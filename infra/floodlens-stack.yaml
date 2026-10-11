@@ -30,8 +30,8 @@ Parameters:
 
   BedrockModelId:
     Type: String
-    Default: "anthropic.claude-3-5-sonnet-20241022-v2:0"
-    Description: "Amazon Bedrock Foundation Model ID for agent investigations"
+    Default: "apac.anthropic.claude-3-5-sonnet-20241022-v2:0"
+    Description: "Amazon Bedrock Foundation Model ID or APAC cross-region inference profile ID"
 
 Resources:
   # 1. S3 Dataset and Manifest Bucket

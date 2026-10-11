@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     aws_region: str = "ap-south-1"
     aws_access_key_id: str | None = None
     aws_secret_access_key: str | None = None
-    bedrock_model_id: str = "anthropic.claude-3-5-sonnet-20241022-v2:0"
+    bedrock_model_id: str = "apac.anthropic.claude-3-5-sonnet-20241022-v2:0"
     s3_bucket: str = "floodlens-data"
     cors_origins: str = "http://localhost:3000,http://127.0.0.1:3000"
     agent_mode: str = "local"
