@@ -1,5 +1,5 @@
 import type { InvestigationLimitation } from "@/lib/types/investigation";
-import { LimitationSeverity } from "@/lib/types/investigation/enums";
+import { LimitationSeverity } from "@/lib/types/enums";
 
 export interface LimitationsPanelProps {
   limitations: InvestigationLimitation[];

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useMemo } from "react";
-import { MapContainer, TileLayer, CircleMarker, Popup, Polyline, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { Place } from "@/lib/types/investigation";
@@ -10,6 +10,30 @@ import { CHENNAI_CENTER } from "@/lib/constants";
 import FloodObservationLayer from "./layers/FloodObservationLayer";
 import MapLayerToggle from "./controls/MapLayerToggle";
 import MapLegend from "./controls/MapLegend";
+
+function createPinIcon(color: string, label: string, isSelected: boolean) {
+  const size = isSelected ? 34 : 26;
+  const height = Math.round(size * 1.35);
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 32" width="${size}" height="${height}" style="filter: drop-shadow(0 2px 5px rgba(0,0,0,0.35));">
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 8.5 12 20 12 20s12-11.5 12-20c0-6.63-5.37-12-12-12z" fill="${color}" stroke="#FFFFFF" stroke-width="1.5"/>
+      <circle cx="12" cy="11" r="5.5" fill="#FFFFFF"/>
+      ${
+        label
+          ? `<text x="12" y="14" font-size="7.5" font-weight="900" fill="${color}" text-anchor="middle" font-family="system-ui, sans-serif">${label}</text>`
+          : `<circle cx="12" cy="11" r="2.5" fill="${color}"/>`
+      }
+    </svg>
+  `;
+
+  return L.divIcon({
+    html: svg,
+    className: "pinpoint-marker-icon",
+    iconSize: [size, height],
+    iconAnchor: [size / 2, height],
+    popupAnchor: [0, -height + 4],
+  });
+}
 
 function MapViewController({
   center,
@@ -218,22 +242,19 @@ export default function FloodMap({
             />
           )}
 
-          {/* Render Places Layer */}
+          {/* Render Places Layer with Pinpoint Markers */}
           {renderedPlaces.map((place) => {
             const isSelectedA = selectedPlaceA?.id === place.id;
             const isSelectedB = selectedPlaceB?.id === place.id;
+            const pinColor = isSelectedA ? "#C23E2A" : isSelectedB ? "#3B8352" : "#8C7355";
+            const pinLabel = isSelectedA ? "A" : isSelectedB ? "B" : "";
+            const pinIcon = createPinIcon(pinColor, pinLabel, isSelectedA || isSelectedB);
 
             return (
-              <CircleMarker
+              <Marker
                 key={place.id}
-                center={[place.latitude, place.longitude]}
-                radius={isSelectedA || isSelectedB ? 15 : 10}
-                pathOptions={{
-                  color: isSelectedA ? "#C23E2A" : isSelectedB ? "#3B8352" : "#9E8B75",
-                  fillColor: isSelectedA ? "#D44A35" : isSelectedB ? "#469B60" : "#C4B29C",
-                  fillOpacity: isSelectedA || isSelectedB ? 0.95 : 0.8,
-                  weight: isSelectedA || isSelectedB ? 4 : 2,
-                }}
+                position={[place.latitude, place.longitude]}
+                icon={pinIcon}
                 eventHandlers={{ click: () => onPlaceSelect?.(place) }}
               >
                 <Popup>
@@ -315,7 +336,7 @@ export default function FloodMap({
                     </div>
                   </div>
                 </Popup>
-              </CircleMarker>
+              </Marker>
             );
           })}
 

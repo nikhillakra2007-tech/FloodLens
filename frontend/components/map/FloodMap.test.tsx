@@ -12,6 +12,9 @@ vi.mock("react-leaflet", () => ({
   CircleMarker: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="circle-marker">{children}</div>
   ),
+  Marker: ({ children }: { children: React.ReactNode }) => (
+    <div data-testid="marker">{children}</div>
+  ),
   Popup: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="popup">{children}</div>
   ),
