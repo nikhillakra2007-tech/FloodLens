@@ -1,0 +1,93 @@
+{
+  "manifest_version": "2.0",
+  "phase": "PHASE_2_EXPANSION",
+  "generated_at": "2026-10-08T22:12:05.142168+00:00",
+  "geographic_region": "Chennai, Tamil Nadu, India",
+  "events_covered": [
+    {
+      "year": 2015,
+      "event_id": "38316862-23cf-4fd3-9c5b-6d450f46d666",
+      "event_type": "extreme_rainfall",
+      "rainfall_mm": 494.0
+    },
+    {
+      "year": 2021,
+      "event_id": "64e6c8f1-39c2-44db-b522-e52cb781a2b9",
+      "event_type": "monsoon",
+      "rainfall_mm": 215.0
+    },
+    {
+      "year": 2023,
+      "event_id": "9886fb58-f0f8-4eb2-8caf-658f68db7321",
+      "event_type": "cyclone",
+      "rainfall_mm": 450.0
+    }
+  ],
+  "drainage_network_versions": [
+    {
+      "version": "GCC_SWD_2015_ESTIMATE",
+      "survey_year": 2015,
+      "segment_count": 10
+    },
+    {
+      "version": "GCC_SWD_2021_SURVEY",
+      "survey_year": 2021,
+      "segment_count": 15
+    },
+    {
+      "version": "GCC_SWD_2023_SURVEY",
+      "survey_year": 2023,
+      "segment_count": 20
+    }
+  ],
+  "datasets": [
+    {
+      "source_name": "GCC Flood Surveys (2015-2023)",
+      "file_path": "C:\\Users\\nikhi\\OneDrive\\Desktop\\coding\\AWSxENVIRONMENT\\data\\raw\\chennai_flood_observations_all.csv",
+      "sha256": "25041da017137e087a2f39155f745c582d1903d32801c6042e1154fa80e7efd5",
+      "size_bytes": 1770,
+      "records": 17
+    },
+    {
+      "source_name": "GCC Stormwater Drain Survey",
+      "file_path": "C:\\Users\\nikhi\\OneDrive\\Desktop\\coding\\AWSxENVIRONMENT\\data\\raw\\chennai_gcc_drainage_network_full.csv",
+      "sha256": "deb71f1d24d097c6ea1e67a537c1dec66c0de092235de553c211fff3bcbfcffa",
+      "size_bytes": 3033,
+      "records": 20
+    },
+    {
+      "source_name": "IMD Rainfall Station Data",
+      "file_path": "C:\\Users\\nikhi\\OneDrive\\Desktop\\coding\\AWSxENVIRONMENT\\data\\raw\\chennai_rainfall_all.csv",
+      "sha256": "d66e061b5f2cfd2ae932f7e859bf7c33d751d9b30a34a7cdfcf33f3b4731fd08",
+      "size_bytes": 7565,
+      "records": 96
+    },
+    {
+      "source_name": "Copernicus DEM GLO-30",
+      "file_path": "data\\raw\\chennai_terrain_features.csv",
+      "sha256": "5cf6e37c2c941aa3e8684d52a5a7171878c6cf5e41ca59deccab00216b8eb397",
+      "size_bytes": 507,
+      "records": 4
+    },
+    {
+      "source_name": "HAND 30m Dataset",
+      "file_path": "data\\raw\\chennai_hand_features.csv",
+      "sha256": "0975395dc88611eae5dc1480ac00c7844abd9860cec840d32994b74fb5d3e979",
+      "size_bytes": 410,
+      "records": 4
+    },
+    {
+      "source_name": "ESA WorldCover 10m",
+      "file_path": "data\\raw\\chennai_landcover_features.csv",
+      "sha256": "15a26a7937886304b4dfe63b1139a577991a314d4b8048bf02a2c8fbeb757788",
+      "size_bytes": 490,
+      "records": 4
+    }
+  ],
+  "derived_features": {
+    "rainfall_event_features": 12,
+    "contributing_area_proxies": 4,
+    "feature_derivations": 16
+  },
+  "lineage_provenance": "COMPLETE"
+}

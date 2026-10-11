@@ -1,0 +1,100 @@
+{
+  "generated_at": "2026-10-08T21:38:36.558355+00:00",
+  "database_status": "CONNECTED_POSTGIS",
+  "total_checks": 8,
+  "checks_passed": 8,
+  "checks_failed": 0,
+  "checks_warned": 0,
+  "is_audit_clean": true,
+  "summary": {
+    "places_count": 4,
+    "flood_events_count": 3,
+    "flood_observations_count": 17,
+    "drain_segments_count": 20,
+    "rainfall_observations_count": 104,
+    "contributing_area_proxies_count": 4,
+    "feature_derivations_count": 64
+  },
+  "results": [
+    {
+      "check_name": "spatial_geometry_validity",
+      "category": "spatial",
+      "status": "PASS",
+      "items_checked": 79,
+      "violations_count": 0,
+      "details": [
+        "All spatial geometries are valid (ST_IsValid = True)."
+      ]
+    },
+    {
+      "check_name": "spatial_coordinate_bounds",
+      "category": "spatial",
+      "status": "PASS",
+      "items_checked": 4,
+      "violations_count": 0,
+      "details": [
+        "All places lie within valid Chennai Metropolitan Area coordinates."
+      ]
+    },
+    {
+      "check_name": "drainage_inference_tracking",
+      "category": "spatial",
+      "status": "PASS",
+      "items_checked": 20,
+      "violations_count": 0,
+      "details": [
+        "Verified 2 inferred segment(s) explicitly flagged (is_inferred=True); not conflated with direct survey."
+      ]
+    },
+    {
+      "check_name": "temporal_event_observation_window",
+      "category": "temporal",
+      "status": "PASS",
+      "items_checked": 17,
+      "violations_count": 0,
+      "details": [
+        "All flood observations occur within corresponding event calendar years."
+      ]
+    },
+    {
+      "check_name": "drainage_network_version_alignment",
+      "category": "temporal",
+      "status": "PASS",
+      "items_checked": 3,
+      "violations_count": 0,
+      "details": [
+        "Verified 3 drainage versions (2015, 2021, 2023) with explicit survey_year and alignment tracking."
+      ]
+    },
+    {
+      "check_name": "physical_variable_bounds",
+      "category": "physical",
+      "status": "PASS",
+      "items_checked": 145,
+      "violations_count": 0,
+      "details": [
+        "All physical variables (rainfall, water depth, conduit dimensions, landcover fractions) within valid bounds."
+      ]
+    },
+    {
+      "check_name": "uniqueness_and_deduplication",
+      "category": "duplicate",
+      "status": "PASS",
+      "items_checked": 14,
+      "violations_count": 0,
+      "details": [
+        "Zero duplicate place records or dataset versions detected."
+      ]
+    },
+    {
+      "check_name": "provenance_lineage_chain",
+      "category": "provenance",
+      "status": "PASS",
+      "items_checked": 73,
+      "violations_count": 0,
+      "details": [
+        "Full lineage verified: 9 source files with SHA-256, 64 feature derivations recorded."
+      ]
+    }
+  ]
+}

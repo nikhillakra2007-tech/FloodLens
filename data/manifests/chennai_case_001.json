@@ -1,0 +1,26 @@
+{
+  "case_id": "CHENNAI_CASE_001",
+  "event": "Chennai 2015 Flood",
+  "target_location": "Anna Nagar (Ward 101)",
+  "comparison_location": "Velachery (Ward 102)",
+  "source_ids": {
+    "flood_obs": "a680b136-a341-408b-b22f-c85207ec603d",
+    "drainage": "7d4ccc25-7657-4e1d-9e4c-a5d80b3f8b8c",
+    "rainfall": "f79df99c-c7f8-4b0d-908a-5ebbef809029",
+    "dem": "5e0b5d5a-afa3-48bd-8ece-29bdf4a886a2",
+    "hand": "e078ca19-0d4a-44d2-8df7-a1af770a5890",
+    "landcover": "cb8e5148-e601-4312-8c48-f512d803a8c0"
+  },
+  "source_file_ids": {
+    "flood_obs": "111292d3-4c5e-4e95-acde-d9ab6c199a5e",
+    "drainage": "9417a91e-c57d-40f2-8ae1-f8ac9ec3d7fc",
+    "rainfall": "f3c0745f-112c-4052-a422-58009e36e80d",
+    "dem": "db4ec204-21d3-4929-be05-4b156c88fef7",
+    "hand": "01443bb0-6151-46ba-9662-75a1f2f0f6e5",
+    "landcover": "89e24823-ef42-4dd6-a255-b29d05d61d20"
+  },
+  "processing_version": "v1",
+  "feature_version": "v1",
+  "ingestion_timestamp": "2026-10-08T22:12:03.245711+00:00",
+  "files": []
+}

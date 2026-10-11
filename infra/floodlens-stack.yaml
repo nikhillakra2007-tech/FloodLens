@@ -1,0 +1,182 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "FloodLens - One-Command Serverless Infrastructure: S3, IAM, CloudWatch, and App Runner"
+
+Parameters:
+  EnvironmentName:
+    Type: String
+    Default: "prod"
+    Description: "Deployment stage (prod, staging, dev)"
+
+  BucketName:
+    Type: String
+    Default: "floodlens-data-chennai"
+    Description: "Name for the private S3 dataset and manifest bucket"
+
+  ImageUri:
+    Type: String
+    Default: "public.ecr.aws/aws-containers/hello-app-runner:latest"
+    Description: "ECR Container Image URI for the FastAPI backend"
+
+  DatabaseURL:
+    Type: String
+    NoEcho: true
+    Default: "postgresql+psycopg2://postgres:postgres@localhost:5432/floodlens"
+    Description: "PostgreSQL + PostGIS connection string"
+
+  FrontendCorsOrigin:
+    Type: String
+    Default: "*"
+    Description: "Allowed CORS origins for Next.js frontend (e.g. https://main.d12345.amplifyapp.com)"
+
+  BedrockModelId:
+    Type: String
+    Default: "anthropic.claude-3-5-sonnet-20241022-v2:0"
+    Description: "Amazon Bedrock Foundation Model ID for agent investigations"
+
+Resources:
+  # 1. S3 Dataset and Manifest Bucket
+  FloodLensDataBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${BucketName}-${AWS::AccountId}-${AWS::Region}"
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      VersioningConfiguration:
+        Status: Enabled
+      Tags:
+        - Key: Project
+          Value: FloodLens
+        - Key: Environment
+          Value: !Ref EnvironmentName
+
+  # 2. App Runner Instance IAM Role (Least Privilege)
+  AppRunnerInstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "floodlens-apprunner-instance-role-${AWS::Region}"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - tasks.apprunner.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName: FloodLensS3Access
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - s3:ListBucket
+                Resource:
+                  - !GetAtt FloodLensDataBucket.Arn
+                  - !Sub "${FloodLensDataBucket.Arn}/*"
+        - PolicyName: FloodLensBedrockAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - bedrock:InvokeModel
+                  - bedrock:InvokeModelWithResponseStream
+                  - bedrock:Converse
+                Resource: "*"
+        - PolicyName: FloodLensCloudWatchLogging
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                  - logs:DescribeLogStreams
+                Resource: "arn:aws:logs:*:*:*"
+
+  # 3. App Runner ECR Access Role
+  AppRunnerECRAccessRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "floodlens-apprunner-ecr-role-${AWS::Region}"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - build.apprunner.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSAppRunnerServicePolicyForECRAccess
+
+  # 4. App Runner Service (FastAPI Backend)
+  BackendAppRunnerService:
+    Type: AWS::AppRunner::Service
+    Properties:
+      ServiceName: !Sub "floodlens-backend-${EnvironmentName}"
+      HealthCheckConfiguration:
+        Path: "/api/v1/health"
+        Protocol: HTTP
+        Interval: 10
+        Timeout: 5
+        HealthyThreshold: 1
+        UnhealthyThreshold: 3
+      InstanceConfiguration:
+        Cpu: "1024" # 1 vCPU
+        Memory: "2048" # 2 GB
+        InstanceRoleArn: !GetAtt AppRunnerInstanceRole.Arn
+      SourceConfiguration:
+        AuthenticationConfiguration:
+          AccessRoleArn: !GetAtt AppRunnerECRAccessRole.Arn
+        AutoDeploymentsEnabled: false
+        ImageRepository:
+          ImageIdentifier: !Ref ImageUri
+          ImageRepositoryType: ECR
+          ImageConfiguration:
+            Port: "8000"
+            RuntimeEnvironmentVariables:
+              - Name: AWS_REGION
+                Value: !Ref AWS::Region
+              - Name: S3_BUCKET
+                Value: !Ref FloodLensDataBucket
+              - Name: AGENT_MODE
+                Value: "bedrock"
+              - Name: BEDROCK_MODEL_ID
+                Value: !Ref BedrockModelId
+              - Name: DATABASE_URL
+                Value: !Ref DatabaseURL
+              - Name: CORS_ORIGINS
+                Value: !Ref FrontendCorsOrigin
+              - Name: LOG_LEVEL
+                Value: "INFO"
+      Tags:
+        - Key: Project
+          Value: FloodLens
+
+Outputs:
+  AppRunnerServiceUrl:
+    Description: "Public HTTPS URL of the FloodLens Backend API"
+    Value: !Sub "https://${BackendAppRunnerService.ServiceUrl}"
+    Export:
+      Name: FloodLensBackendUrl
+
+  S3BucketName:
+    Description: "Private S3 Bucket for datasets and manifests"
+    Value: !Ref FloodLensDataBucket
+
+  AppRunnerServiceArn:
+    Description: "ARN of the App Runner Service"
+    Value: !GetAtt BackendAppRunnerService.ServiceArn

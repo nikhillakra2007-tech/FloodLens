@@ -1,0 +1,6 @@
+.next
+node_modules
+out
+dist
+*.config.js
+*.config.mjs
