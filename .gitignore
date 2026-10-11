@@ -30,3 +30,6 @@ data/processed/
 *.avi
 *.mov
 video_assets/
+video_scratch/
+build_demo_video.py
+scratch_capture.py
