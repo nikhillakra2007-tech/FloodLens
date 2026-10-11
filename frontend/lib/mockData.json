@@ -1,0 +1,2082 @@
+{
+  "places": [
+    {
+      "name": "Anna Nagar (Ward 101)",
+      "ward": "101",
+      "zone": "Anna Nagar",
+      "place_type": "flood_location",
+      "description": "Real observation from 2015 Chennai floods",
+      "longitude": 80.21,
+      "latitude": 13.085,
+      "id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
+      "created_at": "2026-10-09T01:33:09.466380+05:30"
+    },
+    {
+      "name": "T Nagar (Ward 104)",
+      "ward": "104",
+      "zone": "T Nagar",
+      "place_type": "flood_location",
+      "description": "Real observation from 2015 Chennai floods",
+      "longitude": 80.235,
+      "latitude": 13.04,
+      "id": "1ea309cc-6461-493e-b4aa-412ea3474676",
+      "created_at": "2026-10-09T01:33:09.466380+05:30"
+    },
+    {
+      "name": "Velachery (Ward 102)",
+      "ward": "102",
+      "zone": "Velachery",
+      "place_type": "comparable",
+      "description": "Real observation from 2015 Chennai floods",
+      "longitude": 80.22,
+      "latitude": 13.045,
+      "id": "b0aa192d-6cc8-4262-97b7-07cd5de2d9a8",
+      "created_at": "2026-10-09T01:33:09.466380+05:30"
+    },
+    {
+      "name": "Adyar (Ward 103)",
+      "ward": "103",
+      "zone": "Adyar",
+      "place_type": "comparable",
+      "description": "Real observation from 2015 Chennai floods",
+      "longitude": 80.23,
+      "latitude": 13.01,
+      "id": "e503e3f2-28ba-46b0-8f7d-27aa3001f7be",
+      "created_at": "2026-10-09T01:33:09.466380+05:30"
+    }
+  ],
+  "compRes": {
+    "place_a_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
+    "place_b_id": "b0aa192d-6cc8-4262-97b7-07cd5de2d9a8",
+    "similarity_score": 0.832,
+    "feature_similarities": {
+      "rainfall": 0,
+      "terrain": 0.8435374149659864,
+      "hand_elevation": 0.6363636363636364,
+      "land_cover": 0.9090909090909091,
+      "drainage_context": 0.8552188552188553,
+      "waterbody_proximity": 0.75
+    },
+    "reasons": [
+      "Close geographic proximity (4.6 km)",
+      "Comparable storm rainfall forcing",
+      "Similar topographic elevation",
+      "Comparable stormwater drain asset density",
+      "Similar urban built-up density",
+      "Similar terrain (similarity=0.84)",
+      "Similar land_cover (similarity=0.91)",
+      "Similar drainage_context (similarity=0.86)"
+    ]
+  },
+  "createComp": {
+    "id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
+    "place_a_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
+    "place_b_id": "b0aa192d-6cc8-4262-97b7-07cd5de2d9a8",
+    "similarity_score": 0.832,
+    "weights_version": "phase2_explainable",
+    "feature_similarities": {
+      "terrain": 0.8435374149659864,
+      "rainfall": 0,
+      "land_cover": 0.9090909090909091,
+      "hand_elevation": 0.6363636363636364,
+      "drainage_context": 0.8552188552188553,
+      "waterbody_proximity": 0.75
+    },
+    "similarity_breakdown": {
+      "terrain": 0.8435374149659864,
+      "rainfall": 0,
+      "land_cover": 0.9090909090909091,
+      "hand_elevation": 0.6363636363636364,
+      "drainage_context": 0.8552188552188553,
+      "waterbody_proximity": 0.75,
+      "terrain_similarity": 0.8435374149659864,
+      "rainfall_similarity": 0,
+      "land_cover_similarity": 0.9090909090909091,
+      "landcover_similarity": 0.9090909090909091,
+      "hand_elevation_similarity": 0.6363636363636364,
+      "drainage_context_similarity": 0.8552188552188553,
+      "drainage_similarity": 0.8552188552188553,
+      "waterbody_proximity_similarity": 0.75
+    },
+    "reasons": [
+      "Close geographic proximity (4.6 km)",
+      "Comparable storm rainfall forcing",
+      "Similar topographic elevation",
+      "Comparable stormwater drain asset density",
+      "Similar urban built-up density",
+      "Similar terrain (similarity=0.84)",
+      "Similar land_cover (similarity=0.91)",
+      "Similar drainage_context (similarity=0.86)"
+    ],
+    "created_at": "2026-10-09T02:36:14.549060+05:30"
+  },
+  "createInv": {
+    "id": "de9cda17-8daa-448d-813e-9378b97619fb",
+    "comparison_id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
+    "status": "completed",
+    "agent_mode": "local",
+    "created_at": "2026-10-11T15:33:12.037702+05:30"
+  },
+  "inv": {
+    "id": "de9cda17-8daa-448d-813e-9378b97619fb",
+    "comparison_id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
+    "status": "completed",
+    "agent_mode": "local",
+    "summary": "Differential analysis of Anna Nagar (Ward 101) vs Velachery (Ward 102). Similarity score: 0.81. Strongest mechanism: RUNOFF_CONCENTRATION.",
+    "strongest_mechanism": "RUNOFF_CONCENTRATION",
+    "agent_response": {
+      "unknowns": [
+        "No specific unknowns recorded"
+      ],
+      "confidence": 0.5,
+      "strongest_mechanism": "RUNOFF_CONCENTRATION",
+      "supporting_evidence": [
+        "[FACT] Height Above Nearest Drain (HAND) difference indicates terrain depression context",
+        "[SUPPORTED] Higher upstream built-up fraction is consistent with greater runoff concentration",
+        "[SUPPORTED] Greater distance to outfall is consistent with restricted outflow",
+        "[SUPPORTED] Lower estimated effective capacity is consistent with reduced drainage throughput",
+        "[SUPPORTED] Network connectivity difference detected",
+        "[SUPPORTED] Built-up fraction difference (imperviousness-related proxy) suggests differential surface runoff potential",
+        "[SUPPORTED] Higher water fraction indicates potential waterbody interaction",
+        "[UNKNOWN] Insufficient evidence to evaluate this mechanism"
+      ],
+      "counterfactual_result": null,
+      "historical_validation": null,
+      "investigation_summary": "Differential analysis of Anna Nagar (Ward 101) vs Velachery (Ward 102). Similarity score: 0.81. Strongest mechanism: RUNOFF_CONCENTRATION.",
+      "alternative_mechanisms": [
+        "TERRAIN_DEPRESSION",
+        "IMPERVIOUS_SURFACE",
+        "DRAINAGE_CAPACITY"
+      ],
+      "certainty_classification": {
+        "1d7624de-338b-402c-b647-da3e8487ecb8": "SUPPORTED",
+        "5c2fea1d-6715-4c02-8d60-f8fa248ed83c": "SUPPORTED",
+        "64727812-8512-444a-89b6-68c9b96a8c7f": "FACT",
+        "676dc9be-f130-4a76-a146-2e76080bb1fb": "SUPPORTED",
+        "9330bc6e-348d-4828-87b0-14d86291a7dd": "UNKNOWN",
+        "a1657760-5bf2-4d4a-9468-cc958cfa92ed": "SUPPORTED",
+        "dac776c0-28c3-4918-9e59-2fe62f795760": "SUPPORTED",
+        "ddaf5eef-3f64-4eb4-96ec-d307b45db8d5": "SUPPORTED"
+      }
+    },
+    "error_message": null,
+    "started_at": null,
+    "completed_at": "2026-10-11T15:33:12.516405+05:30",
+    "created_at": "2026-10-11T15:33:12.037702+05:30",
+    "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+    "place_a": {
+      "name": "Anna Nagar (Ward 101)",
+      "ward": "101",
+      "zone": "Anna Nagar",
+      "place_type": "flood_location",
+      "description": "Real observation from 2015 Chennai floods",
+      "longitude": 80.21,
+      "latitude": 13.085,
+      "id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
+      "created_at": "2026-10-09T01:33:09.466380+05:30"
+    },
+    "place_b": {
+      "name": "Velachery (Ward 102)",
+      "ward": "102",
+      "zone": "Velachery",
+      "place_type": "comparable",
+      "description": "Real observation from 2015 Chennai floods",
+      "longitude": 80.22,
+      "latitude": 13.045,
+      "id": "b0aa192d-6cc8-4262-97b7-07cd5de2d9a8",
+      "created_at": "2026-10-09T01:33:09.466380+05:30"
+    },
+    "comparison": {
+      "id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
+      "place_a_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
+      "place_b_id": "b0aa192d-6cc8-4262-97b7-07cd5de2d9a8",
+      "similarity_score": 0.832,
+      "weights_version": "phase2_explainable",
+      "feature_similarities": {
+        "terrain": 0.8435374149659864,
+        "rainfall": 0,
+        "land_cover": 0.9090909090909091,
+        "hand_elevation": 0.6363636363636364,
+        "drainage_context": 0.8552188552188553,
+        "waterbody_proximity": 0.75
+      },
+      "similarity_breakdown": {
+        "terrain": 0.8435374149659864,
+        "rainfall": 0,
+        "land_cover": 0.9090909090909091,
+        "hand_elevation": 0.6363636363636364,
+        "drainage_context": 0.8552188552188553,
+        "waterbody_proximity": 0.75,
+        "terrain_similarity": 0.8435374149659864,
+        "rainfall_similarity": 0,
+        "land_cover_similarity": 0.9090909090909091,
+        "landcover_similarity": 0.9090909090909091,
+        "hand_elevation_similarity": 0.6363636363636364,
+        "drainage_context_similarity": 0.8552188552188553,
+        "drainage_similarity": 0.8552188552188553,
+        "waterbody_proximity_similarity": 0.75
+      },
+      "reasons": [
+        "Close geographic proximity (4.6 km)",
+        "Comparable storm rainfall forcing",
+        "Similar topographic elevation",
+        "Comparable stormwater drain asset density",
+        "Similar urban built-up density",
+        "Similar terrain (similarity=0.84)",
+        "Similar land_cover (similarity=0.91)",
+        "Similar drainage_context (similarity=0.86)"
+      ],
+      "created_at": "2026-10-09T02:36:14.549060+05:30"
+    },
+    "mechanisms": [
+      {
+        "id": "4564e6af-253d-4d13-9fc2-aa569f928c3b",
+        "comparison_id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
+        "mechanism_type": "RUNOFF_CONCENTRATION",
+        "score": 0.35,
+        "confidence": 0.5,
+        "certainty": "SUPPORTED",
+        "confidence_meaning": "Supported by upstream topographic contributing area proxy; bounded by lack of direct hydraulic pipe routing.",
+        "rank": 1,
+        "supporting_evidence_ids": [
+          "dac776c0-28c3-4918-9e59-2fe62f795760"
+        ],
+        "limiting_evidence_ids": [],
+        "explanation": "Signals: higher_upstream_built_fraction",
+        "signal_values": {
+          "upstream_built_diff": 0.13,
+          "contributing_area_diff": 0.18400000000000005
+        }
+      },
+      {
+        "id": "5f09eff6-d53b-45a9-860f-6ac14b76f38c",
+        "comparison_id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
+        "mechanism_type": "TERRAIN_DEPRESSION",
+        "score": 0.35,
+        "confidence": 0.5,
+        "certainty": "SUPPORTED",
+        "confidence_meaning": "Direct topographic signal from Copernicus DEM HAND; bounded by 30m micro-topography smoothing.",
+        "rank": 2,
+        "supporting_evidence_ids": [
+          "64727812-8512-444a-89b6-68c9b96a8c7f"
+        ],
+        "limiting_evidence_ids": [],
+        "explanation": "Signals: lower_HAND",
+        "signal_values": {
+          "hand_diff": -2.4,
+          "rel_elev_diff": -1.2
+        }
+      },
+      {
+        "id": "2f55101e-6934-400c-9e96-c50c3bd36544",
+        "comparison_id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
+        "mechanism_type": "IMPERVIOUS_SURFACE",
+        "score": 0.35,
+        "confidence": 0.4,
+        "certainty": "SUPPORTED",
+        "confidence_meaning": "Bounded to 0.40 confidence due to proxy land-cover classification and absence of calibrated 2D hydraulic run-off model.",
+        "rank": 3,
+        "supporting_evidence_ids": [
+          "1d7624de-338b-402c-b647-da3e8487ecb8"
+        ],
+        "limiting_evidence_ids": [],
+        "explanation": "Signals: higher_builtup_proxy (ESA WorldCover 10m proxy; reduced vegetation is co-linear, not independent)",
+        "signal_values": {
+          "builtup_diff": 0.13,
+          "vegetation_diff": -0.1,
+          "corroborating_vegetation": "reduced_vegetation_colinear"
+        }
+      },
+      {
+        "id": "fd36e74e-7d79-4c4d-a4df-f02628595fb4",
+        "comparison_id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
+        "mechanism_type": "DRAINAGE_CAPACITY",
+        "score": 0.3,
+        "confidence": 0.5,
+        "certainty": "SUPPORTED",
+        "confidence_meaning": "Derived from nominal cross-section geometry; bounded by unobserved sub-surface blockage and siltation.",
+        "rank": 4,
+        "supporting_evidence_ids": [
+          "a1657760-5bf2-4d4a-9468-cc958cfa92ed"
+        ],
+        "limiting_evidence_ids": [],
+        "explanation": "Signals: lower_effective_capacity",
+        "signal_values": {
+          "capacity_ratio": 0.7470588235294118
+        }
+      },
+      {
+        "id": "55e6693f-ae28-4b76-850e-4c2754df7dba",
+        "comparison_id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
+        "mechanism_type": "INSUFFICIENT_EVIDENCE",
+        "score": 0.1,
+        "confidence": 0.3,
+        "certainty": "UNKNOWN",
+        "confidence_meaning": "Signal threshold not reached across tested physical dimensions.",
+        "rank": 5,
+        "supporting_evidence_ids": [],
+        "limiting_evidence_ids": [
+          "9330bc6e-348d-4828-87b0-14d86291a7dd"
+        ],
+        "explanation": "Evidence items available: 17",
+        "signal_values": {
+          "evidence_count": 17
+        }
+      },
+      {
+        "id": "ca806338-2d36-43bb-ba96-84b4dfe20426",
+        "comparison_id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
+        "mechanism_type": "DRAINAGE_CONNECTIVITY",
+        "score": 0,
+        "confidence": 0.3,
+        "certainty": "UNKNOWN",
+        "confidence_meaning": "Supported by topological graph traversal; subject to 2023 temporal network mismatch for historical events.",
+        "rank": 6,
+        "supporting_evidence_ids": [
+          "676dc9be-f130-4a76-a146-2e76080bb1fb"
+        ],
+        "limiting_evidence_ids": [],
+        "explanation": "Signals: none detected",
+        "signal_values": {
+          "path_length_diff": -430,
+          "connectivity_diff": 0
+        }
+      },
+      {
+        "id": "b6170b3d-d70c-42a5-84b9-d3a4607c7288",
+        "comparison_id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
+        "mechanism_type": "OUTFALL_RESTRICTION",
+        "score": 0,
+        "confidence": 0.3,
+        "certainty": "UNKNOWN",
+        "confidence_meaning": "Derived from Euclidean outfall proximity; tidal and backwater stage unobserved.",
+        "rank": 7,
+        "supporting_evidence_ids": [
+          "5c2fea1d-6715-4c02-8d60-f8fa248ed83c"
+        ],
+        "limiting_evidence_ids": [],
+        "explanation": "Signals: none detected",
+        "signal_values": {
+          "distance_diff": 77.66886731962455,
+          "downstream_length_diff": -430
+        }
+      },
+      {
+        "id": "15038d45-ad2e-4d9d-8eb1-8f4f271c46e7",
+        "comparison_id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
+        "mechanism_type": "WATERBODY_INTERACTION",
+        "score": 0,
+        "confidence": 0.3,
+        "certainty": "UNKNOWN",
+        "confidence_meaning": "Derived from satellite water fraction; actual retention basin capacity unmodeled.",
+        "rank": 8,
+        "supporting_evidence_ids": [
+          "ddaf5eef-3f64-4eb4-96ec-d307b45db8d5"
+        ],
+        "limiting_evidence_ids": [],
+        "explanation": "Signals: none detected",
+        "signal_values": {
+          "water_fraction_diff": -0.020000000000000004
+        }
+      }
+    ],
+    "evidence": [
+      {
+        "id": "64727812-8512-444a-89b6-68c9b96a8c7f",
+        "evidence_id": "64727812-8512-444a-89b6-68c9b96a8c7f",
+        "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+        "mechanism_type": "TERRAIN_DEPRESSION",
+        "certainty_level": "FACT",
+        "claim": "Height Above Nearest Drain (HAND) difference indicates terrain depression context",
+        "value": -2.4,
+        "unit": "m",
+        "source": "deterministic_engine",
+        "source_id": null,
+        "dataset_version_id": null,
+        "feature_derivation_id": null,
+        "spatial_ref": null,
+        "temporal_ref": null,
+        "support_score": 0.8,
+        "explanation": "HAND computed from Copernicus DEM GLO-30",
+        "source_independence": "INDEPENDENT_SOURCE",
+        "limitations": [
+          "Copernicus DEM 30m resolution smooths street-level micro-topography, curbs, and road crowns"
+        ],
+        "extra_data": {},
+        "created_at": "2026-10-11T15:33:12.409270+05:30"
+      },
+      {
+        "id": "dac776c0-28c3-4918-9e59-2fe62f795760",
+        "evidence_id": "dac776c0-28c3-4918-9e59-2fe62f795760",
+        "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+        "mechanism_type": "RUNOFF_CONCENTRATION",
+        "certainty_level": "SUPPORTED",
+        "claim": "Higher upstream built-up fraction is consistent with greater runoff concentration",
+        "value": 0.13,
+        "unit": "fraction",
+        "source": "deterministic_engine",
+        "source_id": null,
+        "dataset_version_id": null,
+        "feature_derivation_id": null,
+        "spatial_ref": null,
+        "temporal_ref": null,
+        "support_score": 0.7,
+        "explanation": "Upstream built-up fraction difference suggests differential runoff generation",
+        "source_independence": "DEPENDENT_DERIVATION",
+        "limitations": [
+          "Contributing area is a topographic proxy rather than a physically bounded catchment"
+        ],
+        "extra_data": {},
+        "created_at": "2026-10-11T15:33:12.409270+05:30"
+      },
+      {
+        "id": "5c2fea1d-6715-4c02-8d60-f8fa248ed83c",
+        "evidence_id": "5c2fea1d-6715-4c02-8d60-f8fa248ed83c",
+        "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+        "mechanism_type": "OUTFALL_RESTRICTION",
+        "certainty_level": "SUPPORTED",
+        "claim": "Greater distance to outfall is consistent with restricted outflow",
+        "value": 77.66886731962455,
+        "unit": "m",
+        "source": "deterministic_engine",
+        "source_id": null,
+        "dataset_version_id": null,
+        "feature_derivation_id": null,
+        "spatial_ref": null,
+        "temporal_ref": null,
+        "support_score": 0.6,
+        "explanation": "Outfall distance computed from drainage network geometry",
+        "source_independence": "INDEPENDENT_SOURCE",
+        "limitations": [
+          "Tidal backwater effects and tailwater elevations at outfalls unobserved"
+        ],
+        "extra_data": {},
+        "created_at": "2026-10-11T15:33:12.409270+05:30"
+      },
+      {
+        "id": "a1657760-5bf2-4d4a-9468-cc958cfa92ed",
+        "evidence_id": "a1657760-5bf2-4d4a-9468-cc958cfa92ed",
+        "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+        "mechanism_type": "DRAINAGE_CAPACITY",
+        "certainty_level": "SUPPORTED",
+        "claim": "Lower estimated effective capacity is consistent with reduced drainage throughput",
+        "value": 0.7470588235294118,
+        "unit": "ratio",
+        "source": "deterministic_engine",
+        "source_id": null,
+        "dataset_version_id": null,
+        "feature_derivation_id": null,
+        "spatial_ref": null,
+        "temporal_ref": null,
+        "support_score": 0.6,
+        "explanation": "Effective capacity proxy derived from segment dimensions",
+        "source_independence": "DEPENDENT_DERIVATION",
+        "limitations": [
+          "Temporal mismatch: GCC SWD shapefile reflects 2023 network for historical flood events",
+          "Sub-surface pipe blockage state and sediment accumulation unobserved"
+        ],
+        "extra_data": {},
+        "created_at": "2026-10-11T15:33:12.409270+05:30"
+      },
+      {
+        "id": "676dc9be-f130-4a76-a146-2e76080bb1fb",
+        "evidence_id": "676dc9be-f130-4a76-a146-2e76080bb1fb",
+        "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+        "mechanism_type": "DRAINAGE_CONNECTIVITY",
+        "certainty_level": "SUPPORTED",
+        "claim": "Network connectivity difference detected",
+        "value": 0,
+        "unit": "boolean_diff",
+        "source": "deterministic_engine",
+        "source_id": null,
+        "dataset_version_id": null,
+        "feature_derivation_id": null,
+        "spatial_ref": null,
+        "temporal_ref": null,
+        "support_score": 0.6,
+        "explanation": "Connectivity determined from segment graph analysis",
+        "source_independence": "DEPENDENT_DERIVATION",
+        "limitations": [
+          "Temporal mismatch: GCC SWD shapefile reflects 2023 network for historical flood events",
+          "Sub-surface pipe blockage state and sediment accumulation unobserved"
+        ],
+        "extra_data": {},
+        "created_at": "2026-10-11T15:33:12.409270+05:30"
+      },
+      {
+        "id": "1d7624de-338b-402c-b647-da3e8487ecb8",
+        "evidence_id": "1d7624de-338b-402c-b647-da3e8487ecb8",
+        "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+        "mechanism_type": "IMPERVIOUS_SURFACE",
+        "certainty_level": "SUPPORTED",
+        "claim": "Built-up fraction difference (imperviousness-related proxy) suggests differential surface runoff potential",
+        "value": 0.13,
+        "unit": "fraction",
+        "source": "deterministic_engine",
+        "source_id": null,
+        "dataset_version_id": null,
+        "feature_derivation_id": null,
+        "spatial_ref": null,
+        "temporal_ref": null,
+        "support_score": 0.55,
+        "explanation": "Built-up fraction proxy derived from ESA WorldCover 10m; does not represent parcel-level measured imperviousness.",
+        "source_independence": "SAME_SOURCE_SIGNAL",
+        "limitations": [
+          "Static 2023 land cover proxy does not represent parcel-level measured imperviousness",
+          "Infiltration rate heterogeneity not directly measured"
+        ],
+        "extra_data": {},
+        "created_at": "2026-10-11T15:33:12.409270+05:30"
+      },
+      {
+        "id": "ddaf5eef-3f64-4eb4-96ec-d307b45db8d5",
+        "evidence_id": "ddaf5eef-3f64-4eb4-96ec-d307b45db8d5",
+        "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+        "mechanism_type": "WATERBODY_INTERACTION",
+        "certainty_level": "SUPPORTED",
+        "claim": "Higher water fraction indicates potential waterbody interaction",
+        "value": -0.020000000000000004,
+        "unit": "fraction",
+        "source": "deterministic_engine",
+        "source_id": null,
+        "dataset_version_id": null,
+        "feature_derivation_id": null,
+        "spatial_ref": null,
+        "temporal_ref": null,
+        "support_score": 0.5,
+        "explanation": "Water fraction from ESA WorldCover landcover data",
+        "source_independence": "INDEPENDENT_SOURCE",
+        "limitations": [],
+        "extra_data": {},
+        "created_at": "2026-10-11T15:33:12.409270+05:30"
+      },
+      {
+        "id": "9330bc6e-348d-4828-87b0-14d86291a7dd",
+        "evidence_id": "9330bc6e-348d-4828-87b0-14d86291a7dd",
+        "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+        "mechanism_type": "INSUFFICIENT_EVIDENCE",
+        "certainty_level": "UNKNOWN",
+        "claim": "Insufficient evidence to evaluate this mechanism",
+        "value": null,
+        "unit": null,
+        "source": "deterministic_engine",
+        "source_id": null,
+        "dataset_version_id": null,
+        "feature_derivation_id": null,
+        "spatial_ref": null,
+        "temporal_ref": null,
+        "support_score": 0.1,
+        "explanation": "No discriminating signals detected from available data",
+        "source_independence": "INDEPENDENT_SOURCE",
+        "limitations": [],
+        "extra_data": {},
+        "created_at": "2026-10-11T15:33:12.409270+05:30"
+      }
+    ],
+    "validation": null,
+    "defensibility": {
+      "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+      "place_a_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
+      "place_b_id": "b0aa192d-6cc8-4262-97b7-07cd5de2d9a8",
+      "proposed_mechanism": "RUNOFF_CONCENTRATION",
+      "verdict": "DEFENSIBLE_WITH_MATERIAL_LIMITATIONS",
+      "correlation_gates_passed": 5,
+      "causal_gates_passed": 0,
+      "total_gates": 8,
+      "gates": {
+        "direct_flood_observation": {
+          "gate_name": "direct_flood_observation",
+          "status": "PASS",
+          "confidence": 0.9,
+          "description": "Verified field flood observations exist for Place A (7 obs) and Place B (3 obs).",
+          "explanation": "Verified field flood observations exist for Place A (7 obs) and Place B (3 obs).",
+          "reason": "Verified field flood observations exist for Place A (7 obs) and Place B (3 obs).",
+          "gate_type": "CORRELATION",
+          "evidence_ids": [],
+          "limitations": [
+            "Field observations are point surveys; water depth is localized."
+          ]
+        },
+        "terrain_evidence": {
+          "gate_name": "terrain_evidence",
+          "status": "PASS",
+          "confidence": 0.8,
+          "description": "Copernicus DEM GLO-30 elevation and HAND metrics available for both locations.",
+          "explanation": "Copernicus DEM GLO-30 elevation and HAND metrics available for both locations.",
+          "reason": "Copernicus DEM GLO-30 elevation and HAND metrics available for both locations.",
+          "gate_type": "CORRELATION",
+          "evidence_ids": [],
+          "limitations": [
+            "Copernicus DEM 30m vertical accuracy +/- 2.5m.",
+            "Micro-topography (<0.5m road crowns, curbs, storm drains) remains unresolved."
+          ]
+        },
+        "drainage_evidence": {
+          "gate_name": "drainage_evidence",
+          "status": "PASS",
+          "confidence": 0.75,
+          "description": "Stormwater drainage network records exist (A: 8 seg, B: 5 seg).",
+          "explanation": "Stormwater drainage network records exist (A: 8 seg, B: 5 seg).",
+          "reason": "Stormwater drainage network records exist (A: 8 seg, B: 5 seg).",
+          "gate_type": "CORRELATION",
+          "evidence_ids": [],
+          "limitations": [
+            "Contains 1 inferred segment(s) in Ward 101.",
+            "Internal sub-street roadside drains and gully pits remain unmapped.",
+            "Subsurface conduit sedimentation and blockage remain UNKNOWN."
+          ]
+        },
+        "rainfall_comparability": {
+          "gate_name": "rainfall_comparability",
+          "status": "PASS",
+          "confidence": 0.7,
+          "description": "Rainfall comparability classified as PARTIALLY_COMPARABLE (70.0 mm diff).",
+          "explanation": "Rainfall comparability classified as PARTIALLY_COMPARABLE (70.0 mm diff).",
+          "reason": "Rainfall comparability classified as PARTIALLY_COMPARABLE (70.0 mm diff).",
+          "gate_type": "CORRELATION",
+          "evidence_ids": [],
+          "limitations": [
+            "Station spacing ~4 km cannot detect hyper-local convective micro-bursts (<500 m).",
+            "Rainfall equality indicates comparable forcing, not identical street-level cloudbursts."
+          ]
+        },
+        "multi_event_recurrence": {
+          "gate_name": "multi_event_recurrence",
+          "status": "PASS",
+          "confidence": 0.6,
+          "description": "Historical recurrence assessed as MODERATE_SUPPORT across 3 events.",
+          "explanation": "Historical recurrence assessed as MODERATE_SUPPORT across 3 events.",
+          "reason": "Historical recurrence assessed as MODERATE_SUPPORT across 3 events.",
+          "gate_type": "CORRELATION",
+          "evidence_ids": [],
+          "limitations": [
+            "Statistical sample size is limited (N=3).",
+            "Historical land-cover changes are unobserved (static 2020 ESA WorldCover reused across all events).",
+            "Recurrence of depth disparity confirms persistent vulnerability contrast, not proof of sole mechanism."
+          ]
+        },
+        "independent_mechanism_evidence": {
+          "gate_name": "independent_mechanism_evidence",
+          "status": "CONDITIONAL",
+          "confidence": 0.55,
+          "description": "Mechanism 'RUNOFF_CONCENTRATION' supported by deterministic physical proxy metrics.",
+          "explanation": "Mechanism 'RUNOFF_CONCENTRATION' supported by deterministic physical proxy metrics.",
+          "reason": "Mechanism 'RUNOFF_CONCENTRATION' supported by deterministic physical proxy metrics.",
+          "gate_type": "CAUSAL",
+          "evidence_ids": [],
+          "limitations": [
+            "Derived proxy metrics (DEM, HAND, drain stats); lacks 2D hydrodynamic calibration."
+          ]
+        },
+        "temporal_alignment": {
+          "gate_name": "temporal_alignment",
+          "status": "CONDITIONAL",
+          "confidence": 0.6,
+          "description": "Drainage network version 'GCC_SWD_2015_ESTIMATE' is EVENT_ALIGNED.",
+          "explanation": "Drainage network version 'GCC_SWD_2015_ESTIMATE' is EVENT_ALIGNED.",
+          "reason": "Drainage network version 'GCC_SWD_2015_ESTIMATE' is EVENT_ALIGNED.",
+          "gate_type": "CAUSAL",
+          "evidence_ids": [],
+          "limitations": [
+            "Drainage geometry is estimated for 2015 baseline.",
+            "ESA WorldCover land-cover is a 2020 static snapshot (5-year post-event temporal gap for 2015)."
+          ]
+        },
+        "causal_mechanism_specificity": {
+          "gate_name": "causal_mechanism_specificity",
+          "status": "FAIL",
+          "confidence": 0.45,
+          "description": "Candidate mechanism 'RUNOFF_CONCENTRATION' co-occurs with significant physical confounders: Topographic HAND difference (-2.4 m); Drainage network length deficit (430 m).",
+          "explanation": "Candidate mechanism 'RUNOFF_CONCENTRATION' co-occurs with significant physical confounders: Topographic HAND difference (-2.4 m); Drainage network length deficit (430 m).",
+          "reason": "Candidate mechanism 'RUNOFF_CONCENTRATION' co-occurs with significant physical confounders: Topographic HAND difference (-2.4 m); Drainage network length deficit (430 m).",
+          "gate_type": "CAUSAL",
+          "evidence_ids": [],
+          "limitations": [
+            "Multiple physical drivers co-occur in the flooded ward.",
+            "Empirical data cannot isolate which mechanism was primary without calibrated hydrodynamic simulation.",
+            "Attributing flood disparity solely to one mechanism commits a single-cause fallacy."
+          ]
+        }
+      },
+      "correlation_gates": {
+        "direct_flood_observation": {
+          "gate_name": "direct_flood_observation",
+          "status": "PASS",
+          "confidence": 0.9,
+          "description": "Verified field flood observations exist for Place A (7 obs) and Place B (3 obs).",
+          "explanation": "Verified field flood observations exist for Place A (7 obs) and Place B (3 obs).",
+          "reason": "Verified field flood observations exist for Place A (7 obs) and Place B (3 obs).",
+          "gate_type": "CORRELATION",
+          "evidence_ids": [],
+          "limitations": [
+            "Field observations are point surveys; water depth is localized."
+          ]
+        },
+        "terrain_evidence": {
+          "gate_name": "terrain_evidence",
+          "status": "PASS",
+          "confidence": 0.8,
+          "description": "Copernicus DEM GLO-30 elevation and HAND metrics available for both locations.",
+          "explanation": "Copernicus DEM GLO-30 elevation and HAND metrics available for both locations.",
+          "reason": "Copernicus DEM GLO-30 elevation and HAND metrics available for both locations.",
+          "gate_type": "CORRELATION",
+          "evidence_ids": [],
+          "limitations": [
+            "Copernicus DEM 30m vertical accuracy +/- 2.5m.",
+            "Micro-topography (<0.5m road crowns, curbs, storm drains) remains unresolved."
+          ]
+        },
+        "drainage_evidence": {
+          "gate_name": "drainage_evidence",
+          "status": "PASS",
+          "confidence": 0.75,
+          "description": "Stormwater drainage network records exist (A: 8 seg, B: 5 seg).",
+          "explanation": "Stormwater drainage network records exist (A: 8 seg, B: 5 seg).",
+          "reason": "Stormwater drainage network records exist (A: 8 seg, B: 5 seg).",
+          "gate_type": "CORRELATION",
+          "evidence_ids": [],
+          "limitations": [
+            "Contains 1 inferred segment(s) in Ward 101.",
+            "Internal sub-street roadside drains and gully pits remain unmapped.",
+            "Subsurface conduit sedimentation and blockage remain UNKNOWN."
+          ]
+        },
+        "rainfall_comparability": {
+          "gate_name": "rainfall_comparability",
+          "status": "PASS",
+          "confidence": 0.7,
+          "description": "Rainfall comparability classified as PARTIALLY_COMPARABLE (70.0 mm diff).",
+          "explanation": "Rainfall comparability classified as PARTIALLY_COMPARABLE (70.0 mm diff).",
+          "reason": "Rainfall comparability classified as PARTIALLY_COMPARABLE (70.0 mm diff).",
+          "gate_type": "CORRELATION",
+          "evidence_ids": [],
+          "limitations": [
+            "Station spacing ~4 km cannot detect hyper-local convective micro-bursts (<500 m).",
+            "Rainfall equality indicates comparable forcing, not identical street-level cloudbursts."
+          ]
+        },
+        "multi_event_recurrence": {
+          "gate_name": "multi_event_recurrence",
+          "status": "PASS",
+          "confidence": 0.6,
+          "description": "Historical recurrence assessed as MODERATE_SUPPORT across 3 events.",
+          "explanation": "Historical recurrence assessed as MODERATE_SUPPORT across 3 events.",
+          "reason": "Historical recurrence assessed as MODERATE_SUPPORT across 3 events.",
+          "gate_type": "CORRELATION",
+          "evidence_ids": [],
+          "limitations": [
+            "Statistical sample size is limited (N=3).",
+            "Historical land-cover changes are unobserved (static 2020 ESA WorldCover reused across all events).",
+            "Recurrence of depth disparity confirms persistent vulnerability contrast, not proof of sole mechanism."
+          ]
+        }
+      },
+      "causal_gates": {
+        "independent_mechanism_evidence": {
+          "gate_name": "independent_mechanism_evidence",
+          "status": "CONDITIONAL",
+          "confidence": 0.55,
+          "description": "Mechanism 'RUNOFF_CONCENTRATION' supported by deterministic physical proxy metrics.",
+          "explanation": "Mechanism 'RUNOFF_CONCENTRATION' supported by deterministic physical proxy metrics.",
+          "reason": "Mechanism 'RUNOFF_CONCENTRATION' supported by deterministic physical proxy metrics.",
+          "gate_type": "CAUSAL",
+          "evidence_ids": [],
+          "limitations": [
+            "Derived proxy metrics (DEM, HAND, drain stats); lacks 2D hydrodynamic calibration."
+          ]
+        },
+        "temporal_alignment": {
+          "gate_name": "temporal_alignment",
+          "status": "CONDITIONAL",
+          "confidence": 0.6,
+          "description": "Drainage network version 'GCC_SWD_2015_ESTIMATE' is EVENT_ALIGNED.",
+          "explanation": "Drainage network version 'GCC_SWD_2015_ESTIMATE' is EVENT_ALIGNED.",
+          "reason": "Drainage network version 'GCC_SWD_2015_ESTIMATE' is EVENT_ALIGNED.",
+          "gate_type": "CAUSAL",
+          "evidence_ids": [],
+          "limitations": [
+            "Drainage geometry is estimated for 2015 baseline.",
+            "ESA WorldCover land-cover is a 2020 static snapshot (5-year post-event temporal gap for 2015)."
+          ]
+        },
+        "causal_mechanism_specificity": {
+          "gate_name": "causal_mechanism_specificity",
+          "status": "FAIL",
+          "confidence": 0.45,
+          "description": "Candidate mechanism 'RUNOFF_CONCENTRATION' co-occurs with significant physical confounders: Topographic HAND difference (-2.4 m); Drainage network length deficit (430 m).",
+          "explanation": "Candidate mechanism 'RUNOFF_CONCENTRATION' co-occurs with significant physical confounders: Topographic HAND difference (-2.4 m); Drainage network length deficit (430 m).",
+          "reason": "Candidate mechanism 'RUNOFF_CONCENTRATION' co-occurs with significant physical confounders: Topographic HAND difference (-2.4 m); Drainage network length deficit (430 m).",
+          "gate_type": "CAUSAL",
+          "evidence_ids": [],
+          "limitations": [
+            "Multiple physical drivers co-occur in the flooded ward.",
+            "Empirical data cannot isolate which mechanism was primary without calibrated hydrodynamic simulation.",
+            "Attributing flood disparity solely to one mechanism commits a single-cause fallacy."
+          ]
+        }
+      },
+      "material_limitations": [
+        "Field observations are point surveys; water depth is localized.",
+        "Copernicus DEM 30m vertical accuracy +/- 2.5m.",
+        "Micro-topography (<0.5m road crowns, curbs, storm drains) remains unresolved.",
+        "Contains 1 inferred segment(s) in Ward 101.",
+        "Internal sub-street roadside drains and gully pits remain unmapped.",
+        "Subsurface conduit sedimentation and blockage remain UNKNOWN.",
+        "Station spacing ~4 km cannot detect hyper-local convective micro-bursts (<500 m).",
+        "Rainfall equality indicates comparable forcing, not identical street-level cloudbursts.",
+        "Statistical sample size is limited (N=3).",
+        "Historical land-cover changes are unobserved (static 2020 ESA WorldCover reused across all events).",
+        "Recurrence of depth disparity confirms persistent vulnerability contrast, not proof of sole mechanism.",
+        "Derived proxy metrics (DEM, HAND, drain stats); lacks 2D hydrodynamic calibration.",
+        "Drainage geometry is estimated for 2015 baseline.",
+        "ESA WorldCover land-cover is a 2020 static snapshot (5-year post-event temporal gap for 2015).",
+        "Multiple physical drivers co-occur in the flooded ward.",
+        "Empirical data cannot isolate which mechanism was primary without calibrated hydrodynamic simulation.",
+        "Attributing flood disparity solely to one mechanism commits a single-cause fallacy."
+      ],
+      "has_material_limitations": true,
+      "causal_vs_correlation_analysis": "Defensibility Audit Result: 5/5 correlation gates passed, 0/3 causal specificity gates passed. The data solidly confirms that Anna Nagar experienced higher flood depth under comparable rainfall forcing, and that this depth disparity recurred across 3 historical events. However, because Anna Nagar simultaneously exhibits lower HAND terrain (-2.4m), higher built-up fraction (+0.13 proxy), and lower drainage length (-430m), the causal attribution to 'RUNOFF_CONCENTRATION' remains a plausible contributing factor rather than a proven solitary cause.",
+      "recommendation": "Classify conclusion as DEFENSIBLE_WITH_MATERIAL_LIMITATIONS. Report candidate mechanism as a contributing factor alongside co-occurring topographic and drainage capacity factors. Strictly prohibit claiming singular causality."
+    },
+    "counterfactual": null,
+    "limitations": [
+      {
+        "id": "lim-01-rainfall-spatial-resolution",
+        "limitation": "rainfall_spatial_resolution",
+        "severity": "MEDIUM",
+        "source": "IMD Grid / Station Interp",
+        "affected_feature": "rainfall_mm",
+        "explanation": "Regional grid interpolation smooths localized convective cloudbursts; sub-kilometer spatial rainfall heterogeneity cannot be fully resolved."
+      },
+      {
+        "id": "lim-02-dem-micro-topography",
+        "limitation": "dem_micro_topography",
+        "severity": "MEDIUM",
+        "source": "Copernicus DEM GLO-30",
+        "affected_feature": "hand_m, elevation_m",
+        "explanation": "30-meter DEM resolution does not capture street-level crowns, curbs, or compound walls that dictate shallow urban street flooding."
+      },
+      {
+        "id": "lim-03-contributing-area-proxy",
+        "limitation": "contributing_area_proxy",
+        "severity": "HIGH",
+        "source": "DEM HAND / Topographic Gradient Proxy",
+        "affected_feature": "area_km2",
+        "explanation": "Contributing area is a topographic proxy rather than a physically bounded, calibrated hydraulic catchment boundary."
+      },
+      {
+        "id": "lim-04-drainage-temporal-mismatch",
+        "limitation": "drainage_temporal_mismatch",
+        "severity": "HIGH",
+        "source": "GCC SWD Survey (2023)",
+        "affected_feature": "total_length_m, connectivity",
+        "explanation": "Modern 2023 storm water drain network shapefiles are temporally mismatched against 2015 and 2021 historical flood events."
+      },
+      {
+        "id": "lim-05-static-land-cover",
+        "limitation": "static_land_cover",
+        "severity": "MEDIUM",
+        "source": "ESA WorldCover 10m (2021/2023)",
+        "affected_feature": "builtup_fraction, imperviousness",
+        "explanation": "Static 10m satellite classification does not dynamically capture multi-year urban densification between 2015 and 2023."
+      },
+      {
+        "id": "lim-06-drain-blockage-unknown",
+        "limitation": "drain_blockage_unknown",
+        "severity": "HIGH",
+        "source": "Field Maintenance Logs",
+        "affected_feature": "effective_capacity",
+        "explanation": "Sub-surface sediment deposition, solid waste blockages, and inlet obstructions during storm events are unobserved and assumed clean."
+      },
+      {
+        "id": "lim-07-historical-sample-size",
+        "limitation": "historical_sample_size",
+        "severity": "MEDIUM",
+        "source": "Historical Flood Observations (N=3)",
+        "affected_feature": "multi_event_validation",
+        "explanation": "Empirical validation is bounded by N=3 recorded flood events (2015, 2021, 2023); statistical power for multi-event recurrence is moderate."
+      },
+      {
+        "id": "lim-08-no-calibrated-hydraulic-model",
+        "limitation": "no_calibrated_hydraulic_model",
+        "severity": "HIGH",
+        "source": "Mechanistic Proxy Framework",
+        "affected_feature": "causal_inference",
+        "explanation": "Investigation derives mechanisms from comparative multi-factor signals rather than calibrated 2D hydrodynamic simulation (e.g. SWMM/HEC-RAS)."
+      }
+    ],
+    "provenance_summary": {
+      "sources_tracked": 5,
+      "dataset_versions_tracked": 5,
+      "feature_derivations_computed": 12,
+      "lineage_available": true
+    }
+  },
+  "mechs": [
+    {
+      "id": "4564e6af-253d-4d13-9fc2-aa569f928c3b",
+      "comparison_id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
+      "mechanism_type": "RUNOFF_CONCENTRATION",
+      "score": 0.35,
+      "confidence": 0.5,
+      "certainty": "SUPPORTED",
+      "confidence_meaning": "Supported by upstream topographic contributing area proxy; bounded by lack of direct hydraulic pipe routing.",
+      "rank": 1,
+      "supporting_evidence_ids": [
+        "dac776c0-28c3-4918-9e59-2fe62f795760"
+      ],
+      "limiting_evidence_ids": [],
+      "explanation": "Signals: higher_upstream_built_fraction",
+      "signal_values": {
+        "upstream_built_diff": 0.13,
+        "contributing_area_diff": 0.18400000000000005
+      }
+    },
+    {
+      "id": "5f09eff6-d53b-45a9-860f-6ac14b76f38c",
+      "comparison_id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
+      "mechanism_type": "TERRAIN_DEPRESSION",
+      "score": 0.35,
+      "confidence": 0.5,
+      "certainty": "SUPPORTED",
+      "confidence_meaning": "Direct topographic signal from Copernicus DEM HAND; bounded by 30m micro-topography smoothing.",
+      "rank": 2,
+      "supporting_evidence_ids": [
+        "64727812-8512-444a-89b6-68c9b96a8c7f"
+      ],
+      "limiting_evidence_ids": [],
+      "explanation": "Signals: lower_HAND",
+      "signal_values": {
+        "hand_diff": -2.4,
+        "rel_elev_diff": -1.2
+      }
+    },
+    {
+      "id": "2f55101e-6934-400c-9e96-c50c3bd36544",
+      "comparison_id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
+      "mechanism_type": "IMPERVIOUS_SURFACE",
+      "score": 0.35,
+      "confidence": 0.4,
+      "certainty": "SUPPORTED",
+      "confidence_meaning": "Bounded to 0.40 confidence due to proxy land-cover classification and absence of calibrated 2D hydraulic run-off model.",
+      "rank": 3,
+      "supporting_evidence_ids": [
+        "1d7624de-338b-402c-b647-da3e8487ecb8"
+      ],
+      "limiting_evidence_ids": [],
+      "explanation": "Signals: higher_builtup_proxy (ESA WorldCover 10m proxy; reduced vegetation is co-linear, not independent)",
+      "signal_values": {
+        "builtup_diff": 0.13,
+        "vegetation_diff": -0.1,
+        "corroborating_vegetation": "reduced_vegetation_colinear"
+      }
+    },
+    {
+      "id": "fd36e74e-7d79-4c4d-a4df-f02628595fb4",
+      "comparison_id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
+      "mechanism_type": "DRAINAGE_CAPACITY",
+      "score": 0.3,
+      "confidence": 0.5,
+      "certainty": "SUPPORTED",
+      "confidence_meaning": "Derived from nominal cross-section geometry; bounded by unobserved sub-surface blockage and siltation.",
+      "rank": 4,
+      "supporting_evidence_ids": [
+        "a1657760-5bf2-4d4a-9468-cc958cfa92ed"
+      ],
+      "limiting_evidence_ids": [],
+      "explanation": "Signals: lower_effective_capacity",
+      "signal_values": {
+        "capacity_ratio": 0.7470588235294118
+      }
+    },
+    {
+      "id": "55e6693f-ae28-4b76-850e-4c2754df7dba",
+      "comparison_id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
+      "mechanism_type": "INSUFFICIENT_EVIDENCE",
+      "score": 0.1,
+      "confidence": 0.3,
+      "certainty": "UNKNOWN",
+      "confidence_meaning": "Signal threshold not reached across tested physical dimensions.",
+      "rank": 5,
+      "supporting_evidence_ids": [],
+      "limiting_evidence_ids": [
+        "9330bc6e-348d-4828-87b0-14d86291a7dd"
+      ],
+      "explanation": "Evidence items available: 17",
+      "signal_values": {
+        "evidence_count": 17
+      }
+    },
+    {
+      "id": "ca806338-2d36-43bb-ba96-84b4dfe20426",
+      "comparison_id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
+      "mechanism_type": "DRAINAGE_CONNECTIVITY",
+      "score": 0,
+      "confidence": 0.3,
+      "certainty": "UNKNOWN",
+      "confidence_meaning": "Supported by topological graph traversal; subject to 2023 temporal network mismatch for historical events.",
+      "rank": 6,
+      "supporting_evidence_ids": [
+        "676dc9be-f130-4a76-a146-2e76080bb1fb"
+      ],
+      "limiting_evidence_ids": [],
+      "explanation": "Signals: none detected",
+      "signal_values": {
+        "path_length_diff": -430,
+        "connectivity_diff": 0
+      }
+    },
+    {
+      "id": "b6170b3d-d70c-42a5-84b9-d3a4607c7288",
+      "comparison_id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
+      "mechanism_type": "OUTFALL_RESTRICTION",
+      "score": 0,
+      "confidence": 0.3,
+      "certainty": "UNKNOWN",
+      "confidence_meaning": "Derived from Euclidean outfall proximity; tidal and backwater stage unobserved.",
+      "rank": 7,
+      "supporting_evidence_ids": [
+        "5c2fea1d-6715-4c02-8d60-f8fa248ed83c"
+      ],
+      "limiting_evidence_ids": [],
+      "explanation": "Signals: none detected",
+      "signal_values": {
+        "distance_diff": 77.66886731962455,
+        "downstream_length_diff": -430
+      }
+    },
+    {
+      "id": "15038d45-ad2e-4d9d-8eb1-8f4f271c46e7",
+      "comparison_id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
+      "mechanism_type": "WATERBODY_INTERACTION",
+      "score": 0,
+      "confidence": 0.3,
+      "certainty": "UNKNOWN",
+      "confidence_meaning": "Derived from satellite water fraction; actual retention basin capacity unmodeled.",
+      "rank": 8,
+      "supporting_evidence_ids": [
+        "ddaf5eef-3f64-4eb4-96ec-d307b45db8d5"
+      ],
+      "limiting_evidence_ids": [],
+      "explanation": "Signals: none detected",
+      "signal_values": {
+        "water_fraction_diff": -0.020000000000000004
+      }
+    }
+  ],
+  "evs": [
+    {
+      "id": "64727812-8512-444a-89b6-68c9b96a8c7f",
+      "evidence_id": "64727812-8512-444a-89b6-68c9b96a8c7f",
+      "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+      "mechanism_type": "TERRAIN_DEPRESSION",
+      "certainty_level": "FACT",
+      "claim": "Height Above Nearest Drain (HAND) difference indicates terrain depression context",
+      "value": -2.4,
+      "unit": "m",
+      "source": "deterministic_engine",
+      "source_id": null,
+      "dataset_version_id": null,
+      "feature_derivation_id": null,
+      "spatial_ref": null,
+      "temporal_ref": null,
+      "support_score": 0.8,
+      "explanation": "HAND computed from Copernicus DEM GLO-30",
+      "source_independence": "INDEPENDENT_SOURCE",
+      "limitations": [
+        "Copernicus DEM 30m resolution smooths street-level micro-topography, curbs, and road crowns"
+      ],
+      "extra_data": {},
+      "created_at": "2026-10-11T15:33:12.409270+05:30"
+    },
+    {
+      "id": "dac776c0-28c3-4918-9e59-2fe62f795760",
+      "evidence_id": "dac776c0-28c3-4918-9e59-2fe62f795760",
+      "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+      "mechanism_type": "RUNOFF_CONCENTRATION",
+      "certainty_level": "SUPPORTED",
+      "claim": "Higher upstream built-up fraction is consistent with greater runoff concentration",
+      "value": 0.13,
+      "unit": "fraction",
+      "source": "deterministic_engine",
+      "source_id": null,
+      "dataset_version_id": null,
+      "feature_derivation_id": null,
+      "spatial_ref": null,
+      "temporal_ref": null,
+      "support_score": 0.7,
+      "explanation": "Upstream built-up fraction difference suggests differential runoff generation",
+      "source_independence": "DEPENDENT_DERIVATION",
+      "limitations": [
+        "Contributing area is a topographic proxy rather than a physically bounded catchment"
+      ],
+      "extra_data": {},
+      "created_at": "2026-10-11T15:33:12.409270+05:30"
+    },
+    {
+      "id": "5c2fea1d-6715-4c02-8d60-f8fa248ed83c",
+      "evidence_id": "5c2fea1d-6715-4c02-8d60-f8fa248ed83c",
+      "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+      "mechanism_type": "OUTFALL_RESTRICTION",
+      "certainty_level": "SUPPORTED",
+      "claim": "Greater distance to outfall is consistent with restricted outflow",
+      "value": 77.66886731962455,
+      "unit": "m",
+      "source": "deterministic_engine",
+      "source_id": null,
+      "dataset_version_id": null,
+      "feature_derivation_id": null,
+      "spatial_ref": null,
+      "temporal_ref": null,
+      "support_score": 0.6,
+      "explanation": "Outfall distance computed from drainage network geometry",
+      "source_independence": "INDEPENDENT_SOURCE",
+      "limitations": [
+        "Tidal backwater effects and tailwater elevations at outfalls unobserved"
+      ],
+      "extra_data": {},
+      "created_at": "2026-10-11T15:33:12.409270+05:30"
+    },
+    {
+      "id": "a1657760-5bf2-4d4a-9468-cc958cfa92ed",
+      "evidence_id": "a1657760-5bf2-4d4a-9468-cc958cfa92ed",
+      "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+      "mechanism_type": "DRAINAGE_CAPACITY",
+      "certainty_level": "SUPPORTED",
+      "claim": "Lower estimated effective capacity is consistent with reduced drainage throughput",
+      "value": 0.7470588235294118,
+      "unit": "ratio",
+      "source": "deterministic_engine",
+      "source_id": null,
+      "dataset_version_id": null,
+      "feature_derivation_id": null,
+      "spatial_ref": null,
+      "temporal_ref": null,
+      "support_score": 0.6,
+      "explanation": "Effective capacity proxy derived from segment dimensions",
+      "source_independence": "DEPENDENT_DERIVATION",
+      "limitations": [
+        "Temporal mismatch: GCC SWD shapefile reflects 2023 network for historical flood events",
+        "Sub-surface pipe blockage state and sediment accumulation unobserved"
+      ],
+      "extra_data": {},
+      "created_at": "2026-10-11T15:33:12.409270+05:30"
+    },
+    {
+      "id": "676dc9be-f130-4a76-a146-2e76080bb1fb",
+      "evidence_id": "676dc9be-f130-4a76-a146-2e76080bb1fb",
+      "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+      "mechanism_type": "DRAINAGE_CONNECTIVITY",
+      "certainty_level": "SUPPORTED",
+      "claim": "Network connectivity difference detected",
+      "value": 0,
+      "unit": "boolean_diff",
+      "source": "deterministic_engine",
+      "source_id": null,
+      "dataset_version_id": null,
+      "feature_derivation_id": null,
+      "spatial_ref": null,
+      "temporal_ref": null,
+      "support_score": 0.6,
+      "explanation": "Connectivity determined from segment graph analysis",
+      "source_independence": "DEPENDENT_DERIVATION",
+      "limitations": [
+        "Temporal mismatch: GCC SWD shapefile reflects 2023 network for historical flood events",
+        "Sub-surface pipe blockage state and sediment accumulation unobserved"
+      ],
+      "extra_data": {},
+      "created_at": "2026-10-11T15:33:12.409270+05:30"
+    },
+    {
+      "id": "1d7624de-338b-402c-b647-da3e8487ecb8",
+      "evidence_id": "1d7624de-338b-402c-b647-da3e8487ecb8",
+      "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+      "mechanism_type": "IMPERVIOUS_SURFACE",
+      "certainty_level": "SUPPORTED",
+      "claim": "Built-up fraction difference (imperviousness-related proxy) suggests differential surface runoff potential",
+      "value": 0.13,
+      "unit": "fraction",
+      "source": "deterministic_engine",
+      "source_id": null,
+      "dataset_version_id": null,
+      "feature_derivation_id": null,
+      "spatial_ref": null,
+      "temporal_ref": null,
+      "support_score": 0.55,
+      "explanation": "Built-up fraction proxy derived from ESA WorldCover 10m; does not represent parcel-level measured imperviousness.",
+      "source_independence": "SAME_SOURCE_SIGNAL",
+      "limitations": [
+        "Static 2023 land cover proxy does not represent parcel-level measured imperviousness",
+        "Infiltration rate heterogeneity not directly measured"
+      ],
+      "extra_data": {},
+      "created_at": "2026-10-11T15:33:12.409270+05:30"
+    },
+    {
+      "id": "ddaf5eef-3f64-4eb4-96ec-d307b45db8d5",
+      "evidence_id": "ddaf5eef-3f64-4eb4-96ec-d307b45db8d5",
+      "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+      "mechanism_type": "WATERBODY_INTERACTION",
+      "certainty_level": "SUPPORTED",
+      "claim": "Higher water fraction indicates potential waterbody interaction",
+      "value": -0.020000000000000004,
+      "unit": "fraction",
+      "source": "deterministic_engine",
+      "source_id": null,
+      "dataset_version_id": null,
+      "feature_derivation_id": null,
+      "spatial_ref": null,
+      "temporal_ref": null,
+      "support_score": 0.5,
+      "explanation": "Water fraction from ESA WorldCover landcover data",
+      "source_independence": "INDEPENDENT_SOURCE",
+      "limitations": [],
+      "extra_data": {},
+      "created_at": "2026-10-11T15:33:12.409270+05:30"
+    },
+    {
+      "id": "9330bc6e-348d-4828-87b0-14d86291a7dd",
+      "evidence_id": "9330bc6e-348d-4828-87b0-14d86291a7dd",
+      "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+      "mechanism_type": "INSUFFICIENT_EVIDENCE",
+      "certainty_level": "UNKNOWN",
+      "claim": "Insufficient evidence to evaluate this mechanism",
+      "value": null,
+      "unit": null,
+      "source": "deterministic_engine",
+      "source_id": null,
+      "dataset_version_id": null,
+      "feature_derivation_id": null,
+      "spatial_ref": null,
+      "temporal_ref": null,
+      "support_score": 0.1,
+      "explanation": "No discriminating signals detected from available data",
+      "source_independence": "INDEPENDENT_SOURCE",
+      "limitations": [],
+      "extra_data": {},
+      "created_at": "2026-10-11T15:33:12.409270+05:30"
+    }
+  ],
+  "graph": {
+    "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+    "nodes": [
+      {
+        "id": "rainfall",
+        "label": "Rainfall",
+        "node_type": "input",
+        "metadata": {}
+      },
+      {
+        "id": "catchment",
+        "label": "Catchment",
+        "node_type": "process",
+        "metadata": {}
+      },
+      {
+        "id": "runoff",
+        "label": "Runoff",
+        "node_type": "process",
+        "metadata": {}
+      },
+      {
+        "id": "drain_network",
+        "label": "Drain Network",
+        "node_type": "process",
+        "metadata": {}
+      },
+      {
+        "id": "bottleneck",
+        "label": "Bottleneck",
+        "node_type": "constraint",
+        "metadata": {}
+      },
+      {
+        "id": "outfall",
+        "label": "Outfall",
+        "node_type": "boundary",
+        "metadata": {}
+      },
+      {
+        "id": "terrain_storage",
+        "label": "Terrain Storage",
+        "node_type": "storage",
+        "metadata": {}
+      },
+      {
+        "id": "flood_observation",
+        "label": "Flood Observation",
+        "node_type": "observation",
+        "metadata": {}
+      }
+    ],
+    "edges": [
+      {
+        "source": "rainfall",
+        "target": "catchment",
+        "mechanism": "RUNOFF_CONCENTRATION",
+        "evidence_ids": [
+          "dac776c0-28c3-4918-9e59-2fe62f795760"
+        ],
+        "certainty_level": "FACT",
+        "relation_type": "PROXY_INPUT",
+        "support_score": 1,
+        "label": "Rainfall input"
+      },
+      {
+        "source": "catchment",
+        "target": "runoff",
+        "mechanism": "IMPERVIOUS_SURFACE",
+        "evidence_ids": [
+          "1d7624de-338b-402c-b647-da3e8487ecb8"
+        ],
+        "certainty_level": "SUPPORTED",
+        "relation_type": "ASSOCIATION",
+        "support_score": 0.7,
+        "label": "Runoff generation (impervious)"
+      },
+      {
+        "source": "runoff",
+        "target": "drain_network",
+        "mechanism": "DRAINAGE_CAPACITY",
+        "evidence_ids": [
+          "a1657760-5bf2-4d4a-9468-cc958cfa92ed"
+        ],
+        "certainty_level": "SUPPORTED",
+        "relation_type": "ASSOCIATION",
+        "support_score": 0.6,
+        "label": "Drainage inflow"
+      },
+      {
+        "source": "catchment",
+        "target": "terrain_storage",
+        "mechanism": "TERRAIN_DEPRESSION",
+        "evidence_ids": [
+          "64727812-8512-444a-89b6-68c9b96a8c7f"
+        ],
+        "certainty_level": "SUPPORTED",
+        "relation_type": "PROXY_INPUT",
+        "support_score": 0.6,
+        "label": "Terrain ponding"
+      },
+      {
+        "source": "terrain_storage",
+        "target": "flood_observation",
+        "mechanism": "TERRAIN_DEPRESSION",
+        "evidence_ids": [
+          "64727812-8512-444a-89b6-68c9b96a8c7f"
+        ],
+        "certainty_level": "SUPPORTED",
+        "relation_type": "CORRELATION",
+        "support_score": 0.5,
+        "label": "Local inundation"
+      },
+      {
+        "source": "bottleneck",
+        "target": "outfall",
+        "mechanism": "OUTFALL_RESTRICTION",
+        "evidence_ids": [
+          "5c2fea1d-6715-4c02-8d60-f8fa248ed83c"
+        ],
+        "certainty_level": "HYPOTHESIS",
+        "relation_type": "CAUSAL_HYPOTHESIS",
+        "support_score": 0.4,
+        "label": "Outflow restriction"
+      },
+      {
+        "source": "bottleneck",
+        "target": "flood_observation",
+        "mechanism": "DRAINAGE_CAPACITY",
+        "evidence_ids": [
+          "a1657760-5bf2-4d4a-9468-cc958cfa92ed"
+        ],
+        "certainty_level": "SUPPORTED",
+        "relation_type": "CORRELATION",
+        "support_score": 0.6,
+        "label": "Excess flooding"
+      }
+    ]
+  },
+  "val": {
+    "id": "4010986a-eeb5-403c-977b-faf9f5fe004d",
+    "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+    "proposed_mechanism": "RUNOFF_CONCENTRATION",
+    "event_count": 3,
+    "supporting_event_count": 3,
+    "contradicting_event_count": 0,
+    "inconclusive_event_count": 0,
+    "result": "MODERATE_SUPPORT",
+    "confidence": 0.6,
+    "recurring_mechanisms": {
+      "mechanisms": [
+        "RUNOFF_CONCENTRATION"
+      ]
+    },
+    "explanation": "Moderate historical support across 3 events (2015, 2021, 2023). Relative flood depth disparity (A > B) recurred across 3 events. Statistical confidence is bounded to 0.60 because sample size is small (N=3), and static 2020 land-cover/terrain features are reused without multi-temporal historical land-cover observations.",
+    "method_version": "v2_multi_event",
+    "event_ids": [
+      "d9660f3b-fd6e-423a-83be-a6da9fef4ffc",
+      "e51f81ca-aebf-4a80-a154-286d49ab42b3",
+      "7e9ee7b5-1750-4553-a6eb-082f115f037a"
+    ],
+    "observation_ids": [],
+    "feature_derivation_ids": [],
+    "source_datasets": [
+      "IMD/GPM rainfall",
+      "TNWRD water level / flood records",
+      "Sentinel-1 / Copernicus EMS flood extent"
+    ],
+    "sample_size_n": 3,
+    "validation_method": "multi_event_consistency_triangulation",
+    "validation_status": null,
+    "limitations": [
+      "N=3 multi-event historical sample does not justify strong certainty; unobserved antecedent conditions and temporal drainage alterations may exist."
+    ]
+  },
+  "def": {
+    "investigation_id": "de9cda17-8daa-448d-813e-9378b97619fb",
+    "place_a_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
+    "place_b_id": "b0aa192d-6cc8-4262-97b7-07cd5de2d9a8",
+    "proposed_mechanism": "RUNOFF_CONCENTRATION",
+    "verdict": "DEFENSIBLE_WITH_MATERIAL_LIMITATIONS",
+    "correlation_gates_passed": 5,
+    "causal_gates_passed": 0,
+    "total_gates": 8,
+    "gates": {
+      "direct_flood_observation": {
+        "gate_name": "direct_flood_observation",
+        "status": "PASS",
+        "confidence": 0.9,
+        "description": "Verified field flood observations exist for Place A (7 obs) and Place B (3 obs).",
+        "explanation": "Verified field flood observations exist for Place A (7 obs) and Place B (3 obs).",
+        "reason": "Verified field flood observations exist for Place A (7 obs) and Place B (3 obs).",
+        "gate_type": "CORRELATION",
+        "evidence_ids": [],
+        "limitations": [
+          "Field observations are point surveys; water depth is localized."
+        ]
+      },
+      "terrain_evidence": {
+        "gate_name": "terrain_evidence",
+        "status": "PASS",
+        "confidence": 0.8,
+        "description": "Copernicus DEM GLO-30 elevation and HAND metrics available for both locations.",
+        "explanation": "Copernicus DEM GLO-30 elevation and HAND metrics available for both locations.",
+        "reason": "Copernicus DEM GLO-30 elevation and HAND metrics available for both locations.",
+        "gate_type": "CORRELATION",
+        "evidence_ids": [],
+        "limitations": [
+          "Copernicus DEM 30m vertical accuracy +/- 2.5m.",
+          "Micro-topography (<0.5m road crowns, curbs, storm drains) remains unresolved."
+        ]
+      },
+      "drainage_evidence": {
+        "gate_name": "drainage_evidence",
+        "status": "PASS",
+        "confidence": 0.75,
+        "description": "Stormwater drainage network records exist (A: 8 seg, B: 5 seg).",
+        "explanation": "Stormwater drainage network records exist (A: 8 seg, B: 5 seg).",
+        "reason": "Stormwater drainage network records exist (A: 8 seg, B: 5 seg).",
+        "gate_type": "CORRELATION",
+        "evidence_ids": [],
+        "limitations": [
+          "Contains 1 inferred segment(s) in Ward 101.",
+          "Internal sub-street roadside drains and gully pits remain unmapped.",
+          "Subsurface conduit sedimentation and blockage remain UNKNOWN."
+        ]
+      },
+      "rainfall_comparability": {
+        "gate_name": "rainfall_comparability",
+        "status": "PASS",
+        "confidence": 0.7,
+        "description": "Rainfall comparability classified as PARTIALLY_COMPARABLE (70.0 mm diff).",
+        "explanation": "Rainfall comparability classified as PARTIALLY_COMPARABLE (70.0 mm diff).",
+        "reason": "Rainfall comparability classified as PARTIALLY_COMPARABLE (70.0 mm diff).",
+        "gate_type": "CORRELATION",
+        "evidence_ids": [],
+        "limitations": [
+          "Station spacing ~4 km cannot detect hyper-local convective micro-bursts (<500 m).",
+          "Rainfall equality indicates comparable forcing, not identical street-level cloudbursts."
+        ]
+      },
+      "multi_event_recurrence": {
+        "gate_name": "multi_event_recurrence",
+        "status": "PASS",
+        "confidence": 0.6,
+        "description": "Historical recurrence assessed as MODERATE_SUPPORT across 3 events.",
+        "explanation": "Historical recurrence assessed as MODERATE_SUPPORT across 3 events.",
+        "reason": "Historical recurrence assessed as MODERATE_SUPPORT across 3 events.",
+        "gate_type": "CORRELATION",
+        "evidence_ids": [],
+        "limitations": [
+          "Statistical sample size is limited (N=3).",
+          "Historical land-cover changes are unobserved (static 2020 ESA WorldCover reused across all events).",
+          "Recurrence of depth disparity confirms persistent vulnerability contrast, not proof of sole mechanism."
+        ]
+      },
+      "independent_mechanism_evidence": {
+        "gate_name": "independent_mechanism_evidence",
+        "status": "CONDITIONAL",
+        "confidence": 0.55,
+        "description": "Mechanism 'RUNOFF_CONCENTRATION' supported by deterministic physical proxy metrics.",
+        "explanation": "Mechanism 'RUNOFF_CONCENTRATION' supported by deterministic physical proxy metrics.",
+        "reason": "Mechanism 'RUNOFF_CONCENTRATION' supported by deterministic physical proxy metrics.",
+        "gate_type": "CAUSAL",
+        "evidence_ids": [],
+        "limitations": [
+          "Derived proxy metrics (DEM, HAND, drain stats); lacks 2D hydrodynamic calibration."
+        ]
+      },
+      "temporal_alignment": {
+        "gate_name": "temporal_alignment",
+        "status": "CONDITIONAL",
+        "confidence": 0.6,
+        "description": "Drainage network version 'GCC_SWD_2015_ESTIMATE' is EVENT_ALIGNED.",
+        "explanation": "Drainage network version 'GCC_SWD_2015_ESTIMATE' is EVENT_ALIGNED.",
+        "reason": "Drainage network version 'GCC_SWD_2015_ESTIMATE' is EVENT_ALIGNED.",
+        "gate_type": "CAUSAL",
+        "evidence_ids": [],
+        "limitations": [
+          "Drainage geometry is estimated for 2015 baseline.",
+          "ESA WorldCover land-cover is a 2020 static snapshot (5-year post-event temporal gap for 2015)."
+        ]
+      },
+      "causal_mechanism_specificity": {
+        "gate_name": "causal_mechanism_specificity",
+        "status": "FAIL",
+        "confidence": 0.45,
+        "description": "Candidate mechanism 'RUNOFF_CONCENTRATION' co-occurs with significant physical confounders: Topographic HAND difference (-2.4 m); Drainage network length deficit (430 m).",
+        "explanation": "Candidate mechanism 'RUNOFF_CONCENTRATION' co-occurs with significant physical confounders: Topographic HAND difference (-2.4 m); Drainage network length deficit (430 m).",
+        "reason": "Candidate mechanism 'RUNOFF_CONCENTRATION' co-occurs with significant physical confounders: Topographic HAND difference (-2.4 m); Drainage network length deficit (430 m).",
+        "gate_type": "CAUSAL",
+        "evidence_ids": [],
+        "limitations": [
+          "Multiple physical drivers co-occur in the flooded ward.",
+          "Empirical data cannot isolate which mechanism was primary without calibrated hydrodynamic simulation.",
+          "Attributing flood disparity solely to one mechanism commits a single-cause fallacy."
+        ]
+      }
+    },
+    "correlation_gates": {
+      "direct_flood_observation": {
+        "gate_name": "direct_flood_observation",
+        "status": "PASS",
+        "confidence": 0.9,
+        "description": "Verified field flood observations exist for Place A (7 obs) and Place B (3 obs).",
+        "explanation": "Verified field flood observations exist for Place A (7 obs) and Place B (3 obs).",
+        "reason": "Verified field flood observations exist for Place A (7 obs) and Place B (3 obs).",
+        "gate_type": "CORRELATION",
+        "evidence_ids": [],
+        "limitations": [
+          "Field observations are point surveys; water depth is localized."
+        ]
+      },
+      "terrain_evidence": {
+        "gate_name": "terrain_evidence",
+        "status": "PASS",
+        "confidence": 0.8,
+        "description": "Copernicus DEM GLO-30 elevation and HAND metrics available for both locations.",
+        "explanation": "Copernicus DEM GLO-30 elevation and HAND metrics available for both locations.",
+        "reason": "Copernicus DEM GLO-30 elevation and HAND metrics available for both locations.",
+        "gate_type": "CORRELATION",
+        "evidence_ids": [],
+        "limitations": [
+          "Copernicus DEM 30m vertical accuracy +/- 2.5m.",
+          "Micro-topography (<0.5m road crowns, curbs, storm drains) remains unresolved."
+        ]
+      },
+      "drainage_evidence": {
+        "gate_name": "drainage_evidence",
+        "status": "PASS",
+        "confidence": 0.75,
+        "description": "Stormwater drainage network records exist (A: 8 seg, B: 5 seg).",
+        "explanation": "Stormwater drainage network records exist (A: 8 seg, B: 5 seg).",
+        "reason": "Stormwater drainage network records exist (A: 8 seg, B: 5 seg).",
+        "gate_type": "CORRELATION",
+        "evidence_ids": [],
+        "limitations": [
+          "Contains 1 inferred segment(s) in Ward 101.",
+          "Internal sub-street roadside drains and gully pits remain unmapped.",
+          "Subsurface conduit sedimentation and blockage remain UNKNOWN."
+        ]
+      },
+      "rainfall_comparability": {
+        "gate_name": "rainfall_comparability",
+        "status": "PASS",
+        "confidence": 0.7,
+        "description": "Rainfall comparability classified as PARTIALLY_COMPARABLE (70.0 mm diff).",
+        "explanation": "Rainfall comparability classified as PARTIALLY_COMPARABLE (70.0 mm diff).",
+        "reason": "Rainfall comparability classified as PARTIALLY_COMPARABLE (70.0 mm diff).",
+        "gate_type": "CORRELATION",
+        "evidence_ids": [],
+        "limitations": [
+          "Station spacing ~4 km cannot detect hyper-local convective micro-bursts (<500 m).",
+          "Rainfall equality indicates comparable forcing, not identical street-level cloudbursts."
+        ]
+      },
+      "multi_event_recurrence": {
+        "gate_name": "multi_event_recurrence",
+        "status": "PASS",
+        "confidence": 0.6,
+        "description": "Historical recurrence assessed as MODERATE_SUPPORT across 3 events.",
+        "explanation": "Historical recurrence assessed as MODERATE_SUPPORT across 3 events.",
+        "reason": "Historical recurrence assessed as MODERATE_SUPPORT across 3 events.",
+        "gate_type": "CORRELATION",
+        "evidence_ids": [],
+        "limitations": [
+          "Statistical sample size is limited (N=3).",
+          "Historical land-cover changes are unobserved (static 2020 ESA WorldCover reused across all events).",
+          "Recurrence of depth disparity confirms persistent vulnerability contrast, not proof of sole mechanism."
+        ]
+      }
+    },
+    "causal_gates": {
+      "independent_mechanism_evidence": {
+        "gate_name": "independent_mechanism_evidence",
+        "status": "CONDITIONAL",
+        "confidence": 0.55,
+        "description": "Mechanism 'RUNOFF_CONCENTRATION' supported by deterministic physical proxy metrics.",
+        "explanation": "Mechanism 'RUNOFF_CONCENTRATION' supported by deterministic physical proxy metrics.",
+        "reason": "Mechanism 'RUNOFF_CONCENTRATION' supported by deterministic physical proxy metrics.",
+        "gate_type": "CAUSAL",
+        "evidence_ids": [],
+        "limitations": [
+          "Derived proxy metrics (DEM, HAND, drain stats); lacks 2D hydrodynamic calibration."
+        ]
+      },
+      "temporal_alignment": {
+        "gate_name": "temporal_alignment",
+        "status": "CONDITIONAL",
+        "confidence": 0.6,
+        "description": "Drainage network version 'GCC_SWD_2015_ESTIMATE' is EVENT_ALIGNED.",
+        "explanation": "Drainage network version 'GCC_SWD_2015_ESTIMATE' is EVENT_ALIGNED.",
+        "reason": "Drainage network version 'GCC_SWD_2015_ESTIMATE' is EVENT_ALIGNED.",
+        "gate_type": "CAUSAL",
+        "evidence_ids": [],
+        "limitations": [
+          "Drainage geometry is estimated for 2015 baseline.",
+          "ESA WorldCover land-cover is a 2020 static snapshot (5-year post-event temporal gap for 2015)."
+        ]
+      },
+      "causal_mechanism_specificity": {
+        "gate_name": "causal_mechanism_specificity",
+        "status": "FAIL",
+        "confidence": 0.45,
+        "description": "Candidate mechanism 'RUNOFF_CONCENTRATION' co-occurs with significant physical confounders: Topographic HAND difference (-2.4 m); Drainage network length deficit (430 m).",
+        "explanation": "Candidate mechanism 'RUNOFF_CONCENTRATION' co-occurs with significant physical confounders: Topographic HAND difference (-2.4 m); Drainage network length deficit (430 m).",
+        "reason": "Candidate mechanism 'RUNOFF_CONCENTRATION' co-occurs with significant physical confounders: Topographic HAND difference (-2.4 m); Drainage network length deficit (430 m).",
+        "gate_type": "CAUSAL",
+        "evidence_ids": [],
+        "limitations": [
+          "Multiple physical drivers co-occur in the flooded ward.",
+          "Empirical data cannot isolate which mechanism was primary without calibrated hydrodynamic simulation.",
+          "Attributing flood disparity solely to one mechanism commits a single-cause fallacy."
+        ]
+      }
+    },
+    "material_limitations": [
+      "Field observations are point surveys; water depth is localized.",
+      "Copernicus DEM 30m vertical accuracy +/- 2.5m.",
+      "Micro-topography (<0.5m road crowns, curbs, storm drains) remains unresolved.",
+      "Contains 1 inferred segment(s) in Ward 101.",
+      "Internal sub-street roadside drains and gully pits remain unmapped.",
+      "Subsurface conduit sedimentation and blockage remain UNKNOWN.",
+      "Station spacing ~4 km cannot detect hyper-local convective micro-bursts (<500 m).",
+      "Rainfall equality indicates comparable forcing, not identical street-level cloudbursts.",
+      "Statistical sample size is limited (N=3).",
+      "Historical land-cover changes are unobserved (static 2020 ESA WorldCover reused across all events).",
+      "Recurrence of depth disparity confirms persistent vulnerability contrast, not proof of sole mechanism.",
+      "Derived proxy metrics (DEM, HAND, drain stats); lacks 2D hydrodynamic calibration.",
+      "Drainage geometry is estimated for 2015 baseline.",
+      "ESA WorldCover land-cover is a 2020 static snapshot (5-year post-event temporal gap for 2015).",
+      "Multiple physical drivers co-occur in the flooded ward.",
+      "Empirical data cannot isolate which mechanism was primary without calibrated hydrodynamic simulation.",
+      "Attributing flood disparity solely to one mechanism commits a single-cause fallacy."
+    ],
+    "has_material_limitations": true,
+    "causal_vs_correlation_analysis": "Defensibility Audit Result: 5/5 correlation gates passed, 0/3 causal specificity gates passed. The data solidly confirms that Anna Nagar experienced higher flood depth under comparable rainfall forcing, and that this depth disparity recurred across 3 historical events. However, because Anna Nagar simultaneously exhibits lower HAND terrain (-2.4m), higher built-up fraction (+0.13 proxy), and lower drainage length (-430m), the causal attribution to 'RUNOFF_CONCENTRATION' remains a plausible contributing factor rather than a proven solitary cause.",
+    "recommendation": "Classify conclusion as DEFENSIBLE_WITH_MATERIAL_LIMITATIONS. Report candidate mechanism as a contributing factor alongside co-occurring topographic and drainage capacity factors. Strictly prohibit claiming singular causality."
+  },
+  "lim": [
+    {
+      "id": "lim-01-rainfall-spatial-resolution",
+      "limitation": "rainfall_spatial_resolution",
+      "severity": "MEDIUM",
+      "source": "IMD Grid / Station Interp",
+      "affected_feature": "rainfall_mm",
+      "explanation": "Regional grid interpolation smooths localized convective cloudbursts; sub-kilometer spatial rainfall heterogeneity cannot be fully resolved."
+    },
+    {
+      "id": "lim-02-dem-micro-topography",
+      "limitation": "dem_micro_topography",
+      "severity": "MEDIUM",
+      "source": "Copernicus DEM GLO-30",
+      "affected_feature": "hand_m, elevation_m",
+      "explanation": "30-meter DEM resolution does not capture street-level crowns, curbs, or compound walls that dictate shallow urban street flooding."
+    },
+    {
+      "id": "lim-03-contributing-area-proxy",
+      "limitation": "contributing_area_proxy",
+      "severity": "HIGH",
+      "source": "DEM HAND / Topographic Gradient Proxy",
+      "affected_feature": "area_km2",
+      "explanation": "Contributing area is a topographic proxy rather than a physically bounded, calibrated hydraulic catchment boundary."
+    },
+    {
+      "id": "lim-04-drainage-temporal-mismatch",
+      "limitation": "drainage_temporal_mismatch",
+      "severity": "HIGH",
+      "source": "GCC SWD Survey (2023)",
+      "affected_feature": "total_length_m, connectivity",
+      "explanation": "Modern 2023 storm water drain network shapefiles are temporally mismatched against 2015 and 2021 historical flood events."
+    },
+    {
+      "id": "lim-05-static-land-cover",
+      "limitation": "static_land_cover",
+      "severity": "MEDIUM",
+      "source": "ESA WorldCover 10m (2021/2023)",
+      "affected_feature": "builtup_fraction, imperviousness",
+      "explanation": "Static 10m satellite classification does not dynamically capture multi-year urban densification between 2015 and 2023."
+    },
+    {
+      "id": "lim-06-drain-blockage-unknown",
+      "limitation": "drain_blockage_unknown",
+      "severity": "HIGH",
+      "source": "Field Maintenance Logs",
+      "affected_feature": "effective_capacity",
+      "explanation": "Sub-surface sediment deposition, solid waste blockages, and inlet obstructions during storm events are unobserved and assumed clean."
+    },
+    {
+      "id": "lim-07-historical-sample-size",
+      "limitation": "historical_sample_size",
+      "severity": "MEDIUM",
+      "source": "Historical Flood Observations (N=3)",
+      "affected_feature": "multi_event_validation",
+      "explanation": "Empirical validation is bounded by N=3 recorded flood events (2015, 2021, 2023); statistical power for multi-event recurrence is moderate."
+    },
+    {
+      "id": "lim-08-no-calibrated-hydraulic-model",
+      "limitation": "no_calibrated_hydraulic_model",
+      "severity": "HIGH",
+      "source": "Mechanistic Proxy Framework",
+      "affected_feature": "causal_inference",
+      "explanation": "Investigation derives mechanisms from comparative multi-factor signals rather than calibrated 2D hydrodynamic simulation (e.g. SWMM/HEC-RAS)."
+    }
+  ],
+  "cf": {
+    "error": {
+      "code": "VALIDATION_ERROR",
+      "message": "Request parameter or body validation failed.",
+      "details": {
+        "validation_errors": [
+          {
+            "loc": [
+              "body",
+              "scenario_name"
+            ],
+            "msg": "Field required",
+            "type": "missing"
+          },
+          {
+            "loc": [
+              "body",
+              "runoff_coefficient"
+            ],
+            "msg": "Field required",
+            "type": "missing"
+          },
+          {
+            "loc": [
+              "body",
+              "contributing_area_km2"
+            ],
+            "msg": "Field required",
+            "type": "missing"
+          },
+          {
+            "loc": [
+              "body",
+              "effective_capacity"
+            ],
+            "msg": "Field required",
+            "type": "missing"
+          },
+          {
+            "loc": [
+              "body",
+              "rainfall_mm"
+            ],
+            "msg": "Field required",
+            "type": "missing"
+          }
+        ]
+      }
+    }
+  },
+  "obs": [
+    {
+      "id": "7405be86-22e5-47d2-8585-7f0879243c9b",
+      "event_id": "d9660f3b-fd6e-423a-83be-a6da9fef4ffc",
+      "place_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
+      "ward": "101",
+      "observed_at": "2023-12-04T05:30:00+05:30",
+      "severity": "high",
+      "depth_cm": 42,
+      "notes": "Observation FLOOD_013 from GCC_2023_Flood_Survey",
+      "source": "GCC_2023_Flood_Survey",
+      "longitude": 80.2101,
+      "latitude": 13.0851
+    },
+    {
+      "id": "6304a925-9791-44c6-94da-2cbee6e46b3f",
+      "event_id": "d9660f3b-fd6e-423a-83be-a6da9fef4ffc",
+      "place_id": "e503e3f2-28ba-46b0-8f7d-27aa3001f7be",
+      "ward": "103",
+      "observed_at": "2023-12-04T05:30:00+05:30",
+      "severity": "low",
+      "depth_cm": 12,
+      "notes": "Observation FLOOD_017 from GCC_2023_Flood_Survey",
+      "source": "GCC_2023_Flood_Survey",
+      "longitude": 80.2303,
+      "latitude": 13.0103
+    },
+    {
+      "id": "56f1c2ae-d77d-4169-81aa-0c0275be6c82",
+      "event_id": "d9660f3b-fd6e-423a-83be-a6da9fef4ffc",
+      "place_id": "b0aa192d-6cc8-4262-97b7-07cd5de2d9a8",
+      "ward": "102",
+      "observed_at": "2023-12-04T05:30:00+05:30",
+      "severity": "medium",
+      "depth_cm": 18,
+      "notes": "Observation FLOOD_016 from GCC_2023_Flood_Survey",
+      "source": "GCC_2023_Flood_Survey",
+      "longitude": 80.2203,
+      "latitude": 13.0451
+    },
+    {
+      "id": "307f1db7-37ad-44cd-967d-9e66afdf0548",
+      "event_id": "d9660f3b-fd6e-423a-83be-a6da9fef4ffc",
+      "place_id": "1ea309cc-6461-493e-b4aa-412ea3474676",
+      "ward": "104",
+      "observed_at": "2023-12-04T05:30:00+05:30",
+      "severity": "medium",
+      "depth_cm": 30,
+      "notes": "Observation FLOOD_015 from GCC_2023_Flood_Survey",
+      "source": "GCC_2023_Flood_Survey",
+      "longitude": 80.2353,
+      "latitude": 13.0402
+    },
+    {
+      "id": "b421940e-bc81-4eae-83eb-1dd913813914",
+      "event_id": "d9660f3b-fd6e-423a-83be-a6da9fef4ffc",
+      "place_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
+      "ward": "101",
+      "observed_at": "2023-12-04T05:30:00+05:30",
+      "severity": "high",
+      "depth_cm": 38,
+      "notes": "Observation FLOOD_014 from GCC_2023_Flood_Survey",
+      "source": "GCC_2023_Flood_Survey",
+      "longitude": 80.2106,
+      "latitude": 13.0847
+    },
+    {
+      "id": "200eff80-37b1-4424-b1c9-b8acb99e77a0",
+      "event_id": "e51f81ca-aebf-4a80-a154-286d49ab42b3",
+      "place_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
+      "ward": "101",
+      "observed_at": "2021-11-07T05:30:00+05:30",
+      "severity": "medium",
+      "depth_cm": 28,
+      "notes": "Observation FLOOD_009 from GCC_2021_Flood_Survey",
+      "source": "GCC_2021_Flood_Survey",
+      "longitude": 80.2108,
+      "latitude": 13.0848
+    },
+    {
+      "id": "60651ad4-2e97-410a-928d-623e09ca8f14",
+      "event_id": "e51f81ca-aebf-4a80-a154-286d49ab42b3",
+      "place_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
+      "ward": "101",
+      "observed_at": "2021-11-07T05:30:00+05:30",
+      "severity": "high",
+      "depth_cm": 35,
+      "notes": "Observation FLOOD_008 from GCC_2021_Flood_Survey",
+      "source": "GCC_2021_Flood_Survey",
+      "longitude": 80.2102,
+      "latitude": 13.0852
+    },
+    {
+      "id": "30633bb6-12c0-487b-9c59-b7dded8cb670",
+      "event_id": "e51f81ca-aebf-4a80-a154-286d49ab42b3",
+      "place_id": "1ea309cc-6461-493e-b4aa-412ea3474676",
+      "ward": "104",
+      "observed_at": "2021-11-07T05:30:00+05:30",
+      "severity": "medium",
+      "depth_cm": 22,
+      "notes": "Observation FLOOD_010 from GCC_2021_Flood_Survey",
+      "source": "GCC_2021_Flood_Survey",
+      "longitude": 80.2352,
+      "latitude": 13.0405
+    },
+    {
+      "id": "024adda4-1e63-4dcb-ba5d-27eb57e4fab9",
+      "event_id": "e51f81ca-aebf-4a80-a154-286d49ab42b3",
+      "place_id": "b0aa192d-6cc8-4262-97b7-07cd5de2d9a8",
+      "ward": "102",
+      "observed_at": "2021-11-07T05:30:00+05:30",
+      "severity": "low",
+      "depth_cm": 12,
+      "notes": "Observation FLOOD_011 from GCC_2021_Flood_Survey",
+      "source": "GCC_2021_Flood_Survey",
+      "longitude": 80.2205,
+      "latitude": 13.0452
+    },
+    {
+      "id": "207eea0d-3fde-480c-972f-9e33ef07c91e",
+      "event_id": "e51f81ca-aebf-4a80-a154-286d49ab42b3",
+      "place_id": "e503e3f2-28ba-46b0-8f7d-27aa3001f7be",
+      "ward": "103",
+      "observed_at": "2021-11-07T05:30:00+05:30",
+      "severity": "low",
+      "depth_cm": 8,
+      "notes": "Observation FLOOD_012 from GCC_2021_Flood_Survey",
+      "source": "GCC_2021_Flood_Survey",
+      "longitude": 80.2305,
+      "latitude": 13.0105
+    },
+    {
+      "id": "c53d5b6b-d8d9-4606-b825-a7ad6a87cf39",
+      "event_id": "7e9ee7b5-1750-4553-a6eb-082f115f037a",
+      "place_id": "b0aa192d-6cc8-4262-97b7-07cd5de2d9a8",
+      "ward": "102",
+      "observed_at": "2015-12-01T05:30:00+05:30",
+      "severity": "low",
+      "depth_cm": 15,
+      "notes": "Observation FLOOD_006 from GCC_2015_Flood_Survey",
+      "source": "GCC_2015_Flood_Survey",
+      "longitude": 80.22,
+      "latitude": 13.045
+    },
+    {
+      "id": "7abc19c5-38d2-4572-a4ca-3e47a591ffca",
+      "event_id": "7e9ee7b5-1750-4553-a6eb-082f115f037a",
+      "place_id": "1ea309cc-6461-493e-b4aa-412ea3474676",
+      "ward": "104",
+      "observed_at": "2015-12-01T05:30:00+05:30",
+      "severity": "medium",
+      "depth_cm": 25,
+      "notes": "Observation FLOOD_004 from GCC_2015_Flood_Survey",
+      "source": "GCC_2015_Flood_Survey",
+      "longitude": 80.235,
+      "latitude": 13.04
+    },
+    {
+      "id": "f936d968-adc4-434e-b67c-ed054e66eebd",
+      "event_id": "7e9ee7b5-1750-4553-a6eb-082f115f037a",
+      "place_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
+      "ward": "101",
+      "observed_at": "2015-12-01T05:30:00+05:30",
+      "severity": "high",
+      "depth_cm": 52,
+      "notes": "Observation FLOOD_003 from GCC_2015_Flood_Survey",
+      "source": "GCC_2015_Flood_Survey",
+      "longitude": 80.2095,
+      "latitude": 13.0855
+    },
+    {
+      "id": "7cb0f6c0-55dd-4c7f-9208-98ac475c60ef",
+      "event_id": "7e9ee7b5-1750-4553-a6eb-082f115f037a",
+      "place_id": "1ea309cc-6461-493e-b4aa-412ea3474676",
+      "ward": "104",
+      "observed_at": "2015-12-01T05:30:00+05:30",
+      "severity": "medium",
+      "depth_cm": 30,
+      "notes": "Observation FLOOD_005 from GCC_2015_Flood_Survey",
+      "source": "GCC_2015_Flood_Survey",
+      "longitude": 80.2355,
+      "latitude": 13.0395
+    },
+    {
+      "id": "013f0ffc-e409-4b19-a796-37e67fbbdc01",
+      "event_id": "7e9ee7b5-1750-4553-a6eb-082f115f037a",
+      "place_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
+      "ward": "101",
+      "observed_at": "2015-12-01T05:30:00+05:30",
+      "severity": "high",
+      "depth_cm": 38,
+      "notes": "Observation FLOOD_002 from GCC_2015_Flood_Survey",
+      "source": "GCC_2015_Flood_Survey",
+      "longitude": 80.2105,
+      "latitude": 13.0845
+    },
+    {
+      "id": "1468c3ae-58f9-43a3-89e5-020cebc3b730",
+      "event_id": "7e9ee7b5-1750-4553-a6eb-082f115f037a",
+      "place_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
+      "ward": "101",
+      "observed_at": "2015-12-01T05:30:00+05:30",
+      "severity": "high",
+      "depth_cm": 45,
+      "notes": "Observation FLOOD_001 from GCC_2015_Flood_Survey",
+      "source": "GCC_2015_Flood_Survey",
+      "longitude": 80.21,
+      "latitude": 13.085
+    },
+    {
+      "id": "0c16fa85-edb5-4804-adc8-7df4148acf2b",
+      "event_id": "7e9ee7b5-1750-4553-a6eb-082f115f037a",
+      "place_id": "e503e3f2-28ba-46b0-8f7d-27aa3001f7be",
+      "ward": "103",
+      "observed_at": "2015-12-01T05:30:00+05:30",
+      "severity": "low",
+      "depth_cm": 10,
+      "notes": "Observation FLOOD_007 from GCC_2015_Flood_Survey",
+      "source": "GCC_2015_Flood_Survey",
+      "longitude": 80.23,
+      "latitude": 13.01
+    }
+  ],
+  "drains": {
+    "drains": [
+      {
+        "id": "9bb1a257-d9ac-463c-9970-cafe5edb7410",
+        "drain_type": "side_drain",
+        "ward": "102",
+        "street_name": "Velachery Lake Road",
+        "is_inferred": false,
+        "length_m": 400
+      },
+      {
+        "id": "d9878c1f-5b98-4c97-8fe6-d2e827145ac7",
+        "drain_type": "macro",
+        "ward": "102",
+        "street_name": "Velachery Bypass Extension",
+        "is_inferred": false,
+        "length_m": 350
+      },
+      {
+        "id": "e8211536-0588-4666-b347-bd09b2dbc329",
+        "drain_type": "side_drain",
+        "ward": "102",
+        "street_name": "Velachery Bypass",
+        "is_inferred": false,
+        "length_m": 300
+      },
+      {
+        "id": "f5402fc3-33c7-4ebc-b154-1a81dca414ef",
+        "drain_type": "macro",
+        "ward": "102",
+        "street_name": "Velachery Outfall Connection",
+        "is_inferred": false,
+        "length_m": 150
+      },
+      {
+        "id": "fe3991b3-4fda-4df1-96a1-360549e0453f",
+        "drain_type": "macro",
+        "ward": "102",
+        "street_name": "Velachery Main Road",
+        "is_inferred": false,
+        "length_m": 500
+      }
+    ]
+  }
+}

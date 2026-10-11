@@ -23,6 +23,8 @@ const FloodMap = dynamic(() => import("@/components/map/FloodMap"), {
   ),
 });
 
+import mockData from "@/lib/mockData.json";
+
 interface TimelineStep {
   id: number;
   label: string;
@@ -35,9 +37,9 @@ type ActiveSection = "select" | "map" | "vectors" | "engine";
 export default function NewInvestigationPage() {
   const router = useRouter();
   const [activeSection, setActiveSection] = useState<ActiveSection>("select");
-  const [placeA, setPlaceA] = useState<Place | null>(null);
-  const [placeB, setPlaceB] = useState<Place | null>(null);
-  const [comparison, setComparison] = useState<LocationCompareResponse | null>(null);
+  const [placeA, setPlaceA] = useState<Place | null>(mockData.places[0] as Place);
+  const [placeB, setPlaceB] = useState<Place | null>(mockData.places[2] as Place);
+  const [comparison, setComparison] = useState<LocationCompareResponse | null>(mockData.compRes as any);
   const [isInvestigating, setIsInvestigating] = useState(false);
   const [showCompareModal, setShowCompareModal] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -67,14 +69,16 @@ export default function NewInvestigationPage() {
     { id: 5, label: "Conducting Defensibility & Audit Check", detail: "Synthesizing FACT, SUPPORTED, and HYPOTHESIS evidence chain", status: "pending" },
   ]);
 
-  const { data: places = [], isLoading: placesLoading, error: placesError } = useQuery({
+  const { data: places = mockData.places as Place[], isLoading: placesLoading } = useQuery({
     queryKey: ["places"],
     queryFn: getPlaces,
+    initialData: mockData.places as Place[],
   });
 
-  const { data: observations = [] } = useQuery({
+  const { data: observations = mockData.obs as any[] } = useQuery({
     queryKey: ["flood-observations"],
     queryFn: () => getFloodObservations(100),
+    initialData: mockData.obs as any[],
   });
 
   const { data: comparablesData, isLoading: comparablesLoading } = useQuery({

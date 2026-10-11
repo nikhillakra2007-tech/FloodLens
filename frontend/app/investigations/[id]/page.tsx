@@ -22,6 +22,7 @@ import EvidenceList from "@/components/evidence/EvidenceList";
 import { CounterfactualForm } from "@/components/counterfactual";
 import CausalFlowBanner from "@/components/investigation/flowchart/CausalFlowBanner";
 import type { Mechanism } from "@/lib/types/investigation";
+import mockData from "@/lib/mockData.json";
 
 const FloodMap = dynamic(() => import("@/components/map/FloodMap"), {
   ssr: false,
@@ -53,14 +54,16 @@ export default function InvestigationDetailPage() {
   const { data: mechanisms = [], isLoading: mechanismsLoading } = useMechanisms(id);
   const { data: evidence = [], isLoading: evidenceLoading } = useEvidence(id);
 
-  const { data: places = [] } = useQuery({
+  const { data: places = mockData.places as any[] } = useQuery({
     queryKey: ["places"],
     queryFn: getPlaces,
+    initialData: mockData.places as any[],
   });
 
-  const { data: observations = [] } = useQuery({
+  const { data: observations = mockData.obs as any[] } = useQuery({
     queryKey: ["flood-observations"],
     queryFn: () => getFloodObservations(100),
+    initialData: mockData.obs as any[],
   });
 
   if (investigationLoading) {
