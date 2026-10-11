@@ -2,14 +2,33 @@
 
 **Differential Urban Hydrological Intelligence for Defensible Flood Attribution**
 
-🔗 **[floodlens-app.vercel.app](https://floodlens-app.vercel.app)** · [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) · [![Tests](https://img.shields.io/badge/Tests-168%20Passed-emerald.svg)](https://github.com/nikhillakra2007-tech/FloodLens)
+🔗 **[floodlens-app.vercel.app](https://floodlens-app.vercel.app)** · [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) · [![Tests](https://img.shields.io/badge/Tests-168%20Passed-emerald.svg)](https://github.com/nikhillakra2007-tech/FloodLens) · [![Python](https://img.shields.io/badge/Python-3.12-3776AB.svg?logo=python&logoColor=white)](https://python.org) · [![Next.js](https://img.shields.io/badge/Next.js-14-000000.svg?logo=next.js&logoColor=white)](https://nextjs.org) · [![AWS Serverless](https://img.shields.io/badge/AWS-Lambda%20%7C%20Bedrock%20%7C%20S3-FF9900.svg?logo=amazon-aws&logoColor=white)](https://aws.amazon.com)
 
 > *"Why did your street flood when the next ward didn't?"*
 
-Conventional flood maps show static water depths after disaster strikes. **FloodLens** diagnoses the physical failure mechanism by pairing inundated catchments with resilient twin wards across elevation gradients, stormwater drain conduits, and impervious surface fractions.
+Conventional flood maps show static water depths after disaster strikes, treating flooding as an inevitable natural consequence. **FloodLens** is a differential urban hydrological intelligence system that diagnoses the physical root cause of flooding. By pairing inundated catchments with resilient twin wards across elevation gradients, stormwater drain (SWD) conduits, and impervious surface fractions, FloodLens isolates structural drainage choke points from extreme cloudburst forcing.
 
 ---
 
+## 📑 Table of Contents
+
+- [Visual Platform Tour](#-visual-platform-tour)
+- [How It Works: The Twin Catchment Thesis](#-how-it-works-the-twin-catchment-thesis)
+- [System Architecture](#️-system-architecture)
+- [AWS Cloud Infrastructure & Services](#-aws-cloud-infrastructure--services)
+  - [AWS Architecture Overview](#aws-architecture-overview)
+  - [Detailed AWS Services Breakdown](#detailed-aws-services-breakdown)
+  - [Hybrid Operating Model: Cloud vs. Local](#hybrid-operating-model-cloud-vs-local)
+  - [Automated AWS Deployment Pipeline](#automated-aws-deployment-pipeline)
+- [Hydrological Science & Causal Inference](#-hydrological-science--causal-inference)
+- [Repository Organization](#-repository-organization)
+- [Test Suite & Verification](#-test-suite--verification)
+- [Local Development Quickstart](#-local-development-quickstart)
+- [Automated Cloud Deployment](#-automated-cloud-deployment)
+- [Environment Configuration](#-environment-configuration)
+- [License & Scientific Data Sources](#-license--scientific-data-sources)
+
+---
 
 ## 📸 Visual Platform Tour
 
@@ -57,11 +76,17 @@ flowchart LR
     E --> G["✅ Dry Streets (0cm)\nProof: Rain Alone Was Not The Cause"]
 ```
 
+When two adjacent catchments receive the exact same 400mm+ precipitation pulse during a cyclonic event, yet one experiences severe standing inundation while the other stays dry, **meteorology cannot be the primary explanatory variable**. FloodLens quantifies the exact physical discrepancy across:
+- **Slope & Topography**: Elevation delta and natural basin fall.
+- **Hydraulic Conduit Capacity**: Manning's flow capacity minus silt and debris accumulation.
+- **Surface Imperviousness**: Runoff coefficient scaling due to urbanization.
+- **Tailwater Choke Points**: High-tide canal backwater and blocked outfalls.
+
 ---
 
 ## 🏛️ System Architecture
 
-FloodLens combines geospatial GIS ingestion, deterministic hydrological modeling, and a cloud-native microservices architecture:
+FloodLens combines multi-source geospatial GIS ingestion, deterministic hydrological modeling, and a cloud-native serverless architecture:
 
 ```mermaid
 flowchart TD
@@ -72,9 +97,13 @@ flowchart TD
         I4["ESA WorldCover 10m Impervious Class"]
     end
 
-    subgraph Core["2. Storage & Spatial Core"]
-        S1["AWS S3 Bucket (Raw Telemetry & GeoTIFFs)"]
-        S2["RDS PostgreSQL + PostGIS (Spatial Indices)"]
+    subgraph AWS_Cloud["2. AWS Cloud Infrastructure"]
+        S1["Amazon S3\n(GeoTIFFs, Manifests, Datasets)"]
+        S2["Amazon ECR\n(FastAPI Docker Container)"]
+        S3["AWS Lambda + Web Adapter (LWA)\n(2048MB Serverless Microservice)"]
+        S4["AWS Lambda Function URL\n(Public HTTPS, Low Latency, CORS)"]
+        S5["Amazon Bedrock\n(Claude 3.5 Sonnet Causal Synthesis)"]
+        S6["Amazon CloudWatch\n(Execution Logs & Telemetry)"]
     end
 
     subgraph Engine["3. Hydrological Inference & Audit Core"]
@@ -86,37 +115,230 @@ flowchart TD
 
     subgraph Frontend["4. Presentation Layer (Next.js 14)"]
         F1["Interactive GCC Basemap & Geospatial Hotspots"]
-        F2["Real-Time Hydraulic Parameter Simulator"]
-        F3["High-Definition Causal DAG Visualizer"]
+        F2["Subterranean Infrastructure 3D Cross-Section"]
+        F3["Real-Time Hydraulic Parameter Simulator"]
+        F4["High-Definition Causal DAG Visualizer"]
     end
 
     I1 & I2 & I3 & I4 --> S1
-    S1 --> S2
-    S2 --> E1
-    E1 --> E2 --> E3 --> E4
-    E4 --> F1 & F2 & F3
+    S1 --> S3
+    S2 --> S3
+    S3 <--> S5
+    S3 --> S6
+    S3 --> S4
+    S4 --> F1 & F2 & F3 & F4
+    S3 --> E1 --> E2 --> E3 --> E4
 ```
 
-### AWS Cloud Infrastructure
+---
 
-| Service | Component Role | Configuration |
+## ☁️ AWS Cloud Infrastructure & Services
+
+FloodLens is engineered with an enterprise-grade, cost-effective, and highly scalable **AWS serverless architecture**. Every component adheres to the AWS Well-Architected Framework, emphasizing security, operational excellence, and scientific reproducibility.
+
+### AWS Architecture Overview
+
+| AWS Service | Architectural Role | Technical Specifications & Sizing |
 | :--- | :--- | :--- |
-| **AWS S3** | Telemetry & Raw Spatial Data Store | Versioned bucket storing GeoTIFFs, SWD shapefiles, and rainfall logs |
-| **Amazon RDS** | PostGIS Spatial Engine | PostgreSQL 15 with PostGIS extension for topological vector queries |
-| **AWS App Runner / ECS** | Backend API & Ingestion Worker | Containerized FastAPI service running deterministic audit pipelines |
-| **Amazon Bedrock** | LLM Synthesis & Defensibility Audit | Claude 3.5 Sonnet synthesizing scientific evidence chains |
-| **Vercel** | Edge Frontend Delivery | Next.js 14 App Router with Tailwind CSS and SVG DAG rendering |
+| **Amazon Bedrock** | GenAI Hydrological Reasoning & Defensibility Audit | Anthropic Claude 3.5 Sonnet (`apac.anthropic.claude-3-5-sonnet-20241022-v2:0`) via `bedrock-runtime` Converse API |
+| **AWS Lambda** | Serverless Container Compute Engine | Python 3.12 container via **AWS Lambda Web Adapter (LWA)**, 2048 MB RAM, 120s timeout |
+| **AWS Lambda Function URL** | High-Performance Public HTTPS Gateway | Direct invocation endpoint with native CORS; eliminates API Gateway latency and surcharge |
+| **Amazon S3** | Scientific Data Lake & Manifest Store | Private encrypted bucket (`AES256`), bucket versioning, public access blocked, deterministic SHA-256 integrity metadata |
+| **Amazon ECR** | Container Image Registry | Private image repository (`floodlens-backend`) with image scanning enabled (`scanOnPush=true`) |
+| **AWS IAM** | Principle of Least Privilege Access Control | Execution role scoped strictly to S3 read/write, Bedrock Converse invocation, and CloudWatch basic logging |
+| **Amazon CloudWatch** | Observability, Audit Logs & Metrics | Centralized structured JSON logging, execution performance tracking, and error telemetry |
+| **Amazon RDS (Optional)** | Spatial PostGIS Engine | PostgreSQL 16 + PostGIS 3.4 for spatial indexing and topological vector queries |
+| **AWS CloudFormation** | Infrastructure as Code (IaC) | Declarative single-command infrastructure template ([infra/floodlens-stack.yaml](file:///c:/Users/nikhi/OneDrive/Desktop/coding/AWSxENVIRONMENT/infra/floodlens-stack.yaml)) |
+
+---
+
+### Detailed AWS Services Breakdown
+
+#### 1. Amazon Bedrock (Scientific Evidence Synthesis & Defensibility Gate)
+- **Role**: Powers the causal investigation agent that translates mathematical hydraulic outputs into courtroom-grade attribution reports.
+- **Model**: Anthropic Claude 3.5 Sonnet (`apac.anthropic.claude-3-5-sonnet-20241022-v2:0` in `ap-south-1` Mumbai / APAC inference profile).
+- **Execution**: The agent invokes Bedrock through the Converse API (`boto3.client('bedrock-runtime')`).
+- **Defensibility Guardrails**: Bedrock outputs are strictly audited by the application's sanitization pipeline:
+  - Validates output structure against strict schema constraints (`validate_agent_output`).
+  - Flags unsupported assertions into an explicit `unknowns` register.
+  - Enforces three-tier evidentiary taxonomy: `FACT` (measured gauge/survey data), `SUPPORTED` (calibrated hydrological models), and `CAUSAL HYPOTHESIS` (counterfactual assertions).
+
+#### 2. AWS Lambda with AWS Lambda Web Adapter (LWA)
+- **Role**: Runs the containerized FastAPI backend without managing EC2 instances, ECS clusters, or load balancers.
+- **Integration**: Leverages the official AWS Lambda Web Adapter (`public.ecr.aws/awsguru/aws-lambda-adapter:0.8.4`), enabling unmodified ASGI FastAPI apps to run directly on Lambda.
+- **Performance**: Provisioned with 2048 MB memory, allocating sufficient CPU power for real-time spatial calculations and rapid sub-second warm response times.
+
+#### 3. AWS Lambda Function URL
+- **Role**: Provides direct public HTTPS endpoints to the backend API (`https://<url-id>.lambda-url.<region>.on.aws/`).
+- **Benefits**:
+  - Eliminates the cost, operational complexity, and 29-second payload timeouts of AWS API Gateway.
+  - Native CORS headers preconfigured in CloudFormation to allow seamless communication with Vercel and AWS Amplify frontends.
+
+#### 4. Amazon S3 (Hydrological Data Lake)
+- **Role**: Houses spatial layers, digital elevation models, drainage networks, and historical flood incident logs.
+- **Folder Structure**:
+  - `raw/`: Untouched IMD rainfall logs, Copernicus DEM GLO-30 GeoTIFFs, and GCC SWD shapefiles.
+  - `processed/`: Standardized GeoJSON layers, normalized elevation grids, and topology graphs.
+  - `manifests/`: Phase 2 & 3 catchment pairing manifests and event benchmarks.
+  - `derived/`: Precomputed Manning discharge capacities and backwater depth profiles.
+- **Integrity**: Every file uploaded via [scripts/sync_s3.py](file:///c:/Users/nikhi/OneDrive/Desktop/coding/AWSxENVIRONMENT/scripts/sync_s3.py) includes a computed SHA-256 hash in its S3 Object Metadata for scientific verification.
+
+#### 5. AWS IAM Security & Least Privilege
+The Lambda execution role ([infra/floodlens-stack.yaml](file:///c:/Users/nikhi/OneDrive/Desktop/coding/AWSxENVIRONMENT/infra/floodlens-stack.yaml)) strictly limits permissions to:
+- `s3:GetObject`, `s3:PutObject`, `s3:ListBucket` scoped exclusively to the project's data bucket.
+- `bedrock:InvokeModel`, `bedrock:InvokeModelWithResponseStream`, `bedrock:Converse`.
+- Standard AWS Lambda basic execution logging (`logs:CreateLogGroup`, `logs:CreateLogStream`, `logs:PutLogEvents`).
+
+---
+
+### Hybrid Operating Model: Cloud vs. Local
+
+FloodLens is built with a seamless dual-backend runtime architecture. Developers and auditors can run the entire system 100% offline or fully connected to AWS:
+
+| Operating Mode | Environment Variable | Storage Layer | LLM Causal Agent | Use Case |
+| :--- | :--- | :--- | :--- | :--- |
+| **Local / Offline** | `AGENT_MODE=local` | Local directory (`data/`) | Deterministic Rule-Based Causal Engine | Local dev, unit testing, offline demos, zero AWS costs |
+| **AWS Cloud (Production)** | `AGENT_MODE=bedrock` | Amazon S3 Bucket | Amazon Bedrock (Claude 3.5 Sonnet) | Production deployment, scalable public API, automated audits |
+
+Switching modes requires only toggling `AGENT_MODE` in `.env` — zero code changes required.
+
+---
+
+### Automated AWS Deployment Pipeline
+
+FloodLens includes battle-tested, zero-friction deployment scripts for both Windows PowerShell and Linux/macOS bash:
+
+```mermaid
+flowchart LR
+    Step1["1. Verify IAM & AWS CLI\n(aws sts get-caller-identity)"] --> Step2["2. Ensure Amazon ECR Repo\n(floodlens-backend)"]
+    Step2 --> Step3["3. Docker Build & Push\n(FastAPI + Lambda Adapter)"]
+    Step3 --> Step4["4. Deploy CloudFormation\n(infra/floodlens-stack.yaml)"]
+    Step4 --> Step5["5. Sync Datasets to S3\n(scripts/sync_s3.py + SHA-256)"]
+    Step5 --> Step6["🚀 Live HTTPS API\n(Lambda Function URL)"]
+```
+
+#### Running the Pipeline
+
+- **Linux / macOS**:
+  ```bash
+  # Pre-flight check without creating resources:
+  ./deploy.sh ap-south-1 floodlens-production --dry-run
+
+  # Full automated deployment:
+  ./deploy.sh ap-south-1 floodlens-production
+  ```
+
+- **Windows PowerShell**:
+  ```powershell
+  # Pre-flight check without creating resources:
+  .\deploy.ps1 -Region ap-south-1 -StackName floodlens-production -DryRun
+
+  # Full automated deployment:
+  .\deploy.ps1 -Region ap-south-1 -StackName floodlens-production
+  ```
+
+---
+
+## 🔬 Hydrological Science & Causal Inference
+
+FloodLens grounds all attribution in classical fluid dynamics and physical hydrology:
+
+### 1. Rational Runoff Peak Rate
+$$Q_{peak} = C \cdot I \cdot A$$
+- $C$: Weighted runoff coefficient calculated from ESA WorldCover impervious fractions (paved roads: $0.85-0.90$, bare earth/parks: $0.20-0.35$).
+- $I$: Rainfall intensity derived from IMD radar / rain-gauge timeseries ($mm/hr$).
+- $A$: Catchment contributing area ($m^2$).
+
+### 2. Manning's Gravity Conduit Capacity
+$$Q_{capacity} = \frac{1}{n} \cdot A \cdot R_h^{2/3} \cdot S_0^{1/2}$$
+- $n$: Roughness coefficient ($n = 0.015$ clean concrete, $n = 0.035$ heavily silted).
+- $R_h$: Hydraulic radius ($A / P$).
+- $S_0$: Conduit invert bed slope.
+
+### 3. Backwater & Surcharge Calculation
+When tailwater elevation at canal outfalls exceeds the pipe crown, or siltation exceeds $40\%$, gravity discharge collapses. FloodLens solves the gradually varied flow equation step-by-step to compute the resulting hydraulic grade line (HGL) surcharge head spilling into streets.
+
+---
+
+## 📁 Repository Organization
+
+```
+FloodLens/
+├── backend/                       # Python 3.12 FastAPI Serverless Backend
+│   ├── alembic/                   # Database schema migrations
+│   ├── app/
+│   │   ├── agent/                 # Bedrock & local causal reasoning agents
+│   │   │   ├── core/              # Bedrock Converse API invocation & fallback
+│   │   │   ├── guardrails/        # Defensibility validation & output sanitization
+│   │   │   └── prompts/           # Hydraulic audit system prompts
+│   │   ├── api/v1/                # REST endpoints (health, twins, simulation, audit)
+│   │   ├── core/                  # Pydantic v2 application settings & configs
+│   │   ├── models/                # SQLAlchemy & GeoAlchemy2 spatial ORM models
+│   │   ├── schemas/               # Strict Pydantic input/output schemas
+│   │   └── services/
+│   │       ├── aws/               # Amazon S3 & storage abstraction service
+│   │       └── geospatial/        # Rational method, Manning equation & backwater
+│   ├── tests/                     # 97 Pytest test suites (unit, integration, contract, adversarial)
+│   ├── Dockerfile                 # Multi-stage image with AWS Lambda Web Adapter
+│   └── requirements.txt           # Python dependencies (FastAPI, boto3, GeoAlchemy2, Shapely)
+│
+├── frontend/                      # Next.js 14 App Router Presentation Layer
+│   ├── app/                       # Routes (Landing hero, investigation, counterfactuals)
+│   ├── components/                # Modular React & Tailwind components
+│   │   ├── investigation/         # Catchment comparison panels, 3D cross-section
+│   │   └── ui/                    # Reusable visual primitives & SVG DAG nodes
+│   ├── lib/                       # API clients, types, and hydraulic math helpers
+│   └── tests/                     # 71 Vitest frontend component & logic tests
+│
+├── infra/                         # Infrastructure as Code
+│   └── floodlens-stack.yaml       # AWS CloudFormation template (Lambda, S3, IAM, URL)
+│
+├── scripts/                       # DevOps, Ingestion & Automation Utilities
+│   ├── sync_s3.py                 # S3 dataset synchronization with SHA-256 verification
+│   ├── ingest_chennai.py          # Chennai geospatial and SWD pipeline ingestion
+│   ├── seed_demo.py               # Deterministic seed data for local and staging
+│   └── validate_data.py           # Scientific integrity check for GeoJSON & DEMs
+│
+├── data/                          # Scientific Datasets & Manifests (Local Fallback)
+│   ├── raw/                       # Raw IMD rainfall logs, Copernicus DEMs, GCC SWD
+│   ├── processed/                 # GeoJSON catchments and normalized elevation grids
+│   └── manifests/                 # Twin catchment pair definitions and ground truth
+│
+├── docs/                          # Comprehensive Scientific & System Documentation
+│   ├── architecture/              # High-level architecture and data flows
+│   ├── deployment/                # AWS deployment instructions and cloud topologies
+│   └── images/                    # Platform screenshots and UI visual assets
+│
+├── deploy.ps1                     # Windows PowerShell one-command AWS deployment pipeline
+├── deploy.sh                      # Linux/macOS bash one-command AWS deployment pipeline
+├── docker-compose.yml             # Local PostgreSQL 16 + PostGIS 3.4 development environment
+├── Makefile                       # Developer shortcuts (install, test, migrate, run)
+└── README.md                      # Project documentation and architectural guide
+```
 
 ---
 
 ## 🧪 Test Suite & Verification
 
-FloodLens is validated by automated test suites executed across unit, contract, and adversarial boundaries:
+FloodLens maintains an uncompromising verification posture, covering numerical hydrology formulas, API contracts, adversarial edge cases, and accessibility:
 
-- **Backend (Pytest)**: 97 passed tests (topographic similarity, Manning conduit capacity, multi-event recurrence, data quality checks).
-- **Frontend (Vitest)**: 71 passed tests across 15 test suites (component rendering, accessibility labels, counterfactual forms).
-- **Type Safety**: 100% strict TypeScript compilation with zero errors across 9 static and dynamic routes.
-- **Flake Rate**: 0.00% across 6 consecutive automated execution passes.
+- **Backend (Pytest)**: **97 passed tests**
+  - Physical unit tests: Topographic similarity matching, Manning pipe capacity under siltation, backwater head propagation.
+  - API & Contract tests: Schema compliance, pagination, and error handling.
+  - Adversarial guardrail tests: Prompt injection resistance, missing data fallback, ungrounded hypothesis mitigation.
+- **Frontend (Vitest)**: **71 passed tests** across 15 test suites
+  - Component mechanics, accessible ARIA labels, parameter slider reactivity, counterfactual recalculation.
+- **Type Safety**: 100% strict TypeScript compilation with zero errors across all static and dynamic routes.
+- **Flake Rate**: 0.00% across consecutive CI test executions.
+
+Run the test suites locally:
+```bash
+# Backend tests
+pytest backend/tests -v
+
+# Frontend tests
+cd frontend && npm run test:run
+```
 
 ---
 
@@ -124,32 +346,100 @@ FloodLens is validated by automated test suites executed across unit, contract, 
 
 ### Prerequisites
 - Node.js 18+ & npm
-- Python 3.11+
-- PostgreSQL 15 with PostGIS (optional, fallback calibrated fixtures included)
+- Python 3.12+ (or 3.11+)
+- Docker & Docker Compose (for local PostGIS database)
+- AWS CLI v2 (optional, only needed for AWS sync or deployment)
 
-### 1. Backend Setup
+### 1. Clone & Setup Environment
+```bash
+git clone https://github.com/nikhillakra2007-tech/FloodLens.git
+cd FloodLens
+cp .env.example backend/.env
+```
+
+### 2. Start Local Database (PostGIS)
+```bash
+docker compose up -d db
+```
+
+### 3. Backend Setup
 ```bash
 cd backend
 python -m venv .venv
-# On Windows:
-.venv\Scripts\activate
+
 # On Linux/macOS:
 source .venv/bin/activate
+# On Windows:
+.venv\Scripts\activate
 
 pip install -r requirements.txt
+alembic upgrade head
+python ../scripts/seed_demo.py
+
 uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
+API docs will be available at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
 
-### 2. Frontend Setup
+### 4. Frontend Setup
+In a new terminal window:
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) to view the application locally.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 ---
 
-## 📄 License
+## 🚀 Automated Cloud Deployment
+
+Deploy the entire FloodLens cloud infrastructure in a single command using your preferred shell:
+
+### Option A: Linux / macOS
+```bash
+chmod +x deploy.sh
+./deploy.sh ap-south-1 floodlens-production
+```
+
+### Option B: Windows PowerShell
+```powershell
+.\deploy.ps1 -Region ap-south-1 -StackName floodlens-production
+```
+
+### What the deployment pipeline does automatically:
+1. Validates AWS CLI credentials and active IAM identity.
+2. Creates or checks the Amazon ECR repository (`floodlens-backend`).
+3. Builds the production Docker image with the AWS Lambda Web Adapter.
+4. Pushes the container image to Amazon ECR.
+5. Deploys the CloudFormation stack ([infra/floodlens-stack.yaml](file:///c:/Users/nikhi/OneDrive/Desktop/coding/AWSxENVIRONMENT/infra/floodlens-stack.yaml)), provisioning the S3 Bucket, IAM Role, Lambda Function, and Function URL.
+6. Synchronizes raw datasets, manifests, and GeoJSON files to the private S3 bucket with computed SHA-256 integrity checksums.
+7. Outputs the public HTTPS backend API URL and health check endpoint.
+
+---
+
+## ⚙️ Environment Configuration
+
+| Variable | Description | Default / Example | Required in AWS? |
+| :--- | :--- | :--- | :--- |
+| `DATABASE_URL` | PostgreSQL + PostGIS connection string | `postgresql+psycopg2://postgres:postgres@localhost:5432/floodlens` | Yes (RDS endpoint) |
+| `AWS_REGION` | Target AWS deployment region | `ap-south-1` | Yes |
+| `AWS_ACCESS_KEY_ID` | AWS access key (optional if using IAM role) | `AKIA...` | Optional (IAM Role preferred) |
+| `AWS_SECRET_ACCESS_KEY` | AWS secret key (optional if using IAM role) | `wJalr...` | Optional (IAM Role preferred) |
+| `BEDROCK_MODEL_ID` | Amazon Bedrock Foundation Model ID | `apac.anthropic.claude-3-5-sonnet-20241022-v2:0` | Yes (when `AGENT_MODE=bedrock`) |
+| `S3_BUCKET` | S3 Data Lake bucket name | `floodlens-data-chennai` | Yes |
+| `CORS_ORIGINS` | Allowed origins for web client | `https://floodlens-app.vercel.app,http://localhost:3000` | Yes |
+| `AGENT_MODE` | Hydrological causal agent mode | `local` (offline) or `bedrock` (cloud) | No (defaults to `local`) |
+| `LOG_LEVEL` | Python logging severity level | `INFO` | No |
+
+---
+
+## 📜 License & Scientific Data Sources
+
+### License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+### Scientific Data Provenance
+- **Rainfall & Radar Telemetry**: India Meteorological Department (IMD) Chennai Doppler Weather Radar (DWR) & Automatic Weather Station (AWS) records.
+- **Digital Elevation Model (DEM)**: Copernicus DEM GLO-30 (30-meter European Space Agency elevation grid).
+- **Land Cover & Impervious Fractions**: ESA WorldCover 10m Land Classification dataset.
+- **Stormwater Drain (SWD) Network**: Greater Chennai Corporation (GCC) open stormwater asset registry.
