@@ -34,6 +34,16 @@ interface TimelineStep {
 
 type ActiveSection = "select" | "map" | "vectors" | "engine";
 
+function getCleanPlaceName(name: string): string {
+  return name.replace(/\s*\(Ward\s*[^)]+\)/i, "").trim();
+}
+
+function formatPlaceOptionLabel(place: Place | null | undefined): string {
+  if (!place) return "";
+  const base = getCleanPlaceName(place.name);
+  return place.ward ? `${base} (Ward ${place.ward})` : base;
+}
+
 export default function NewInvestigationPage() {
   const router = useRouter();
   const [activeSection, setActiveSection] = useState<ActiveSection>("select");
@@ -332,12 +342,12 @@ export default function NewInvestigationPage() {
             <div className="flex items-center gap-2 font-mono font-bold">
               <span className="text-[#C23E2A] flex items-center gap-1">
                 <span className="h-2 w-2 rounded-full bg-[#C23E2A]" />
-                {placeA.name}
+                {formatPlaceOptionLabel(placeA)}
               </span>
               <span className="text-[#9E8B75]">vs</span>
               <span className="text-[#3B8352] flex items-center gap-1">
                 <span className="h-2 w-2 rounded-full bg-[#3B8352]" />
-                {placeB.name}
+                {formatPlaceOptionLabel(placeB)}
               </span>
               {comparison && (
                 <span className="bg-terracotta-100 text-terracotta-800 px-2 py-0.5 rounded text-[10px]">
@@ -491,7 +501,7 @@ export default function NewInvestigationPage() {
                     <option value="">{placesLoading ? "Loading GCC wards..." : "Choose Location A..."}</option>
                     {places.map((place) => (
                       <option key={place.id} value={place.id}>
-                        {place.name} {place.ward ? `· Ward ${place.ward}` : ""} ({place.zone ?? "GCC"})
+                        {formatPlaceOptionLabel(place)}
                       </option>
                     ))}
                   </select>
@@ -500,7 +510,7 @@ export default function NewInvestigationPage() {
                 {placeA ? (
                   <div className="rounded-2xl border border-red-100 bg-[#FAF7F2] p-4 space-y-2 text-xs">
                     <div className="flex justify-between items-center">
-                      <span className="font-serif font-bold text-sm text-[#221B15]">{placeA.name}</span>
+                      <span className="font-serif font-bold text-sm text-[#221B15]">{getCleanPlaceName(placeA.name)}</span>
                       <span className="font-mono text-[#C23E2A] bg-red-100 px-2 py-0.5 rounded-full font-bold text-[10px]">
                         Ward {placeA.ward ?? "N/A"}
                       </span>
@@ -563,9 +573,10 @@ export default function NewInvestigationPage() {
                       ?.filter((c) => c.place_id !== placeA?.id)
                       .map((c) => {
                         const place = places.find((p) => p.id === c.place_id);
+                        const label = place ? formatPlaceOptionLabel(place) : getCleanPlaceName(c.name);
                         return (
                           <option key={c.place_id} value={c.place_id}>
-                            {place?.name ?? c.name} · {(c.similarity_score * 100).toFixed(0)}% Topographic Fit
+                            {label} · {(c.similarity_score * 100).toFixed(0)}% Topographic Fit
                           </option>
                         );
                       })}
@@ -575,7 +586,7 @@ export default function NewInvestigationPage() {
                         .filter((p) => p.id !== placeA?.id)
                         .map((p) => (
                           <option key={p.id} value={p.id}>
-                            {p.name} {p.ward ? `· Ward ${p.ward}` : ""}
+                            {formatPlaceOptionLabel(p)}
                           </option>
                         ))}
                   </select>
@@ -590,7 +601,7 @@ export default function NewInvestigationPage() {
                 {placeB ? (
                   <div className="rounded-2xl border border-emerald-100 bg-[#FAF7F2] p-4 space-y-2 text-xs">
                     <div className="flex justify-between items-center">
-                      <span className="font-serif font-bold text-sm text-[#221B15]">{placeB.name}</span>
+                      <span className="font-serif font-bold text-sm text-[#221B15]">{getCleanPlaceName(placeB.name)}</span>
                       <span className="font-mono text-[#3B8352] bg-emerald-100 px-2 py-0.5 rounded-full font-bold text-[10px]">
                         Ward {placeB.ward ?? "N/A"}
                       </span>
