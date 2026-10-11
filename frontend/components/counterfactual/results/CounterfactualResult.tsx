@@ -40,7 +40,7 @@ export default function CounterfactualResult({ result }: CounterfactualResultPro
           <p className="text-lg font-mono font-semibold text-gray-900">
             {formatScore(result.baseline_output)}
           </p>
-          <p className="text-xs text-gray-400">m³/s ({result.output_metric.replace(/_/g, " ")})</p>
+          <p className="text-xs text-gray-400">m³/s ({(result.output_metric ?? "peak_discharge_proxy_m3_s").replace(/_/g, " ")})</p>
         </div>
         <div
           className={`rounded-lg border p-3 ${
@@ -57,7 +57,7 @@ export default function CounterfactualResult({ result }: CounterfactualResultPro
           >
             {formatScore(result.counterfactual_output)}
           </p>
-          <p className="text-xs text-gray-400">m³/s ({result.output_metric.replace(/_/g, " ")})</p>
+          <p className="text-xs text-gray-400">m³/s ({(result.output_metric ?? "peak_discharge_proxy_m3_s").replace(/_/g, " ")})</p>
         </div>
       </div>
 
@@ -69,8 +69,8 @@ export default function CounterfactualResult({ result }: CounterfactualResultPro
               isReduction ? "text-green-700" : "text-red-700"
             }`}
           >
-            {result.delta > 0 ? "+" : ""}
-            {formatScore(result.delta)} m³/s
+            {(result.delta ?? 0) > 0 ? "+" : ""}
+            {formatScore(result.delta ?? 0)} m³/s
           </span>
         </div>
         <div className="mt-1 flex items-center justify-between">
@@ -88,7 +88,7 @@ export default function CounterfactualResult({ result }: CounterfactualResultPro
       <div className="rounded-lg border border-border bg-surface-subtle p-3">
         <h4 className="text-xs font-semibold text-gray-600 mb-2">Scenario Parameters</h4>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-          {Object.entries(result.parameters).map(([key, value]) => {
+          {Object.entries(result.parameters || {}).map(([key, value]) => {
             if (typeof value === "object" && value !== null) {
               return (
                 <div key={key} className="rounded border border-[#E8DFD3] bg-white p-2.5 space-y-1">
@@ -122,7 +122,7 @@ export default function CounterfactualResult({ result }: CounterfactualResultPro
 
       <div className="rounded-lg border border-blue-200 bg-blue-50 p-3">
         <p className="text-xs font-semibold text-blue-800">Transformation Rule</p>
-        <p className="mt-0.5 text-xs text-blue-700">{result.transformation_rule}</p>
+        <p className="mt-0.5 text-xs text-blue-700">{result.transformation_rule ?? "Linear rational peak runoff proxy balance: Q = C * I * A - capacity"}</p>
         <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-blue-600">
           <span>Mechanism: {result.mechanism_tested.replace(/_/g, " ")}</span>
           <span>Provenance: {result.baseline_feature_provenance}</span>

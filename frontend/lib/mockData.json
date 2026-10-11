@@ -1763,276 +1763,272 @@
     }
   ],
   "cf": {
-    "error": {
-      "code": "VALIDATION_ERROR",
-      "message": "Request parameter or body validation failed.",
-      "details": {
-        "validation_errors": [
-          {
-            "loc": [
-              "body",
-              "scenario_name"
-            ],
-            "msg": "Field required",
-            "type": "missing"
-          },
-          {
-            "loc": [
-              "body",
-              "runoff_coefficient"
-            ],
-            "msg": "Field required",
-            "type": "missing"
-          },
-          {
-            "loc": [
-              "body",
-              "contributing_area_km2"
-            ],
-            "msg": "Field required",
-            "type": "missing"
-          },
-          {
-            "loc": [
-              "body",
-              "effective_capacity"
-            ],
-            "msg": "Field required",
-            "type": "missing"
-          },
-          {
-            "loc": [
-              "body",
-              "rainfall_mm"
-            ],
-            "msg": "Field required",
-            "type": "missing"
-          }
-        ]
+    "id": "43828670-df35-4b45-a2eb-d1f3e1af10b2",
+    "investigation_id": "6bbbad94-f0a9-46bb-92a0-19229171d699",
+    "scenario_name": "reduce_runoff_20pct",
+    "parameters": {
+      "baseline": {
+        "rainfall_mm": 100.0,
+        "drainage_path_km": 2.0,
+        "effective_capacity": 100.0,
+        "runoff_coefficient": 0.7,
+        "contributing_area_km2": 5.0,
+        "upstream_impervious_fraction": 0.6
+      },
+      "counterfactual": {
+        "rainfall_mm": 100.0,
+        "drainage_path_km": 2.0,
+        "effective_capacity": 100.0,
+        "runoff_coefficient": 0.56,
+        "contributing_area_km2": 5.0,
+        "upstream_impervious_fraction": 0.6
       }
-    }
+    },
+    "baseline_output": 250.0,
+    "counterfactual_output": 180.0,
+    "delta": -70.0,
+    "percent_change": -28.0,
+    "disclaimer": "Simplified counterfactual proxy \u2014 not a calibrated hydraulic prediction.",
+    "mechanism_tested": "RUNOFF_GENERATION_SURCHARGE",
+    "input_features": [
+      "runoff_coefficient",
+      "contributing_area_km2",
+      "effective_capacity",
+      "rainfall_mm",
+      "upstream_impervious_fraction",
+      "drainage_path_km"
+    ],
+    "baseline_values": {},
+    "transformed_values": {},
+    "transformation_rule": "Linear rational peak runoff proxy balance: Q = C * I * A - capacity",
+    "output_metric": "peak_discharge_proxy_m3_s",
+    "sensitivity_run_id": null,
+    "baseline_feature_provenance": "ESA WorldCover 10m, Copernicus DEM GLO-30, GCC SWD network",
+    "is_calibrated_hydraulic_prediction": false,
+    "limitation": "Simplified counterfactual proxy \u2014 not a calibrated hydraulic prediction.",
+    "created_at": "2026-10-11T16:18:11.394037+05:30"
   },
   "obs": [
     {
-      "id": "7405be86-22e5-47d2-8585-7f0879243c9b",
+      "id": "obs-001-koyambedu",
       "event_id": "d9660f3b-fd6e-423a-83be-a6da9fef4ffc",
       "place_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
-      "ward": "101",
+      "ward": "127",
       "observed_at": "2023-12-04T05:30:00+05:30",
       "severity": "high",
       "depth_cm": 42,
-      "notes": "Observation FLOOD_013 from GCC_2023_Flood_Survey",
+      "notes": "Koyambedu Wholesale Market Junction (2023 Michaung Flood Survey)",
       "source": "GCC_2023_Flood_Survey",
-      "longitude": 80.2101,
-      "latitude": 13.0851
+      "longitude": 80.1915,
+      "latitude": 13.0694
     },
     {
-      "id": "6304a925-9791-44c6-94da-2cbee6e46b3f",
-      "event_id": "d9660f3b-fd6e-423a-83be-a6da9fef4ffc",
-      "place_id": "e503e3f2-28ba-46b0-8f7d-27aa3001f7be",
-      "ward": "103",
-      "observed_at": "2023-12-04T05:30:00+05:30",
-      "severity": "low",
-      "depth_cm": 12,
-      "notes": "Observation FLOOD_017 from GCC_2023_Flood_Survey",
-      "source": "GCC_2023_Flood_Survey",
-      "longitude": 80.2303,
-      "latitude": 13.0103
-    },
-    {
-      "id": "56f1c2ae-d77d-4169-81aa-0c0275be6c82",
+      "id": "obs-002-madipakkam",
       "event_id": "d9660f3b-fd6e-423a-83be-a6da9fef4ffc",
       "place_id": "b0aa192d-6cc8-4262-97b7-07cd5de2d9a8",
-      "ward": "102",
-      "observed_at": "2023-12-04T05:30:00+05:30",
-      "severity": "medium",
-      "depth_cm": 18,
-      "notes": "Observation FLOOD_016 from GCC_2023_Flood_Survey",
-      "source": "GCC_2023_Flood_Survey",
-      "longitude": 80.2203,
-      "latitude": 13.0451
-    },
-    {
-      "id": "307f1db7-37ad-44cd-967d-9e66afdf0548",
-      "event_id": "d9660f3b-fd6e-423a-83be-a6da9fef4ffc",
-      "place_id": "1ea309cc-6461-493e-b4aa-412ea3474676",
-      "ward": "104",
-      "observed_at": "2023-12-04T05:30:00+05:30",
-      "severity": "medium",
-      "depth_cm": 30,
-      "notes": "Observation FLOOD_015 from GCC_2023_Flood_Survey",
-      "source": "GCC_2023_Flood_Survey",
-      "longitude": 80.2353,
-      "latitude": 13.0402
-    },
-    {
-      "id": "b421940e-bc81-4eae-83eb-1dd913813914",
-      "event_id": "d9660f3b-fd6e-423a-83be-a6da9fef4ffc",
-      "place_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
-      "ward": "101",
+      "ward": "188",
       "observed_at": "2023-12-04T05:30:00+05:30",
       "severity": "high",
       "depth_cm": 38,
-      "notes": "Observation FLOOD_014 from GCC_2023_Flood_Survey",
+      "notes": "Madipakkam Lake Basin overflow (2023 Michaung Flood Survey)",
       "source": "GCC_2023_Flood_Survey",
-      "longitude": 80.2106,
-      "latitude": 13.0847
+      "longitude": 80.1963,
+      "latitude": 12.9648
     },
     {
-      "id": "200eff80-37b1-4424-b1c9-b8acb99e77a0",
+      "id": "obs-003-pallikaranai",
+      "event_id": "d9660f3b-fd6e-423a-83be-a6da9fef4ffc",
+      "place_id": "b0aa192d-6cc8-4262-97b7-07cd5de2d9a8",
+      "ward": "190",
+      "observed_at": "2023-12-04T05:30:00+05:30",
+      "severity": "high",
+      "depth_cm": 52,
+      "notes": "Pallikaranai Marshland Margin (2023 Michaung Flood Survey)",
+      "source": "GCC_2023_Flood_Survey",
+      "longitude": 80.2178,
+      "latitude": 12.9376
+    },
+    {
+      "id": "obs-004-kolathur",
+      "event_id": "d9660f3b-fd6e-423a-83be-a6da9fef4ffc",
+      "place_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
+      "ward": "64",
+      "observed_at": "2023-12-04T05:30:00+05:30",
+      "severity": "high",
+      "depth_cm": 35,
+      "notes": "Kolathur Catchment Basin (2023 Michaung Flood Survey)",
+      "source": "GCC_2023_Flood_Survey",
+      "longitude": 80.2167,
+      "latitude": 13.1238
+    },
+    {
+      "id": "obs-005-vyasarpadi",
+      "event_id": "d9660f3b-fd6e-423a-83be-a6da9fef4ffc",
+      "place_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
+      "ward": "35",
+      "observed_at": "2023-12-04T05:30:00+05:30",
+      "severity": "high",
+      "depth_cm": 45,
+      "notes": "Vyasarpadi Ganesapuram Subway Basin (2023 Michaung Flood Survey)",
+      "source": "GCC_2023_Flood_Survey",
+      "longitude": 80.2602,
+      "latitude": 13.1118
+    },
+    {
+      "id": "obs-006-perambur",
       "event_id": "e51f81ca-aebf-4a80-a154-286d49ab42b3",
       "place_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
-      "ward": "101",
+      "ward": "71",
       "observed_at": "2021-11-07T05:30:00+05:30",
       "severity": "medium",
       "depth_cm": 28,
-      "notes": "Observation FLOOD_009 from GCC_2021_Flood_Survey",
+      "notes": "Perambur Barracks Road Inundation (GCC 2021 Survey)",
       "source": "GCC_2021_Flood_Survey",
-      "longitude": 80.2108,
-      "latitude": 13.0848
+      "longitude": 80.2481,
+      "latitude": 13.1017
     },
     {
-      "id": "60651ad4-2e97-410a-928d-623e09ca8f14",
+      "id": "obs-007-pulianthope",
       "event_id": "e51f81ca-aebf-4a80-a154-286d49ab42b3",
       "place_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
-      "ward": "101",
+      "ward": "75",
       "observed_at": "2021-11-07T05:30:00+05:30",
-      "severity": "high",
-      "depth_cm": 35,
-      "notes": "Observation FLOOD_008 from GCC_2021_Flood_Survey",
+      "severity": "medium",
+      "depth_cm": 30,
+      "notes": "Pulianthope Basin Lowland (GCC 2021 Survey)",
       "source": "GCC_2021_Flood_Survey",
-      "longitude": 80.2102,
-      "latitude": 13.0852
+      "longitude": 80.2673,
+      "latitude": 13.0924
     },
     {
-      "id": "30633bb6-12c0-487b-9c59-b7dded8cb670",
+      "id": "obs-008-otteri",
       "event_id": "e51f81ca-aebf-4a80-a154-286d49ab42b3",
-      "place_id": "1ea309cc-6461-493e-b4aa-412ea3474676",
-      "ward": "104",
+      "place_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
+      "ward": "77",
       "observed_at": "2021-11-07T05:30:00+05:30",
       "severity": "medium",
       "depth_cm": 22,
-      "notes": "Observation FLOOD_010 from GCC_2021_Flood_Survey",
+      "notes": "Otteri Nullah Outfall (GCC 2021 Survey)",
       "source": "GCC_2021_Flood_Survey",
-      "longitude": 80.2352,
-      "latitude": 13.0405
+      "longitude": 80.252,
+      "latitude": 13.0886
     },
     {
-      "id": "024adda4-1e63-4dcb-ba5d-27eb57e4fab9",
-      "event_id": "e51f81ca-aebf-4a80-a154-286d49ab42b3",
-      "place_id": "b0aa192d-6cc8-4262-97b7-07cd5de2d9a8",
-      "ward": "102",
-      "observed_at": "2021-11-07T05:30:00+05:30",
-      "severity": "low",
-      "depth_cm": 12,
-      "notes": "Observation FLOOD_011 from GCC_2021_Flood_Survey",
-      "source": "GCC_2021_Flood_Survey",
-      "longitude": 80.2205,
-      "latitude": 13.0452
-    },
-    {
-      "id": "207eea0d-3fde-480c-972f-9e33ef07c91e",
+      "id": "obs-009-saidapet",
       "event_id": "e51f81ca-aebf-4a80-a154-286d49ab42b3",
       "place_id": "e503e3f2-28ba-46b0-8f7d-27aa3001f7be",
-      "ward": "103",
+      "ward": "142",
       "observed_at": "2021-11-07T05:30:00+05:30",
-      "severity": "low",
-      "depth_cm": 8,
-      "notes": "Observation FLOOD_012 from GCC_2021_Flood_Survey",
+      "severity": "medium",
+      "depth_cm": 25,
+      "notes": "Saidapet Maraimalai Adigal Bridge Basin (GCC 2021 Survey)",
       "source": "GCC_2021_Flood_Survey",
-      "longitude": 80.2305,
-      "latitude": 13.0105
+      "longitude": 80.2238,
+      "latitude": 13.0212
     },
     {
-      "id": "c53d5b6b-d8d9-4606-b825-a7ad6a87cf39",
+      "id": "obs-010-guindy",
+      "event_id": "e51f81ca-aebf-4a80-a154-286d49ab42b3",
+      "place_id": "e503e3f2-28ba-46b0-8f7d-27aa3001f7be",
+      "ward": "160",
+      "observed_at": "2021-11-07T05:30:00+05:30",
+      "severity": "low",
+      "depth_cm": 18,
+      "notes": "Guindy Kathipara Junction Underpass (GCC 2021 Survey)",
+      "source": "GCC_2021_Flood_Survey",
+      "longitude": 80.2032,
+      "latitude": 13.0075
+    },
+    {
+      "id": "obs-011-ashoknagar",
       "event_id": "7e9ee7b5-1750-4553-a6eb-082f115f037a",
-      "place_id": "b0aa192d-6cc8-4262-97b7-07cd5de2d9a8",
-      "ward": "102",
+      "place_id": "1ea309cc-6461-493e-b4aa-412ea3474676",
+      "ward": "134",
       "observed_at": "2015-12-01T05:30:00+05:30",
       "severity": "low",
       "depth_cm": 15,
-      "notes": "Observation FLOOD_006 from GCC_2015_Flood_Survey",
+      "notes": "Ashok Nagar 11th Sector Basin (GCC 2015 Survey)",
       "source": "GCC_2015_Flood_Survey",
-      "longitude": 80.22,
-      "latitude": 13.045
+      "longitude": 80.2114,
+      "latitude": 13.0362
     },
     {
-      "id": "7abc19c5-38d2-4572-a4ca-3e47a591ffca",
+      "id": "obs-012-jafferkhanpet",
       "event_id": "7e9ee7b5-1750-4553-a6eb-082f115f037a",
       "place_id": "1ea309cc-6461-493e-b4aa-412ea3474676",
-      "ward": "104",
+      "ward": "138",
       "observed_at": "2015-12-01T05:30:00+05:30",
       "severity": "medium",
-      "depth_cm": 25,
-      "notes": "Observation FLOOD_004 from GCC_2015_Flood_Survey",
+      "depth_cm": 20,
+      "notes": "Jafferkhanpet Kasi Point (GCC 2015 Survey)",
       "source": "GCC_2015_Flood_Survey",
-      "longitude": 80.235,
-      "latitude": 13.04
+      "longitude": 80.2062,
+      "latitude": 12.9814
     },
     {
-      "id": "f936d968-adc4-434e-b67c-ed054e66eebd",
+      "id": "obs-013-semmancheri",
       "event_id": "7e9ee7b5-1750-4553-a6eb-082f115f037a",
-      "place_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
-      "ward": "101",
+      "place_id": "e503e3f2-28ba-46b0-8f7d-27aa3001f7be",
+      "ward": "197",
+      "observed_at": "2015-12-01T05:30:00+05:30",
+      "severity": "medium",
+      "depth_cm": 32,
+      "notes": "Semmancheri OMR Catchment (GCC 2015 Survey)",
+      "source": "GCC_2015_Flood_Survey",
+      "longitude": 80.2274,
+      "latitude": 12.8712
+    },
+    {
+      "id": "obs-014-mudichur",
+      "event_id": "7e9ee7b5-1750-4553-a6eb-082f115f037a",
+      "place_id": "b0aa192d-6cc8-4262-97b7-07cd5de2d9a8",
+      "ward": "200",
       "observed_at": "2015-12-01T05:30:00+05:30",
       "severity": "high",
-      "depth_cm": 52,
-      "notes": "Observation FLOOD_003 from GCC_2015_Flood_Survey",
+      "depth_cm": 36,
+      "notes": "Mudichur Tambaram Low-lying Basin (GCC 2015 Survey)",
       "source": "GCC_2015_Flood_Survey",
-      "longitude": 80.2095,
-      "latitude": 13.0855
+      "longitude": 80.1172,
+      "latitude": 12.9234
     },
     {
-      "id": "7cb0f6c0-55dd-4c7f-9208-98ac475c60ef",
+      "id": "obs-015-korattur",
       "event_id": "7e9ee7b5-1750-4553-a6eb-082f115f037a",
-      "place_id": "1ea309cc-6461-493e-b4aa-412ea3474676",
-      "ward": "104",
+      "place_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
+      "ward": "83",
+      "observed_at": "2015-12-01T05:30:00+05:30",
+      "severity": "medium",
+      "depth_cm": 24,
+      "notes": "Korattur Industrial Grid (GCC 2015 Survey)",
+      "source": "GCC_2015_Flood_Survey",
+      "longitude": 80.1768,
+      "latitude": 13.1091
+    },
+    {
+      "id": "obs-016-velachery-south",
+      "event_id": "7e9ee7b5-1750-4553-a6eb-082f115f037a",
+      "place_id": "b0aa192d-6cc8-4262-97b7-07cd5de2d9a8",
+      "ward": "177",
       "observed_at": "2015-12-01T05:30:00+05:30",
       "severity": "medium",
       "depth_cm": 30,
-      "notes": "Observation FLOOD_005 from GCC_2015_Flood_Survey",
+      "notes": "Velachery Ram Nagar Lowland (GCC 2015 Survey)",
       "source": "GCC_2015_Flood_Survey",
-      "longitude": 80.2355,
-      "latitude": 13.0395
+      "longitude": 80.2195,
+      "latitude": 12.9785
     },
     {
-      "id": "013f0ffc-e409-4b19-a796-37e67fbbdc01",
+      "id": "obs-017-royapettah",
       "event_id": "7e9ee7b5-1750-4553-a6eb-082f115f037a",
-      "place_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
-      "ward": "101",
+      "place_id": "1ea309cc-6461-493e-b4aa-412ea3474676",
+      "ward": "115",
       "observed_at": "2015-12-01T05:30:00+05:30",
-      "severity": "high",
-      "depth_cm": 38,
-      "notes": "Observation FLOOD_002 from GCC_2015_Flood_Survey",
+      "severity": "medium",
+      "depth_cm": 26,
+      "notes": "Royapettah High Road Basin (GCC 2015 Survey)",
       "source": "GCC_2015_Flood_Survey",
-      "longitude": 80.2105,
-      "latitude": 13.0845
-    },
-    {
-      "id": "1468c3ae-58f9-43a3-89e5-020cebc3b730",
-      "event_id": "7e9ee7b5-1750-4553-a6eb-082f115f037a",
-      "place_id": "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
-      "ward": "101",
-      "observed_at": "2015-12-01T05:30:00+05:30",
-      "severity": "high",
-      "depth_cm": 45,
-      "notes": "Observation FLOOD_001 from GCC_2015_Flood_Survey",
-      "source": "GCC_2015_Flood_Survey",
-      "longitude": 80.21,
-      "latitude": 13.085
-    },
-    {
-      "id": "0c16fa85-edb5-4804-adc8-7df4148acf2b",
-      "event_id": "7e9ee7b5-1750-4553-a6eb-082f115f037a",
-      "place_id": "e503e3f2-28ba-46b0-8f7d-27aa3001f7be",
-      "ward": "103",
-      "observed_at": "2015-12-01T05:30:00+05:30",
-      "severity": "low",
-      "depth_cm": 10,
-      "notes": "Observation FLOOD_007 from GCC_2015_Flood_Survey",
-      "source": "GCC_2015_Flood_Survey",
-      "longitude": 80.23,
-      "latitude": 13.01
+      "longitude": 80.2618,
+      "latitude": 13.0532
     }
   ],
   "drains": {

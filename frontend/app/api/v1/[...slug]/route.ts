@@ -192,31 +192,72 @@ export async function POST(
     } catch {
       // ignore
     }
-    const rainfallRed = body.rainfall_reduction_pct ?? 20;
-    const drainageInc = body.drainage_capacity_increase_pct ?? 15;
-    const baselineDepth = 75; // cm
-    const mitigatedDepth = Math.max(
-      8,
-      Math.round(baselineDepth * (1 - (rainfallRed * 0.4 + drainageInc * 0.6) / 100))
-    );
+
+    const scenarioName = body.scenario_name || "reduce_runoff_20pct";
+    const rainfall = typeof body.rainfall_mm === "number" ? body.rainfall_mm : 100.0;
+    const area = typeof body.contributing_area_km2 === "number" ? body.contributing_area_km2 : 5.0;
+    const capacity = typeof body.effective_capacity === "number" ? body.effective_capacity : 100.0;
+    const baseRunoffCoeff = typeof body.runoff_coefficient === "number" ? body.runoff_coefficient : 0.7;
+    const upstreamImp = typeof body.upstream_impervious_fraction === "number" ? body.upstream_impervious_fraction : 0.6;
+    const drainagePath = typeof body.drainage_path_km === "number" ? body.drainage_path_km : 2.0;
+
+    // Simulate 20% impervious / runoff coefficient reduction
+    const cfRunoffCoeff = scenarioName.includes("reduce_runoff")
+      ? Math.max(0.05, baseRunoffCoeff * 0.8)
+      : Math.max(0.05, baseRunoffCoeff * 0.85);
+
+    const baselineRunoff = rainfall * area * baseRunoffCoeff;
+    const cfRunoff = rainfall * area * cfRunoffCoeff;
+    const baselineOutput = Math.max(0, baselineRunoff - capacity);
+    const cfOutput = Math.max(0, cfRunoff - capacity);
+    const delta = cfOutput - baselineOutput;
+    const percentChange = baselineOutput > 0 ? (delta / baselineOutput) * 100 : 0;
 
     return NextResponse.json({
-      investigation_id: slug[1],
-      scenario_name: "Urban Drainage & Precipitation Intervention",
-      baseline_depth_cm: baselineDepth,
-      counterfactual_depth_cm: mitigatedDepth,
-      depth_delta_cm: mitigatedDepth - baselineDepth,
-      risk_reduction_percentage: Math.round(((baselineDepth - mitigatedDepth) / baselineDepth) * 100),
-      interventions: {
-        rainfall_reduction_pct: rainfallRed,
-        drainage_capacity_increase_pct: drainageInc,
+      id: "43828670-df35-4b45-a2eb-d1f3e1af10b2",
+      investigation_id: slug[1] || "6bbbad94-f0a9-46bb-92a0-19229171d699",
+      scenario_name: scenarioName,
+      parameters: {
+        baseline: {
+          rainfall_mm: rainfall,
+          drainage_path_km: drainagePath,
+          effective_capacity: capacity,
+          runoff_coefficient: baseRunoffCoeff,
+          contributing_area_km2: area,
+          upstream_impervious_fraction: upstreamImp,
+        },
+        counterfactual: {
+          rainfall_mm: rainfall,
+          drainage_path_km: drainagePath,
+          effective_capacity: capacity,
+          runoff_coefficient: Number(cfRunoffCoeff.toFixed(2)),
+          contributing_area_km2: area,
+          upstream_impervious_fraction: upstreamImp,
+        },
       },
-      mechanism_deltas: {
-        conduit_surcharge: -(drainageInc * 0.8),
-        runoff_concentration: -(rainfallRed * 0.7),
-        backwater_head_meters: -(drainageInc * 0.02),
-      },
-      audit_verdict: "HYDRAULIC_MITIGATION_VERIFIED",
+      baseline_output: Number(baselineOutput.toFixed(2)),
+      counterfactual_output: Number(cfOutput.toFixed(2)),
+      delta: Number(delta.toFixed(2)),
+      percent_change: Number(percentChange.toFixed(2)),
+      disclaimer: "Simplified counterfactual proxy — not a calibrated hydraulic prediction.",
+      mechanism_tested: "RUNOFF_GENERATION_SURCHARGE",
+      input_features: [
+        "runoff_coefficient",
+        "contributing_area_km2",
+        "effective_capacity",
+        "rainfall_mm",
+        "upstream_impervious_fraction",
+        "drainage_path_km",
+      ],
+      baseline_values: {},
+      transformed_values: {},
+      transformation_rule: "Linear rational peak runoff proxy balance: Q = C * I * A - capacity",
+      output_metric: "peak_discharge_proxy_m3_s",
+      sensitivity_run_id: null,
+      baseline_feature_provenance: "ESA WorldCover 10m, Copernicus DEM GLO-30, GCC SWD network",
+      is_calibrated_hydraulic_prediction: false,
+      limitation: "Simplified counterfactual proxy — not a calibrated hydraulic prediction.",
+      created_at: new Date().toISOString(),
     });
   }
 

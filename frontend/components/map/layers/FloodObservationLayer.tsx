@@ -34,11 +34,41 @@ export default function FloodObservationLayer({ observations }: FloodObservation
   const highPin = useMemo(() => createObsPinIcon(true), []);
   const normPin = useMemo(() => createObsPinIcon(false), []);
 
-  if (observations.length === 0) return null;
+  // Deduplicate observations to ensure only 1 pinpoint per location (merging clustered survey points into max depth)
+  const uniqueObservations = useMemo(() => {
+    if (!observations || observations.length === 0) return [];
+    const result: FloodObservation[] = [];
+    const minDistanceThresholdDeg = 0.007; // ~770 meters
+
+    for (const obs of observations) {
+      if (obs.latitude === null || obs.longitude === null) continue;
+
+      const existingIdx = result.findIndex((item) => {
+        if (item.latitude === null || item.longitude === null) return false;
+        if (item.ward && obs.ward && item.ward === obs.ward) return true;
+        const dLat = item.latitude - obs.latitude!;
+        const dLon = item.longitude - obs.longitude!;
+        return Math.sqrt(dLat * dLat + dLon * dLon) < minDistanceThresholdDeg;
+      });
+
+      if (existingIdx >= 0) {
+        // Retain the higher inundation depth observation for this location
+        const existing = result[existingIdx];
+        if ((obs.depth_cm ?? 0) > (existing.depth_cm ?? 0)) {
+          result[existingIdx] = obs;
+        }
+      } else {
+        result.push(obs);
+      }
+    }
+    return result;
+  }, [observations]);
+
+  if (uniqueObservations.length === 0) return null;
 
   return (
     <>
-      {observations.map((obs) => {
+      {uniqueObservations.map((obs) => {
         if (obs.longitude === null || obs.latitude === null) return null;
 
         const isHigh = obs.severity === "high";
