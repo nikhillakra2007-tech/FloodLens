@@ -109,7 +109,6 @@ Resources:
       MemorySize: 2048
       Environment:
         Variables:
-          AWS_REGION: !Ref AWS::Region
           S3_BUCKET: !Ref FloodLensDataBucket
           AGENT_MODE: "bedrock"
           BEDROCK_MODEL_ID: !Ref BedrockModelId

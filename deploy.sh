@@ -48,6 +48,13 @@ docker push "$IMAGE_TAG"
 
 # 4. Deploy CloudFormation Stack
 echo -e "\n[Step 4/5] Deploying CloudFormation infrastructure stack: $STACK_NAME..."
+CURRENT_STATUS=$(aws cloudformation describe-stacks --stack-name "$STACK_NAME" --region "$REGION" --query "Stacks[0].StackStatus" --output text 2>/dev/null || true)
+if [ "$CURRENT_STATUS" = "ROLLBACK_COMPLETE" ]; then
+    echo " Detected stack in ROLLBACK_COMPLETE. Deleting previous failed stack before clean recreate..."
+    aws cloudformation delete-stack --stack-name "$STACK_NAME" --region "$REGION"
+    aws cloudformation wait stack-delete-complete --stack-name "$STACK_NAME" --region "$REGION"
+fi
+
 aws cloudformation deploy \
     --template-file infra/floodlens-stack.yaml \
     --stack-name "$STACK_NAME" \
