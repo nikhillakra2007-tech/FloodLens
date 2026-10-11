@@ -25,3 +25,8 @@ data/processed/
 .DS_Store
 *.tsbuildinfo
 .vercel/
+*.mp4
+*.webm
+*.avi
+*.mov
+video_assets/
