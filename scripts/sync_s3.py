@@ -12,12 +12,6 @@ import os
 import sys
 from pathlib import Path
 
-# Add backend directory to sys.path
-backend_dir = Path(__file__).resolve().parent.parent / "backend"
-sys.path.insert(0, str(backend_dir))
-
-from app.core.config import get_settings
-
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger("floodlens.sync_s3")
 
@@ -31,13 +25,14 @@ def compute_sha256(file_path: Path) -> str:
 
 
 def sync_directory_to_s3(data_dir: Path, bucket_name: str, region: str, dry_run: bool = False):
-    import boto3
-    from botocore.exceptions import ClientError
-
-    s3 = boto3.client("s3", region_name=region)
-
-    # Ensure bucket exists
+    s3 = None
     if not dry_run:
+        import boto3
+        from botocore.exceptions import ClientError
+
+        s3 = boto3.client("s3", region_name=region)
+
+        # Ensure bucket exists
         try:
             s3.head_bucket(Bucket=bucket_name)
             logger.info("Bucket '%s' exists and is accessible.", bucket_name)
@@ -103,9 +98,8 @@ def main():
     parser.add_argument("--region", type=str, default=None, help="Override AWS region")
     args = parser.parse_args()
 
-    settings = get_settings()
-    bucket = args.bucket or settings.s3_bucket
-    region = args.region or settings.aws_region
+    bucket = args.bucket or os.environ.get("S3_BUCKET", "floodlens-data-chennai")
+    region = args.region or os.environ.get("AWS_REGION", os.environ.get("AWS_DEFAULT_REGION", "ap-south-1"))
 
     data_dir = Path(__file__).resolve().parent.parent / "data"
     if not data_dir.exists():

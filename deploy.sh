@@ -17,9 +17,11 @@ CALLER_IDENTITY=$(aws sts get-caller-identity --output json)
 ACCOUNT_ID=$(echo "$CALLER_IDENTITY" | grep -o '"Account": "[^"]*' | cut -d'"' -f4)
 echo " Authenticated Account: $ACCOUNT_ID"
 
+PYTHON_BIN=$(command -v python3 || command -v python || echo "python")
+
 if [ "$DRY_RUN" = "true" ] || [ "$DRY_RUN" = "--dry-run" ]; then
     echo -e "\n[Step 2/5] (Dry-Run) Simulating S3 dataset sync..."
-    python scripts/sync_s3.py --dry-run --region "$REGION"
+    "$PYTHON_BIN" scripts/sync_s3.py --dry-run --region "$REGION"
     echo -e "\n[Step 3/5] (Dry-Run) Validating CloudFormation template..."
     aws cloudformation validate-template --template-body file://infra/floodlens-stack.yaml --region "$REGION"
     echo -e "\n[Dry-Run Succeeded] All templates and scripts validated cleanly."
@@ -59,7 +61,7 @@ BUCKET_NAME=$(aws cloudformation describe-stacks --stack-name "$STACK_NAME" --re
 
 # 5. Sync S3 datasets
 echo -e "\n[Step 5/5] Syncing Chennai scientific datasets to S3 bucket: $BUCKET_NAME..."
-python scripts/sync_s3.py --bucket "$BUCKET_NAME" --region "$REGION"
+"$PYTHON_BIN" scripts/sync_s3.py --bucket "$BUCKET_NAME" --region "$REGION"
 
 echo "=========================================================="
 echo " FloodLens AWS Deployment Successful!                     "
