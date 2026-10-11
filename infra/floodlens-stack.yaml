@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: "FloodLens - One-Command Serverless Infrastructure: S3, IAM, CloudWatch, and App Runner"
+Description: "FloodLens - One-Command Serverless Infrastructure: S3, IAM, CloudWatch, and Lambda Function URL"
 
 Parameters:
   EnvironmentName:
@@ -56,20 +56,22 @@ Resources:
         - Key: Environment
           Value: !Ref EnvironmentName
 
-  # 2. App Runner Instance IAM Role (Least Privilege)
-  AppRunnerInstanceRole:
+  # 2. Lambda Execution IAM Role (Least Privilege)
+  LambdaExecutionRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: !Sub "floodlens-apprunner-instance-role-${AWS::Region}"
+      RoleName: !Sub "floodlens-lambda-role-${AWS::Region}"
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
         Statement:
           - Effect: Allow
             Principal:
               Service:
-                - tasks.apprunner.amazonaws.com
+                - lambda.amazonaws.com
             Action:
               - sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
       Policies:
         - PolicyName: FloodLensS3Access
           PolicyDocument:
@@ -93,83 +95,59 @@ Resources:
                   - bedrock:InvokeModelWithResponseStream
                   - bedrock:Converse
                 Resource: "*"
-        - PolicyName: FloodLensCloudWatchLogging
-          PolicyDocument:
-            Version: "2012-10-17"
-            Statement:
-              - Effect: Allow
-                Action:
-                  - logs:CreateLogGroup
-                  - logs:CreateLogStream
-                  - logs:PutLogEvents
-                  - logs:DescribeLogStreams
-                Resource: "arn:aws:logs:*:*:*"
 
-  # 3. App Runner ECR Access Role
-  AppRunnerECRAccessRole:
-    Type: AWS::IAM::Role
+  # 3. Lambda Function (FastAPI Backend Container)
+  BackendLambdaFunction:
+    Type: AWS::Lambda::Function
     Properties:
-      RoleName: !Sub "floodlens-apprunner-ecr-role-${AWS::Region}"
-      AssumeRolePolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service:
-                - build.apprunner.amazonaws.com
-            Action:
-              - sts:AssumeRole
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AWSAppRunnerServicePolicyForECRAccess
-
-  # 4. App Runner Service (FastAPI Backend)
-  BackendAppRunnerService:
-    Type: AWS::AppRunner::Service
-    Properties:
-      ServiceName: !Sub "floodlens-backend-${EnvironmentName}"
-      HealthCheckConfiguration:
-        Path: "/api/v1/health"
-        Protocol: HTTP
-        Interval: 10
-        Timeout: 5
-        HealthyThreshold: 1
-        UnhealthyThreshold: 3
-      InstanceConfiguration:
-        Cpu: "1024" # 1 vCPU
-        Memory: "2048" # 2 GB
-        InstanceRoleArn: !GetAtt AppRunnerInstanceRole.Arn
-      SourceConfiguration:
-        AuthenticationConfiguration:
-          AccessRoleArn: !GetAtt AppRunnerECRAccessRole.Arn
-        AutoDeploymentsEnabled: false
-        ImageRepository:
-          ImageIdentifier: !Ref ImageUri
-          ImageRepositoryType: ECR
-          ImageConfiguration:
-            Port: "8000"
-            RuntimeEnvironmentVariables:
-              - Name: AWS_REGION
-                Value: !Ref AWS::Region
-              - Name: S3_BUCKET
-                Value: !Ref FloodLensDataBucket
-              - Name: AGENT_MODE
-                Value: "bedrock"
-              - Name: BEDROCK_MODEL_ID
-                Value: !Ref BedrockModelId
-              - Name: DATABASE_URL
-                Value: !Ref DatabaseURL
-              - Name: CORS_ORIGINS
-                Value: !Ref FrontendCorsOrigin
-              - Name: LOG_LEVEL
-                Value: "INFO"
+      FunctionName: !Sub "floodlens-backend-${EnvironmentName}"
+      PackageType: Image
+      Code:
+        ImageUri: !Ref ImageUri
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Timeout: 120
+      MemorySize: 2048
+      Environment:
+        Variables:
+          AWS_REGION: !Ref AWS::Region
+          S3_BUCKET: !Ref FloodLensDataBucket
+          AGENT_MODE: "bedrock"
+          BEDROCK_MODEL_ID: !Ref BedrockModelId
+          DATABASE_URL: !Ref DatabaseURL
+          CORS_ORIGINS: !Ref FrontendCorsOrigin
+          LOG_LEVEL: "INFO"
       Tags:
         - Key: Project
           Value: FloodLens
 
+  # 4. Lambda Public Function URL (HTTPS Endpoint)
+  BackendFunctionUrl:
+    Type: AWS::Lambda::Url
+    Properties:
+      TargetFunctionArn: !GetAtt BackendLambdaFunction.Arn
+      AuthType: NONE
+      Cors:
+        AllowOrigins:
+          - "*"
+        AllowMethods:
+          - "*"
+        AllowHeaders:
+          - "*"
+        MaxAge: 86400
+
+  # 5. Public Invocation Permission for Function URL
+  BackendFunctionUrlPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !GetAtt BackendLambdaFunction.Arn
+      Action: lambda:InvokeFunctionUrl
+      Principal: "*"
+      FunctionUrlAuthType: NONE
+
 Outputs:
-  AppRunnerServiceUrl:
+  BackendUrl:
     Description: "Public HTTPS URL of the FloodLens Backend API"
-    Value: !Sub "https://${BackendAppRunnerService.ServiceUrl}"
+    Value: !GetAtt BackendFunctionUrl.FunctionUrl
     Export:
       Name: FloodLensBackendUrl
 
@@ -177,6 +155,6 @@ Outputs:
     Description: "Private S3 Bucket for datasets and manifests"
     Value: !Ref FloodLensDataBucket
 
-  AppRunnerServiceArn:
-    Description: "ARN of the App Runner Service"
-    Value: !GetAtt BackendAppRunnerService.ServiceArn
+  LambdaFunctionArn:
+    Description: "ARN of the Lambda Function"
+    Value: !GetAtt BackendLambdaFunction.Arn

@@ -56,7 +56,8 @@ aws cloudformation deploy \
     --region "$REGION"
 
 # Get outputs
-BACKEND_URL=$(aws cloudformation describe-stacks --stack-name "$STACK_NAME" --region "$REGION" --query "Stacks[0].Outputs[?OutputKey=='AppRunnerServiceUrl'].OutputValue" --output text)
+BACKEND_URL=$(aws cloudformation describe-stacks --stack-name "$STACK_NAME" --region "$REGION" --query "Stacks[0].Outputs[?OutputKey=='BackendUrl'].OutputValue" --output text)
+BACKEND_URL="${BACKEND_URL%/}"
 BUCKET_NAME=$(aws cloudformation describe-stacks --stack-name "$STACK_NAME" --region "$REGION" --query "Stacks[0].Outputs[?OutputKey=='S3BucketName'].OutputValue" --output text)
 
 # 5. Sync S3 datasets
@@ -70,7 +71,6 @@ echo "Backend API URL:     $BACKEND_URL"
 echo "Backend Health Path: $BACKEND_URL/api/v1/health"
 echo "S3 Data Bucket:      s3://$BUCKET_NAME"
 echo ""
-echo "Next Step: Frontend AWS Amplify Deployment:"
-echo "1. Connect your repository in AWS Amplify Console."
-echo "2. Add environment variable: NEXT_PUBLIC_API_BASE_URL = $BACKEND_URL/api/v1"
+echo "Next Step: Configure Frontend Vercel / Environment:"
+echo "Update NEXT_PUBLIC_API_BASE_URL to: $BACKEND_URL/api/v1"
 echo "3. Deploy!"
