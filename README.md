@@ -10,18 +10,6 @@ Conventional flood maps show static water depths after disaster strikes. **Flood
 
 ---
 
-### 📌 GitHub Repository Details (About Section)
-
-- **Description:**
-  ```text
-  Differential urban hydrological intelligence & causal audit engine for defensible flood attribution in twin catchments.
-  ```
-- **Website URL:**
-  [https://floodlens-app.vercel.app](https://floodlens-app.vercel.app)
-- **Topics:**
-  `hydrology` · `urban-flooding` · `causal-inference` · `chennai-flood` · `fastapi` · `nextjs` · `postgis` · `aws-architecture`
-
----
 
 ## 📸 Visual Platform Tour
 
