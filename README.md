@@ -98,21 +98,15 @@ Every finding passes strict legal and scientific defensibility gates. Satellite 
 
 ---
 
-### 4. Causal Mechanism Ranking & Interactive Inspector
+### 4. Causal Mechanism Ranking, High-Definition Causal DAG  & Interactive Inspector
 Identifies and ranks the verified non-zero physical drivers: Runoff Concentration, Conduit Surcharging, Outfall Backwater Stagnation, or Topographic Depression.
-
-![Causal Mechanism Ranking](docs/images/04_causal_mechanisms_dag.png)
-
----
-
-### 5. High-Definition Causal DAG (Zero-Overlap Flow)
 A full-screen modal with deep backdrop blur displaying the entire physical propagation chain from rainfall forcing to flood observation with complete spatial clarity.
 
 ![High-Definition Causal DAG](docs/images/06_full_visual_graph_modal.png)
 
 ---
 
-### 6. Bounded Counterfactual Simulation Lab
+### 5. Bounded Counterfactual Simulation Lab
 Simulates municipal engineering interventions (increasing effective conduit capacity, reducing upstream imperviousness) to estimate relative peak discharge reduction.
 
 ![Counterfactual Simulation Lab](docs/images/05_counterfactual_simulation.png)
