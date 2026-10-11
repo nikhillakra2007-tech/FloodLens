@@ -2,23 +2,24 @@
 
 **Differential Urban Hydrological Intelligence for Defensible Flood Attribution**
 
-[![Live App](https://img.shields.io/badge/Live%20Platform-Vercel%20Deployed-10B981?style=for-the-badge&logo=vercel)](https://frontend-six-woad-12.vercel.app)
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge&logo=github)](https://github.com/nikhillakra2007-tech/FloodLens)
-[![Tests](https://img.shields.io/badge/Tests-97%20Pytest%20%7C%2071%20Vitest-success?style=for-the-badge)](https://github.com/nikhillakra2007-tech/FloodLens)
-[![License: MIT](https://img.shields.io/badge/License-MIT-amber?style=for-the-badge)](https://opensource.org/licenses/MIT)
+🔗 **[floodlens-app.vercel.app](https://floodlens-app.vercel.app)** · [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) · [![Tests](https://img.shields.io/badge/Tests-168%20Passed-emerald.svg)](https://github.com/nikhillakra2007-tech/FloodLens)
 
-> **Live Deployment:** [https://frontend-six-woad-12.vercel.app](https://frontend-six-woad-12.vercel.app)  
 > *"Why did your street flood when the next ward didn't?"*
 
 Conventional flood maps show static water depths after disaster strikes. **FloodLens** diagnoses the physical failure mechanism by pairing inundated catchments with resilient twin wards across elevation gradients, stormwater drain conduits, and impervious surface fractions.
 
 ---
 
-### 📌 GitHub "About" Metadata
-```text
-Differential urban hydrological intelligence & causal audit engine for defensible flood attribution in twin catchments.
-```
-**Tags:** `hydrology` · `urban-flooding` · `causal-inference` · `chennai-flood` · `fastapi` · `nextjs` · `postgis` · `aws-architecture`
+### 📌 GitHub Repository Details (About Section)
+
+- **Description:**
+  ```text
+  Differential urban hydrological intelligence & causal audit engine for defensible flood attribution in twin catchments.
+  ```
+- **Website URL:**
+  [https://floodlens-app.vercel.app](https://floodlens-app.vercel.app)
+- **Topics:**
+  `hydrology` · `urban-flooding` · `causal-inference` · `chennai-flood` · `fastapi` · `nextjs` · `postgis` · `aws-architecture`
 
 ---
 
