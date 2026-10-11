@@ -131,16 +131,12 @@ export default function LandingPage() {
 
             <Link
               href="/hub"
-              className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl border border-[#E0D5C7] bg-white hover:bg-[#FAF7F2] hover:border-terracotta-400 hover:scale-[1.02] active:scale-[0.99] px-6 py-4 text-sm font-bold text-[#3A2F25] transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl border border-[#E0D5C7] bg-white hover:bg-[#FAF7F2] hover:border-terracotta-400 hover:scale-[1.02] active:scale-[0.99] px-8 py-4 text-sm font-bold text-[#3A2F25] transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
             >
               <span>Explore Feature Hub</span>
-            </Link>
-
-            <Link
-              href="/demo-video"
-              className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl border border-cyan-800 bg-[#0B0F19] hover:bg-[#131B2E] text-cyan-400 hover:text-cyan-300 hover:scale-[1.02] active:scale-[0.99] px-6 py-4 text-sm font-bold transition-all duration-300 shadow-sm cursor-pointer"
-            >
-              <span>🎬 2-Min Video Pitch</span>
+              <svg className="h-4 w-4 text-terracotta-600 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
             </Link>
           </div>
         </div>
