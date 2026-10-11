@@ -1,5 +1,7 @@
+const LIVE_AWS_API_URL = "https://uwpjoljajktr7pv7otc4rk7ofq0eapix.lambda-url.ap-southeast-2.on.aws/api/v1";
+
 function getApiBase(): string {
-  const envUrl = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_API_URL;
+  const envUrl = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_API_URL || process.env.FASTAPI_BACKEND_URL;
   if (envUrl) {
     return envUrl.endsWith("/api/v1") ? envUrl : `${envUrl.replace(/\/+$/, "")}/api/v1`;
   }
@@ -7,8 +9,8 @@ function getApiBase(): string {
   if (typeof window !== "undefined") {
     return "/api/v1";
   }
-  // On the server (SSR), call backend directly
-  return "http://localhost:8000/api/v1";
+  // On the server (SSR), call live AWS backend
+  return LIVE_AWS_API_URL;
 }
 
 export class ApiError extends Error {

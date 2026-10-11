@@ -5,15 +5,13 @@ const nextConfig = {
     ignoreDuringBuilds: false,
   },
   async rewrites() {
-    if (process.env.FASTAPI_BACKEND_URL) {
-      return [
-        {
-          source: "/api/v1/:path*",
-          destination: `${process.env.FASTAPI_BACKEND_URL}/api/v1/:path*`,
-        },
-      ];
-    }
-    return [];
+    const backendUrl = process.env.FASTAPI_BACKEND_URL || "https://uwpjoljajktr7pv7otc4rk7ofq0eapix.lambda-url.ap-southeast-2.on.aws";
+    return [
+      {
+        source: "/api/v1/:path*",
+        destination: `${backendUrl.replace(/\/+$/, "")}/api/v1/:path*`,
+      },
+    ];
   },
 };
 
