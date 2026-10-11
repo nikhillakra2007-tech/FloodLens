@@ -62,6 +62,15 @@ aws cloudformation deploy \
     --parameter-overrides ImageUri="$IMAGE_TAG" \
     --region "$REGION"
 
+# Ensure Function URL invoke permission is present
+aws lambda add-permission \
+    --function-name "floodlens-backend-prod" \
+    --statement-id AllowPublicInvokeViaFunctionUrl \
+    --action lambda:InvokeFunction \
+    --principal "*" \
+    --invoked-via-function-url \
+    --region "$REGION" 2>/dev/null || true
+
 # Get outputs
 BACKEND_URL=$(aws cloudformation describe-stacks --stack-name "$STACK_NAME" --region "$REGION" --query "Stacks[0].Outputs[?OutputKey=='BackendUrl'].OutputValue" --output text)
 BACKEND_URL="${BACKEND_URL%/}"

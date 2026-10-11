@@ -134,12 +134,20 @@ Resources:
           - "*"
         MaxAge: 86400
 
-  # 5. Public Invocation Permission for Function URL
+  # 5. Public Invocation Permissions for Function URL
   BackendFunctionUrlPermission:
     Type: AWS::Lambda::Permission
     Properties:
       FunctionName: !GetAtt BackendLambdaFunction.Arn
       Action: lambda:InvokeFunctionUrl
+      Principal: "*"
+      FunctionUrlAuthType: NONE
+
+  BackendLambdaInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !GetAtt BackendLambdaFunction.Arn
+      Action: lambda:InvokeFunction
       Principal: "*"
       FunctionUrlAuthType: NONE
 
