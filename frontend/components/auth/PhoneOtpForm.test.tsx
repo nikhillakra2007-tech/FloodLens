@@ -25,6 +25,7 @@ describe("PhoneOtpForm", () => {
       sendPhoneOtp: mockSendPhoneOtp,
       verifyPhoneOtp: mockVerifyPhoneOtp,
       resetPassword: vi.fn(),
+      instantDemoLogin: vi.fn(),
       signOut: vi.fn(),
       refreshProfile: vi.fn(),
     });

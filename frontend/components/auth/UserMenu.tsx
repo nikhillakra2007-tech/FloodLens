@@ -72,9 +72,16 @@ export default function UserMenu() {
 
         {/* Mode Pill Badge */}
         <div className="hidden sm:flex flex-col items-start text-left">
-          <span className="text-xs font-bold text-[#221B15] truncate max-w-[120px]">
-            {displayName}
-          </span>
+          <div className="flex items-center gap-1.5">
+            <span className="text-xs font-bold text-[#221B15] truncate max-w-[120px]">
+              {displayName}
+            </span>
+            {user.id?.startsWith("demo-") && (
+              <span className="text-[9px] font-bold text-amber-800 bg-amber-100 border border-amber-200 px-1 rounded">
+                Demo
+              </span>
+            )}
+          </div>
           <span
             className={clsx(
               "text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.2 rounded-full border",

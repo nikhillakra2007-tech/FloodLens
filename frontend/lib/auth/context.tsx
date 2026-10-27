@@ -24,6 +24,7 @@ interface AuthContextType {
   sendPhoneOtp: (phone: string) => Promise<{ error?: string }>;
   verifyPhoneOtp: (phone: string, token: string) => Promise<{ error?: string }>;
   resetPassword: (email: string) => Promise<{ error?: string; message?: string }>;
+  instantDemoLogin: (mode?: ExperienceMode) => Promise<void>;
   signOut: () => Promise<void>;
   refreshProfile: () => Promise<void>;
 }
@@ -31,6 +32,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const LOCAL_STORAGE_MODE_KEY = "floodlens_experience_mode";
+const LOCAL_STORAGE_DEMO_KEY = "floodlens_demo_session_data";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -111,6 +113,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) {
+      if (typeof window !== "undefined") {
+        const savedDemo = localStorage.getItem(LOCAL_STORAGE_DEMO_KEY);
+        if (savedDemo) {
+          try {
+            const parsed = JSON.parse(savedDemo);
+            if (parsed?.user && parsed?.profile) {
+              setUser(parsed.user);
+              setProfile(parsed.profile);
+              setExperienceModeState(parsed.profile.experience_mode || "citizen");
+            }
+          } catch {
+            localStorage.removeItem(LOCAL_STORAGE_DEMO_KEY);
+          }
+        }
+      }
       setIsLoading(false);
       return;
     }
@@ -127,6 +144,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           setUser(session.user);
           await fetchProfile(session.user);
         } else if (isMounted) {
+          if (typeof window !== "undefined") {
+            const savedDemo = localStorage.getItem(LOCAL_STORAGE_DEMO_KEY);
+            if (savedDemo) {
+              try {
+                const parsed = JSON.parse(savedDemo);
+                if (parsed?.user && parsed?.profile) {
+                  setUser(parsed.user);
+                  setProfile(parsed.profile);
+                  setExperienceModeState(parsed.profile.experience_mode || "citizen");
+                  if (isMounted) setIsLoading(false);
+                  return;
+                }
+              } catch {
+                localStorage.removeItem(LOCAL_STORAGE_DEMO_KEY);
+              }
+            }
+          }
           setUser(null);
           setProfile(null);
         }
@@ -167,6 +201,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (user && profile) {
       const updatedProfile = { ...profile, experience_mode: mode, updated_at: new Date().toISOString() };
       setProfile(updatedProfile);
+
+      if (user.id.startsWith("demo-") && typeof window !== "undefined") {
+        localStorage.setItem(
+          LOCAL_STORAGE_DEMO_KEY,
+          JSON.stringify({
+            user: { ...user, user_metadata: { ...user.user_metadata, experience_mode: mode } },
+            profile: updatedProfile,
+          })
+        );
+        return;
+      }
 
       const supabase = getSupabaseBrowserClient();
       if (supabase) {
@@ -410,6 +455,54 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const instantDemoLogin = async (mode: ExperienceMode = "technical") => {
+    const isTech = mode === "technical";
+    const demoId = isTech ? "demo-technical-officer" : "demo-citizen-user";
+    const demoName = isTech ? "Dr. K. Senthil Nathan" : "Priya Ramanathan";
+    const demoEmail = isTech ? "senthil.nathan@gcc.chennai.gov.in" : "priya.ramanathan@velachery.org";
+    const demoRole = isTech ? "GCC Senior Hydrologist & SWD Lead" : "Velachery Ward 170 Resident Observer";
+
+    const demoUser: User = {
+      id: demoId,
+      app_metadata: { provider: "demo" },
+      user_metadata: {
+        full_name: demoName,
+        experience_mode: mode,
+        role_title: demoRole,
+        is_demo: true,
+      },
+      aud: "authenticated",
+      created_at: new Date().toISOString(),
+      email: demoEmail,
+      role: "authenticated",
+      updated_at: new Date().toISOString(),
+    };
+
+    const demoProfile: UserProfile = {
+      id: demoId,
+      email: demoEmail,
+      full_name: demoName,
+      phone: "+919840123456",
+      experience_mode: mode,
+      profile_completed: true,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    };
+
+    setUser(demoUser);
+    setProfile(demoProfile);
+    setExperienceModeState(mode);
+
+    if (typeof window !== "undefined") {
+      localStorage.setItem(LOCAL_STORAGE_MODE_KEY, mode);
+      localStorage.setItem(
+        LOCAL_STORAGE_DEMO_KEY,
+        JSON.stringify({ user: demoUser, profile: demoProfile })
+      );
+      document.cookie = "floodlens_demo_session=1; path=/; max-age=86400; SameSite=Lax";
+    }
+  };
+
   const signOut = async () => {
     const supabase = getSupabaseBrowserClient();
     if (supabase) {
@@ -422,6 +515,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
     setProfile(null);
     if (typeof window !== "undefined") {
+      localStorage.removeItem(LOCAL_STORAGE_DEMO_KEY);
+      document.cookie = "floodlens_demo_session=; path=/; max-age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT";
       window.location.href = "/";
     }
   };
@@ -447,6 +542,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         sendPhoneOtp,
         verifyPhoneOtp,
         resetPassword,
+        instantDemoLogin,
         signOut,
         refreshProfile,
       }}

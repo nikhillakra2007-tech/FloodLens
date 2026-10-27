@@ -20,6 +20,15 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
+  // 1b. Check for instant demo session cookie
+  const isDemoSession = request.cookies.get("floodlens_demo_session")?.value;
+  if (isDemoSession) {
+    if (pathname === "/auth" && !request.nextUrl.searchParams.get("next")) {
+      return NextResponse.redirect(new URL("/hub", request.url));
+    }
+    return response;
+  }
+
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 

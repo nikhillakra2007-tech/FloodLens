@@ -20,6 +20,7 @@ export default function AuthPageContent() {
     signInWithEmail,
     signUpWithEmail,
     signInWithGoogle,
+    instantDemoLogin,
   } = useAuth();
 
   const nextDestination = validateRedirectUrl(searchParams.get("next"), "/hub");
@@ -48,6 +49,19 @@ export default function AuthPageContent() {
   const [formSuccess, setFormSuccess] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isGoogleSubmitting, setIsGoogleSubmitting] = useState(false);
+  const [isDemoSubmitting, setIsDemoSubmitting] = useState<ExperienceMode | null>(null);
+
+  const handleDemoLogin = async (mode: ExperienceMode) => {
+    setIsDemoSubmitting(mode);
+    setFormError(null);
+    try {
+      await instantDemoLogin(mode);
+      router.push(nextDestination);
+    } catch (err: any) {
+      setFormError(err.message || "Failed to initialize demo session.");
+      setIsDemoSubmitting(null);
+    }
+  };
 
   // If already logged in with complete profile, redirect to destination
   useEffect(() => {
@@ -402,6 +416,92 @@ export default function AuthPageContent() {
                 <span>{formSuccess}</span>
               </div>
             )}
+
+            {/* INSTANT DEMO ACCOUNT ACCESS CARD */}
+            <div className="rounded-2xl border border-[#E0D5C7] bg-gradient-to-br from-[#FAF7F2] via-white to-amber-50/50 p-4 sm:p-5 shadow-xs space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-terracotta-600 text-white shadow-xs text-xs font-bold">
+                    ⚡
+                  </span>
+                  <div>
+                    <h3 className="text-xs font-bold text-[#221B15] tracking-tight">
+                      Instant Demo Account Access
+                    </h3>
+                    <p className="text-[11px] text-[#756350]">
+                      Explore FloodLens immediately with verified personas — no OTP or passwords needed
+                    </p>
+                  </div>
+                </div>
+                <span className="hidden sm:inline-flex rounded-full bg-emerald-50 border border-emerald-300 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
+                  Instant Entry
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                {/* Option 1: Technical Hydrologist / GCC Engineer */}
+                <button
+                  type="button"
+                  onClick={() => handleDemoLogin("technical")}
+                  disabled={isDemoSubmitting !== null}
+                  className="group relative flex flex-col items-start p-3 rounded-xl border border-amber-300/90 bg-white hover:bg-amber-50/50 hover:border-amber-400 hover:shadow-xs active:scale-[0.99] transition-all text-left cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  <div className="flex items-center justify-between w-full">
+                    <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-amber-800 bg-amber-100/70 border border-amber-200 px-2 py-0.5 rounded-full">
+                      <span>📐</span> Technical Mode
+                    </span>
+                    {isDemoSubmitting === "technical" && (
+                      <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-amber-600 border-t-transparent" />
+                    )}
+                  </div>
+                  <div className="mt-2 text-xs font-bold text-[#221B15] group-hover:text-amber-900 transition-colors">
+                    Dr. K. Senthil Nathan
+                  </div>
+                  <div className="text-[11px] text-[#756350] line-clamp-1">
+                    GCC Chief Hydrologist & SWD Lead
+                  </div>
+                  <div className="mt-1 text-[10px] text-[#8C7A6B] flex items-center gap-1">
+                    <span>Differential equations & IDF curves</span>
+                    <span className="text-amber-700 font-bold group-hover:translate-x-0.5 transition-transform">→</span>
+                  </div>
+                </button>
+
+                {/* Option 2: Citizen Resident Observer */}
+                <button
+                  type="button"
+                  onClick={() => handleDemoLogin("citizen")}
+                  disabled={isDemoSubmitting !== null}
+                  className="group relative flex flex-col items-start p-3 rounded-xl border border-terracotta-200 bg-white hover:bg-terracotta-50/50 hover:border-terracotta-400 hover:shadow-xs active:scale-[0.99] transition-all text-left cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  <div className="flex items-center justify-between w-full">
+                    <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-terracotta-800 bg-terracotta-100/70 border border-terracotta-200 px-2 py-0.5 rounded-full">
+                      <span>🏘️</span> Citizen Mode
+                    </span>
+                    {isDemoSubmitting === "citizen" && (
+                      <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-terracotta-600 border-t-transparent" />
+                    )}
+                  </div>
+                  <div className="mt-2 text-xs font-bold text-[#221B15] group-hover:text-terracotta-900 transition-colors">
+                    Priya Ramanathan
+                  </div>
+                  <div className="text-[11px] text-[#756350] line-clamp-1">
+                    Velachery Ward 170 Resident Observer
+                  </div>
+                  <div className="mt-1 text-[10px] text-[#8C7A6B] flex items-center gap-1">
+                    <span>Plain language & ward risk advisories</span>
+                    <span className="text-terracotta-700 font-bold group-hover:translate-x-0.5 transition-transform">→</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <div className="relative flex items-center justify-center my-1">
+              <div className="border-t border-[#E8DFD3] w-full" />
+              <span className="bg-white px-3 text-[11px] font-bold uppercase tracking-wider text-[#8C7A6B] shrink-0">
+                Or sign in with custom credentials
+              </span>
+              <div className="border-t border-[#E8DFD3] w-full" />
+            </div>
 
             {/* VIEW A: PHONE OTP FORM */}
             {showPhoneOtp ? (

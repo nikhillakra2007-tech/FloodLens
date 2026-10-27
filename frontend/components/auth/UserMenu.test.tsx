@@ -26,6 +26,7 @@ describe("UserMenu", () => {
       sendPhoneOtp: vi.fn(),
       verifyPhoneOtp: vi.fn(),
       resetPassword: vi.fn(),
+      instantDemoLogin: vi.fn(),
       signOut: mockSignOut,
       refreshProfile: vi.fn(),
     });
@@ -54,6 +55,7 @@ describe("UserMenu", () => {
       sendPhoneOtp: vi.fn(),
       verifyPhoneOtp: vi.fn(),
       resetPassword: vi.fn(),
+      instantDemoLogin: vi.fn(),
       signOut: mockSignOut,
       refreshProfile: vi.fn(),
     });

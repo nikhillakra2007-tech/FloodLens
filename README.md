@@ -2,7 +2,7 @@
 
 **Differential Urban Hydrological Intelligence for Defensible Flood Attribution**
 
-🔗 **[floodlens-app.vercel.app](https://floodlens-app.vercel.app)** · [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) · [![Tests](https://img.shields.io/badge/Tests-168%20Passed-emerald.svg)](https://github.com/nikhillakra2007-tech/FloodLens) · [![Python](https://img.shields.io/badge/Python-3.12-3776AB.svg?logo=python&logoColor=white)](https://python.org) · [![Next.js](https://img.shields.io/badge/Next.js-14-000000.svg?logo=next.js&logoColor=white)](https://nextjs.org) · [![AWS Serverless](https://img.shields.io/badge/AWS-Lambda%20%7C%20Bedrock%20%7C%20S3-FF9900.svg?logo=amazon-aws&logoColor=white)](https://aws.amazon.com)
+🔗 **[floodlens-app.vercel.app](https://floodlens-app.vercel.app)** · ⚡ **[Live Auth Gateway & Instant Demo](https://floodlens-app.vercel.app/auth)** · [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) · [![Tests](https://img.shields.io/badge/Tests-198%20Passed-emerald.svg)](https://github.com/nikhillakra2007-tech/FloodLens) · [![Python](https://img.shields.io/badge/Python-3.12-3776AB.svg?logo=python&logoColor=white)](https://python.org) · [![Next.js](https://img.shields.io/badge/Next.js-14-000000.svg?logo=next.js&logoColor=white)](https://nextjs.org) · [![AWS Serverless](https://img.shields.io/badge/AWS-Lambda%20%7C%20Bedrock%20%7C%20S3-FF9900.svg?logo=amazon-aws&logoColor=white)](https://aws.amazon.com)
 
 > *"Why did your street flood when the next ward didn't?"*
 
@@ -10,8 +10,25 @@ Conventional flood maps show static water depths after disaster strikes, treatin
 
 ---
 
+## 🌐 Live Deployments & Instant Demo Access
+
+| Environment / Service | Direct Production URL | Description |
+| :--- | :--- | :--- |
+| **Production Web App** | [https://floodlens-app.vercel.app](https://floodlens-app.vercel.app) | Complete Next.js 14 hydrological diagnosis platform |
+| **Authentication Gateway** | [https://floodlens-app.vercel.app/auth](https://floodlens-app.vercel.app/auth) | Secure gateway with Google OAuth, Indian Mobile OTP, and Instant Demo Access |
+| **Secondary Production Alias** | [https://floodlens-chennai.vercel.app](https://floodlens-chennai.vercel.app) | High-availability production domain alias |
+| **Feature Hub (Authenticated)** | [https://floodlens-app.vercel.app/hub](https://floodlens-app.vercel.app/hub) | Diagnostic catalog, ward comparisons, and simulator |
+
+### ⚡ Instant Demo Accounts (Zero Setup Required)
+Anyone can test the complete system with one click directly on the [Auth Page](https://floodlens-app.vercel.app/auth):
+- **Dr. K. Senthil Nathan (Technical Mode)**: Pre-configured GCC Chief Hydrologist & SWD Lead persona. Unlocks differential hydro-mechanical equations, rational runoff coefficients ($Q = CIA$), Manning conduit calculations, and hydraulic backwater head profiles.
+- **Priya Ramanathan (Citizen Mode)**: Pre-configured Velachery Ward 170 Resident persona. Delivers plain-language ward risk summaries, localized safety advisories, and community action steps.
+
+---
+
 ## 📑 Table of Contents
 
+- [Live Deployments & Instant Demo Access](#-live-deployments--instant-demo-access)
 - [Visual Platform Tour](#-visual-platform-tour)
 - [How It Works: The Twin Catchment Thesis](#-how-it-works-the-twin-catchment-thesis)
 - [System Architecture](#️-system-architecture)
@@ -326,7 +343,8 @@ FloodLens maintains an uncompromising verification posture, covering numerical h
   - Physical unit tests: Topographic similarity matching, Manning pipe capacity under siltation, backwater head propagation.
   - API & Contract tests: Schema compliance, pagination, and error handling.
   - Adversarial guardrail tests: Prompt injection resistance, missing data fallback, ungrounded hypothesis mitigation.
-- **Frontend (Vitest)**: **71 passed tests** across 15 test suites
+- **Frontend (Vitest)**: **101 passed tests** across 20 test suites
+  - Complete authentication test coverage: Google OAuth initialization, Indian Mobile (+91) OTP validation, PIN auto-advance, Citizen vs Technical experience mode toggle, profile upsert, and instant demo session bypass.
   - Component mechanics, accessible ARIA labels, parameter slider reactivity, counterfactual recalculation.
 - **Type Safety**: 100% strict TypeScript compilation with zero errors across all static and dynamic routes.
 - **Flake Rate**: 0.00% across consecutive CI test executions.
