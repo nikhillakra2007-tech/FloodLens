@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { useState, useEffect } from "react";
+import UserMenu from "@/components/auth/UserMenu";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -134,8 +135,10 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Right Section Bar: CTA on landing, Back & ID on investigation pages */}
+        {/* Right Section Bar: CTA on landing, Back & ID on investigation pages, plus UserMenu */}
         <div className="flex items-center gap-3">
+          <UserMenu />
+
           {isLandingPage ? (
             <Link
               href="/investigations/new"
@@ -196,6 +199,15 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
+          <div className="pt-2 border-t border-[#E8DFD3]">
+            <Link
+              href="/auth"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block rounded-xl px-4 py-2.5 text-sm font-bold text-terracotta-700 bg-terracotta-50 hover:bg-terracotta-100"
+            >
+              Sign In / Account Gateway
+            </Link>
+          </div>
         </div>
       )}
     </header>

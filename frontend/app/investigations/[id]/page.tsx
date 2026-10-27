@@ -23,6 +23,7 @@ import { CounterfactualForm } from "@/components/counterfactual";
 import CausalFlowBanner from "@/components/investigation/flowchart/CausalFlowBanner";
 import type { Mechanism } from "@/lib/types/investigation";
 import mockData from "@/lib/mockData.json";
+import { useAuth } from "@/lib/auth/context";
 
 const FloodMap = dynamic(() => import("@/components/map/FloodMap"), {
   ssr: false,
@@ -43,6 +44,8 @@ export default function InvestigationDetailPage() {
   const id = params.id;
   const [activeTab, setActiveTab] = useState<ActiveInvestigationTab>("simulation");
   const [selectedMechanism, setSelectedMechanism] = useState<Mechanism | null>(null);
+
+  const { experienceMode, setExperienceMode } = useAuth();
 
   const {
     data: investigation,
@@ -108,6 +111,86 @@ export default function InvestigationDetailPage() {
       {investigation.error_message && (
         <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-xs text-red-800" role="alert">
           {investigation.error_message}
+        </div>
+      )}
+
+      {/* 2. EXPERIENCE MODE TAILORED PRESENTATION BANNER */}
+      {experienceMode === "citizen" ? (
+        <div className="rounded-2xl border border-terracotta-200 bg-terracotta-50/70 p-5 shadow-xs space-y-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-terracotta-600 text-white text-xs font-bold">
+                C
+              </span>
+              <div>
+                <h3 className="font-serif text-sm font-bold text-[#221B15]">
+                  Citizen View: Why this area flooded
+                </h3>
+                <p className="text-[11px] text-[#756350]">
+                  Plain-language breakdown for residents and community members
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setExperienceMode("technical")}
+              className="self-start sm:self-auto rounded-xl border border-terracotta-300 bg-white px-3 py-1.5 text-[11px] font-bold text-terracotta-800 hover:bg-terracotta-100 hover:text-terracotta-900 transition-colors shadow-2xs cursor-pointer"
+            >
+              Switch to Technical Mode →
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1 text-xs">
+            <div className="rounded-xl border border-[#E8DFD3] bg-white p-3.5 space-y-1">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-terracotta-600">
+                What the Evidence Shows
+              </span>
+              <p className="text-[#3A2F25] font-medium leading-relaxed">
+                Both areas received nearly identical cloudburst rainfall (over 380mm). Meteorological rainfall alone did not cause the divergence.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-[#E8DFD3] bg-white p-3.5 space-y-1">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-terracotta-600">
+                Physical Failure Reason
+              </span>
+              <p className="text-[#3A2F25] font-medium leading-relaxed">
+                Water backed up from downstream stormwater drain (SWD) canals into the local elevation depression basin, preventing gravity outflow.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-[#E8DFD3] bg-white p-3.5 space-y-1">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-terracotta-600">
+                What Is Still Uncertain
+              </span>
+              <p className="text-[#3A2F25] font-medium leading-relaxed">
+                Tidal gate surge timing at the canal outfall during high tide is being verified with ground-truth sensor records.
+              </p>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="rounded-2xl border border-amber-200 bg-amber-50/60 p-4 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2.5">
+            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-700 text-white text-xs font-bold font-mono">
+              T
+            </span>
+            <div>
+              <p className="font-bold text-[#221B15]">
+                Technical Mode Active: Hydrological & Physical Engineering Depth
+              </p>
+              <p className="text-[11px] text-[#756350] font-mono">
+                Manning Q = (1/n)AR^(2/3)S^(1/2) • Rational Q = CIA • GVF dy/dx = (S0 - Sf)/(1 - Fr²)
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => setExperienceMode("citizen")}
+            className="self-start sm:self-auto rounded-xl border border-amber-300 bg-white px-3 py-1.5 text-[11px] font-bold text-amber-900 hover:bg-amber-100 transition-colors shadow-2xs cursor-pointer"
+          >
+            Switch to Citizen Mode
+          </button>
         </div>
       )}
 

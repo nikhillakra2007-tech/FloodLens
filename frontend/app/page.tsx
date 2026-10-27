@@ -5,6 +5,7 @@ import Link from "next/link";
 import CausalFlowchart from "@/components/visuals/CausalFlowchart";
 import InfrastructureCrossSectionViewer from "@/components/visuals/InfrastructureCrossSectionViewer";
 import HydrologicalConventionsModal from "@/components/visuals/HydrologicalConventionsModal";
+import GatewayTransitionLink from "@/components/auth/GatewayTransitionLink";
 
 interface Scenario {
   id: string;
@@ -116,9 +117,9 @@ export default function LandingPage() {
             Conventional flood maps only show water depth. <strong className="text-[#221B15] font-semibold">FloodLens</strong> diagnoses the physical failure mechanism—pairing inundated catchments with resilient twin wards across elevation gradients, stormwater drain conduits, and imperviousness.
           </p>
 
-          {/* CTAs with Smooth Hover Transitions */}
+          {/* CTAs with Smooth Gateway Transitions */}
           <div className="animate-fadeInUp stagger-3 flex flex-col sm:flex-row items-center gap-4 pt-2 w-full sm:w-auto">
-            <Link
+            <GatewayTransitionLink
               href="/investigations/new"
               className="w-full sm:w-auto flex items-center justify-center gap-2.5 rounded-2xl bg-terracotta-600 px-8 py-4 text-sm font-bold text-white shadow-warm hover:bg-terracotta-700 hover:shadow-lift hover:scale-[1.02] active:scale-[0.99] transition-all duration-300 transform cursor-pointer"
             >
@@ -127,9 +128,9 @@ export default function LandingPage() {
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
               </svg>
-            </Link>
+            </GatewayTransitionLink>
 
-            <Link
+            <GatewayTransitionLink
               href="/hub"
               className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl border border-[#E0D5C7] bg-white hover:bg-[#FAF7F2] hover:border-terracotta-400 hover:scale-[1.02] active:scale-[0.99] px-8 py-4 text-sm font-bold text-[#3A2F25] transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
             >
@@ -137,7 +138,7 @@ export default function LandingPage() {
               <svg className="h-4 w-4 text-terracotta-600 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
-            </Link>
+            </GatewayTransitionLink>
           </div>
         </div>
 
