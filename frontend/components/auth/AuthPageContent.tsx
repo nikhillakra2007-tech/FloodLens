@@ -8,6 +8,7 @@ import { useAuth } from "@/lib/auth/context";
 import { validateRedirectUrl, signInSchema, signUpSchema } from "@/lib/auth/validation";
 import ExperienceModeSelector from "./ExperienceModeSelector";
 import PhoneOtpForm from "./PhoneOtpForm";
+import HydrologicalFlowchartVisual from "@/components/visuals/HydrologicalFlowchartVisual";
 import type { ExperienceMode } from "@/lib/auth/types";
 
 export default function AuthPageContent() {
@@ -56,7 +57,11 @@ export default function AuthPageContent() {
     setFormError(null);
     try {
       await instantDemoLogin(mode);
-      router.push(nextDestination);
+      const explicitNext = searchParams.get("next");
+      const target = explicitNext
+        ? validateRedirectUrl(explicitNext, mode === "technical" ? "/investigations/new" : "/hub")
+        : (mode === "technical" ? "/investigations/new" : "/hub");
+      router.push(target);
     } catch (err: any) {
       setFormError(err.message || "Failed to initialize demo session.");
       setIsDemoSubmitting(null);
@@ -66,13 +71,16 @@ export default function AuthPageContent() {
   // If already logged in with complete profile, redirect to destination
   useEffect(() => {
     if (user && profile) {
+      const explicitNext = searchParams.get("next");
+      const defaultDest = profile.experience_mode === "citizen" ? "/hub" : "/investigations/new";
+      const target = explicitNext ? validateRedirectUrl(explicitNext, defaultDest) : defaultDest;
       if (!profile.profile_completed) {
-        router.replace(`/onboarding?next=${encodeURIComponent(nextDestination)}`);
+        router.replace(`/onboarding?next=${encodeURIComponent(target)}`);
       } else {
-        router.replace(nextDestination);
+        router.replace(target);
       }
     }
-  }, [user, profile, nextDestination, router]);
+  }, [user, profile, searchParams, router]);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -217,7 +225,7 @@ export default function AuthPageContent() {
             </Link>
 
             {/* Scientific diagram container */}
-            <div className="rounded-xl border border-[#E0D5C7] bg-white/70 p-3 shadow-2xs backdrop-blur-xs space-y-2">
+            <div className="rounded-xl border border-[#E0D5C7] bg-white/70 p-2 sm:p-2.5 shadow-2xs backdrop-blur-xs space-y-1.5">
               <div className="flex items-center justify-between border-b border-[#E8DFD3] pb-1.5">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] flex items-center gap-1">
                   <span className="h-1.5 w-1.5 rounded-full bg-terracotta-600" />
@@ -228,101 +236,8 @@ export default function AuthPageContent() {
                 </span>
               </div>
 
-              {/* Lightweight Scientific Hydrological Vector Diagram */}
-              <div className="w-full aspect-[4/3] relative flex items-center justify-center">
-                <svg
-                  className="w-full h-full"
-                  viewBox="0 0 280 210"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  role="img"
-                  aria-label="Hydrological intelligence flow diagram illustrating rainfall, watershed contours, conduit flow, and backwater flood forecast"
-                >
-                  <defs>
-                    <linearGradient id="rainGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#4A90E2" stopOpacity="0.8" />
-                      <stop offset="100%" stopColor="#357ABD" stopOpacity="0.2" />
-                    </linearGradient>
-                    <linearGradient id="streamGrad2" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stopColor="#C85A17" />
-                      <stop offset="60%" stopColor="#D97706" />
-                      <stop offset="100%" stopColor="#DC2626" />
-                    </linearGradient>
-                    <pattern id="hatchGrid" width="6" height="6" patternUnits="userSpaceOnUse">
-                      <path d="M-1,1 l2,-2 M0,6 l6,-6 M5,7 l2,-2" stroke="#C85A17" strokeWidth="0.6" strokeOpacity="0.25" />
-                    </pattern>
-                  </defs>
-
-                  {/* 1. Rainfall / Doppler Radar Cloud Area (Top) */}
-                  <g>
-                    <rect x="15" y="8" width="250" height="32" rx="6" fill="#F0F7FF" stroke="#CCE3FF" strokeWidth="1" />
-                    <circle cx="34" cy="24" r="9" fill="#D6E8FA" />
-                    <path d="M30 24c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="#2B6CB0" strokeWidth="1.5" />
-                    <text x="50" y="22" fill="#1E3A8A" fontSize="9" fontWeight="700" fontFamily="sans-serif">
-                      Rainfall / Radar Cloudburst
-                    </text>
-                    <text x="50" y="32" fill="#3B82F6" fontSize="8" fontFamily="monospace">
-                      390mm / 24h • IMD Doppler Verified
-                    </text>
-                    {/* Falling precipitation vectors */}
-                    <path d="M190 14l-4 8M205 14l-4 8M220 14l-4 8M235 14l-4 8M250 14l-4 8" stroke="#3B82F6" strokeWidth="1.2" strokeLinecap="round" />
-                  </g>
-
-                  {/* Flow arrow 1: Rain to Catchment */}
-                  <path d="M140 40v12" stroke="#2B6CB0" strokeWidth="1.5" strokeDasharray="2 2" markerEnd="url(#arrow)" />
-
-                  {/* 2. Watershed & Elevation Contours */}
-                  <path d="M20 70 C80 56, 180 58, 260 74" stroke="#A89279" strokeWidth="1" strokeDasharray="3 3" fill="none" />
-                  <text x="228" y="66" fill="#8C7A6B" fontSize="7" fontFamily="monospace">12.4m DEM</text>
-
-                  <path d="M16 100 C75 84, 185 88, 264 104" stroke="#8C7A6B" strokeWidth="1.2" fill="none" />
-                  <text x="230" y="96" fill="#8C7A6B" fontSize="7" fontFamily="monospace">8.2m DEM</text>
-
-                  {/* 3. Stormwater Drain Conduit & River Flow */}
-                  <path
-                    d="M30 68 C80 95, 110 130, 160 140 C200 148, 230 160, 260 175"
-                    stroke="url(#streamGrad2)"
-                    strokeWidth="3.5"
-                    strokeLinecap="round"
-                    fill="none"
-                  />
-                  {/* Conduit Invert Slope Callout */}
-                  <rect x="25" y="112" width="85" height="18" rx="4" fill="#FAF7F2" stroke="#D5C6B3" strokeWidth="0.8" />
-                  <text x="30" y="124" fill="#554638" fontSize="7.5" fontWeight="600" fontFamily="sans-serif">
-                    Conduit: S₀ = -0.3%
-                  </text>
-
-                  {/* 4. Surcharge / Backwater Junction Node */}
-                  <circle cx="160" cy="140" r="14" fill="#FEF2F2" stroke="#DC2626" strokeWidth="1.2" />
-                  <circle cx="160" cy="140" r="6" fill="#DC2626" />
-                  <circle cx="160" cy="140" r="10" stroke="#DC2626" strokeWidth="0.8" strokeDasharray="2 2" />
-
-                  {/* Backwater Surge Label */}
-                  <rect x="110" y="162" width="102" height="18" rx="4" fill="#FFF1F2" stroke="#FECDD3" strokeWidth="0.8" />
-                  <text x="115" y="174" fill="#991B1B" fontSize="7.5" fontWeight="700" fontFamily="sans-serif">
-                    +1.03m Hydraulic Head
-                  </text>
-
-                  {/* 5. Inundation Risk Polygon */}
-                  <path
-                    d="M160 140 C190 120, 245 130, 255 160 C240 185, 180 180, 160 140 Z"
-                    fill="url(#hatchGrid)"
-                    stroke="#C85A17"
-                    strokeWidth="1"
-                    strokeDasharray="2 2"
-                  />
-                  <text x="210" y="148" fill="#C85A17" fontSize="7" fontWeight="700" fontFamily="sans-serif">
-                    Ponding
-                  </text>
-
-                  {/* Sequence Breadcrumb Labels at Bottom of Graphic */}
-                  <g transform="translate(10, 194)">
-                    <text x="0" y="8" fill="#756350" fontSize="7" fontWeight="700" fontFamily="sans-serif">
-                      Rainfall → Watershed → Conduit Flow → Backwater → Risk Isolated
-                    </text>
-                  </g>
-                </svg>
-              </div>
+              {/* Polished 5-Stage Scientific Hydrological Vector Diagram */}
+              <HydrologicalFlowchartVisual />
             </div>
           </div>
 

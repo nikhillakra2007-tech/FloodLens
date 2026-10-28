@@ -12,6 +12,7 @@ import { getPlaces, getComparables, compareLocations } from "@/lib/api/spatial/l
 import { getFloodObservations } from "@/lib/api/spatial/map";
 import { createComparison, createInvestigation } from "@/lib/api/investigation/investigations";
 import type { Place, LocationCompareResponse } from "@/lib/types/investigation";
+import { useAuth } from "@/lib/auth/context";
 
 const FloodMap = nextDynamic(() => import("@/components/map/FloodMap"), {
   ssr: false,
@@ -48,6 +49,7 @@ function formatPlaceOptionLabel(place: Place | null | undefined): string {
 
 export default function NewInvestigationPage() {
   const router = useRouter();
+  const { experienceMode } = useAuth();
   const [activeSection, setActiveSection] = useState<ActiveSection>("select");
   const [placeA, setPlaceA] = useState<Place | null>(mockData.places[0] as Place);
   const [placeB, setPlaceB] = useState<Place | null>(mockData.places[2] as Place);
@@ -325,8 +327,34 @@ export default function NewInvestigationPage() {
        0.0)
     : 0.0;
 
+  if (mounted && experienceMode === "citizen") {
+    return (
+      <div className="mx-auto max-w-3xl px-4 py-16 text-center space-y-6">
+        <div className="rounded-3xl border border-terracotta-200 bg-[#FAF7F2] p-8 sm:p-12 shadow-card space-y-5">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-terracotta-200 bg-terracotta-50 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-terracotta-800">
+            Citizen Mode Active
+          </span>
+          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#221B15]">
+            Technical Workspace Boundary
+          </h1>
+          <p className="text-sm sm:text-base text-[#554638] leading-relaxed max-w-xl mx-auto font-normal">
+            The Differential Spatial Diagnostic Console is reserved for municipal hydrologists and civil engineers calculating Manning conduit equations and backwater curves. As a Citizen Resident Observer, your dedicated interface is the Resident Community Portal.
+          </p>
+          <div className="pt-2 flex justify-center">
+            <Link
+              href="/hub"
+              className="inline-flex items-center gap-2 rounded-xl bg-terracotta-600 px-6 py-3 text-sm font-semibold text-white shadow-warm hover:bg-terracotta-700 transition-all cursor-pointer"
+            >
+              <span>← Return to Citizen Resident Portal</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 space-y-6">
+    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 space-y-6 min-w-0 overflow-x-hidden">
       {/* 1. TOP STATUS BAR: ACTIVE PAIR STATUS */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-[#E8DFD3]">
         <div className="flex items-center gap-2">
@@ -337,11 +365,11 @@ export default function NewInvestigationPage() {
 
         {/* Live Catchment Status Chip */}
         <div className="flex items-center gap-3 bg-[#FAF7F2] border border-[#E8DFD3] rounded-2xl px-4 py-2 text-xs shadow-xs">
-          <span className="font-bold text-[#756350] uppercase tracking-wider text-[11px]">
+          <span className="font-semibold text-[#756350] uppercase tracking-wider text-[11px]">
             Diagnostic Axis:
           </span>
           {placeA && placeB ? (
-            <div className="flex items-center gap-2 font-mono font-bold">
+            <div className="flex items-center gap-2 font-mono font-semibold">
               <span className="text-[#C23E2A] flex items-center gap-1">
                 <span className="h-2 w-2 rounded-full bg-[#C23E2A]" />
                 {formatPlaceOptionLabel(placeA)}
@@ -352,7 +380,7 @@ export default function NewInvestigationPage() {
                 {formatPlaceOptionLabel(placeB)}
               </span>
               {comparison && (
-                <span className="bg-terracotta-100 text-terracotta-800 px-2 py-0.5 rounded text-[10px]">
+                <span className="bg-terracotta-100 text-terracotta-800 px-2 py-0.5 rounded text-[10px] font-semibold">
                   {(comparison.similarity_score * 100).toFixed(0)}% Fit
                 </span>
               )}
@@ -368,7 +396,7 @@ export default function NewInvestigationPage() {
         <button
           type="button"
           onClick={() => setActiveSection("select")}
-          className={`flex-1 min-w-[170px] flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+          className={`flex-1 min-w-[125px] sm:min-w-0 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
             activeSection === "select"
               ? "bg-terracotta-600 text-white shadow-warm"
               : "text-[#554638] hover:bg-[#FAF7F2] hover:text-[#221B15]"
@@ -381,20 +409,20 @@ export default function NewInvestigationPage() {
         <button
           type="button"
           onClick={() => setActiveSection("map")}
-          className={`flex-1 min-w-[170px] flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+          className={`flex-1 min-w-[125px] sm:min-w-0 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
             activeSection === "map"
               ? "bg-terracotta-600 text-white shadow-warm"
               : "text-[#554638] hover:bg-[#FAF7F2] hover:text-[#221B15]"
           }`}
         >
           <span>🗺️</span>
-          <span>2. Geospatial Ward Map</span>
+          <span>2. Geospatial Map</span>
         </button>
 
         <button
           type="button"
           onClick={() => setActiveSection("vectors")}
-          className={`flex-1 min-w-[170px] flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+          className={`flex-1 min-w-[125px] sm:min-w-0 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
             activeSection === "vectors"
               ? "bg-terracotta-600 text-white shadow-warm"
               : "text-[#554638] hover:bg-[#FAF7F2] hover:text-[#221B15]"
@@ -407,7 +435,7 @@ export default function NewInvestigationPage() {
         <button
           type="button"
           onClick={() => setActiveSection("engine")}
-          className={`flex-1 min-w-[170px] flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+          className={`flex-1 min-w-[125px] sm:min-w-0 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
             activeSection === "engine"
               ? "bg-terracotta-600 text-white shadow-warm"
               : "text-[#554638] hover:bg-[#FAF7F2] hover:text-[#221B15]"

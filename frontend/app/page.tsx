@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import FeaturesSectionNav from "@/components/layout/FeaturesSectionNav";
 import CausalFlowchart from "@/components/visuals/CausalFlowchart";
 import InfrastructureCrossSectionViewer from "@/components/visuals/InfrastructureCrossSectionViewer";
 import HydrologicalConventionsModal from "@/components/visuals/HydrologicalConventionsModal";
@@ -100,91 +101,93 @@ export default function LandingPage() {
   const [isConventionsOpen, setIsConventionsOpen] = useState<boolean>(false);
 
   return (
-    <div className="space-y-24 py-8 sm:py-16">
-      {/* 1. HERO SECTION WITH SATELLITE DEM GRAPHIC */}
-      <section id="overview" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12 scroll-mt-28">
-        <div className="flex flex-col items-center text-center space-y-6 max-w-4xl mx-auto">
-          {/* Scientific Category Pill */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-terracotta-200 bg-terracotta-50 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-terracotta-800 shadow-2xs">
-            <span className="h-2 w-2 rounded-full bg-terracotta-600 animate-pulse" />
-            <span>Differential Urban Hydrological Intelligence</span>
-          </div>
+    <>
+      <FeaturesSectionNav />
+      <div className="space-y-24 py-6 sm:py-12">
+        {/* 1. HERO SECTION WITH SATELLITE DEM GRAPHIC */}
+        <section id="overview" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12 scroll-mt-28">
+          <div className="flex flex-col items-center text-center space-y-6 max-w-4xl mx-auto">
+            {/* Scientific Category Pill */}
+            <div className="inline-flex items-center gap-2 rounded-full border border-terracotta-200 bg-terracotta-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-terracotta-800 shadow-2xs">
+              <span className="h-2 w-2 rounded-full bg-terracotta-600 animate-pulse" />
+              <span>Differential Urban Hydrological Intelligence</span>
+            </div>
 
-          {/* Headline with Responsive Clamp (40-56px target) */}
-          <h1 className="animate-fadeInUp font-bold text-3xl sm:text-5xl lg:text-6xl tracking-tight text-[#221B15] leading-[1.12]">
-            Why did your street flood when the{" "}
-            <span className="text-terracotta-600 font-bold hover:text-terracotta-700 transition-colors duration-200">
-              next ward didn&apos;t?
-            </span>
-          </h1>
-
-          {/* Subtitle (16-18px readable target) */}
-          <p className="animate-fadeInUp text-base sm:text-lg text-[#554638] leading-relaxed max-w-3xl font-normal">
-            Conventional flood maps only show water depth. <strong className="text-[#221B15] font-semibold">FloodLens</strong> diagnoses the physical failure mechanism—pairing inundated catchments with resilient twin wards across elevation gradients, stormwater drain conduits, and imperviousness.
-          </p>
-
-          {/* CTAs with Clear Visual Hierarchy: Sign In to Platform replaces Run Ward Diagnosis */}
-          <div className="animate-fadeInUp flex flex-col sm:flex-row items-center gap-4 pt-2 w-full sm:w-auto">
-            <Link
-              href="/auth"
-              className="w-full sm:w-auto flex items-center justify-center gap-2.5 rounded-xl bg-terracotta-600 px-8 py-4 text-base font-bold text-white shadow-warm hover:bg-terracotta-700 hover:shadow-lift hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
-            >
-              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
-                <polyline points="10 17 15 12 10 7" />
-                <line x1="15" y1="12" x2="3" y2="12" />
-              </svg>
-              <span>Sign In to Platform</span>
-            </Link>
-
-            <a
-              href="#infrastructure"
-              className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl border border-[#E0D5C7] bg-white hover:bg-[#FAF7F2] hover:border-[#D5C6B3] hover:-translate-y-0.5 active:translate-y-0 px-8 py-4 text-base font-semibold text-[#3A2F25] transition-all duration-200 shadow-sm cursor-pointer"
-            >
-              <span>Explore Drainage Anatomy</span>
-              <svg className="h-4 w-4 text-terracotta-600 transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M19 9l-7 7-7-7" />
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        {/* HERO SATELLITE DEM IMAGE CARD WITH DEDICATED STATUS BAR (ZERO OVERLAPPING) */}
-        <div className="rounded-3xl border border-[#E8DFD3] bg-white shadow-lift overflow-hidden">
-          <div className="relative aspect-[16/9] w-full overflow-hidden group">
-            <img
-              src="/images/chennai-catchment-map.jpg"
-              alt="Chennai Coastal City & Drainage Basins Topography"
-              className="h-full w-full object-cover img-zoom"
-            />
-            {/* Architectural overlay badge top-left */}
-            <div className="absolute top-4 left-4 rounded-xl border border-[#E8DFD3]/90 bg-white/95 px-3.5 py-2 shadow-xs backdrop-blur-md space-y-0.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-terracotta-700 block">
-                Topographic Survey &amp; Drainage Basin Datum
+            {/* Headline with Responsive Clamp */}
+            <h1 className="animate-fadeInUp font-serif text-3xl sm:text-5xl lg:text-6xl tracking-tight text-[#221B15] leading-[1.14] font-bold">
+              Why did your street flood when the{" "}
+              <span className="text-terracotta-600 hover:text-terracotta-700 transition-colors duration-200">
+                next ward didn&apos;t?
               </span>
-              <span className="font-bold text-xs sm:text-sm text-[#221B15] block">
-                Greater Chennai Corporation Hydrological Grid
-              </span>
+            </h1>
+
+            {/* Subtitle */}
+            <p className="animate-fadeInUp text-base sm:text-lg text-[#554638] leading-relaxed max-w-3xl font-normal">
+              Conventional flood maps only show water depth. <strong className="text-[#221B15] font-semibold">FloodLens</strong> diagnoses the physical failure mechanism—pairing inundated catchments with resilient twin wards across elevation gradients, stormwater drain conduits, and imperviousness.
+            </p>
+
+            {/* CTAs with Clear Visual Hierarchy */}
+            <div className="animate-fadeInUp flex flex-col sm:flex-row items-center gap-4 pt-2 w-full sm:w-auto">
+              <Link
+                href="/auth"
+                className="w-full sm:w-auto flex items-center justify-center gap-2.5 rounded-xl bg-terracotta-600 px-8 py-3.5 text-sm sm:text-base font-semibold text-white shadow-warm hover:bg-terracotta-700 hover:shadow-lift hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
+              >
+                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                  <polyline points="10 17 15 12 10 7" />
+                  <line x1="15" y1="12" x2="3" y2="12" />
+                </svg>
+                <span>Sign In to Platform</span>
+              </Link>
+
+              <a
+                href="#infrastructure"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl border border-[#E0D5C7] bg-white hover:bg-[#FAF7F2] hover:border-[#D5C6B3] hover:-translate-y-0.5 active:translate-y-0 px-8 py-3.5 text-sm sm:text-base font-medium text-[#3A2F25] transition-all duration-200 shadow-xs cursor-pointer"
+              >
+                <span>Explore Drainage Anatomy</span>
+                <svg className="h-4 w-4 text-terracotta-600 transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M19 9l-7 7-7-7" />
+                </svg>
+              </a>
             </div>
           </div>
 
-          {/* Dedicated Telemetry Status Bar - Eliminates overlap at all viewport sizes */}
-          <div className="border-t border-[#E8DFD3] bg-[#FAF7F2] p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs font-semibold">
-            <div className="flex items-center gap-2 text-[#221B15]">
-              <span className="h-2.5 w-2.5 rounded-full bg-terracotta-600 shrink-0" />
-              <span>Major River Systems: Cooum, Adyar &amp; Buckingham Canal</span>
+          {/* HERO SATELLITE DEM IMAGE CARD WITH DEDICATED STATUS BAR (ZERO OVERLAPPING) */}
+          <div className="rounded-3xl border border-[#E8DFD3] bg-white shadow-lift overflow-hidden">
+            <div className="relative aspect-[16/9] w-full overflow-hidden group">
+              <img
+                src="/images/chennai-catchment-map.jpg"
+                alt="Chennai Coastal City & Drainage Basins Topography"
+                className="h-full w-full object-cover img-zoom"
+              />
+              {/* Architectural overlay badge top-left with responsive width protection */}
+              <div className="absolute top-4 left-4 max-w-[85%] sm:max-w-md rounded-xl border border-[#E8DFD3]/90 bg-white/95 px-3.5 py-2 shadow-xs backdrop-blur-md space-y-0.5 pointer-events-none">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-terracotta-700 block truncate">
+                  Topographic Survey &amp; Drainage Basin Datum
+                </span>
+                <span className="font-semibold text-xs sm:text-sm text-[#221B15] block truncate">
+                  Greater Chennai Corporation Hydrological Grid
+                </span>
+              </div>
             </div>
-            <div className="flex items-center gap-2 text-[#554638]">
-              <span>Reservoirs: Red Hills &amp; Chembarambakkam Lake</span>
+
+            {/* Dedicated Telemetry Status Bar - Eliminates overlap at all viewport sizes */}
+            <div className="border-t border-[#E8DFD3] bg-[#FAF7F2] p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs font-medium">
+              <div className="flex items-center gap-2 text-[#221B15]">
+                <span className="h-2.5 w-2.5 rounded-full bg-terracotta-600 shrink-0" />
+                <span>Major River Systems: Cooum, Adyar &amp; Buckingham Canal</span>
+              </div>
+              <div className="flex items-center gap-2 text-[#554638]">
+                <span>Reservoirs: Red Hills &amp; Chembarambakkam Lake</span>
+              </div>
+              <Link
+                href="/auth?next=%2Finvestigations%2Fnew"
+                className="font-semibold text-terracotta-700 hover:text-terracotta-800 flex items-center gap-1.5 transition-colors self-start md:self-auto"
+              >
+                <span>Explore Ward Hotspots on Map →</span>
+              </Link>
             </div>
-            <Link
-              href="/auth?next=%2Finvestigations%2Fnew"
-              className="font-bold text-terracotta-700 hover:text-terracotta-800 flex items-center gap-1.5 transition-colors self-start md:self-auto"
-            >
-              <span>Explore Ward Hotspots on Map →</span>
-            </Link>
           </div>
-        </div>
 
         {/* Real-time Telemetry Metrics: Varied Analytical Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -535,5 +538,6 @@ export default function LandingPage() {
         onClose={() => setIsConventionsOpen(false)}
       />
     </div>
+    </>
   );
 }

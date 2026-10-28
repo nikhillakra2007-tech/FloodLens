@@ -16,6 +16,7 @@ interface AuthContextType {
   profile: UserProfile | null;
   experienceMode: ExperienceMode;
   setExperienceMode: (mode: ExperienceMode) => Promise<void>;
+  updateProfile: (updates: Partial<UserProfile>) => Promise<{ error?: string; success?: boolean }>;
   isLoading: boolean;
   isConfigured: boolean;
   signInWithEmail: (creds: SignInCredentials) => Promise<{ error?: string }>;
@@ -192,38 +193,98 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
   }, [fetchProfile]);
 
+  // Strict role enforcement: cross-mode switching is prevented
   const setExperienceMode = async (mode: ExperienceMode) => {
+    if (user?.id.startsWith("demo-")) {
+      console.warn("[Auth] Demo accounts are assigned to a fixed persona and cannot switch modes.");
+      return;
+    }
+    if (profile?.experience_mode && profile.experience_mode !== mode) {
+      console.warn("[Auth] Role is locked to verified account authorization. Cross-mode switching is disabled.");
+      return;
+    }
     setExperienceModeState(mode);
     if (typeof window !== "undefined") {
       localStorage.setItem(LOCAL_STORAGE_MODE_KEY, mode);
     }
+  };
 
-    if (user && profile) {
-      const updatedProfile = { ...profile, experience_mode: mode, updated_at: new Date().toISOString() };
-      setProfile(updatedProfile);
+  // Legitimate profile settings update lifecycle with honest persistence
+  const updateProfile = async (updates: Partial<UserProfile>): Promise<{ error?: string; success?: boolean }> => {
+    if (!user) {
+      return { error: "No active user session found. Please sign in." };
+    }
 
-      if (user.id.startsWith("demo-") && typeof window !== "undefined") {
-        localStorage.setItem(
-          LOCAL_STORAGE_DEMO_KEY,
-          JSON.stringify({
-            user: { ...user, user_metadata: { ...user.user_metadata, experience_mode: mode } },
-            profile: updatedProfile,
-          })
-        );
-        return;
+    // Explicitly reject any attempt to alter role through profile updates
+    if (updates.experience_mode && updates.experience_mode !== experienceMode) {
+      return { error: "Role is enforced by account authorization and cannot be changed from Profile Settings." };
+    }
+
+    try {
+      const current = profile || {
+        id: user.id,
+        email: user.email ?? null,
+        full_name: user.user_metadata?.full_name ?? "FloodLens User",
+        phone: user.phone ?? null,
+        experience_mode: experienceMode,
+        profile_completed: true,
+      };
+
+      const updatedProfile: UserProfile = {
+        ...current,
+        ...updates,
+        experience_mode: experienceMode, // enforce invariant
+        updated_at: new Date().toISOString(),
+      };
+
+      // 1. If demo session, cleanly persist to localStorage
+      if (user.id.startsWith("demo-")) {
+        const updatedUser = {
+          ...user,
+          user_metadata: {
+            ...user.user_metadata,
+            full_name: updatedProfile.full_name,
+            phone: updatedProfile.phone,
+            department_or_agency: updatedProfile.department_or_agency,
+            primary_ward: updatedProfile.primary_ward,
+          },
+        };
+        setUser(updatedUser);
+        setProfile(updatedProfile);
+        if (typeof window !== "undefined") {
+          localStorage.setItem(
+            LOCAL_STORAGE_DEMO_KEY,
+            JSON.stringify({ user: updatedUser, profile: updatedProfile })
+          );
+        }
+        return { success: true };
       }
 
+      // 2. Real account with Supabase
       const supabase = getSupabaseBrowserClient();
       if (supabase) {
-        try {
-          await supabase
-            .from("profiles")
-            .update({ experience_mode: mode, updated_at: new Date().toISOString() })
-            .eq("id", user.id);
-        } catch (err) {
-          console.warn("[Auth] Failed to persist experience mode to backend profile:", err);
+        const { error } = await supabase
+          .from("profiles")
+          .update({
+            full_name: updatedProfile.full_name,
+            phone: updatedProfile.phone,
+            department_or_agency: updatedProfile.department_or_agency,
+            primary_ward: updatedProfile.primary_ward,
+            email_notifications: updatedProfile.email_notifications,
+            sms_alerts: updatedProfile.sms_alerts,
+            updated_at: updatedProfile.updated_at,
+          })
+          .eq("id", user.id);
+
+        if (error) {
+          return { error: `Failed to save changes to database: ${error.message}` };
         }
       }
+
+      setProfile(updatedProfile);
+      return { success: true };
+    } catch (err: any) {
+      return { error: err.message || "An unexpected error occurred while saving profile settings." };
     }
   };
 
@@ -265,28 +326,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     try {
-      let formattedPhone: string | undefined = undefined;
-      if (creds.phone && creds.phone.trim()) {
-        const phoneRes = formatIndianPhoneNumber(creds.phone);
-        if (phoneRes.isValid) {
-          formattedPhone = phoneRes.e164;
-        }
-      }
-
-      const emailNormalized = creds.email.trim().toLowerCase();
-      const redirectUrl = typeof window !== "undefined"
-        ? `${window.location.origin}/auth/callback`
-        : undefined;
-
       const { data, error } = await supabase.auth.signUp({
-        email: emailNormalized,
+        email: creds.email.trim().toLowerCase(),
         password: creds.password,
         options: {
-          emailRedirectTo: redirectUrl,
           data: {
             full_name: creds.full_name.trim(),
+            phone: creds.phone?.trim() || null,
             experience_mode: creds.experience_mode,
-            phone: formattedPhone,
           },
         },
       });
@@ -295,60 +342,53 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return { error: error.message };
       }
 
-      // Check if email confirmation is required by Supabase project settings
-      const needEmailVerification = Boolean(data.user && !data.session);
-
       if (data.user) {
         setUser(data.user);
-        // Persist local preference immediately
-        setExperienceModeState(creds.experience_mode);
-        if (typeof window !== "undefined") {
-          localStorage.setItem(LOCAL_STORAGE_MODE_KEY, creds.experience_mode);
-        }
+        await fetchProfile(data.user);
 
         // Create profile row if session was established immediately
         if (data.session) {
           try {
             await supabase.from("profiles").upsert({
               id: data.user.id,
-              email: emailNormalized,
+              email: data.user.email,
               full_name: creds.full_name.trim(),
-              phone: formattedPhone || null,
+              phone: creds.phone?.trim() || null,
               experience_mode: creds.experience_mode,
               profile_completed: true,
               created_at: new Date().toISOString(),
               updated_at: new Date().toISOString(),
             });
           } catch {
-            // Ignore if RLS or offline
+            // Ignore if RLS triggers handle it
           }
-          await fetchProfile(data.user);
         }
       }
 
+      const needEmailVerification = !data.session;
       return { needEmailVerification };
     } catch (err: any) {
-      return { error: err.message || "An error occurred during account creation." };
+      return { error: err.message || "An unexpected error occurred during account registration." };
     }
   };
 
-  const signInWithGoogle = async (targetDestination?: string) => {
+  const signInWithGoogle = async (targetDestination: string = "/investigations/new") => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) {
       return {
-        error: "Google Sign-In requires Supabase authentication configuration. Please configure Supabase and Google OAuth credentials.",
+        error: "Supabase authentication is not configured. Please add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to your environment variables.",
       };
     }
 
     try {
-      const safeNext = validateRedirectUrl(targetDestination, "/hub");
       const origin = typeof window !== "undefined" ? window.location.origin : "";
-      const callbackUrl = `${origin}/auth/callback?next=${encodeURIComponent(safeNext)}`;
+      const validNext = validateRedirectUrl(targetDestination, "/investigations/new");
+      const redirectTo = `${origin}/auth/callback?next=${encodeURIComponent(validNext)}`;
 
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: callbackUrl,
+          redirectTo,
           queryParams: {
             access_type: "offline",
             prompt: "consent",
@@ -362,7 +402,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       return {};
     } catch (err: any) {
-      return { error: err.message || "Failed to initiate Google authentication." };
+      return { error: err.message || "Failed to initiate Google OAuth." };
     }
   };
 
@@ -370,7 +410,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) {
       return {
-        error: "SMS OTP authentication is not configured in this environment.",
+        error: "SMS OTP authentication is not configured in this deployment.",
       };
     }
 
@@ -382,6 +422,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const { error } = await supabase.auth.signInWithOtp({
         phone: formatted.e164,
+        options: {
+          channel: "sms",
+        },
       });
 
       if (error) {
@@ -390,7 +433,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       return {};
     } catch (err: any) {
-      return { error: err.message || "Failed to request SMS OTP." };
+      return { error: err.message || "Failed to send SMS verification code." };
     }
   };
 
@@ -461,6 +504,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const demoName = isTech ? "Dr. K. Senthil Nathan" : "Priya Ramanathan";
     const demoEmail = isTech ? "senthil.nathan@gcc.chennai.gov.in" : "priya.ramanathan@velachery.org";
     const demoRole = isTech ? "GCC Senior Hydrologist & SWD Lead" : "Velachery Ward 170 Resident Observer";
+    const demoDept = isTech ? "Greater Chennai Corporation — Stormwater Drainage Directorate" : "Velachery Residents Welfare Association";
+    const demoWard = isTech ? "Ward 101 — Anna Nagar" : "Ward 170 — Velachery";
 
     const demoUser: User = {
       id: demoId,
@@ -469,6 +514,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         full_name: demoName,
         experience_mode: mode,
         role_title: demoRole,
+        department_or_agency: demoDept,
+        primary_ward: demoWard,
         is_demo: true,
       },
       aud: "authenticated",
@@ -485,6 +532,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       phone: "+919840123456",
       experience_mode: mode,
       profile_completed: true,
+      role_title: demoRole,
+      department_or_agency: demoDept,
+      primary_ward: demoWard,
+      email_notifications: true,
+      sms_alerts: true,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     };
@@ -499,7 +551,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         LOCAL_STORAGE_DEMO_KEY,
         JSON.stringify({ user: demoUser, profile: demoProfile })
       );
-      document.cookie = "floodlens_demo_session=1; path=/; max-age=86400; SameSite=Lax";
+      document.cookie = `floodlens_demo_session=${mode}; path=/; max-age=86400; SameSite=Lax`;
     }
   };
 
@@ -516,6 +568,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setProfile(null);
     if (typeof window !== "undefined") {
       localStorage.removeItem(LOCAL_STORAGE_DEMO_KEY);
+      localStorage.removeItem(LOCAL_STORAGE_MODE_KEY);
       document.cookie = "floodlens_demo_session=; path=/; max-age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT";
       window.location.href = "/";
     }
@@ -523,6 +576,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const refreshProfile = async () => {
     if (user) {
+      if (user.id.startsWith("demo-")) {
+        const savedDemo = localStorage.getItem(LOCAL_STORAGE_DEMO_KEY);
+        if (savedDemo) {
+          try {
+            const parsed = JSON.parse(savedDemo);
+            if (parsed?.profile) {
+              setProfile(parsed.profile);
+            }
+          } catch {
+            // ignore
+          }
+        }
+        return;
+      }
       await fetchProfile(user);
     }
   };
@@ -534,6 +601,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         profile,
         experienceMode,
         setExperienceMode,
+        updateProfile,
         isLoading,
         isConfigured: isSupabaseConfigured,
         signInWithEmail,
