@@ -37,7 +37,7 @@ const LOCAL_STORAGE_DEMO_KEY = "floodlens_demo_session_data";
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [experienceMode, setExperienceModeState] = useState<ExperienceMode>("citizen");
+  const [experienceMode, setExperienceModeState] = useState<ExperienceMode>("technical");
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // Load initial local preference
@@ -75,7 +75,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         // Fallback profile derived from auth user metadata
         const metadata = currentUser.user_metadata || {};
         const fallbackMode: ExperienceMode =
-          metadata.experience_mode === "technical" ? "technical" : "citizen";
+          metadata.experience_mode === "citizen" ? "citizen" : "technical";
         const newProfile: UserProfile = {
           id: currentUser.id,
           email: currentUser.email ?? null,
@@ -121,7 +121,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             if (parsed?.user && parsed?.profile) {
               setUser(parsed.user);
               setProfile(parsed.profile);
-              setExperienceModeState(parsed.profile.experience_mode || "citizen");
+              setExperienceModeState(parsed.profile.experience_mode || "technical");
             }
           } catch {
             localStorage.removeItem(LOCAL_STORAGE_DEMO_KEY);
@@ -152,7 +152,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 if (parsed?.user && parsed?.profile) {
                   setUser(parsed.user);
                   setProfile(parsed.profile);
-                  setExperienceModeState(parsed.profile.experience_mode || "citizen");
+                  setExperienceModeState(parsed.profile.experience_mode || "technical");
                   if (isMounted) setIsLoading(false);
                   return;
                 }

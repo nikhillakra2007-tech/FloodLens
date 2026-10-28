@@ -2,7 +2,7 @@
 
 **Differential Urban Hydrological Intelligence for Defensible Flood Attribution**
 
-🔗 **[floodlens-app.vercel.app](https://floodlens-app.vercel.app)** · ⚡ **[Live Auth Gateway & Instant Demo](https://floodlens-app.vercel.app/auth)** · [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) · [![Tests](https://img.shields.io/badge/Tests-198%20Passed-emerald.svg)](https://github.com/nikhillakra2007-tech/FloodLens) · [![Python](https://img.shields.io/badge/Python-3.12-3776AB.svg?logo=python&logoColor=white)](https://python.org) · [![Next.js](https://img.shields.io/badge/Next.js-14-000000.svg?logo=next.js&logoColor=white)](https://nextjs.org) · [![AWS Serverless](https://img.shields.io/badge/AWS-Lambda%20%7C%20Bedrock%20%7C%20S3-FF9900.svg?logo=amazon-aws&logoColor=white)](https://aws.amazon.com)
+🔗 **[floodlens-app.vercel.app](https://floodlens-app.vercel.app)** · ⚡ **[Live Auth Gateway & Instant Demo](https://floodlens-app.vercel.app/auth)** · [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) · [![Tests](https://img.shields.io/badge/Tests-203%20Passed-emerald.svg)](https://github.com/nikhillakra2007-tech/FloodLens) · [![Python](https://img.shields.io/badge/Python-3.12-3776AB.svg?logo=python&logoColor=white)](https://python.org) · [![Next.js](https://img.shields.io/badge/Next.js-14-000000.svg?logo=next.js&logoColor=white)](https://nextjs.org) · [![AWS Serverless](https://img.shields.io/badge/AWS-Lambda%20%7C%20Bedrock%20%7C%20S3-FF9900.svg?logo=amazon-aws&logoColor=white)](https://aws.amazon.com)
 
 > *"Why did your street flood when the next ward didn't?"*
 
@@ -393,8 +393,8 @@ FloodLens maintains an uncompromising verification posture, covering numerical h
   - Physical unit tests: Topographic similarity matching, Manning pipe capacity under siltation, backwater head propagation.
   - API & Contract tests: Schema compliance, pagination, and error handling.
   - Adversarial guardrail tests: Prompt injection resistance, missing data fallback, ungrounded hypothesis mitigation.
-- **Frontend (Vitest)**: **101 passed tests** across 20 test suites
-  - Complete authentication test coverage: Google OAuth initialization, Indian Mobile (+91) OTP validation, PIN auto-advance, Citizen vs Technical experience mode toggle, profile upsert, and instant demo session bypass.
+- **Frontend (Vitest)**: **106 passed tests** across 21 test suites
+  - Complete authentication test coverage: Compact scientific gateway layout, instant 1-click Technical Demo access (`Dr. K. Senthil Nathan`), Citizen Mode toggle (`Priya Ramanathan`), Google OAuth initialization, Indian Mobile (+91) OTP validation, PIN auto-advance, and contextual missing-provider fallback.
   - Component mechanics, accessible ARIA labels, parameter slider reactivity, counterfactual recalculation.
 - **Type Safety**: 100% strict TypeScript compilation with zero errors across all static and dynamic routes.
 - **Flake Rate**: 0.00% across consecutive CI test executions.
