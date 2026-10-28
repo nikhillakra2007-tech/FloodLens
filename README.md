@@ -14,7 +14,8 @@ Conventional flood maps show static water depths after disaster strikes, treatin
 
 | Environment / Route | Direct Production URL | Functional Description |
 | :--- | :--- | :--- |
-| **Production Web App** | [https://floodlens-app.vercel.app](https://floodlens-app.vercel.app) | Complete Next.js 14 hydrological diagnosis platform |
+| **Production Web App** | [https://floodlens-app.vercel.app](https://floodlens-app.vercel.app) | Complete Next.js 14 hydrological diagnosis platform (Main Branch) |
+| **Preview Deployment** | [https://frontend-ecs788bip-nikhillakra2007-9371s-projects.vercel.app](https://frontend-ecs788bip-nikhillakra2007-9371s-projects.vercel.app) | Isolated Vercel Preview for `fix/technical-access-ui-ux` |
 | **Authentication Gateway** | [https://floodlens-app.vercel.app/auth](https://floodlens-app.vercel.app/auth) | Google OAuth, Indian Phone (+91) OTP, and Instant Demo Access |
 | **Feature Hub (Authenticated)** | [https://floodlens-app.vercel.app/hub](https://floodlens-app.vercel.app/hub) | Role-tailored resident portal and engineering workspace catalog |
 | **Diagnostic Catchment Console** | [https://floodlens-app.vercel.app/investigations/new](https://floodlens-app.vercel.app/investigations/new) | Interactive catchment selection matrix & pipeline trigger |
