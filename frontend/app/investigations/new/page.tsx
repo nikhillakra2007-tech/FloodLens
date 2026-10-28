@@ -1,17 +1,19 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { useState, useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import dynamic from "next/dynamic";
+import nextDynamic from "next/dynamic";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { getPlaces, getComparables, compareLocations } from "@/lib/api/spatial/locations";
 import { getFloodObservations } from "@/lib/api/spatial/map";
 import { createComparison, createInvestigation } from "@/lib/api/investigation/investigations";
 import type { Place, LocationCompareResponse } from "@/lib/types/investigation";
 
-const FloodMap = dynamic(() => import("@/components/map/FloodMap"), {
+const FloodMap = nextDynamic(() => import("@/components/map/FloodMap"), {
   ssr: false,
   loading: () => (
     <div className="flex h-96 w-full items-center justify-center rounded-2xl border border-[#E8DFD3] bg-[#F5EFE6]">
