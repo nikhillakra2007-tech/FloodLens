@@ -111,16 +111,16 @@ export default function Navbar() {
               </div>
             </Link>
 
-            {/* Desktop Navigation Links (14-16px readable typography, comfortable click targets) */}
-            <nav className="hidden xl:flex items-center gap-1 pl-4 border-l border-[#E8DFD3]" aria-label="Main Navigation">
+            {/* Desktop Navigation Links */}
+            <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 pl-3 xl:pl-4 border-l border-[#E8DFD3]" aria-label="Main Navigation">
               {currentNavLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   className={clsx(
-                    "px-4 py-2.5 text-sm lg:text-[15px] font-semibold rounded-xl transition-all duration-150 whitespace-nowrap",
+                    "px-2.5 xl:px-3.5 py-2 text-xs xl:text-sm font-medium rounded-xl transition-all duration-150 whitespace-nowrap",
                     link.isActive
-                      ? "text-terracotta-700 bg-terracotta-50/90 border border-terracotta-200/80 font-bold shadow-2xs"
+                      ? "text-terracotta-800 bg-terracotta-50/90 border border-terracotta-200/80 font-semibold shadow-2xs"
                       : "text-[#554638] hover:text-[#221B15] hover:bg-[#F5EFE6]"
                   )}
                 >

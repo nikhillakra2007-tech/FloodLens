@@ -41,6 +41,7 @@ describe("AuthPageContent", () => {
       instantDemoLogin: mockInstantDemoLogin,
       signOut: vi.fn(),
       refreshProfile: vi.fn(),
+      updateProfile: vi.fn().mockResolvedValue({ success: true }),
     });
   };
 

@@ -7,6 +7,11 @@ export interface UserProfile {
   phone?: string | null;
   experience_mode: ExperienceMode;
   profile_completed: boolean;
+  department_or_agency?: string | null;
+  primary_ward?: string | null;
+  role_title?: string | null;
+  email_notifications?: boolean;
+  sms_alerts?: boolean;
   created_at?: string;
   updated_at?: string;
 }

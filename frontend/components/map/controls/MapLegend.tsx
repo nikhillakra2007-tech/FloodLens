@@ -16,7 +16,12 @@ export default function MapLegend({
   collapsible = false,
   defaultExpanded = true,
 }: MapLegendProps) {
-  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
+  const [isExpanded, setIsExpanded] = useState(() => {
+    if (typeof window !== "undefined" && window.innerWidth < 640) {
+      return false;
+    }
+    return defaultExpanded;
+  });
 
   return (
     <div

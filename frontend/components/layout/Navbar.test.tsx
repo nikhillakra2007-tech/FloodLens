@@ -45,6 +45,7 @@ describe("Navbar", () => {
       instantDemoLogin: vi.fn(),
       signOut: vi.fn(),
       refreshProfile: vi.fn(),
+      updateProfile: vi.fn().mockResolvedValue({ success: true }),
     });
   };
 

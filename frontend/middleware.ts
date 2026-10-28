@@ -20,11 +20,18 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  // 1b. Check for instant demo session cookie
-  const isDemoSession = request.cookies.get("floodlens_demo_session")?.value;
-  if (isDemoSession) {
+  // 1b. Check for instant demo session cookie and enforce separation
+  const demoCookie = request.cookies.get("floodlens_demo_session")?.value;
+  if (demoCookie) {
+    const isCitizen = demoCookie === "citizen";
     if (pathname === "/auth" && !request.nextUrl.searchParams.get("next")) {
-      return NextResponse.redirect(new URL("/investigations/new", request.url));
+      return NextResponse.redirect(new URL(isCitizen ? "/hub" : "/investigations/new", request.url));
+    }
+    // Strict separation: Citizen mode users entering technical workbench are routed to citizen hub
+    if (isCitizen && pathname === "/investigations/new") {
+      const redirectUrl = new URL("/hub", request.url);
+      redirectUrl.searchParams.set("notice", "citizen_restricted");
+      return NextResponse.redirect(redirectUrl);
     }
     return response;
   }
@@ -83,7 +90,7 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(redirectUrl);
     }
 
-    // 4. If already authenticated user visits /auth without a specific redirect, send to /hub
+    // 4. If already authenticated user visits /auth without a specific redirect, send to technical destination
     if (user && pathname === "/auth" && !request.nextUrl.searchParams.get("next")) {
       return NextResponse.redirect(new URL("/investigations/new", request.url));
     }

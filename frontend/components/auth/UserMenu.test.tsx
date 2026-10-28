@@ -29,6 +29,7 @@ describe("UserMenu", () => {
       instantDemoLogin: vi.fn(),
       signOut: mockSignOut,
       refreshProfile: vi.fn(),
+      updateProfile: vi.fn().mockResolvedValue({ success: true }),
     });
 
     render(<UserMenu />);
@@ -58,6 +59,7 @@ describe("UserMenu", () => {
       instantDemoLogin: vi.fn(),
       signOut: mockSignOut,
       refreshProfile: vi.fn(),
+      updateProfile: vi.fn().mockResolvedValue({ success: true }),
     });
 
     render(<UserMenu />);
@@ -70,14 +72,18 @@ describe("UserMenu", () => {
     const menuBtn = screen.getByRole("button", { name: /User account menu/i });
     fireEvent.click(menuBtn);
 
-    // Dropdown contains profile info and sign out button
+    // Dropdown contains profile info, read-only role, and sign out button
     expect(screen.getAllByText("Rajesh Raman").length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText("rajesh@resilience.org")).toBeTruthy();
-    expect(screen.getByRole("button", { name: /Sign Out/i })).toBeTruthy();
+    expect(screen.getByText("Assigned Role")).toBeTruthy();
+    expect(screen.getByText(/Role is strictly bound to authorization. Cross-mode switching is disabled./i)).toBeTruthy();
 
-    // Mode switch button can be clicked
-    const technicalBtn = screen.getByRole("button", { name: "Technical" });
-    fireEvent.click(technicalBtn);
-    expect(mockSetExperienceMode).toHaveBeenCalledWith("technical");
+    // Verify cross-mode toggle button is NOT present (strictly enforced separation)
+    expect(screen.queryByRole("button", { name: /^Technical$/i })).toBeNull();
+
+    // Sign out button works
+    const signOutBtn = screen.getByRole("button", { name: /Sign Out/i });
+    fireEvent.click(signOutBtn);
+    expect(mockSignOut).toHaveBeenCalled();
   });
 });

@@ -22,7 +22,7 @@ export default function ExperienceModeSelector({
           Application Experience Mode <span className="text-terracotta-600">*</span>
         </label>
         <span className="text-[11px] font-medium text-[#756350]">
-          Switch anytime in settings
+          Bound to verified account
         </span>
       </div>
 

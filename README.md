@@ -18,10 +18,20 @@ Conventional flood maps show static water depths after disaster strikes, treatin
 | **Preview Deployment** | [https://frontend-ecs788bip-nikhillakra2007-9371s-projects.vercel.app](https://frontend-ecs788bip-nikhillakra2007-9371s-projects.vercel.app) | Isolated Vercel Preview for `fix/technical-access-ui-ux` |
 | **Authentication Gateway** | [https://floodlens-app.vercel.app/auth](https://floodlens-app.vercel.app/auth) | Google OAuth, Indian Phone (+91) OTP, and Instant Demo Access |
 | **Feature Hub (Authenticated)** | [https://floodlens-app.vercel.app/hub](https://floodlens-app.vercel.app/hub) | Role-tailored resident portal and engineering workspace catalog |
-| **Diagnostic Catchment Console** | [https://floodlens-app.vercel.app/investigations/new](https://floodlens-app.vercel.app/investigations/new) | Interactive catchment selection matrix & pipeline trigger |
+| **Diagnostic Catchment Console** | [https://floodlens-app.vercel.app/investigations/new](https://floodlens-app.vercel.app/investigations/new) | Interactive catchment selection matrix & pipeline trigger (Verified Original Technical Destination) |
+| **Profile & Role Settings** | [https://floodlens-app.vercel.app/settings](https://floodlens-app.vercel.app/settings) | Enforced read-only authorization role, Indian contact mobile validation, monitored ward, and notification settings |
 | **Differential Twin Simulator** | [https://floodlens-app.vercel.app/simulator](https://floodlens-app.vercel.app/simulator) | Calibrated comparative urban twin scenario workbench |
 | **Causal DAG & Flowchart** | [https://floodlens-app.vercel.app/flowchart](https://floodlens-app.vercel.app/flowchart) | Interactive physical propagation network with real-time sliders |
 | **Subsurface Conduit Anatomy** | [https://floodlens-app.vercel.app/infrastructure](https://floodlens-app.vercel.app/infrastructure) | 3D subterranean cross-section & sediment obstruction viewer |
+
+### 🌊 Master Repair & Feature Implementations
+1. **Verified Technical Destination Restored**: Traced Git history confirming the original "Run Ward Diagnosis" destination is `/investigations/new`. The landing page CTA now cleanly routes to `/auth`, where **Enter Technical Demo** directly loads the original technical console with zero redirect loops.
+2. **Scroll-Aware Features Section Navigation**: The Features section navigation bar on the landing page renders at the top in its resting state, hides smoothly on scroll-down (>8px hysteresis threshold), and reveals cleanly on scroll-up without covering page headers or layout jumps.
+3. **Strict Role Separation (Citizen vs. Technical)**: Interactive cross-mode switching has been eliminated from settings, dropdown menus, and client requests. Role status is displayed as an informational read-only badge. Demo accounts are persona-locked; unauthorized route access redirects with context.
+4. **Profile & Role Settings Lifecycle**: Fully integrated `/settings` and `/onboarding` with loading states, double-submission protection, Indian phone (+91) regex validation, monitored Chennai catchment selection, and honest local/remote persistence feedback.
+5. **Polished 5-Stage Hydrological Vector Diagram**: Replaced rough left-side auth visuals with a peer-review-grade SVG illustrating: *1. Rainfall Forcing (390mm Michaung) → 2. Catchment Runoff (Q=CIA) → 3. Drainage Network (SWD Culvert) → 4. Hydraulic Bottleneck (+1.03m dy/dx Backwater) → 5. Flood Risk Output (Ponding)* with an integrated scientific legend.
+6. **Zero Horizontal Overflow at 100% Zoom**: Refined flexbox child constraints (`min-w-0 flex-1`, text wrapping, responsive tabs `min-w-[115px] sm:min-w-0`, overflow-safe user menus `max-w-[calc(100vw-2rem)]`) across 320px, 360px, 390px, 430px, 768px, 1024px, 1280px, and 1440px viewports.
+7. **Map Overlap & Elevation Fixes**: Dedicated telemetry status bars beneath satellite cards, responsive bounding on hero badges (`max-w-[85%]`), and responsive mobile-collapsed map legend to prevent marker or control collisions.
 
 ### ⚡ Public Landing Page to Technical Access Journey
 1. **Public Landing Page (`/`)**: Clean, public-facing interface with prominent **Sign In** action directing visitors to `/auth` without exposing personal credentials, user names, or avatars.
@@ -43,7 +53,7 @@ flowchart TD
     
     ModeSwitch -->|"Technical Mode (Engineers & Planners)"| Tech["Technical Engineering Workspace\n• Full Hydro-Mechanics Formulary\n• Manning Surcharge Calculations\n• Rational Peak Runoff (Q = CIA)\n• Gradually Varied Flow (GVF dy/dx)\n• 5-Tab Comprehensive Investigation Lab\n• Bounded Counterfactual Simulator"]
     
-    Cit <-->|"Instant Seamless Toggle"| Tech
+    Cit -.->|"Strict Role Separation Enforced (Cross-Mode Switching Disabled)"| Tech
 ```
 
 ### A. Technical Mode (Hydrological Engineering Workspace)

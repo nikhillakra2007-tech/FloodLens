@@ -78,7 +78,7 @@ const CITIZEN_WARDS: CitizenWardInfo[] = [
 ];
 
 export default function FeatureHubPage() {
-  const { experienceMode, setExperienceMode } = useAuth();
+  const { experienceMode } = useAuth();
   const [selectedCitizenWard, setSelectedCitizenWard] = useState<CitizenWardInfo>(CITIZEN_WARDS[0]);
 
   const technicalFeatures: FeaturePortal[] = [
@@ -184,11 +184,11 @@ export default function FeatureHubPage() {
 
   return (
     <div className="py-8 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-10 animate-fadeIn">
-      {/* Dynamic Header with Role State & Mode Toggle */}
+      {/* Dynamic Header with Enforced Role Status (No cross-mode toggling) */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-[#E8DFD3]">
         <div className="space-y-2">
           <div className="flex items-center gap-2.5">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-terracotta-200 bg-terracotta-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-terracotta-800">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-terracotta-200 bg-terracotta-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-terracotta-800">
               <span className={`h-2 w-2 rounded-full ${isCitizenMode ? "bg-terracotta-600" : "bg-amber-600"}`} />
               <span>{isCitizenMode ? "Citizen Resident Portal" : "Hydrological Engineering Hub"}</span>
             </span>
@@ -203,29 +203,28 @@ export default function FeatureHubPage() {
               : "Hydrological Intelligence & Diagnostic Workspaces"}
           </h1>
 
-          <p className="text-sm sm:text-base text-[#554638] leading-relaxed max-w-2xl">
+          <p className="text-sm sm:text-base text-[#554638] leading-relaxed max-w-2xl font-normal">
             {isCitizenMode
               ? "Simple, verified insights for Chennai residents. See why your neighborhood flooded or stayed safe, and explore practical safety steps."
               : "Full mathematical models, differential twin-catchment formulation, Manning conduit equations, and causal DAG diagnostic tools."}
           </p>
         </div>
 
-        {/* Mode Switcher Button */}
+        {/* Read-Only Enforced Role Badge & Optional Diagnostic Link */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <button
-            type="button"
-            onClick={() => setExperienceMode(isCitizenMode ? "technical" : "citizen")}
-            className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#E0D5C7] bg-white hover:bg-[#FAF7F2] hover:border-terracotta-400 px-4 py-2.5 text-xs font-bold text-[#554638] hover:text-[#221B15] transition-all shadow-xs cursor-pointer"
-          >
-            <span>{isCitizenMode ? "📐 Switch to Technical Engineering Mode" : "🏘️ Switch to Citizen Mode"}</span>
-          </button>
+          <div className="inline-flex items-center gap-2 rounded-xl border border-[#E0D5C7] bg-white px-3.5 py-2 text-xs font-medium text-[#554638] shadow-xs">
+            <span className="font-semibold text-[#221B15]">Role:</span>
+            <span>{isCitizenMode ? "Citizen Resident Observer" : "GCC Senior Hydrologist"}</span>
+          </div>
 
-          <Link
-            href="/investigations/new"
-            className="inline-flex items-center justify-center gap-2 text-xs font-bold text-white bg-terracotta-600 hover:bg-terracotta-700 px-4 py-2.5 rounded-xl transition-all shadow-warm"
-          >
-            <span>Diagnostic Console →</span>
-          </Link>
+          {!isCitizenMode && (
+            <Link
+              href="/investigations/new"
+              className="inline-flex items-center justify-center gap-2 text-xs font-semibold text-white bg-terracotta-600 hover:bg-terracotta-700 px-4 py-2.5 rounded-xl transition-all shadow-warm"
+            >
+              <span>Diagnostic Console →</span>
+            </Link>
+          )}
         </div>
       </div>
 
@@ -236,7 +235,7 @@ export default function FeatureHubPage() {
         <div className="space-y-8 animate-fadeIn">
           {/* Ward Selection Row */}
           <div className="space-y-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#756350] block">
+            <span className="text-xs font-medium uppercase tracking-wider text-[#756350] block">
               Select Your Area / Ward to Check Assessed Status:
             </span>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -254,7 +253,7 @@ export default function FeatureHubPage() {
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-sm text-[#221B15]">{ward.wardName}</span>
+                      <span className="font-semibold text-sm text-[#221B15]">{ward.wardName}</span>
                       <span className="font-mono text-[10px] text-[#756350]">{ward.wardNumber}</span>
                     </div>
                     <div className="mt-2 flex items-center gap-1.5">
@@ -267,7 +266,7 @@ export default function FeatureHubPage() {
                             : "bg-emerald-500"
                         }`}
                       />
-                      <span className="text-[11px] font-semibold text-[#554638] line-clamp-1">
+                      <span className="text-[11px] font-medium text-[#554638] line-clamp-1">
                         {ward.status === "vulnerable" ? "Silt Backwater Risk" : ward.status === "moderate" ? "Canal Dependent" : "Resilient Drainage"}
                       </span>
                     </div>
@@ -282,11 +281,11 @@ export default function FeatureHubPage() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#E8DFD3]">
               <div>
                 <div className="flex items-center gap-2">
-                  <h2 className="font-bold text-xl sm:text-2xl text-[#221B15]">
+                  <h2 className="font-semibold text-xl sm:text-2xl text-[#221B15]">
                     {selectedCitizenWard.wardName} ({selectedCitizenWard.wardNumber})
                   </h2>
                   <span
-                    className={`px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${
+                    className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold border ${
                       selectedCitizenWard.status === "vulnerable"
                         ? "bg-red-50 text-red-800 border-red-200"
                         : selectedCitizenWard.status === "moderate"
@@ -297,16 +296,16 @@ export default function FeatureHubPage() {
                     {selectedCitizenWard.statusLabel}
                   </span>
                 </div>
-                <p className="text-xs sm:text-sm text-[#554638] mt-1">
+                <p className="text-xs sm:text-sm text-[#554638] mt-1 font-normal">
                   {selectedCitizenWard.summary}
                 </p>
               </div>
 
               <Link
-                href="/investigations/new"
-                className="self-start sm:self-auto inline-flex items-center gap-1.5 text-xs font-bold text-terracotta-700 hover:text-terracotta-800 bg-terracotta-50 hover:bg-terracotta-100 border border-terracotta-200 px-3.5 py-2 rounded-xl transition-colors"
+                href="/investigations/de9cda17-8daa-448d-813e-9378b97619fb"
+                className="self-start sm:self-auto inline-flex items-center gap-1.5 text-xs font-semibold text-terracotta-700 hover:text-terracotta-800 bg-terracotta-50 hover:bg-terracotta-100 border border-terracotta-200 px-3.5 py-2 rounded-xl transition-colors"
               >
-                <span>View on Geospatial Map →</span>
+                <span>View Community Flood Map →</span>
               </Link>
             </div>
 
@@ -314,33 +313,33 @@ export default function FeatureHubPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {/* Pillar 1: Plain Language Explanation */}
               <div className="rounded-2xl border border-[#E5DDD0] bg-[#FAF7F2] p-5 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-terracotta-700">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-terracotta-700">
                   <span>💡</span>
                   <span>Why Did This Happen?</span>
                 </div>
-                <p className="text-xs sm:text-sm text-[#3A2F25] leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#3A2F25] leading-relaxed font-normal">
                   {selectedCitizenWard.whyItHappened}
                 </p>
               </div>
 
               {/* Pillar 2: Recommended Resident Action */}
               <div className="rounded-2xl border border-[#E5DDD0] bg-[#FAF7F2] p-5 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#554638]">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#554638]">
                   <span>🛠️</span>
                   <span>Recommended Resident Action</span>
                 </div>
-                <p className="text-xs sm:text-sm text-[#3A2F25] leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#3A2F25] leading-relaxed font-normal">
                   {selectedCitizenWard.recommendedAction}
                 </p>
               </div>
 
               {/* Pillar 3: Safety & Emergency Advice */}
               <div className="rounded-2xl border border-[#E5DDD0] bg-[#FAF7F2] p-5 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-800">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-emerald-800">
                   <span>🛡️</span>
                   <span>Monsoon Safety Advice</span>
                 </div>
-                <p className="text-xs sm:text-sm text-[#3A2F25] leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#3A2F25] leading-relaxed font-normal">
                   {selectedCitizenWard.safetyAdvice}
                 </p>
               </div>
@@ -350,17 +349,17 @@ export default function FeatureHubPage() {
           {/* Official Helplines & Emergency Advisory Card */}
           <div className="rounded-3xl border border-terracotta-200 bg-gradient-to-br from-[#FDF5F0] via-white to-amber-50/50 p-6 sm:p-8 shadow-sm space-y-4">
             <div className="flex items-center gap-2">
-              <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-terracotta-600 text-white text-xs font-bold">
+              <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-terracotta-600 text-white text-xs font-semibold">
                 ☎️
               </span>
-              <h3 className="font-bold text-base text-[#221B15]">
+              <h3 className="font-semibold text-base text-[#221B15]">
                 Verified Greater Chennai Corporation Civil Helplines
               </h3>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1">
               <div className="rounded-xl border border-terracotta-200 bg-white p-4 space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] block">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-[#756350] block">
                   GCC 24/7 Citizen Helpline
                 </span>
                 <span className="font-mono text-2xl font-bold text-terracotta-700 block">1913</span>
@@ -368,7 +367,7 @@ export default function FeatureHubPage() {
               </div>
 
               <div className="rounded-xl border border-[#E0D5C7] bg-white p-4 space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] block">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-[#756350] block">
                   State Disaster Control Room
                 </span>
                 <span className="font-mono text-xl font-bold text-[#221B15] block">1070</span>
@@ -376,7 +375,7 @@ export default function FeatureHubPage() {
               </div>
 
               <div className="rounded-xl border border-[#E0D5C7] bg-white p-4 space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] block">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-[#756350] block">
                   District Operations Centre
                 </span>
                 <span className="font-mono text-xl font-bold text-[#221B15] block">1077</span>
@@ -397,7 +396,7 @@ export default function FeatureHubPage() {
                 📐
               </span>
               <div>
-                <span className="font-bold text-[#221B15] block font-sans text-sm">
+                <span className="font-semibold text-[#221B15] block font-sans text-sm">
                   Physical Hydro-Mechanic Formulations Active:
                 </span>
                 <span className="text-[#554638] text-[11px]">
@@ -407,10 +406,10 @@ export default function FeatureHubPage() {
             </div>
 
             <div className="flex items-center gap-2 self-start md:self-auto shrink-0">
-              <span className="rounded-md bg-white border border-amber-300 px-2 py-1 text-[11px] text-amber-900 font-semibold">
+              <span className="rounded-md bg-white border border-amber-300 px-2 py-1 text-[11px] text-amber-900 font-medium">
                 Copernicus GLO-30 DEM
               </span>
-              <span className="rounded-md bg-white border border-amber-300 px-2 py-1 text-[11px] text-amber-900 font-semibold">
+              <span className="rounded-md bg-white border border-amber-300 px-2 py-1 text-[11px] text-amber-900 font-medium">
                 GCC SWD GIS Vector
               </span>
             </div>
@@ -425,10 +424,10 @@ export default function FeatureHubPage() {
               >
                 <div className="space-y-5">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#756350]">
+                    <span className="text-xs font-medium uppercase tracking-wider text-[#756350]">
                       {feature.category}
                     </span>
-                    <span className={`rounded-full border px-3 py-0.5 text-xs font-bold ${feature.badgeColor}`}>
+                    <span className={`rounded-full border px-3 py-0.5 text-xs font-semibold ${feature.badgeColor}`}>
                       {feature.badge}
                     </span>
                   </div>
@@ -438,23 +437,23 @@ export default function FeatureHubPage() {
                       {feature.iconSvg}
                     </div>
                     <div>
-                      <h2 className="font-bold text-lg sm:text-xl text-[#221B15] group-hover:text-terracotta-700 transition-colors">
+                      <h2 className="font-semibold text-lg sm:text-xl text-[#221B15] group-hover:text-terracotta-700 transition-colors">
                         {feature.title}
                       </h2>
-                      <p className="mt-1 text-xs sm:text-sm text-[#554638] leading-relaxed">
+                      <p className="mt-1 text-xs sm:text-sm text-[#554638] leading-relaxed font-normal">
                         {feature.description}
                       </p>
                     </div>
                   </div>
 
                   <div className="space-y-2 pt-2 border-t border-[#F0E8DD]">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#756350] block">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-[#756350] block">
                       Engineering Capabilities:
                     </span>
                     <ul className="space-y-1.5 text-xs text-[#554638]">
                       {feature.highlights.map((h, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <span className="text-terracotta-600 font-bold">✓</span>
+                        <li key={i} className="flex items-start gap-2 font-normal">
+                          <span className="text-terracotta-600 font-semibold">✓</span>
                           <span>{h}</span>
                         </li>
                       ))}
@@ -465,7 +464,7 @@ export default function FeatureHubPage() {
                 <div className="pt-6">
                   <Link
                     href={feature.href}
-                    className={`w-full flex items-center justify-center gap-2 rounded-xl py-3 text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+                    className={`w-full flex items-center justify-center gap-2 rounded-xl py-3 text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
                       feature.buttonVariant === "primary"
                         ? "bg-terracotta-600 text-white shadow-warm hover:bg-terracotta-700 hover:shadow-lift"
                         : "border border-[#E0D5C7] bg-[#FAF7F2] text-[#554638] hover:bg-white hover:text-[#221B15] hover:border-[#D5C6B3]"
