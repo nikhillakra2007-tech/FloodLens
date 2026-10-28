@@ -457,53 +457,95 @@ export default function InfrastructureCrossSectionViewer() {
           </div>
         </div>
 
-        {/* Structured Analytical Panels: Varied component treatments with directional depth */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-          {/* Block A: Failure & Hydraulic Inversion Panel */}
-          <div className="rounded-2xl border border-red-200/90 bg-gradient-to-br from-white via-red-50/30 to-red-50/70 p-6 space-y-3.5 shadow-sm hover:shadow-warm transition-all duration-300 relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-1 bg-red-500" />
-            <div className="flex items-center justify-between gap-2">
-              <div className="flex items-center gap-2 text-[#C23E2A] font-bold text-sm tracking-tight">
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-red-100 text-xs text-red-700">!</span>
-                <span>Block A Failure: Underground Choke &amp; Backwater Surge</span>
+        {/* Structured Analytical Panels: High-Hierarchy Asymmetrical Treatments with Directional Elevation */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-3">
+          {/* Block A: Failure & Hydraulic Inversion Panel (Left Directional Elevation, 6 cols) */}
+          <div className="lg:col-span-6 rounded-2xl border-y border-r border-[#F0D0CB] border-l-4 border-l-red-600 bg-gradient-to-br from-white via-[#FFF5F3] to-[#FDF0EE] p-6 sm:p-7 space-y-4 shadow-md hover:shadow-warm transition-all duration-300 relative">
+            <div className="flex items-center justify-between gap-2 border-b border-red-100 pb-3">
+              <div className="space-y-0.5">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-red-700 bg-red-100/80 border border-red-200 px-2 py-0.5 rounded-full inline-block">
+                  Primary Failure Bottleneck
+                </span>
+                <h3 className="text-base sm:text-lg font-bold text-[#8C2314] tracking-tight flex items-center gap-2">
+                  <span>Block A: Conduit Silt &amp; Backwater Surcharge</span>
+                </h3>
               </div>
-              <span className="rounded-full bg-red-100 border border-red-200 px-2 py-0.5 text-[10px] font-bold text-red-800 uppercase tracking-wider font-mono">
-                Surcharged
+              <span className="rounded-xl bg-red-600 text-white px-2.5 py-1 text-xs font-mono font-bold shrink-0 shadow-xs">
+                Inundated
               </span>
             </div>
 
-            <p className="text-xs sm:text-sm text-[#554638] leading-relaxed">
-              Debris and hardened silt sedimentation inside underground conduits cut open cross-sectional volume by over 50%. Under peak rainfall, water cannot enter the drain trunk—instead, pressurized backwater surges upward out of catch basin grates into street gutters and residential basements.
+            <p className="text-xs sm:text-sm text-[#4A3B32] leading-relaxed font-medium">
+              Hardened silt sedimentation and plastic debris inside underground conduits choke open cross-sectional volume by <strong>58%</strong>. Under intense cloudbursts, stormwater cannot enter the trunk canal—instead, pressurized backwater surges vertically out of catch basin grates into streets and residential basements.
             </p>
 
-            <div className="pt-2 border-t border-red-100/80 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono">
-              <span className="text-red-700 font-bold">58% Silt Bed Depth</span>
-              <span className="text-[#756350]">Backwater Head: +1.4m</span>
-              <span className="text-red-800 font-semibold">Q_cap &lt; 3.8 m³/s</span>
+            {/* 3 Structured Quantitative Breakdown Cards */}
+            <div className="grid grid-cols-3 gap-2.5 pt-1">
+              <div className="rounded-xl border border-red-200 bg-white/90 p-2.5 text-center shadow-2xs">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] block">Silt Occlusion</span>
+                <span className="font-mono text-sm sm:text-base font-bold text-red-700 block">58% Depth</span>
+                <span className="text-[10px] text-[#8C7A6B]">Cross-section loss</span>
+              </div>
+              <div className="rounded-xl border border-red-200 bg-white/90 p-2.5 text-center shadow-2xs">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] block">Reverse Head</span>
+                <span className="font-mono text-sm sm:text-base font-bold text-red-700 block">+1.40 m</span>
+                <span className="text-[10px] text-[#8C7A6B]">Above street grate</span>
+              </div>
+              <div className="rounded-xl border border-red-200 bg-white/90 p-2.5 text-center shadow-2xs">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] block">Peak Capacity</span>
+                <span className="font-mono text-sm sm:text-base font-bold text-red-800 block">3.8 m³/s</span>
+                <span className="text-[10px] text-red-600 font-semibold">Deficit: -5.4 m³/s</span>
+              </div>
+            </div>
+
+            <div className="pt-2 border-t border-red-100 flex items-center justify-between text-xs text-[#756350]">
+              <span>Hydraulic Grade: Surcharged Reverse Pressure</span>
+              <span className="font-mono text-red-700 font-bold">Failure: High</span>
             </div>
           </div>
 
-          {/* Block B: Resilient Twin Catchment Panel */}
-          <div className="rounded-2xl border border-emerald-200/90 bg-gradient-to-br from-white via-emerald-50/30 to-emerald-50/70 p-6 space-y-3.5 shadow-sm hover:shadow-warm transition-all duration-300 relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-1 bg-emerald-500" />
-            <div className="flex items-center justify-between gap-2">
-              <div className="flex items-center gap-2 text-[#3B8352] font-bold text-sm tracking-tight">
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-100 text-xs text-emerald-700">✓</span>
-                <span>Block B Resilience: Unobstructed Gravity Fall</span>
+          {/* Block B: Resilient Twin Catchment Panel (Right Directional Elevation, 6 cols) */}
+          <div className="lg:col-span-6 rounded-2xl border-y border-l border-[#CFE8D7] border-r-4 border-r-emerald-600 bg-gradient-to-bl from-white via-[#F2FAF5] to-[#ECF7F0] p-6 sm:p-7 space-y-4 shadow-md hover:shadow-warm transition-all duration-300 relative">
+            <div className="flex items-center justify-between gap-2 border-b border-emerald-100 pb-3">
+              <div className="space-y-0.5">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100/80 border border-emerald-200 px-2 py-0.5 rounded-full inline-block">
+                  Hydrological Control Benchmark
+                </span>
+                <h3 className="text-base sm:text-lg font-bold text-[#1E5C35] tracking-tight flex items-center gap-2">
+                  <span>Block B: Unobstructed Gravity Fall Velocity</span>
+                </h3>
               </div>
-              <span className="rounded-full bg-emerald-100 border border-emerald-200 px-2 py-0.5 text-[10px] font-bold text-emerald-800 uppercase tracking-wider font-mono">
+              <span className="rounded-xl bg-emerald-600 text-white px-2.5 py-1 text-xs font-mono font-bold shrink-0 shadow-xs">
                 Resilient
               </span>
             </div>
 
-            <p className="text-xs sm:text-sm text-[#554638] leading-relaxed">
-              Maintained conduit trunks with a 1.5% positive bed gradient allow peak rainfall to achieve self-cleansing gravitational velocity (&gt;1.5 m/s). Water discharges directly into receiving canals without upstream hydraulic resistance or surface pooling.
+            <p className="text-xs sm:text-sm text-[#3A473E] leading-relaxed font-medium">
+              Well-maintained conduit trunks with an unobstructed <strong>+1.5% positive bed gradient</strong> allow stormwater to accelerate into self-cleansing gravitational flow (&gt;1.5 m/s). Runoff enters roadside grates immediately and discharges directly into receiving tidal canals without surface accumulation.
             </p>
 
-            <div className="pt-2 border-t border-emerald-100/80 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono">
-              <span className="text-emerald-700 font-bold">100% Invert Clearance</span>
-              <span className="text-[#756350]">Bed Gradient: +1.5%</span>
-              <span className="text-emerald-800 font-semibold">Q_cap &gt; 11.2 m³/s</span>
+            {/* 3 Structured Quantitative Breakdown Cards */}
+            <div className="grid grid-cols-3 gap-2.5 pt-1">
+              <div className="rounded-xl border border-emerald-200 bg-white/90 p-2.5 text-center shadow-2xs">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] block">Invert Clearance</span>
+                <span className="font-mono text-sm sm:text-base font-bold text-emerald-700 block">100% Free</span>
+                <span className="text-[10px] text-[#8C7A6B]">Zero sediment bed</span>
+              </div>
+              <div className="rounded-xl border border-emerald-200 bg-white/90 p-2.5 text-center shadow-2xs">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] block">Bed Gradient</span>
+                <span className="font-mono text-sm sm:text-base font-bold text-emerald-700 block">+1.50 %</span>
+                <span className="text-[10px] text-[#8C7A6B]">v &gt; 1.5 m/s self-clean</span>
+              </div>
+              <div className="rounded-xl border border-emerald-200 bg-white/90 p-2.5 text-center shadow-2xs">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] block">Discharge Rate</span>
+                <span className="font-mono text-sm sm:text-base font-bold text-emerald-800 block">11.2 m³/s</span>
+                <span className="text-[10px] text-emerald-700 font-semibold">Surplus: +2.0 m³/s</span>
+              </div>
+            </div>
+
+            <div className="pt-2 border-t border-emerald-100 flex items-center justify-between text-xs text-[#756350]">
+              <span>Hydraulic Grade: Free Gravity Outfall</span>
+              <span className="font-mono text-emerald-700 font-bold">Status: Optimal</span>
             </div>
           </div>
         </div>

@@ -9,13 +9,13 @@ export default function FlowchartPage() {
       {/* Top Breadcrumb & Navigation */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Link
-          href="/"
+          href="/hub"
           className="inline-flex items-center gap-2 text-xs font-bold text-[#554638] hover:text-terracotta-700 bg-white border border-[#E0D5C7] rounded-xl px-3.5 sm:px-4 py-2 transition-all shadow-sm hover:shadow-warm"
         >
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          <span>Back to Overview</span>
+          <span>Feature Hub</span>
         </Link>
 
         <div className="flex flex-wrap items-center gap-2">

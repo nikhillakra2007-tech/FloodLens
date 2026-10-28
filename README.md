@@ -22,10 +22,11 @@ Conventional flood maps show static water depths after disaster strikes, treatin
 | **Causal DAG & Flowchart** | [https://floodlens-app.vercel.app/flowchart](https://floodlens-app.vercel.app/flowchart) | Interactive physical propagation network with real-time sliders |
 | **Subsurface Conduit Anatomy** | [https://floodlens-app.vercel.app/infrastructure](https://floodlens-app.vercel.app/infrastructure) | 3D subterranean cross-section & sediment obstruction viewer |
 
-### ⚡ Instant Demo Accounts (Zero Setup Required)
-Anyone can test the complete system with one click directly on the [Auth Page](https://floodlens-app.vercel.app/auth):
-- **Dr. K. Senthil Nathan (Technical Mode)**: Pre-configured GCC Chief Hydrologist & SWD Lead persona. Unlocks differential hydro-mechanical equations, rational runoff coefficients ($Q = CIA$), Manning conduit calculations, and hydraulic backwater head profiles.
-- **Priya Ramanathan (Citizen Mode)**: Pre-configured Velachery Ward 170 Resident persona. Delivers plain-language ward risk summaries, localized safety advisories, and community action steps.
+### ⚡ Public Landing Page to Technical Access Journey
+1. **Public Landing Page (`/`)**: Clean, public-facing interface with prominent **Sign In** action directing visitors to `/auth` without exposing personal credentials, user names, or avatars.
+2. **Authentication Gateway (`/auth`)**: Compact scientific entry gateway with a custom hydrological visual and zero blocking provider warnings for demo access.
+3. **Technical Access / Instant Demo**: One click on **Enter Technical Demo** logs in as Dr. K. Senthil Nathan (Technical Mode) and routes directly into the original technical website: the **Diagnostic Catchment Console (`/investigations/new`)**, triggering the 5-stage causal inference pipeline and the 5-Tab Investigation Lab.
+4. **Citizen Demo**: Resident observer persona (Priya Ramanathan) routing to the localized community risk portal.
 
 ---
 

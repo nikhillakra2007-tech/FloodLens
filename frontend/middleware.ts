@@ -24,7 +24,7 @@ export async function middleware(request: NextRequest) {
   const isDemoSession = request.cookies.get("floodlens_demo_session")?.value;
   if (isDemoSession) {
     if (pathname === "/auth" && !request.nextUrl.searchParams.get("next")) {
-      return NextResponse.redirect(new URL("/hub", request.url));
+      return NextResponse.redirect(new URL("/investigations/new", request.url));
     }
     return response;
   }
@@ -85,7 +85,7 @@ export async function middleware(request: NextRequest) {
 
     // 4. If already authenticated user visits /auth without a specific redirect, send to /hub
     if (user && pathname === "/auth" && !request.nextUrl.searchParams.get("next")) {
-      return NextResponse.redirect(new URL("/hub", request.url));
+      return NextResponse.redirect(new URL("/investigations/new", request.url));
     }
 
     return response;

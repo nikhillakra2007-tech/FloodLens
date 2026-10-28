@@ -355,28 +355,25 @@ export default function FloodMap({
             defaultExpanded={true}
           />
         </div>
-
-        {/* Desktop Coords / Map Hint Overlay */}
-        <div className="hidden sm:block absolute bottom-4 left-4 z-[400] rounded-xl border border-[#E8DFD3] bg-white/95 px-3 py-1.5 text-[11px] font-mono text-[#554638] shadow-sm backdrop-blur-md">
-          {selectedPlaceA && selectedPlaceB ? (
-            <span className="font-semibold text-terracotta-700">
-              Active Comparative Axis: {selectedPlaceA.name} ↔ {selectedPlaceB.name}
-            </span>
-          ) : (
-            <span>Chennai Catchment Grid · Click markers to select</span>
-          )}
-        </div>
       </div>
 
-      {/* Mobile Active Axis Status bar */}
-      <div className="sm:hidden rounded-xl border border-[#E8DFD3] bg-white p-3 text-xs font-mono text-[#554638] shadow-2xs">
-        {selectedPlaceA && selectedPlaceB ? (
-          <span className="font-semibold text-terracotta-700">
-            Comparative Axis: {selectedPlaceA.name} (Ward {selectedPlaceA.ward}) ↔ {selectedPlaceB.name} (Ward {selectedPlaceB.ward})
-          </span>
-        ) : (
-          <span>Chennai Catchment Grid · Tap pins on map to inspect</span>
-        )}
+      {/* Dedicated Status & Telemetry Bar - Zero overlap on all viewports */}
+      <div className="rounded-xl border border-[#E8DFD3] bg-[#FAF7F2] p-3.5 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs sm:text-sm font-mono text-[#554638] shadow-2xs">
+        <div className="flex items-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-terracotta-600 shrink-0" />
+          {selectedPlaceA && selectedPlaceB ? (
+            <span className="font-bold text-terracotta-800">
+              Comparative Axis: {selectedPlaceA.name} (Ward {selectedPlaceA.ward ?? "—"}) ↔ {selectedPlaceB.name} (Ward {selectedPlaceB.ward ?? "—"})
+            </span>
+          ) : (
+            <span className="text-[#554638]">
+              Chennai Catchment Grid · Click markers on map to assign comparison targets
+            </span>
+          )}
+        </div>
+        <div className="text-[11px] sm:text-xs text-[#756350] flex items-center gap-2">
+          <span>Datum: 13.04°N, 80.22°E</span>
+        </div>
       </div>
     </div>
   );

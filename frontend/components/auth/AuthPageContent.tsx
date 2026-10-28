@@ -23,7 +23,7 @@ export default function AuthPageContent() {
     instantDemoLogin,
   } = useAuth();
 
-  const nextDestination = validateRedirectUrl(searchParams.get("next"), "/hub");
+  const nextDestination = validateRedirectUrl(searchParams.get("next"), "/investigations/new");
   const initialMode = searchParams.get("mode") === "signup" ? "signup" : "login";
 
   const [authMode, setAuthMode] = useState<"login" | "signup">(initialMode);

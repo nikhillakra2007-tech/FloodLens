@@ -123,28 +123,29 @@ export default function LandingPage() {
             Conventional flood maps only show water depth. <strong className="text-[#221B15] font-semibold">FloodLens</strong> diagnoses the physical failure mechanism—pairing inundated catchments with resilient twin wards across elevation gradients, stormwater drain conduits, and imperviousness.
           </p>
 
-          {/* CTAs with Clear Visual Hierarchy */}
+          {/* CTAs with Clear Visual Hierarchy: Sign In to Platform replaces Run Ward Diagnosis */}
           <div className="animate-fadeInUp flex flex-col sm:flex-row items-center gap-4 pt-2 w-full sm:w-auto">
-            <GatewayTransitionLink
-              href="/investigations/new"
-              className="w-full sm:w-auto flex items-center justify-center gap-2.5 rounded-xl bg-terracotta-600 px-8 py-3.5 text-sm font-bold text-white shadow-warm hover:bg-terracotta-700 hover:shadow-lift hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
+            <Link
+              href="/auth"
+              className="w-full sm:w-auto flex items-center justify-center gap-2.5 rounded-xl bg-terracotta-600 px-8 py-4 text-base font-bold text-white shadow-warm hover:bg-terracotta-700 hover:shadow-lift hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
             >
-              <span>Run Ward Diagnosis</span>
-              <svg className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
+              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                <polyline points="10 17 15 12 10 7" />
+                <line x1="15" y1="12" x2="3" y2="12" />
               </svg>
-            </GatewayTransitionLink>
+              <span>Sign In to Platform</span>
+            </Link>
 
-            <GatewayTransitionLink
-              href="/hub"
-              className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl border border-[#E0D5C7] bg-white hover:bg-[#FAF7F2] hover:border-[#D5C6B3] hover:-translate-y-0.5 active:translate-y-0 px-8 py-3.5 text-sm font-semibold text-[#3A2F25] transition-all duration-200 shadow-sm cursor-pointer"
+            <a
+              href="#infrastructure"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl border border-[#E0D5C7] bg-white hover:bg-[#FAF7F2] hover:border-[#D5C6B3] hover:-translate-y-0.5 active:translate-y-0 px-8 py-4 text-base font-semibold text-[#3A2F25] transition-all duration-200 shadow-sm cursor-pointer"
             >
-              <span>Explore Feature Hub</span>
+              <span>Explore Drainage Anatomy</span>
               <svg className="h-4 w-4 text-terracotta-600 transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7" />
+                <path d="M19 9l-7 7-7-7" />
               </svg>
-            </GatewayTransitionLink>
+            </a>
           </div>
         </div>
 
@@ -177,7 +178,7 @@ export default function LandingPage() {
               <span>Reservoirs: Red Hills &amp; Chembarambakkam Lake</span>
             </div>
             <Link
-              href="/investigations/new"
+              href="/auth?next=%2Finvestigations%2Fnew"
               className="font-bold text-terracotta-700 hover:text-terracotta-800 flex items-center gap-1.5 transition-colors self-start md:self-auto"
             >
               <span>Explore Ward Hotspots on Map →</span>
@@ -428,10 +429,10 @@ export default function LandingPage() {
               </div>
 
               <Link
-                href={`/investigations/new?pair=${activeScenario.id}`}
+                href={`/auth?next=${encodeURIComponent(`/investigations/new?pair=${activeScenario.id}`)}`}
                 className="w-full rounded-2xl bg-white border border-[#E0D5C7] hover:border-terracotta-400 hover:bg-terracotta-50 hover:shadow-warm px-5 py-3.5 text-xs font-bold text-[#221B15] flex items-center justify-center gap-2 transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer shadow-sm group"
               >
-                <span>Run Ward Diagnosis for This Pair</span>
+                <span>Sign In &amp; Run Ward Diagnosis for This Pair</span>
                 <svg className="h-4 w-4 text-terracotta-600 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <line x1="5" y1="12" x2="19" y2="12" />
                   <polyline points="12 5 19 12 12 19" />
@@ -508,20 +509,21 @@ export default function LandingPage() {
           </p>
           <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="/investigations/new"
+              href="/auth"
               className="inline-flex items-center gap-2.5 rounded-2xl bg-terracotta-600 px-9 py-4 text-sm font-bold text-white shadow-warm hover:bg-terracotta-700 hover:shadow-lift hover:scale-[1.02] active:scale-[0.99] transition-all duration-300 transform cursor-pointer group"
             >
-              <span>Run Ward Diagnosis</span>
-              <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
+              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                <polyline points="10 17 15 12 10 7" />
+                <line x1="15" y1="12" x2="3" y2="12" />
               </svg>
+              <span>Sign In to Technical Platform</span>
             </Link>
             <Link
-              href="/hub"
+              href="/auth?next=%2Fhub"
               className="inline-flex items-center gap-2 rounded-2xl border border-[#E0D5C7] bg-white hover:bg-[#FAF7F2] hover:border-terracotta-400 hover:scale-[1.02] active:scale-[0.99] px-8 py-4 text-sm font-bold text-[#3A2F25] transition-all duration-300 shadow-sm cursor-pointer"
             >
-              <span>Open Feature Hub</span>
+              <span>Access Feature Hub</span>
             </Link>
           </div>
         </div>

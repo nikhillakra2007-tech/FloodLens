@@ -221,10 +221,10 @@ export default function FeatureHubPage() {
           </button>
 
           <Link
-            href="/"
-            className="inline-flex items-center justify-center gap-2 text-xs font-bold text-[#554638] hover:text-[#221B15] bg-[#F5EFE6] px-4 py-2.5 rounded-xl transition-all"
+            href="/investigations/new"
+            className="inline-flex items-center justify-center gap-2 text-xs font-bold text-white bg-terracotta-600 hover:bg-terracotta-700 px-4 py-2.5 rounded-xl transition-all shadow-warm"
           >
-            <span>← Landing Overview</span>
+            <span>Diagnostic Console →</span>
           </Link>
         </div>
       </div>
