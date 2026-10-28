@@ -156,7 +156,7 @@ export default function PhoneOtpForm({ onSuccess, onCancel }: PhoneOtpFormProps)
       {step === "phone" ? (
         <form onSubmit={handlePhoneSubmit} className="space-y-5">
           <div className="space-y-1">
-            <h3 className="font-serif text-lg font-bold text-[#221B15]">
+            <h3 className="font-bold text-lg text-[#221B15] tracking-tight">
               Indian Mobile Number Authentication
             </h3>
             <p className="text-xs text-[#554638]">
@@ -236,7 +236,7 @@ export default function PhoneOtpForm({ onSuccess, onCancel }: PhoneOtpFormProps)
       ) : (
         <form onSubmit={handleOtpSubmit} className="space-y-5">
           <div className="space-y-1">
-            <h3 className="font-serif text-lg font-bold text-[#221B15]">
+            <h3 className="font-bold text-lg text-[#221B15] tracking-tight">
               Enter 6-Digit Verification Code
             </h3>
             <p className="text-xs text-[#554638]">
@@ -257,7 +257,7 @@ export default function PhoneOtpForm({ onSuccess, onCancel }: PhoneOtpFormProps)
             <label className="text-xs font-bold uppercase tracking-wider text-[#756350]">
               Verification Code (OTP)
             </label>
-            <div className="flex items-center justify-between gap-2 sm:gap-3">
+            <div className="flex items-center justify-between gap-1.5 sm:gap-3">
               {otpDigits.map((digit, index) => (
                 <input
                   key={index}
@@ -275,7 +275,7 @@ export default function PhoneOtpForm({ onSuccess, onCancel }: PhoneOtpFormProps)
                   autoComplete={index === 0 ? "one-time-code" : "off"}
                   aria-label={`Digit ${index + 1} of 6`}
                   disabled={isLoading}
-                  className="h-12 w-11 sm:w-12 text-center font-mono text-lg font-bold text-[#221B15] border border-[#E0D5C7] rounded-xl focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 bg-white transition-all"
+                  className="h-11 w-9 sm:h-12 sm:w-12 text-center font-mono text-base sm:text-lg font-bold text-[#221B15] border border-[#E0D5C7] rounded-xl focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 bg-white transition-all"
                 />
               ))}
             </div>

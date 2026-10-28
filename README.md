@@ -10,14 +10,17 @@ Conventional flood maps show static water depths after disaster strikes, treatin
 
 ---
 
-## 🌐 Live Deployments & Instant Demo Access
+## 🌐 Live Deployments & Key Application Routes
 
-| Environment / Service | Direct Production URL | Description |
+| Environment / Route | Direct Production URL | Functional Description |
 | :--- | :--- | :--- |
 | **Production Web App** | [https://floodlens-app.vercel.app](https://floodlens-app.vercel.app) | Complete Next.js 14 hydrological diagnosis platform |
-| **Authentication Gateway** | [https://floodlens-app.vercel.app/auth](https://floodlens-app.vercel.app/auth) | Secure gateway with Google OAuth, Indian Mobile OTP, and Instant Demo Access |
-| **Secondary Production Alias** | [https://floodlens-chennai.vercel.app](https://floodlens-chennai.vercel.app) | High-availability production domain alias |
-| **Feature Hub (Authenticated)** | [https://floodlens-app.vercel.app/hub](https://floodlens-app.vercel.app/hub) | Diagnostic catalog, ward comparisons, and simulator |
+| **Authentication Gateway** | [https://floodlens-app.vercel.app/auth](https://floodlens-app.vercel.app/auth) | Google OAuth, Indian Phone (+91) OTP, and Instant Demo Access |
+| **Feature Hub (Authenticated)** | [https://floodlens-app.vercel.app/hub](https://floodlens-app.vercel.app/hub) | Role-tailored resident portal and engineering workspace catalog |
+| **Diagnostic Catchment Console** | [https://floodlens-app.vercel.app/investigations/new](https://floodlens-app.vercel.app/investigations/new) | Interactive catchment selection matrix & pipeline trigger |
+| **Differential Twin Simulator** | [https://floodlens-app.vercel.app/simulator](https://floodlens-app.vercel.app/simulator) | Calibrated comparative urban twin scenario workbench |
+| **Causal DAG & Flowchart** | [https://floodlens-app.vercel.app/flowchart](https://floodlens-app.vercel.app/flowchart) | Interactive physical propagation network with real-time sliders |
+| **Subsurface Conduit Anatomy** | [https://floodlens-app.vercel.app/infrastructure](https://floodlens-app.vercel.app/infrastructure) | 3D subterranean cross-section & sediment obstruction viewer |
 
 ### ⚡ Instant Demo Accounts (Zero Setup Required)
 Anyone can test the complete system with one click directly on the [Auth Page](https://floodlens-app.vercel.app/auth):
@@ -26,17 +29,64 @@ Anyone can test the complete system with one click directly on the [Auth Page](h
 
 ---
 
+## 👥 Dual Experience Architecture: Technical Mode vs. Citizen Mode
+
+FloodLens serves two critical stakeholders with tailored interfaces while maintaining a single, unified analytical truth:
+
+```mermaid
+flowchart TD
+    User["Authenticated User Session"] --> ModeSwitch{"Experience Mode"}
+    
+    ModeSwitch -->|"Citizen Mode (Residents & Public)"| Cit["Citizen Experience\n• Plain-Language Diagnosis\n• Ward Status & Risk Advisory\n• Household Safety Precautions\n• GCC Emergency Helpline (1913)\n• Non-Intimidating Community Map"]
+    
+    ModeSwitch -->|"Technical Mode (Engineers & Planners)"| Tech["Technical Engineering Workspace\n• Full Hydro-Mechanics Formulary\n• Manning Surcharge Calculations\n• Rational Peak Runoff (Q = CIA)\n• Gradually Varied Flow (GVF dy/dx)\n• 5-Tab Comprehensive Investigation Lab\n• Bounded Counterfactual Simulator"]
+    
+    Cit <-->|"Instant Seamless Toggle"| Tech
+```
+
+### A. Technical Mode (Hydrological Engineering Workspace)
+Engineered for municipal civil engineers, disaster response coordinators, urban planners, and hackathon evaluators who require defensible physical evidence:
+- **Mathematical Formulary Strip**: Exposes exact hydrodynamic calculations ($Q_{peak} = C \cdot I \cdot A$, Manning's gravity capacity, backwater differential grade line).
+- **5-Tab Comprehensive Investigation Lab**:
+  1. *Simulation Lab*: Bounded counterfactual parameter sliders (desilting percentage, conduit diameter enlargement, impervious reduction).
+  2. *Causal DAG & Ranking*: Directed acyclic graph isolating causal weights from meteorological noise.
+  3. *Geospatial Basemap*: Monitored catchment polygons, inundation hotspots, and SWD grid layers.
+  4. *Evidence Registry*: Diagrammatic audit trail categorizing `FACT` (sensor/DEM observations), `SUPPORTED` (calibrated models), and `CAUSAL HYPOTHESIS` (counterfactual derivations).
+  5. *Defensibility Audit*: Historical validation against prior Chennai cyclonic events (2015, 2021, 2023) and regulatory gate checks.
+
+### B. Citizen Mode (Calm, Actionable Resident Portal)
+Engineered for Chennai residents, ward council members, and community observers who need immediate clarity without intimidating equations:
+- **Plain-Language Causality**: Clear explanations of why water accumulated (e.g. *"Stormwater backed up from downstream canals into the local bowl-like elevation depression; neighbor ward stayed dry due to steeper natural slope"*).
+- **Localized Ward Risk Status**: Specific to their ward (Velachery Ward 178, Anna Nagar Ward 102, T. Nagar Ward 104, Adyar Ward 103).
+- **Immediate Resident Actions**: Actionable guidelines (elevate ground-floor appliances >30cm, avoid low-lying canal underpasses, park on designated elevated ramps).
+- **Verified Civil Emergency Helplines**: GCC Disaster Management `1913`, TNEB Power Outage & Emergency `94987 94987`, Police/Disaster `112`.
+- **On-Demand Engineering Unlock**: A single button allows residents to view underlying equations and technical simulations whenever desired.
+
+---
+
+## 🎨 UI/UX Redesign & Responsive Architecture
+
+The platform underwent a comprehensive redesign to eliminate generic SaaS aesthetics and deliver a peer-review-grade geospatial intelligence workspace:
+1. **Restrained Technical Typography**: Inter font pairing for razor-sharp headings and narrative readability; JetBrains Mono for coordinates, hydraulic parameters, and numerical telemetry.
+2. **Elimination of Map Overlap Defects**: Moved floating telemetry chips into dedicated, responsive status rows beneath map/satellite visual cards, preventing content collisions across all screen widths.
+3. **Analytical Surface Treatments**: Introduced directional elevation shadows (`0 4px 20px -2px rgba(45,35,26,0.06)`), distinct failure vs. resilience indicator rails, and tinted data modules.
+4. **Mobile Responsiveness (320px – 1440px+)**:
+   - Zero unintended document horizontal scrolling.
+   - Contained horizontal panning for wide technical diagrams (`min-w-[1200px]`).
+   - Accessible navigation slide drawer with body scroll locking and backdrop blur.
+   - Mobile-optimized inputs (`text-base sm:text-sm`) preventing iOS auto-zoom on focus.
+
+---
+
 ## 📑 Table of Contents
 
-- [Live Deployments & Instant Demo Access](#-live-deployments--instant-demo-access)
+- [Live Deployments & Key Application Routes](#-live-deployments--key-application-routes)
+- [Dual Experience Architecture: Technical Mode vs. Citizen Mode](#-dual-experience-architecture-technical-mode-vs-citizen-mode)
+- [UI/UX Redesign & Responsive Architecture](#-uiux-redesign--responsive-architecture)
 - [Visual Platform Tour](#-visual-platform-tour)
 - [How It Works: The Twin Catchment Thesis](#-how-it-works-the-twin-catchment-thesis)
 - [System Architecture](#️-system-architecture)
 - [AWS Cloud Infrastructure & Services](#-aws-cloud-infrastructure--services)
-  - [AWS Architecture Overview](#aws-architecture-overview)
-  - [Detailed AWS Services Breakdown](#detailed-aws-services-breakdown)
-  - [Hybrid Operating Model: Cloud vs. Local](#hybrid-operating-model-cloud-vs-local)
-  - [Automated AWS Deployment Pipeline](#automated-aws-deployment-pipeline)
 - [Hydrological Science & Causal Inference](#-hydrological-science--causal-inference)
 - [Repository Organization](#-repository-organization)
 - [Test Suite & Verification](#-test-suite--verification)

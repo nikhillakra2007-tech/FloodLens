@@ -96,7 +96,7 @@ export default function InfrastructurePage() {
           </p>
         </div>
 
-        <div className="relative overflow-hidden rounded-3xl border border-[#E8DFD3] bg-white shadow-lift">
+        <div className="rounded-3xl border border-[#E8DFD3] bg-white shadow-lift overflow-hidden">
           <div className="relative aspect-[16/9] w-full overflow-hidden">
             <img
               src="/images/chennai-catchment-map.jpg"
@@ -104,31 +104,31 @@ export default function InfrastructurePage() {
               className="h-full w-full object-cover img-zoom"
             />
             {/* Architectural overlay badge top-left */}
-            <div className="absolute top-5 left-5 rounded-2xl border border-[#E8DFD3]/80 bg-white/95 px-4 py-2.5 shadow-card backdrop-blur-md space-y-0.5">
+            <div className="absolute top-4 left-4 rounded-xl border border-[#E8DFD3]/90 bg-white/95 px-3.5 py-2 shadow-xs backdrop-blur-md space-y-0.5">
               <span className="text-[10px] font-bold uppercase tracking-wider text-terracotta-700 block">
                 Topographic Survey & Drainage Basin Datum
               </span>
-              <span className="font-serif font-bold text-sm text-[#221B15] block">
+              <span className="font-bold text-xs sm:text-sm text-[#221B15] block">
                 Greater Chennai Corporation Hydrological Grid
               </span>
             </div>
+          </div>
 
-            {/* Telemetry chips bottom */}
-            <div className="absolute bottom-5 left-5 right-5 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#E8DFD3]/90 bg-white/95 p-4 shadow-card backdrop-blur-md text-xs font-semibold">
-              <div className="flex items-center gap-2 text-[#221B15]">
-                <span className="h-2.5 w-2.5 rounded-full bg-terracotta-600" />
-                <span>Major River Systems: Cooum, Adyar & Buckingham Canal</span>
-              </div>
-              <div className="flex items-center gap-2 text-[#554638]">
-                <span>Reservoirs: Red Hills & Chembarambakkam Lake</span>
-              </div>
-              <Link
-                href="/investigations/new"
-                className="font-bold text-terracotta-700 hover:text-terracotta-800 flex items-center gap-1.5"
-              >
-                <span>Launch Map Investigation →</span>
-              </Link>
+          {/* Dedicated Telemetry status bar - Eliminates overlap at all screen sizes */}
+          <div className="border-t border-[#E8DFD3] bg-[#FAF7F2] p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs font-semibold">
+            <div className="flex items-center gap-2 text-[#221B15]">
+              <span className="h-2.5 w-2.5 rounded-full bg-terracotta-600 shrink-0" />
+              <span>Major River Systems: Cooum, Adyar &amp; Buckingham Canal</span>
             </div>
+            <div className="flex items-center gap-2 text-[#554638]">
+              <span>Reservoirs: Red Hills &amp; Chembarambakkam Lake</span>
+            </div>
+            <Link
+              href="/investigations/new"
+              className="font-bold text-terracotta-700 hover:text-terracotta-800 flex items-center gap-1.5 transition-colors"
+            >
+              <span>Launch Map Investigation →</span>
+            </Link>
           </div>
         </div>
 

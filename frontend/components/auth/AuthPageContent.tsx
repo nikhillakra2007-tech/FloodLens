@@ -155,13 +155,13 @@ export default function AuthPageContent() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center px-4 py-8 sm:px-6 lg:px-8">
+    <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center px-3 py-6 sm:px-6 sm:py-10 lg:px-8">
       <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 rounded-3xl border border-[#E8DFD3] bg-white shadow-lift overflow-hidden">
         
         {/* ============================================================== */}
         {/* LEFT PANEL: FLOODLENS SCIENTIFIC IDENTITY AND CONTEXT (5 cols) */}
         {/* ============================================================== */}
-        <div className="lg:col-span-5 bg-gradient-to-br from-[#FAF7F2] via-[#F5EFE6] to-[#EFE6D8] p-8 sm:p-12 border-b lg:border-b-0 lg:border-r border-[#E8DFD3] flex flex-col justify-between relative overflow-hidden">
+        <div className="lg:col-span-5 bg-gradient-to-br from-[#FAF7F2] via-[#F5EFE6] to-[#EFE6D8] p-6 sm:p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-[#E8DFD3] flex flex-col justify-between relative overflow-hidden">
           
           {/* Subtle Topographic & Hydrological Vector Art (SVG) */}
           <div className="absolute inset-0 opacity-15 pointer-events-none select-none overflow-hidden" aria-hidden="true">
@@ -226,7 +226,7 @@ export default function AuthPageContent() {
           </div>
 
           {/* Top: Brand Header */}
-          <div className="relative z-10 space-y-8">
+          <div className="relative z-10 space-y-6 sm:space-y-8">
             <Link href="/" className="inline-flex items-center gap-3.5 group">
               <div className="relative flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-terracotta-500 to-terracotta-700 p-0.5 shadow-md shadow-terracotta-600/20 group-hover:scale-105 transition-all">
                 <div className="flex h-full w-full items-center justify-center rounded-[14px] bg-[#FAF7F2]">
@@ -244,8 +244,8 @@ export default function AuthPageContent() {
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-serif text-2xl font-bold tracking-tight text-[#221B15]">
-                    Flood<span className="text-terracotta-600 italic">Lens</span>
+                  <span className="font-bold text-2xl tracking-tight text-[#221B15]">
+                    Flood<span className="text-terracotta-600">Lens</span>
                   </span>
                   <span className="rounded-full border border-terracotta-200 bg-terracotta-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-terracotta-700">
                     Chennai
@@ -257,13 +257,13 @@ export default function AuthPageContent() {
               </div>
             </Link>
 
-            <div className="space-y-4 pt-4">
+            <div className="space-y-3 sm:space-y-4 pt-2 sm:pt-4">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-terracotta-200 bg-white/80 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-terracotta-700 shadow-xs backdrop-blur-sm">
                 <span className="h-1.5 w-1.5 rounded-full bg-terracotta-600" />
                 <span>Secure Authentication Gateway</span>
               </span>
 
-              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#221B15] leading-tight">
+              <h2 className="font-bold text-2xl sm:text-3xl lg:text-4xl text-[#221B15] leading-tight tracking-tight">
                 Understand the forces behind every flood.
               </h2>
 
@@ -343,7 +343,7 @@ export default function AuthPageContent() {
             )}
 
             {/* Header: Mode Switcher Tabs */}
-            <div className="flex items-center justify-between border-b border-[#E8DFD3] pb-4">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E8DFD3] pb-4">
               <div className="flex items-center gap-2">
                 <button
                   type="button"
@@ -353,7 +353,7 @@ export default function AuthPageContent() {
                     setFormError(null);
                   }}
                   className={clsx(
-                    "px-4 py-2 text-xs font-bold rounded-xl transition-all cursor-pointer",
+                    "px-3.5 sm:px-4 py-2 text-xs font-bold rounded-xl transition-all cursor-pointer",
                     authMode === "login" && !showPhoneOtp
                       ? "bg-terracotta-600 text-white shadow-xs"
                       : "text-[#756350] hover:text-[#221B15] hover:bg-[#FAF7F2]"
@@ -369,7 +369,7 @@ export default function AuthPageContent() {
                     setFormError(null);
                   }}
                   className={clsx(
-                    "px-4 py-2 text-xs font-bold rounded-xl transition-all cursor-pointer",
+                    "px-3.5 sm:px-4 py-2 text-xs font-bold rounded-xl transition-all cursor-pointer",
                     authMode === "signup" && !showPhoneOtp
                       ? "bg-terracotta-600 text-white shadow-xs"
                       : "text-[#756350] hover:text-[#221B15] hover:bg-[#FAF7F2]"
@@ -580,7 +580,7 @@ export default function AuthPageContent() {
                         onChange={(e) => setLoginEmail(e.target.value)}
                         required
                         disabled={isSubmitting}
-                        className="w-full px-4 py-3 text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all"
+                        className="w-full px-4 py-3 text-base sm:text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all bg-white"
                       />
                     </div>
 
@@ -609,7 +609,7 @@ export default function AuthPageContent() {
                           onChange={(e) => setLoginPassword(e.target.value)}
                           required
                           disabled={isSubmitting}
-                          className="w-full px-4 py-3 pr-11 text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all"
+                          className="w-full px-4 py-3 pr-11 text-base sm:text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all bg-white"
                         />
                         <button
                           type="button"
@@ -668,7 +668,7 @@ export default function AuthPageContent() {
                         onChange={(e) => setSignUpName(e.target.value)}
                         required
                         disabled={isSubmitting}
-                        className="w-full px-4 py-3 text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all"
+                        className="w-full px-4 py-3 text-base sm:text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all bg-white"
                       />
                     </div>
 
@@ -688,7 +688,7 @@ export default function AuthPageContent() {
                         onChange={(e) => setSignUpEmail(e.target.value)}
                         required
                         disabled={isSubmitting}
-                        className="w-full px-4 py-3 text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all"
+                        className="w-full px-4 py-3 text-base sm:text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all bg-white"
                       />
                     </div>
 
@@ -710,7 +710,7 @@ export default function AuthPageContent() {
                             onChange={(e) => setSignUpPassword(e.target.value)}
                             required
                             disabled={isSubmitting}
-                            className="w-full px-4 py-3 pr-10 text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all"
+                            className="w-full px-4 py-3 pr-10 text-base sm:text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all bg-white"
                           />
                           <button
                             type="button"
@@ -749,7 +749,7 @@ export default function AuthPageContent() {
                           onChange={(e) => setSignUpConfirmPassword(e.target.value)}
                           required
                           disabled={isSubmitting}
-                          className="w-full px-4 py-3 text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all"
+                          className="w-full px-4 py-3 text-base sm:text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all bg-white"
                         />
                       </div>
                     </div>

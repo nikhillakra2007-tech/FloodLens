@@ -7,9 +7,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['"Fraunces"', '"Playfair Display"', 'Georgia', 'serif'],
-        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'monospace'],
+        sans: ['var(--font-sans)', 'Inter', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+        mono: ['var(--font-mono)', '"JetBrains Mono"', 'ui-monospace', 'monospace'],
+        serif: ['var(--font-sans)', 'Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
         earth: {
@@ -97,9 +97,10 @@ module.exports = {
       },
       boxShadow: {
         subtle: "0 1px 3px 0 rgba(34, 27, 21, 0.04), 0 1px 2px -1px rgba(34, 27, 21, 0.04)",
-        card: "0 4px 20px -2px rgba(85, 70, 56, 0.06), 0 2px 6px -1px rgba(85, 70, 56, 0.03)",
-        warm: "0 10px 30px -4px rgba(200, 90, 23, 0.12), 0 4px 10px -2px rgba(34, 27, 21, 0.05)",
-        lift: "0 20px 40px -8px rgba(58, 47, 37, 0.12)",
+        card: "0 2px 12px -2px rgba(85, 70, 56, 0.06), 0 1px 4px -1px rgba(85, 70, 56, 0.03)",
+        warm: "0 8px 24px -4px rgba(200, 90, 23, 0.12), 0 2px 8px -2px rgba(34, 27, 21, 0.04)",
+        lift: "0 16px 36px -6px rgba(58, 47, 37, 0.10)",
+        panel: "0 1px 3px rgba(58, 47, 37, 0.05), 0 8px 20px -4px rgba(58, 47, 37, 0.08)",
       },
       transitionTimingFunction: {
         smooth: "cubic-bezier(0.16, 1, 0.3, 1)",

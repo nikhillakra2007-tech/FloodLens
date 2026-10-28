@@ -80,27 +80,27 @@ export default function SimulatorPage() {
   return (
     <div className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8 animate-fadeIn">
       {/* Top Breadcrumb & Actions */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-xs font-bold text-[#554638] hover:text-terracotta-700 bg-white border border-[#E0D5C7] rounded-xl px-4 py-2 transition-all shadow-sm hover:shadow-warm"
+          className="inline-flex items-center gap-2 text-xs font-bold text-[#554638] hover:text-terracotta-700 bg-white border border-[#E0D5C7] rounded-xl px-3.5 sm:px-4 py-2 transition-all shadow-sm hover:shadow-warm"
         >
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          <span>Back to Portal Hub</span>
+          <span>Back to Overview</span>
         </Link>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Link
             href="/flowchart"
-            className="text-xs font-bold text-[#756350] hover:text-[#221B15] bg-[#F5EFE6] px-3.5 py-1.5 rounded-xl transition-all"
+            className="text-xs font-bold text-[#756350] hover:text-[#221B15] bg-[#F5EFE6] px-3 sm:px-3.5 py-1.5 rounded-xl transition-all"
           >
             ← Causal Flowchart
           </Link>
           <Link
             href="/investigations/new"
-            className="text-xs font-bold text-white bg-terracotta-600 hover:bg-terracotta-700 px-4 py-1.5 rounded-xl transition-all shadow-warm"
+            className="text-xs font-bold text-white bg-terracotta-600 hover:bg-terracotta-700 px-3.5 sm:px-4 py-1.5 rounded-xl transition-all shadow-warm"
           >
             Launch Investigation →
           </Link>
@@ -114,7 +114,7 @@ export default function SimulatorPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-terracotta-200 bg-terracotta-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-terracotta-800">
               Differential Urban Twin Catchment Simulator
             </div>
-            <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#221B15]">
+            <h1 className="font-bold text-2xl sm:text-3xl lg:text-4xl text-[#221B15] tracking-tight">
               Differential Diagnosis in Action
             </h1>
             <p className="text-sm text-[#554638] leading-relaxed">
@@ -154,7 +154,7 @@ export default function SimulatorPage() {
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-xs uppercase tracking-wider font-bold text-[#756350]">Comparative Axis</div>
-                <div className="font-serif text-2xl sm:text-3xl font-bold text-[#221B15] mt-1">
+                <div className="font-bold text-2xl sm:text-3xl text-[#221B15] tracking-tight mt-1">
                   <span className="text-[#C23E2A]">{activeScenario.nameA}</span> ({activeScenario.wardA}){" "}
                   <span className="text-[#9E8B75] font-normal text-lg italic">vs</span>{" "}
                   <span className="text-[#3B8352]">{activeScenario.nameB}</span> ({activeScenario.wardB})

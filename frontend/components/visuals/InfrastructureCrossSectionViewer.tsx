@@ -457,26 +457,54 @@ export default function InfrastructureCrossSectionViewer() {
           </div>
         </div>
 
-        {/* Summary comparison boxes */}
+        {/* Structured Analytical Panels: Varied component treatments with directional depth */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-          <div className="rounded-2xl border border-red-200 bg-red-50/60 p-5 space-y-2">
-            <div className="flex items-center gap-2 text-[#C23E2A] font-bold text-sm">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#C23E2A]" />
-              <span>Block A Failure: Stormwater Backup (Bottleneck)</span>
+          {/* Block A: Failure & Hydraulic Inversion Panel */}
+          <div className="rounded-2xl border border-red-200/90 bg-gradient-to-br from-white via-red-50/30 to-red-50/70 p-6 space-y-3.5 shadow-sm hover:shadow-warm transition-all duration-300 relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-red-500" />
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2 text-[#C23E2A] font-bold text-sm tracking-tight">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-red-100 text-xs text-red-700">!</span>
+                <span>Block A Failure: Underground Choke &amp; Backwater Surge</span>
+              </div>
+              <span className="rounded-full bg-red-100 border border-red-200 px-2 py-0.5 text-[10px] font-bold text-red-800 uppercase tracking-wider font-mono">
+                Surcharged
+              </span>
             </div>
-            <p className="text-xs text-[#554638] leading-relaxed">
-              Debris/silt accumulation in underground conduit pipes causes upstream water to push upward through catch basins, flooding streets and basements despite standard rainfall.
+
+            <p className="text-xs sm:text-sm text-[#554638] leading-relaxed">
+              Debris and hardened silt sedimentation inside underground conduits cut open cross-sectional volume by over 50%. Under peak rainfall, water cannot enter the drain trunk—instead, pressurized backwater surges upward out of catch basin grates into street gutters and residential basements.
             </p>
+
+            <div className="pt-2 border-t border-red-100/80 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono">
+              <span className="text-red-700 font-bold">58% Silt Bed Depth</span>
+              <span className="text-[#756350]">Backwater Head: +1.4m</span>
+              <span className="text-red-800 font-semibold">Q_cap &lt; 3.8 m³/s</span>
+            </div>
           </div>
 
-          <div className="rounded-2xl border border-emerald-200 bg-emerald-50/60 p-5 space-y-2">
-            <div className="flex items-center gap-2 text-[#3B8352] font-bold text-sm">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#3B8352]" />
-              <span>Block B Resilience: Unobstructed Gravity Flow</span>
+          {/* Block B: Resilient Twin Catchment Panel */}
+          <div className="rounded-2xl border border-emerald-200/90 bg-gradient-to-br from-white via-emerald-50/30 to-emerald-50/70 p-6 space-y-3.5 shadow-sm hover:shadow-warm transition-all duration-300 relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-emerald-500" />
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2 text-[#3B8352] font-bold text-sm tracking-tight">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-100 text-xs text-emerald-700">✓</span>
+                <span>Block B Resilience: Unobstructed Gravity Fall</span>
+              </div>
+              <span className="rounded-full bg-emerald-100 border border-emerald-200 px-2 py-0.5 text-[10px] font-bold text-emerald-800 uppercase tracking-wider font-mono">
+                Resilient
+              </span>
             </div>
-            <p className="text-xs text-[#554638] leading-relaxed">
-              A 1.5% elevation slope coupled with unclogged conduit cross-section allows storm intake to discharge directly to trunk canals without surface ponding.
+
+            <p className="text-xs sm:text-sm text-[#554638] leading-relaxed">
+              Maintained conduit trunks with a 1.5% positive bed gradient allow peak rainfall to achieve self-cleansing gravitational velocity (&gt;1.5 m/s). Water discharges directly into receiving canals without upstream hydraulic resistance or surface pooling.
             </p>
+
+            <div className="pt-2 border-t border-emerald-100/80 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono">
+              <span className="text-emerald-700 font-bold">100% Invert Clearance</span>
+              <span className="text-[#756350]">Bed Gradient: +1.5%</span>
+              <span className="text-emerald-800 font-semibold">Q_cap &gt; 11.2 m³/s</span>
+            </div>
           </div>
         </div>
       </div>

@@ -77,7 +77,7 @@ export default function ExperienceModeSelector({
             </div>
 
             <div>
-              <h4 className="font-serif text-base font-bold text-[#221B15]">
+              <h4 className="font-bold text-base text-[#221B15]">
                 Citizen
               </h4>
               <p className="text-xs text-[#554638] mt-1 leading-relaxed">
@@ -149,7 +149,7 @@ export default function ExperienceModeSelector({
             </div>
 
             <div>
-              <h4 className="font-serif text-base font-bold text-[#221B15]">
+              <h4 className="font-bold text-base text-[#221B15]">
                 Technical
               </h4>
               <p className="text-xs text-[#554638] mt-1 leading-relaxed">

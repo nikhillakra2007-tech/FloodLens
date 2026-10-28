@@ -104,27 +104,33 @@ export default function LandingPage() {
       {/* 1. HERO SECTION WITH SATELLITE DEM GRAPHIC */}
       <section id="overview" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12 scroll-mt-28">
         <div className="flex flex-col items-center text-center space-y-6 max-w-4xl mx-auto">
-          {/* Headline with FadeInUp */}
-          <h1 className="animate-fadeInUp stagger-1 font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#221B15] leading-[1.08] transition-all">
+          {/* Scientific Category Pill */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-terracotta-200 bg-terracotta-50 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-terracotta-800 shadow-2xs">
+            <span className="h-2 w-2 rounded-full bg-terracotta-600 animate-pulse" />
+            <span>Differential Urban Hydrological Intelligence</span>
+          </div>
+
+          {/* Headline with Responsive Clamp (40-56px target) */}
+          <h1 className="animate-fadeInUp font-bold text-3xl sm:text-5xl lg:text-6xl tracking-tight text-[#221B15] leading-[1.12]">
             Why did your street flood when the{" "}
-            <span className="italic text-terracotta-600 font-normal hover:text-terracotta-700 transition-colors duration-300">
+            <span className="text-terracotta-600 font-bold hover:text-terracotta-700 transition-colors duration-200">
               next ward didn&apos;t?
             </span>
           </h1>
 
-          {/* Subtitle with FadeInUp */}
-          <p className="animate-fadeInUp stagger-2 text-base sm:text-xl text-[#554638] leading-relaxed max-w-3xl font-medium">
+          {/* Subtitle (16-18px readable target) */}
+          <p className="animate-fadeInUp text-base sm:text-lg text-[#554638] leading-relaxed max-w-3xl font-normal">
             Conventional flood maps only show water depth. <strong className="text-[#221B15] font-semibold">FloodLens</strong> diagnoses the physical failure mechanism—pairing inundated catchments with resilient twin wards across elevation gradients, stormwater drain conduits, and imperviousness.
           </p>
 
-          {/* CTAs with Smooth Gateway Transitions */}
-          <div className="animate-fadeInUp stagger-3 flex flex-col sm:flex-row items-center gap-4 pt-2 w-full sm:w-auto">
+          {/* CTAs with Clear Visual Hierarchy */}
+          <div className="animate-fadeInUp flex flex-col sm:flex-row items-center gap-4 pt-2 w-full sm:w-auto">
             <GatewayTransitionLink
               href="/investigations/new"
-              className="w-full sm:w-auto flex items-center justify-center gap-2.5 rounded-2xl bg-terracotta-600 px-8 py-4 text-sm font-bold text-white shadow-warm hover:bg-terracotta-700 hover:shadow-lift hover:scale-[1.02] active:scale-[0.99] transition-all duration-300 transform cursor-pointer"
+              className="w-full sm:w-auto flex items-center justify-center gap-2.5 rounded-xl bg-terracotta-600 px-8 py-3.5 text-sm font-bold text-white shadow-warm hover:bg-terracotta-700 hover:shadow-lift hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
             >
               <span>Run Ward Diagnosis</span>
-              <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <svg className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
               </svg>
@@ -132,18 +138,18 @@ export default function LandingPage() {
 
             <GatewayTransitionLink
               href="/hub"
-              className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl border border-[#E0D5C7] bg-white hover:bg-[#FAF7F2] hover:border-terracotta-400 hover:scale-[1.02] active:scale-[0.99] px-8 py-4 text-sm font-bold text-[#3A2F25] transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl border border-[#E0D5C7] bg-white hover:bg-[#FAF7F2] hover:border-[#D5C6B3] hover:-translate-y-0.5 active:translate-y-0 px-8 py-3.5 text-sm font-semibold text-[#3A2F25] transition-all duration-200 shadow-sm cursor-pointer"
             >
               <span>Explore Feature Hub</span>
-              <svg className="h-4 w-4 text-terracotta-600 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg className="h-4 w-4 text-terracotta-600 transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </GatewayTransitionLink>
           </div>
         </div>
 
-        {/* HERO SATELLITE DEM IMAGE BANNER WITH OVERLAYS */}
-        <div className="relative overflow-hidden rounded-3xl border border-[#E8DFD3] bg-white shadow-lift card-hover-effect">
+        {/* HERO SATELLITE DEM IMAGE CARD WITH DEDICATED STATUS BAR (ZERO OVERLAPPING) */}
+        <div className="rounded-3xl border border-[#E8DFD3] bg-white shadow-lift overflow-hidden">
           <div className="relative aspect-[16/9] w-full overflow-hidden group">
             <img
               src="/images/chennai-catchment-map.jpg"
@@ -151,54 +157,61 @@ export default function LandingPage() {
               className="h-full w-full object-cover img-zoom"
             />
             {/* Architectural overlay badge top-left */}
-            <div className="absolute top-5 left-5 rounded-2xl border border-[#E8DFD3]/80 bg-white/95 px-4 py-2.5 shadow-card backdrop-blur-md space-y-0.5 hover:bg-white transition-all duration-300">
+            <div className="absolute top-4 left-4 rounded-xl border border-[#E8DFD3]/90 bg-white/95 px-3.5 py-2 shadow-xs backdrop-blur-md space-y-0.5">
               <span className="text-[10px] font-bold uppercase tracking-wider text-terracotta-700 block">
-                Topographic Survey & Drainage Basin Datum
+                Topographic Survey &amp; Drainage Basin Datum
               </span>
-              <span className="font-serif font-bold text-sm text-[#221B15] block">
+              <span className="font-bold text-xs sm:text-sm text-[#221B15] block">
                 Greater Chennai Corporation Hydrological Grid
               </span>
             </div>
+          </div>
 
-            {/* Quick telemetry chips bottom */}
-            <div className="absolute bottom-5 left-5 right-5 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#E8DFD3]/90 bg-white/95 p-4 shadow-card backdrop-blur-md text-xs font-semibold">
-              <div className="flex items-center gap-2 text-[#221B15]">
-                <span className="h-2.5 w-2.5 rounded-full bg-terracotta-600" />
-                <span>Major River Systems: Cooum, Adyar & Buckingham Canal</span>
-              </div>
-              <div className="flex items-center gap-2 text-[#554638]">
-                <span>Reservoir Buffer: Red Hills & Chembarambakkam Lake</span>
-              </div>
-              <Link
-                href="/investigations/new"
-                className="font-bold text-terracotta-700 hover:text-terracotta-800 flex items-center gap-1.5 hover:underline transition-all"
-              >
-                <span>Select Hotspot on Map →</span>
-              </Link>
+          {/* Dedicated Telemetry Status Bar - Eliminates overlap at all viewport sizes */}
+          <div className="border-t border-[#E8DFD3] bg-[#FAF7F2] p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs font-semibold">
+            <div className="flex items-center gap-2 text-[#221B15]">
+              <span className="h-2.5 w-2.5 rounded-full bg-terracotta-600 shrink-0" />
+              <span>Major River Systems: Cooum, Adyar &amp; Buckingham Canal</span>
             </div>
+            <div className="flex items-center gap-2 text-[#554638]">
+              <span>Reservoirs: Red Hills &amp; Chembarambakkam Lake</span>
+            </div>
+            <Link
+              href="/investigations/new"
+              className="font-bold text-terracotta-700 hover:text-terracotta-800 flex items-center gap-1.5 transition-colors self-start md:self-auto"
+            >
+              <span>Explore Ward Hotspots on Map →</span>
+            </Link>
           </div>
         </div>
 
-        {/* Real-time Telemetry Metrics Banner with Hover Transitions */}
+        {/* Real-time Telemetry Metrics: Varied Analytical Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="space-y-1 rounded-3xl border border-[#E8DFD3] bg-white p-6 shadow-card card-hover-effect group">
-            <div className="font-serif text-3xl font-bold text-terracotta-600 group-hover:scale-105 transition-transform duration-300 origin-left">4 Wards</div>
-            <div className="text-xs font-semibold text-[#756350]">Calibrated Urban Basins</div>
+          <div className="space-y-1.5 rounded-2xl border border-[#E5DDD0] bg-white p-5 sm:p-6 shadow-sm hover:shadow-warm transition-all duration-200">
+            <span className="text-xs font-bold uppercase tracking-wider text-terracotta-700 block">Basin Models</span>
+            <div className="font-mono text-2xl sm:text-3xl font-bold text-[#221B15]">4 Wards</div>
+            <div className="text-xs text-[#756350] font-medium">Calibrated GCC Catchments</div>
           </div>
-          <div className="space-y-1 rounded-3xl border border-[#E8DFD3] bg-white p-6 shadow-card card-hover-effect group">
-            <div className="font-serif text-3xl font-bold text-sage-600 group-hover:scale-105 transition-transform duration-300 origin-left">100+</div>
-            <div className="text-xs font-semibold text-[#756350]">2023 &amp; Recent Flood Markers</div>
+
+          <div className="space-y-1.5 rounded-2xl border border-[#E5DDD0] bg-white p-5 sm:p-6 shadow-sm hover:shadow-warm transition-all duration-200">
+            <span className="text-xs font-bold uppercase tracking-wider text-sage-700 block">Ground Truth</span>
+            <div className="font-mono text-2xl sm:text-3xl font-bold text-sage-700">100+</div>
+            <div className="text-xs text-[#756350] font-medium">Verified Inundation Markers</div>
           </div>
-          <div className="space-y-1 rounded-3xl border border-[#E8DFD3] bg-white p-6 shadow-card card-hover-effect group">
-            <div className="font-serif text-3xl font-bold text-[#554638] group-hover:scale-105 transition-transform duration-300 origin-left">6 Vectors</div>
-            <div className="text-xs font-semibold text-[#756350]">DEM, HAND, SWD, Impervious</div>
+
+          <div className="space-y-1.5 rounded-2xl border border-[#E5DDD0] bg-white p-5 sm:p-6 shadow-sm hover:shadow-warm transition-all duration-200">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#554638] block">Physical Inputs</span>
+            <div className="font-mono text-2xl sm:text-3xl font-bold text-[#554638]">6 Vectors</div>
+            <div className="text-xs text-[#756350] font-medium">DEM, HAND, SWD, Impervious</div>
           </div>
-          <div className="space-y-1 rounded-3xl border border-[#E8DFD3] bg-white p-6 shadow-card card-hover-effect group">
-            <div className="font-serif text-3xl font-bold text-[#221B15] flex items-center gap-1.5 group-hover:scale-105 transition-transform duration-300 origin-left">
+
+          <div className="space-y-1.5 rounded-2xl border border-[#E5DDD0] bg-white p-5 sm:p-6 shadow-sm hover:shadow-warm transition-all duration-200">
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 block">Inference Speed</span>
+            <div className="font-mono text-2xl sm:text-3xl font-bold text-[#221B15] flex items-center gap-1.5">
               <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
               &lt;200ms
             </div>
-            <div className="text-xs font-semibold text-[#756350]">Causal Formulation Engine</div>
+            <div className="text-xs text-[#756350] font-medium">Causal Formulation Engine</div>
           </div>
         </div>
       </section>
@@ -207,12 +220,12 @@ export default function LandingPage() {
       <section id="infrastructure" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8 scroll-mt-28">
         <div className="text-center space-y-3 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 rounded-full border border-terracotta-200 bg-terracotta-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-terracotta-800">
-            Physical Infrastructure Cross-Section
+            Physical Subsurface Infrastructure Anatomy
           </div>
-          <h2 className="font-serif text-3xl sm:text-5xl font-bold text-[#221B15]">
+          <h2 className="font-bold text-2xl sm:text-4xl text-[#221B15] tracking-tight">
             Flooding Block vs Resilient Twin Block
           </h2>
-          <p className="text-base text-[#554638] leading-relaxed">
+          <p className="text-sm sm:text-base text-[#554638] leading-relaxed">
             See the exact underground mechanism: An identical cloudburst floods Block A due to conduit silt buildup and catch basin backwater, while Block B discharges smoothly via functional outfall slope. Click any pin or marking to inspect citizen-friendly details.
           </p>
         </div>

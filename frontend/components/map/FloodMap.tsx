@@ -207,8 +207,8 @@ export default function FloodMap({
         </div>
       )}
 
-      {/* Main Map + Side Legend Layout */}
-      <div className="relative h-[480px] w-full overflow-hidden rounded-2xl border border-[#E8DFD3] shadow-card">
+      {/* Main Map + Responsive Legend Layout */}
+      <div className="relative h-[380px] sm:h-[480px] lg:h-[540px] w-full overflow-hidden rounded-2xl border border-[#E8DFD3] shadow-card bg-[#F5EFE6]">
         <MapContainer
           center={centerCoordinates}
           zoom={12}
@@ -260,7 +260,7 @@ export default function FloodMap({
                 <Popup>
                   <div className="space-y-2 text-xs text-[#221B15] min-w-[210px] p-0.5">
                     <div className="flex items-center justify-between border-b border-[#E8DFD3] pb-1.5">
-                      <div className="font-serif font-bold text-sm text-[#221B15]">{place.name}</div>
+                      <div className="font-bold text-sm text-[#221B15]">{place.name}</div>
                       <span className="rounded-full bg-[#F5EFE6] px-2 py-0.5 font-mono text-[10px] text-[#554638]">
                         Ward {place.ward || "—"}
                       </span>
@@ -346,16 +346,18 @@ export default function FloodMap({
           )}
         </MapContainer>
 
-        {/* Legend positioned in top-right corner of map */}
-        <div className="absolute right-4 top-4 z-[1000] max-w-xs shadow-lift">
+        {/* Map Legend Overlay: Collapsible on all viewports, compact on mobile, single DOM element */}
+        <div className="absolute right-3 top-3 sm:right-4 sm:top-4 z-[400] max-w-[220px] sm:max-w-xs shadow-lift">
           <MapLegend
             showObservations={showObservations}
             showDrains={showDrains}
+            collapsible={true}
+            defaultExpanded={true}
           />
         </div>
 
-        {/* Coords / map hint overlay at bottom left */}
-        <div className="absolute bottom-4 left-4 z-[1000] rounded-xl border border-[#E8DFD3] bg-white/95 px-3 py-1.5 text-[11px] font-mono text-[#554638] shadow-sm backdrop-blur-md">
+        {/* Desktop Coords / Map Hint Overlay */}
+        <div className="hidden sm:block absolute bottom-4 left-4 z-[400] rounded-xl border border-[#E8DFD3] bg-white/95 px-3 py-1.5 text-[11px] font-mono text-[#554638] shadow-sm backdrop-blur-md">
           {selectedPlaceA && selectedPlaceB ? (
             <span className="font-semibold text-terracotta-700">
               Active Comparative Axis: {selectedPlaceA.name} ↔ {selectedPlaceB.name}
@@ -364,6 +366,17 @@ export default function FloodMap({
             <span>Chennai Catchment Grid · Click markers to select</span>
           )}
         </div>
+      </div>
+
+      {/* Mobile Active Axis Status bar */}
+      <div className="sm:hidden rounded-xl border border-[#E8DFD3] bg-white p-3 text-xs font-mono text-[#554638] shadow-2xs">
+        {selectedPlaceA && selectedPlaceB ? (
+          <span className="font-semibold text-terracotta-700">
+            Comparative Axis: {selectedPlaceA.name} (Ward {selectedPlaceA.ward}) ↔ {selectedPlaceB.name} (Ward {selectedPlaceB.ward})
+          </span>
+        ) : (
+          <span>Chennai Catchment Grid · Tap pins on map to inspect</span>
+        )}
       </div>
     </div>
   );
