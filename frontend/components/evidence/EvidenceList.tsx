@@ -41,8 +41,8 @@ export default function EvidenceList({ evidence, investigationId, selectedMechan
 
   if (evidence.length === 0) {
     return (
-      <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-8 text-center">
-        <p className="text-sm font-semibold text-[#554638]">No ground-truth evidence items registered for this catchment.</p>
+      <div className="rounded-2xl border border-[#DCE6E9] bg-[#F6F9FA] p-8 text-center">
+        <p className="text-sm font-semibold text-[#344C59]">No ground-truth evidence items registered for this catchment.</p>
       </div>
     );
   }
@@ -50,12 +50,12 @@ export default function EvidenceList({ evidence, investigationId, selectedMechan
   return (
     <div className="space-y-4">
       {/* Visual Certainty Level Distribution Diagram */}
-      <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-4 space-y-3">
+      <div className="rounded-2xl border border-[#DCE6E9] bg-[#F6F9FA] p-4 space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
-          <span className="font-bold text-[#554638] uppercase tracking-wider text-[11px]">
+          <span className="font-bold text-[#344C59] uppercase tracking-wider text-[11px]">
             Evidence Confidence Distribution ({counts.all} items)
           </span>
-          <span className="text-[#756350]">Click category to filter evidence</span>
+          <span className="text-[#647C89]">Click category to filter evidence</span>
         </div>
 
         {/* Filter Buttons / Stepper Badges */}
@@ -65,8 +65,8 @@ export default function EvidenceList({ evidence, investigationId, selectedMechan
             onClick={() => setActiveFilter("ALL")}
             className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeFilter === "ALL"
-                ? "bg-[#221B15] text-white shadow-xs"
-                : "bg-white border border-[#E0D5C7] text-[#554638] hover:bg-[#FAF7F2]"
+                ? "bg-[#101F2B] text-white shadow-xs"
+                : "bg-white border border-[#DCE6E9] text-[#344C59] hover:bg-[#F6F9FA]"
             }`}
           >
             All Evidence ({counts.all})
@@ -124,7 +124,7 @@ export default function EvidenceList({ evidence, investigationId, selectedMechan
           return (
             <div
               key={item.id}
-              className="rounded-2xl border border-[#E8DFD3] bg-white p-4 shadow-xs transition-all hover:border-terracotta-300 space-y-3"
+              className="rounded-2xl border border-[#DCE6E9] bg-white p-4 shadow-xs transition-all hover:border-[#168C83] space-y-3"
             >
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
                 <div className="flex items-start gap-2.5">
@@ -139,7 +139,7 @@ export default function EvidenceList({ evidence, investigationId, selectedMechan
                   >
                     {item.certainty_level}
                   </span>
-                  <p className="font-semibold text-sm text-[#221B15] leading-snug">
+                  <p className="font-semibold text-sm text-[#172D3A] leading-snug">
                     {item.claim}
                   </p>
                 </div>
@@ -147,7 +147,7 @@ export default function EvidenceList({ evidence, investigationId, selectedMechan
                 <button
                   type="button"
                   onClick={() => setProvenanceEvidence(item)}
-                  className="rounded-xl border border-[#E0D5C7] bg-[#FAF7F2] hover:bg-terracotta-50 hover:border-terracotta-300 px-3 py-1.5 text-xs font-bold text-[#554638] hover:text-terracotta-800 transition-all cursor-pointer shrink-0 w-fit"
+                  className="rounded-xl border border-[#DCE6E9] bg-[#F6F9FA] hover:bg-[#ECF7F5] hover:border-[#168C83] px-3 py-1.5 text-xs font-bold text-[#344C59] hover:text-[#126D66] transition-all cursor-pointer shrink-0 w-fit"
                   aria-label={`View provenance for: ${item.claim}`}
                 >
                   Inspect Provenance →
@@ -155,22 +155,22 @@ export default function EvidenceList({ evidence, investigationId, selectedMechan
               </div>
 
               {/* Measured Metrics Bar */}
-              <div className="flex flex-wrap items-center gap-3 text-xs bg-[#FAF7F2] p-2.5 rounded-xl border border-[#E8DFD3]">
+              <div className="flex flex-wrap items-center gap-3 text-xs bg-[#F6F9FA] p-2.5 rounded-xl border border-[#DCE6E9]">
                 {item.value !== null && (
-                  <div className="flex items-center gap-1 text-[#221B15]">
-                    <span className="text-[#756350] font-medium">Measured Value:</span>
-                    <span className="font-mono font-bold text-terracotta-700">
+                  <div className="flex items-center gap-1 text-[#172D3A]">
+                    <span className="text-[#647C89] font-medium">Measured Value:</span>
+                    <span className="font-mono font-bold text-[#126D66]">
                       {formatScore(item.value)} {formatUnit(item.unit)}
                     </span>
                   </div>
                 )}
-                <div className="flex items-center gap-1 text-[#554638]">
-                  <span className="text-[#756350]">Source:</span>
+                <div className="flex items-center gap-1 text-[#344C59]">
+                  <span className="text-[#647C89]">Source:</span>
                   <span className="font-semibold capitalize">{item.source.replace(/_/g, " ")}</span>
                 </div>
-                <div className="flex items-center gap-1 text-[#554638]">
-                  <span className="text-[#756350]">Support Score:</span>
-                  <span className="font-mono font-bold text-[#221B15]">{formatScore(item.support_score)}</span>
+                <div className="flex items-center gap-1 text-[#344C59]">
+                  <span className="text-[#647C89]">Support Score:</span>
+                  <span className="font-mono font-bold text-[#172D3A]">{formatScore(item.support_score)}</span>
                 </div>
               </div>
 

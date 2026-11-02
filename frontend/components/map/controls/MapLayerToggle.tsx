@@ -14,15 +14,15 @@ export default function MapLayerToggle({ label, enabled, onToggle, description }
       className={clsx(
         "flex items-center justify-between rounded-xl border p-3.5 transition-all duration-200 cursor-pointer select-none",
         enabled
-          ? "border-terracotta-300 bg-white shadow-subtle"
-          : "border-[#E8DFD3] bg-[#FAF7F2]/80 hover:border-[#D5C6B3] hover:bg-white"
+          ? "border-[#168C83] bg-white shadow-subtle"
+          : "border-[#DCE6E9] bg-[#F6F9FA]/80 hover:border-[#C6D5DA] hover:bg-white"
       )}
     >
       <div className="pr-2">
-        <p className={clsx("text-xs font-bold tracking-tight", enabled ? "text-terracotta-800" : "text-[#554638]")}>
+        <p className={clsx("text-xs font-bold tracking-tight", enabled ? "text-[#126D66]" : "text-[#344C59]")}>
           {label}
         </p>
-        {description && <p className="text-[11px] text-[#756350] mt-0.5">{description}</p>}
+        {description && <p className="text-[11px] text-[#647C89] mt-0.5">{description}</p>}
       </div>
       <button
         type="button"
@@ -34,8 +34,8 @@ export default function MapLayerToggle({ label, enabled, onToggle, description }
           onToggle(!enabled);
         }}
         className={clsx(
-          "relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta-500",
-          enabled ? "bg-terracotta-600 shadow-sm" : "bg-[#DFD3C1]"
+          "relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#168C83]",
+          enabled ? "bg-[#126D66] shadow-sm" : "bg-[#DCE6E9]"
         )}
       >
         <span

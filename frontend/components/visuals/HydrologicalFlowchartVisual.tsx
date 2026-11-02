@@ -92,8 +92,8 @@ export default function HydrologicalFlowchartVisual({
           width="358"
           height="268"
           rx="12"
-          fill="#FAF8F5"
-          stroke="#E5DDD0"
+          fill="#FFFFFF"
+          stroke="#DCE6E9"
           strokeWidth="1"
         />
 
@@ -369,7 +369,7 @@ export default function HydrologicalFlowchartVisual({
             height="26"
             rx="6"
             fill="#FFFFFF"
-            stroke="#E2D7C7"
+            stroke="#DCE6E9"
             strokeWidth="0.8"
           />
 

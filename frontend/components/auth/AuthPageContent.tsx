@@ -157,23 +157,23 @@ export default function AuthPageContent() {
 
     if (result.error) {
       setFormError(result.error);
-    } else if (result.needEmailVerification) {
-      setFormSuccess(
-        "Verification email dispatched. Please check your inbox and click the confirmation link to activate your FloodLens account."
-      );
     } else {
-      router.push(nextDestination);
+      setFormSuccess("Verification email dispatched. Please check your inbox or sign in below.");
+      setAuthMode("login");
     }
   };
 
   const handleGoogleSignIn = async () => {
     setFormError(null);
+    setFormSuccess(null);
+
     if (!isConfigured) {
       setFormError(
-        "Google OAuth provider is not configured in this deployment (missing Supabase credentials). Please use the Instant Technical Demo Access button above to enter immediately."
+        "Google OAuth provider is not configured in this deployment (missing SUPABASE configuration). Use the Instant Technical Demo Access button above to test immediately."
       );
       return;
     }
+
     setIsGoogleSubmitting(true);
     const result = await signInWithGoogle(nextDestination);
     if (result.error) {
@@ -185,24 +185,26 @@ export default function AuthPageContent() {
   return (
     <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center px-4 py-8 sm:px-6">
       {/* Compact, balanced card container (~820px max width) */}
-      <div className="w-full max-w-[820px] rounded-2xl md:rounded-3xl border border-[#E8DFD3] bg-white shadow-lift overflow-hidden grid grid-cols-1 md:grid-cols-12">
+      <div className="w-full max-w-[820px] rounded-2xl md:rounded-3xl border border-[#DCE6E9] bg-white shadow-lift overflow-hidden grid grid-cols-1 md:grid-cols-12">
         
         {/* ============================================================== */}
         {/* LEFT PANEL: DISTINCTIVE SCIENTIFIC HYDROLOGICAL VISUAL (38%)  */}
         {/* ============================================================== */}
-        <div className="md:col-span-5 bg-gradient-to-br from-[#FAF7F2] via-[#F5EFE6] to-[#EFE6D8] p-6 sm:p-7 border-b md:border-b-0 md:border-r border-[#E8DFD3] flex flex-col justify-between relative overflow-hidden">
+        <div className="md:col-span-5 bg-gradient-to-br from-[#101F2B] via-[#193344] to-[#263C4A] p-6 sm:p-7 border-b md:border-b-0 md:border-r border-[#DCE6E9] flex flex-col justify-between relative overflow-hidden">
           
           {/* Top Brand Header */}
           <div className="space-y-4 relative z-10">
             <Link href="/" className="inline-flex items-center gap-2.5 group">
-              <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-terracotta-500 to-terracotta-700 p-0.5 shadow-sm shadow-terracotta-600/20 group-hover:scale-105 transition-all">
-                <div className="flex h-full w-full items-center justify-center rounded-[10px] bg-[#FAF7F2]">
+              <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#168C83] to-[#126D66] p-0.5 shadow-sm shadow-[#168C83]/30 group-hover:scale-105 transition-all">
+                <div className="flex h-full w-full items-center justify-center rounded-[10px] bg-[#101F2B]">
                   <svg
-                    className="h-5 w-5 text-terracotta-600"
+                    className="h-5 w-5 text-[#43B8C6]"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
                     <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
                     <path d="M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" strokeWidth="1.8" />
@@ -211,27 +213,27 @@ export default function AuthPageContent() {
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="font-bold text-lg tracking-tight text-[#221B15]">
-                    Flood<span className="text-terracotta-600">Lens</span>
+                  <span className="font-bold text-lg tracking-tight text-[#F1F6F7]">
+                    Flood<span className="text-[#43B8C6]">Lens</span>
                   </span>
-                  <span className="rounded-full border border-terracotta-200 bg-terracotta-50 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-terracotta-700">
+                  <span className="rounded-full border border-[#43B8C6]/40 bg-[#168C83]/30 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#DDF2EE]">
                     Chennai
                   </span>
                 </div>
-                <p className="text-[10px] text-[#756350] font-medium leading-none">
+                <p className="text-[10px] text-[#BBDCE5] font-medium leading-none">
                   Differential Hydrological Intelligence
                 </p>
               </div>
             </Link>
 
             {/* Scientific diagram container */}
-            <div className="rounded-xl border border-[#E0D5C7] bg-white/70 p-2 sm:p-2.5 shadow-2xs backdrop-blur-xs space-y-1.5">
-              <div className="flex items-center justify-between border-b border-[#E8DFD3] pb-1.5">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] flex items-center gap-1">
-                  <span className="h-1.5 w-1.5 rounded-full bg-terracotta-600" />
+            <div className="rounded-xl border border-[#263C4A] bg-[#101F2B]/60 p-2 sm:p-2.5 shadow-2xs backdrop-blur-xs space-y-1.5">
+              <div className="flex items-center justify-between border-b border-[#263C4A] pb-1.5">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#BBDCE5] flex items-center gap-1">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#43B8C6]" />
                   Hydrological Analysis Chain
                 </span>
-                <span className="font-mono text-[9px] text-[#8C7A6B]">
+                <span className="font-mono text-[9px] text-[#7194A5]">
                   Q = C·I·A | GVF dy/dx
                 </span>
               </div>
@@ -242,38 +244,38 @@ export default function AuthPageContent() {
           </div>
 
           {/* Scientific Context & Proof Points */}
-          <div className="space-y-3 pt-4 border-t border-[#E8DFD3]/80 relative z-10">
+          <div className="space-y-3 pt-4 border-t border-[#263C4A] relative z-10">
             <div>
-              <h2 className="font-bold text-sm sm:text-base text-[#221B15] leading-snug tracking-tight">
+              <h2 className="font-bold text-sm sm:text-base text-[#F1F6F7] leading-snug tracking-tight">
                 Understand the forces behind every flood.
               </h2>
-              <p className="text-[11px] text-[#554638] leading-relaxed pt-1">
+              <p className="text-[11px] text-[#D5E6EB] leading-relaxed pt-1">
                 Explore watershed dynamics, forecast flood risk, and investigate the evidence behind hydrological decisions.
               </p>
             </div>
 
-            <div className="space-y-1.5 text-[11px] text-[#554638]">
+            <div className="space-y-1.5 text-[11px] text-[#D5E6EB]">
               <div className="flex items-center gap-2">
-                <span className="flex h-4 w-4 items-center justify-center rounded-md bg-terracotta-100 text-terracotta-700 text-[10px] font-bold shrink-0">
+                <span className="flex h-4 w-4 items-center justify-center rounded-md bg-[#168C83]/30 text-[#43B8C6] text-[10px] font-bold shrink-0">
                   ✓
                 </span>
                 <span>Watershed and river-flow analysis</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="flex h-4 w-4 items-center justify-center rounded-md bg-terracotta-100 text-terracotta-700 text-[10px] font-bold shrink-0">
+                <span className="flex h-4 w-4 items-center justify-center rounded-md bg-[#168C83]/30 text-[#43B8C6] text-[10px] font-bold shrink-0">
                   ✓
                 </span>
                 <span>Flood-risk mapping and investigations</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="flex h-4 w-4 items-center justify-center rounded-md bg-terracotta-100 text-terracotta-700 text-[10px] font-bold shrink-0">
+                <span className="flex h-4 w-4 items-center justify-center rounded-md bg-[#168C83]/30 text-[#43B8C6] text-[10px] font-bold shrink-0">
                   ✓
                 </span>
                 <span>Technical simulations and impact assessment</span>
               </div>
             </div>
 
-            <div className="pt-1 text-[10px] text-[#756350] font-mono">
+            <div className="pt-1 text-[10px] text-[#7194A5] font-mono">
               Backed by Copernicus DEM GLO-30 & GCC GIS SWD Data
             </div>
           </div>
@@ -286,18 +288,18 @@ export default function AuthPageContent() {
           <div className="space-y-5">
             
             {/* Header: Gateway Title & Navigation */}
-            <div className="flex items-start justify-between gap-3 border-b border-[#E8DFD3] pb-3.5">
+            <div className="flex items-start justify-between gap-3 border-b border-[#DCE6E9] pb-3.5">
               <div>
-                <h1 className="font-bold text-lg sm:text-xl text-[#221B15] tracking-tight">
+                <h1 className="font-bold text-lg sm:text-xl text-[#172D3A] tracking-tight">
                   Sign In to FloodLens
                 </h1>
-                <p className="text-xs text-[#756350]">
+                <p className="text-xs text-[#647C89]">
                   Hydrological intelligence access gateway
                 </p>
               </div>
               <Link
                 href="/"
-                className="text-xs font-bold text-[#756350] hover:text-[#221B15] transition-colors shrink-0"
+                className="text-xs font-bold text-[#647C89] hover:text-[#172D3A] transition-colors shrink-0"
               >
                 ← Overview
               </Link>
@@ -336,13 +338,13 @@ export default function AuthPageContent() {
             {/* ========================================================== */}
             {/* 1. VISUALLY DOMINANT ACTION: INSTANT TECHNICAL DEMO ACCESS */}
             {/* ========================================================== */}
-            <div className="rounded-2xl border-2 border-terracotta-500/80 bg-gradient-to-br from-terracotta-50/70 via-white to-amber-50/40 p-4 sm:p-4.5 shadow-xs space-y-3">
+            <div className="rounded-2xl border-2 border-[#168C83]/50 bg-gradient-to-br from-[#ECF7F5] via-white to-[#EAF1F3] p-4 sm:p-4.5 shadow-xs space-y-3">
               <div className="flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-terracotta-800 bg-terracotta-100/90 border border-terracotta-200 px-2.5 py-0.5 rounded-full">
-                  <span className="h-1.5 w-1.5 rounded-full bg-terracotta-600 animate-pulse" />
+                <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#126D66] bg-[#DDF2EE] border border-[#B0EAE3] px-2.5 py-0.5 rounded-full">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#168C83] animate-pulse" />
                   Instant Demo Access
                 </span>
-                <span className="text-[11px] font-semibold text-terracotta-700">
+                <span className="text-[11px] font-semibold text-[#126D66]">
                   No setup or passwords needed
                 </span>
               </div>
@@ -352,7 +354,7 @@ export default function AuthPageContent() {
                 type="button"
                 onClick={() => handleDemoLogin("technical")}
                 disabled={isDemoSubmitting !== null}
-                className="w-full flex items-center justify-between gap-3 rounded-xl bg-terracotta-600 px-4 py-3 sm:py-3.5 text-left text-white shadow-warm hover:bg-terracotta-700 hover:shadow-lift hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer disabled:opacity-70 group"
+                className="w-full flex items-center justify-between gap-3 rounded-xl bg-[#126D66] px-4 py-3 sm:py-3.5 text-left text-white shadow-cool hover:bg-[#0E544F] hover:shadow-lift hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer disabled:opacity-70 group"
               >
                 <div className="space-y-0.5">
                   <div className="flex items-center gap-2 font-bold text-sm tracking-tight">
@@ -361,7 +363,7 @@ export default function AuthPageContent() {
                       Recommended
                     </span>
                   </div>
-                  <p className="text-xs text-terracotta-100 font-normal">
+                  <p className="text-xs text-[#DDF2EE] font-normal">
                     Dr. K. Senthil Nathan • GCC Lead Hydrologist & SWD Lead
                   </p>
                 </div>
@@ -375,13 +377,13 @@ export default function AuthPageContent() {
               </button>
 
               {/* Citizen Persona Secondary Link */}
-              <div className="flex items-center justify-between pt-1 border-t border-terracotta-200/60 text-xs">
-                <span className="text-[#756350] text-[11px]">Looking for resident flood advisories?</span>
+              <div className="flex items-center justify-between pt-1 border-t border-[#DCE6E9] text-xs">
+                <span className="text-[#647C89] text-[11px]">Looking for resident flood advisories?</span>
                 <button
                   type="button"
                   onClick={() => handleDemoLogin("citizen")}
                   disabled={isDemoSubmitting !== null}
-                  className="font-bold text-terracotta-700 hover:text-terracotta-800 transition-colors inline-flex items-center gap-1 cursor-pointer disabled:opacity-60 text-xs"
+                  className="font-bold text-[#126D66] hover:text-[#0E544F] transition-colors inline-flex items-center gap-1 cursor-pointer disabled:opacity-60 text-xs"
                 >
                   <span>Citizen Mode (Priya Ramanathan)</span>
                   <span>→</span>
@@ -391,11 +393,11 @@ export default function AuthPageContent() {
 
             {/* Subtle Divider */}
             <div className="relative flex items-center justify-center my-1">
-              <div className="w-full border-t border-[#E8DFD3]" />
-              <span className="bg-white px-3 text-[11px] font-bold uppercase tracking-wider text-[#8C7A6B] shrink-0">
+              <div className="w-full border-t border-[#DCE6E9]" />
+              <span className="bg-white px-3 text-[11px] font-bold uppercase tracking-wider text-[#879AA4] shrink-0">
                 or sign in with credentials
               </span>
-              <div className="w-full border-t border-[#E8DFD3]" />
+              <div className="w-full border-t border-[#DCE6E9]" />
             </div>
 
             {/* VIEW A: PHONE OTP FORM */}
@@ -411,7 +413,7 @@ export default function AuthPageContent() {
               <div className="space-y-4">
                 
                 {/* Mode Switcher Tabs (Sign In / Create Account) */}
-                <div className="flex items-center gap-2 border-b border-[#E8DFD3] pb-2">
+                <div className="flex items-center gap-2 border-b border-[#DCE6E9] pb-2">
                   <button
                     type="button"
                     onClick={() => {
@@ -422,8 +424,8 @@ export default function AuthPageContent() {
                     className={clsx(
                       "px-3 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer",
                       authMode === "login"
-                        ? "bg-terracotta-600 text-white shadow-xs"
-                        : "text-[#756350] hover:text-[#221B15] hover:bg-[#FAF7F2]"
+                        ? "bg-[#126D66] text-white shadow-xs"
+                        : "text-[#647C89] hover:text-[#172D3A] hover:bg-[#F6F9FA]"
                     )}
                   >
                     Sign In
@@ -438,8 +440,8 @@ export default function AuthPageContent() {
                     className={clsx(
                       "px-3 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer",
                       authMode === "signup"
-                        ? "bg-terracotta-600 text-white shadow-xs"
-                        : "text-[#756350] hover:text-[#221B15] hover:bg-[#FAF7F2]"
+                        ? "bg-[#126D66] text-white shadow-xs"
+                        : "text-[#647C89] hover:text-[#172D3A] hover:bg-[#F6F9FA]"
                     )}
                   >
                     Create Account
@@ -451,11 +453,11 @@ export default function AuthPageContent() {
                   type="button"
                   onClick={handleGoogleSignIn}
                   disabled={isGoogleSubmitting}
-                  className="w-full flex items-center justify-center gap-2.5 rounded-xl border border-[#E0D5C7] bg-white px-4 py-2.5 text-xs font-bold text-[#221B15] shadow-xs hover:bg-[#FAF7F2] hover:border-[#D5C6B3] active:translate-y-0 transition-all duration-150 disabled:opacity-60 cursor-pointer"
+                  className="w-full flex items-center justify-center gap-2.5 rounded-xl border border-[#DCE6E9] bg-white px-4 py-2.5 text-xs font-bold text-[#172D3A] shadow-xs hover:bg-[#F6F9FA] hover:border-[#C6D5DA] active:translate-y-0 transition-all duration-150 disabled:opacity-60 cursor-pointer"
                 >
                   {isGoogleSubmitting ? (
                     <>
-                      <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-terracotta-600 border-t-transparent" />
+                      <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-[#126D66] border-t-transparent" />
                       <span>Connecting to Google OAuth...</span>
                     </>
                   ) : (
@@ -489,7 +491,7 @@ export default function AuthPageContent() {
                     <div className="space-y-1">
                       <label
                         htmlFor="login-email"
-                        className="text-[11px] font-bold uppercase tracking-wider text-[#756350]"
+                        className="text-[11px] font-bold uppercase tracking-wider text-[#647C89]"
                       >
                         Email Address
                       </label>
@@ -502,7 +504,7 @@ export default function AuthPageContent() {
                         onChange={(e) => setLoginEmail(e.target.value)}
                         required
                         disabled={isSubmitting}
-                        className="w-full px-3.5 py-2 text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all bg-white"
+                        className="w-full px-3.5 py-2 text-sm rounded-xl border border-[#DCE6E9] focus:border-[#168C83] focus:ring-2 focus:ring-[#DDF2EE] transition-all bg-white text-[#172D3A]"
                       />
                     </div>
 
@@ -510,13 +512,13 @@ export default function AuthPageContent() {
                       <div className="flex items-center justify-between">
                         <label
                           htmlFor="login-password"
-                          className="text-[11px] font-bold uppercase tracking-wider text-[#756350]"
+                          className="text-[11px] font-bold uppercase tracking-wider text-[#647C89]"
                         >
                           Password
                         </label>
                         <Link
                           href="/auth/forgot-password"
-                          className="text-[11px] font-semibold text-terracotta-600 hover:text-terracotta-700 transition-colors"
+                          className="text-[11px] font-semibold text-[#126D66] hover:text-[#0E544F] transition-colors"
                         >
                           Forgot?
                         </Link>
@@ -531,12 +533,12 @@ export default function AuthPageContent() {
                           onChange={(e) => setLoginPassword(e.target.value)}
                           required
                           disabled={isSubmitting}
-                          className="w-full px-3.5 py-2 pr-10 text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all bg-white"
+                          className="w-full px-3.5 py-2 pr-10 text-sm rounded-xl border border-[#DCE6E9] focus:border-[#168C83] focus:ring-2 focus:ring-[#DDF2EE] transition-all bg-white text-[#172D3A]"
                         />
                         <button
                           type="button"
                           onClick={() => setShowLoginPassword(!showLoginPassword)}
-                          className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#756350] hover:text-[#221B15] p-1 cursor-pointer"
+                          className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#647C89] hover:text-[#172D3A] p-1 cursor-pointer"
                           aria-label={showLoginPassword ? "Hide password" : "Show password"}
                         >
                           {showLoginPassword ? (
@@ -557,7 +559,7 @@ export default function AuthPageContent() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full rounded-xl bg-[#221B15] px-4 py-2.5 text-xs font-bold text-white shadow-xs transition-all hover:bg-black active:translate-y-0 disabled:opacity-50 cursor-pointer"
+                      className="w-full rounded-xl bg-[#101F2B] px-4 py-2.5 text-xs font-bold text-white shadow-xs transition-all hover:bg-[#193344] active:translate-y-0 disabled:opacity-50 cursor-pointer"
                     >
                       {isSubmitting ? "Verifying..." : "Sign In to Account"}
                     </button>
@@ -570,7 +572,7 @@ export default function AuthPageContent() {
                     <div className="space-y-1">
                       <label
                         htmlFor="signup-name"
-                        className="text-[11px] font-bold uppercase tracking-wider text-[#756350]"
+                        className="text-[11px] font-bold uppercase tracking-wider text-[#647C89]"
                       >
                         Full Name
                       </label>
@@ -583,14 +585,14 @@ export default function AuthPageContent() {
                         onChange={(e) => setSignUpName(e.target.value)}
                         required
                         disabled={isSubmitting}
-                        className="w-full px-3.5 py-2 text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all bg-white"
+                        className="w-full px-3.5 py-2 text-sm rounded-xl border border-[#DCE6E9] focus:border-[#168C83] focus:ring-2 focus:ring-[#DDF2EE] transition-all bg-white text-[#172D3A]"
                       />
                     </div>
 
                     <div className="space-y-1">
                       <label
                         htmlFor="signup-email"
-                        className="text-[11px] font-bold uppercase tracking-wider text-[#756350]"
+                        className="text-[11px] font-bold uppercase tracking-wider text-[#647C89]"
                       >
                         Email Address
                       </label>
@@ -603,7 +605,7 @@ export default function AuthPageContent() {
                         onChange={(e) => setSignUpEmail(e.target.value)}
                         required
                         disabled={isSubmitting}
-                        className="w-full px-3.5 py-2 text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all bg-white"
+                        className="w-full px-3.5 py-2 text-sm rounded-xl border border-[#DCE6E9] focus:border-[#168C83] focus:ring-2 focus:ring-[#DDF2EE] transition-all bg-white text-[#172D3A]"
                       />
                     </div>
 
@@ -611,7 +613,7 @@ export default function AuthPageContent() {
                       <div className="space-y-1">
                         <label
                           htmlFor="signup-password"
-                          className="text-[11px] font-bold uppercase tracking-wider text-[#756350]"
+                          className="text-[11px] font-bold uppercase tracking-wider text-[#647C89]"
                         >
                           Password
                         </label>
@@ -624,13 +626,13 @@ export default function AuthPageContent() {
                           onChange={(e) => setSignUpPassword(e.target.value)}
                           required
                           disabled={isSubmitting}
-                          className="w-full px-3.5 py-2 text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all bg-white"
+                          className="w-full px-3.5 py-2 text-sm rounded-xl border border-[#DCE6E9] focus:border-[#168C83] focus:ring-2 focus:ring-[#DDF2EE] transition-all bg-white text-[#172D3A]"
                         />
                       </div>
                       <div className="space-y-1">
                         <label
                           htmlFor="signup-confirm-password"
-                          className="text-[11px] font-bold uppercase tracking-wider text-[#756350]"
+                          className="text-[11px] font-bold uppercase tracking-wider text-[#647C89]"
                         >
                           Confirm
                         </label>
@@ -643,7 +645,7 @@ export default function AuthPageContent() {
                           onChange={(e) => setSignUpConfirmPassword(e.target.value)}
                           required
                           disabled={isSubmitting}
-                          className="w-full px-3.5 py-2 text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all bg-white"
+                          className="w-full px-3.5 py-2 text-sm rounded-xl border border-[#DCE6E9] focus:border-[#168C83] focus:ring-2 focus:ring-[#DDF2EE] transition-all bg-white text-[#172D3A]"
                         />
                       </div>
                     </div>
@@ -664,10 +666,10 @@ export default function AuthPageContent() {
                         type="checkbox"
                         checked={acceptTerms}
                         onChange={(e) => setAcceptTerms(e.target.checked)}
-                        className="mt-0.5 h-3.5 w-3.5 rounded border-[#D5C6B3] text-terracotta-600 focus:ring-terracotta-500 cursor-pointer"
+                        className="mt-0.5 h-3.5 w-3.5 rounded border-[#C6D5DA] text-[#126D66] focus:ring-[#168C83] cursor-pointer"
                         required
                       />
-                      <label htmlFor="terms-checkbox" className="text-[11px] text-[#554638] leading-tight">
+                      <label htmlFor="terms-checkbox" className="text-[11px] text-[#344C59] leading-tight">
                         I acknowledge FloodLens twin-catchment attribution methodology for Greater Chennai Corporation.
                       </label>
                     </div>
@@ -675,7 +677,7 @@ export default function AuthPageContent() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full rounded-xl bg-terracotta-600 px-4 py-2.5 text-xs font-bold text-white shadow-xs transition-all hover:bg-terracotta-700 active:translate-y-0 disabled:opacity-50 cursor-pointer"
+                      className="w-full rounded-xl bg-[#126D66] px-4 py-2.5 text-xs font-bold text-white shadow-xs transition-all hover:bg-[#0E544F] active:translate-y-0 disabled:opacity-50 cursor-pointer"
                     >
                       {isSubmitting ? "Creating..." : "Create Account & Continue"}
                     </button>
@@ -690,7 +692,7 @@ export default function AuthPageContent() {
                       setShowPhoneOtp(true);
                       setFormError(null);
                     }}
-                    className="inline-flex items-center gap-1.5 text-[11px] font-bold text-terracotta-600 hover:text-terracotta-700 transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#126D66] hover:text-[#0E544F] transition-colors cursor-pointer"
                   >
                     <span>🇮🇳</span>
                     <span>Sign in with Indian Mobile Number & SMS OTP</span>
@@ -701,7 +703,7 @@ export default function AuthPageContent() {
           </div>
 
           {/* Compact Footer Note */}
-          <div className="pt-3 border-t border-[#E8DFD3] text-center text-[10px] text-[#756350]">
+          <div className="pt-3 border-t border-[#DCE6E9] text-center text-[10px] text-[#647C89]">
             Greater Chennai Corporation Differential Hydrological Intelligence
           </div>
         </div>

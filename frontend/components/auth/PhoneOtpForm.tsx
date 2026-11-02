@@ -156,10 +156,10 @@ export default function PhoneOtpForm({ onSuccess, onCancel }: PhoneOtpFormProps)
       {step === "phone" ? (
         <form onSubmit={handlePhoneSubmit} className="space-y-5">
           <div className="space-y-1">
-            <h3 className="font-bold text-lg text-[#221B15] tracking-tight">
+            <h3 className="font-bold text-lg text-[#172D3A] tracking-tight">
               Indian Mobile Number Authentication
             </h3>
-            <p className="text-xs text-[#554638]">
+            <p className="text-xs text-[#344C59]">
               We will send a one-time verification SMS to your phone.
             </p>
           </div>
@@ -176,13 +176,13 @@ export default function PhoneOtpForm({ onSuccess, onCancel }: PhoneOtpFormProps)
           <div className="space-y-2">
             <label
               htmlFor="indian-phone-input"
-              className="text-xs font-bold uppercase tracking-wider text-[#756350]"
+              className="text-xs font-bold uppercase tracking-wider text-[#647C89]"
             >
-              Mobile Number <span className="text-terracotta-600">*</span>
+              Mobile Number <span className="text-[#168C83]">*</span>
             </label>
-            <div className="relative flex rounded-xl border border-[#E0D5C7] bg-white shadow-xs focus-within:border-terracotta-500 focus-within:ring-2 focus-within:ring-terracotta-200 transition-all">
+            <div className="relative flex rounded-xl border border-[#DCE6E9] bg-white shadow-xs focus-within:border-[#168C83] focus-within:ring-2 focus-within:ring-[#DDF2EE] transition-all">
               {/* Fixed Country Badge */}
-              <div className="flex items-center gap-1.5 border-r border-[#E0D5C7] px-3.5 bg-[#FAF7F2] text-xs font-bold text-[#221B15] rounded-l-xl select-none">
+              <div className="flex items-center gap-1.5 border-r border-[#DCE6E9] px-3.5 bg-[#F6F9FA] text-xs font-bold text-[#172D3A] rounded-l-xl select-none">
                 <span className="text-base" role="img" aria-label="India flag">🇮🇳</span>
                 <span>+91</span>
               </div>
@@ -198,12 +198,12 @@ export default function PhoneOtpForm({ onSuccess, onCancel }: PhoneOtpFormProps)
                   setPhoneNumber(val);
                 }}
                 disabled={isLoading}
-                className="w-full border-0 px-3.5 py-3 text-sm font-mono tracking-wider focus:outline-none focus:ring-0 bg-transparent"
+                className="w-full border-0 px-3.5 py-3 text-sm font-mono tracking-wider focus:outline-none focus:ring-0 bg-transparent text-[#172D3A]"
                 aria-describedby="phone-hint"
                 required
               />
             </div>
-            <p id="phone-hint" className="text-[11px] text-[#756350]">
+            <p id="phone-hint" className="text-[11px] text-[#647C89]">
               Enter standard 10-digit Indian mobile number without country code or 0.
             </p>
           </div>
@@ -212,7 +212,7 @@ export default function PhoneOtpForm({ onSuccess, onCancel }: PhoneOtpFormProps)
             <button
               type="submit"
               disabled={isLoading || phoneNumber.length !== 10}
-              className="w-full rounded-xl bg-terracotta-600 px-6 py-3.5 text-xs font-bold text-white shadow-warm transition-all duration-300 hover:bg-terracotta-700 hover:shadow-lift hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full rounded-xl bg-[#126D66] px-6 py-3.5 text-xs font-bold text-white shadow-cool transition-all duration-300 hover:bg-[#0E544F] hover:shadow-lift hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 cursor-pointer"
             >
               {isLoading ? (
                 <>
@@ -227,7 +227,7 @@ export default function PhoneOtpForm({ onSuccess, onCancel }: PhoneOtpFormProps)
             <button
               type="button"
               onClick={onCancel}
-              className="w-full text-center text-xs font-bold text-[#756350] hover:text-[#221B15] py-2 transition-colors cursor-pointer"
+              className="w-full text-center text-xs font-bold text-[#647C89] hover:text-[#172D3A] py-2 transition-colors cursor-pointer"
             >
               ← Back to Email Sign-In
             </button>
@@ -236,11 +236,11 @@ export default function PhoneOtpForm({ onSuccess, onCancel }: PhoneOtpFormProps)
       ) : (
         <form onSubmit={handleOtpSubmit} className="space-y-5">
           <div className="space-y-1">
-            <h3 className="font-bold text-lg text-[#221B15] tracking-tight">
+            <h3 className="font-bold text-lg text-[#172D3A] tracking-tight">
               Enter 6-Digit Verification Code
             </h3>
-            <p className="text-xs text-[#554638]">
-              Sent via SMS to <span className="font-mono font-bold text-[#221B15]">+91 {phoneNumber}</span>
+            <p className="text-xs text-[#344C59]">
+              Sent via SMS to <span className="font-mono font-bold text-[#172D3A]">+91 {phoneNumber}</span>
             </p>
           </div>
 
@@ -254,7 +254,7 @@ export default function PhoneOtpForm({ onSuccess, onCancel }: PhoneOtpFormProps)
           )}
 
           <div className="space-y-3">
-            <label className="text-xs font-bold uppercase tracking-wider text-[#756350]">
+            <label className="text-xs font-bold uppercase tracking-wider text-[#647C89]">
               Verification Code (OTP)
             </label>
             <div className="flex items-center justify-between gap-1.5 sm:gap-3">
@@ -275,7 +275,7 @@ export default function PhoneOtpForm({ onSuccess, onCancel }: PhoneOtpFormProps)
                   autoComplete={index === 0 ? "one-time-code" : "off"}
                   aria-label={`Digit ${index + 1} of 6`}
                   disabled={isLoading}
-                  className="h-11 w-9 sm:h-12 sm:w-12 text-center font-mono text-base sm:text-lg font-bold text-[#221B15] border border-[#E0D5C7] rounded-xl focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 bg-white transition-all"
+                  className="h-11 w-9 sm:h-12 sm:w-12 text-center font-mono text-base sm:text-lg font-bold text-[#172D3A] border border-[#DCE6E9] rounded-xl focus:border-[#168C83] focus:ring-2 focus:ring-[#DDF2EE] bg-white transition-all"
                 />
               ))}
             </div>
@@ -287,7 +287,7 @@ export default function PhoneOtpForm({ onSuccess, onCancel }: PhoneOtpFormProps)
                   setStep("phone");
                   setError(null);
                 }}
-                className="text-[#756350] hover:text-[#221B15] font-medium transition-colors"
+                className="text-[#647C89] hover:text-[#172D3A] font-medium transition-colors"
               >
                 Change Number
               </button>
@@ -298,13 +298,13 @@ export default function PhoneOtpForm({ onSuccess, onCancel }: PhoneOtpFormProps)
                     type="button"
                     onClick={handleResendOtp}
                     disabled={isLoading}
-                    className="font-bold text-terracotta-600 hover:text-terracotta-700 transition-colors cursor-pointer"
+                    className="font-bold text-[#126D66] hover:text-[#0E544F] transition-colors cursor-pointer"
                   >
                     Resend Code
                   </button>
                 ) : (
-                  <span className="text-[#756350]">
-                    Resend in <span className="font-mono font-bold text-[#221B15]">{countdown}s</span>
+                  <span className="text-[#647C89]">
+                    Resend in <span className="font-mono font-bold text-[#172D3A]">{countdown}s</span>
                   </span>
                 )}
               </div>
@@ -315,7 +315,7 @@ export default function PhoneOtpForm({ onSuccess, onCancel }: PhoneOtpFormProps)
             <button
               type="submit"
               disabled={isLoading || otpDigits.join("").length !== 6}
-              className="w-full rounded-xl bg-terracotta-600 px-6 py-3.5 text-xs font-bold text-white shadow-warm transition-all duration-300 hover:bg-terracotta-700 hover:shadow-lift hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full rounded-xl bg-[#126D66] px-6 py-3.5 text-xs font-bold text-white shadow-cool transition-all duration-300 hover:bg-[#0E544F] hover:shadow-lift hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 cursor-pointer"
             >
               {isLoading ? (
                 <>
@@ -330,7 +330,7 @@ export default function PhoneOtpForm({ onSuccess, onCancel }: PhoneOtpFormProps)
             <button
               type="button"
               onClick={onCancel}
-              className="w-full text-center text-xs font-bold text-[#756350] hover:text-[#221B15] py-2 transition-colors cursor-pointer"
+              className="w-full text-center text-xs font-bold text-[#647C89] hover:text-[#172D3A] py-2 transition-colors cursor-pointer"
             >
               Cancel
             </button>

@@ -23,7 +23,7 @@ export default function UserMenu() {
 
   if (isLoading) {
     return (
-      <div className="h-9 w-20 sm:w-24 animate-pulse rounded-xl bg-[#F5EFE6] border border-[#E8DFD3]" />
+      <div className="h-9 w-20 sm:w-24 animate-pulse rounded-xl bg-[#EAF1F3] border border-[#DCE6E9]" />
     );
   }
 
@@ -32,7 +32,7 @@ export default function UserMenu() {
     return (
       <Link
         href="/auth"
-        className="inline-flex items-center gap-2 rounded-xl bg-terracotta-600 px-3.5 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-white shadow-warm hover:bg-terracotta-700 hover:shadow-lift transition-all cursor-pointer shrink-0"
+        className="inline-flex items-center gap-2 rounded-xl bg-[#126D66] px-3.5 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-white shadow-cool hover:bg-[#0E544F] hover:shadow-lift transition-all cursor-pointer shrink-0"
       >
         <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
           <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
@@ -60,24 +60,24 @@ export default function UserMenu() {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 sm:gap-2.5 rounded-2xl border border-[#E0D5C7] bg-white p-1.5 pr-2.5 sm:pr-3 shadow-xs hover:border-[#D5C6B3] hover:bg-[#FAF7F2] transition-all cursor-pointer"
+        className="flex items-center gap-2 sm:gap-2.5 rounded-2xl border border-[#DCE6E9] bg-white p-1.5 pr-2.5 sm:pr-3 shadow-xs hover:border-[#C6D5DA] hover:bg-[#F6F9FA] transition-all cursor-pointer"
         aria-expanded={isOpen}
         aria-haspopup="true"
         aria-label="User account menu"
       >
         {/* Avatar Initials Circle */}
-        <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-xl bg-terracotta-600 text-xs font-semibold text-white shadow-xs">
+        <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-xl bg-[#126D66] text-xs font-semibold text-white shadow-xs">
           {initials}
         </div>
 
         {/* Mode Pill Badge */}
         <div className="hidden sm:flex flex-col items-start text-left">
           <div className="flex items-center gap-1.5">
-            <span className="text-xs sm:text-sm font-semibold text-[#221B15] truncate max-w-[120px] lg:max-w-[140px]">
+            <span className="text-xs sm:text-sm font-semibold text-[#172D3A] truncate max-w-[120px] lg:max-w-[140px]">
               {displayName}
             </span>
             {user.id?.startsWith("demo-") && (
-              <span className="text-[9px] font-semibold text-amber-800 bg-amber-100 border border-amber-200 px-1 py-0.2 rounded">
+              <span className="text-[9px] font-semibold text-cyan-900 bg-[#DDF2EE] border border-[#B0EAE3] px-1 py-0.2 rounded">
                 Demo
               </span>
             )}
@@ -86,8 +86,8 @@ export default function UserMenu() {
             className={clsx(
               "text-[9px] font-semibold uppercase tracking-wider px-1.5 py-0.2 rounded-full border",
               isTechnical
-                ? "border-amber-300 bg-amber-50 text-amber-800"
-                : "border-terracotta-200 bg-terracotta-50 text-terracotta-700"
+                ? "border-[#BBDCE5] bg-[#EAF1F3] text-[#193344]"
+                : "border-[#DDF2EE] bg-[#ECF7F5] text-[#126D66]"
             )}
           >
             {isTechnical ? "Technical Mode" : "Citizen Mode"}
@@ -97,7 +97,7 @@ export default function UserMenu() {
         {/* Chevron Icon */}
         <svg
           className={clsx(
-            "h-3.5 w-3.5 text-[#756350] transition-transform duration-200",
+            "h-3.5 w-3.5 text-[#647C89] transition-transform duration-200",
             isOpen && "rotate-180"
           )}
           viewBox="0 0 24 24"
@@ -111,27 +111,27 @@ export default function UserMenu() {
 
       {/* Account Dropdown Card (overflow-safe, max-w-[calc(100vw-2rem)]) */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-72 sm:w-80 max-w-[calc(100vw-2rem)] rounded-2xl border border-[#E8DFD3] bg-white p-4 sm:p-5 shadow-warm z-50 animate-fadeIn space-y-3 sm:space-y-4">
+        <div className="absolute right-0 mt-2 w-72 sm:w-80 max-w-[calc(100vw-2rem)] rounded-2xl border border-[#DCE6E9] bg-white p-4 sm:p-5 shadow-cool z-50 animate-fadeIn space-y-3 sm:space-y-4">
           {/* User Info Header */}
-          <div className="space-y-0.5 pb-2.5 border-b border-[#E8DFD3]">
-            <p className="text-sm font-semibold text-[#221B15] truncate">{displayName}</p>
-            <p className="text-xs text-[#756350] truncate font-mono">
+          <div className="space-y-0.5 pb-2.5 border-b border-[#DCE6E9]">
+            <p className="text-sm font-semibold text-[#172D3A] truncate">{displayName}</p>
+            <p className="text-xs text-[#647C89] truncate font-mono">
               {user.email || profile?.phone || "Authenticated User"}
             </p>
           </div>
 
-          {/* Read-Only Enforced Role Information (Cross-mode switching removed) */}
-          <div className="space-y-2 rounded-xl bg-[#FAF7F2] p-3 border border-[#E8DFD3]">
+          {/* Read-Only Enforced Role Information */}
+          <div className="space-y-2 rounded-xl bg-[#F6F9FA] p-3 border border-[#DCE6E9]">
             <div className="flex items-center justify-between text-xs">
-              <span className="font-semibold text-[#756350] uppercase text-[10px] tracking-wider">
+              <span className="font-semibold text-[#647C89] uppercase text-[10px] tracking-wider">
                 Assigned Role
               </span>
               <span
                 className={clsx(
                   "text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full border",
                   isTechnical
-                    ? "border-amber-300 bg-amber-50 text-amber-800"
-                    : "border-terracotta-200 bg-terracotta-50 text-terracotta-700"
+                    ? "border-[#BBDCE5] bg-[#EAF1F3] text-[#193344]"
+                    : "border-[#DDF2EE] bg-[#ECF7F5] text-[#126D66]"
                 )}
               >
                 {isTechnical ? "Technical Mode" : "Citizen Mode"}
@@ -139,28 +139,28 @@ export default function UserMenu() {
             </div>
 
             <div>
-              <p className="text-xs font-semibold text-[#221B15]">
+              <p className="text-xs font-semibold text-[#172D3A]">
                 {profile?.role_title || (isTechnical ? "GCC Senior Hydrologist & SWD Lead" : "Velachery Ward 170 Resident Observer")}
               </p>
-              <p className="text-[11px] text-[#756350] leading-relaxed mt-1">
+              <p className="text-[11px] text-[#526B79] leading-relaxed mt-1">
                 {isTechnical
                   ? "Engineering depth enabled: Rational runoff Q=CIA, Manning conduit hydraulics, and differential twin diagnosis."
                   : "Resident depth enabled: Local street inundation observations, flood precautions, and civic helpline contacts."}
               </p>
             </div>
-            <p className="text-[10px] text-[#8C7A6B] italic border-t border-[#E8DFD3]/80 pt-1.5">
+            <p className="text-[10px] text-[#879AA4] italic border-t border-[#DCE6E9]/80 pt-1.5">
               Role is strictly bound to authorization. Cross-mode switching is disabled.
             </p>
           </div>
 
           {/* Quick Links & Sign Out Action */}
-          <div className="space-y-1 pt-1 border-t border-[#E8DFD3]">
+          <div className="space-y-1 pt-1 border-t border-[#DCE6E9]">
             <Link
               href="/onboarding"
               onClick={() => setIsOpen(false)}
-              className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs sm:text-sm font-medium text-[#554638] hover:bg-[#FAF7F2] hover:text-[#221B15] transition-colors"
+              className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs sm:text-sm font-medium text-[#344C59] hover:bg-[#F6F9FA] hover:text-[#172D3A] transition-colors"
             >
-              <svg className="h-4 w-4 text-terracotta-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg className="h-4 w-4 text-[#168C83] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="12" cy="12" r="3" />
                 <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
               </svg>

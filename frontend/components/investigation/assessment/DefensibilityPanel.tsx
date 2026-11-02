@@ -10,14 +10,14 @@ export default function DefensibilityPanel({ assessment }: DefensibilityPanelPro
   return (
     <div className="space-y-4">
       {/* Top Gate Passed Metric Strip */}
-      <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="rounded-2xl border border-[#DCE6E9] bg-[#F6F9FA] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <span className="h-3 w-3 rounded-full bg-emerald-500 animate-pulse" />
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] block">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-[#647C89] block">
               Audit Assessment Verdict
             </span>
-            <span className="font-serif font-bold text-base text-[#221B15] uppercase">
+            <span className="font-serif font-bold text-base text-[#172D3A] uppercase">
               {assessment.verdict.replace(/_/g, " ")}
             </span>
           </div>
@@ -25,7 +25,7 @@ export default function DefensibilityPanel({ assessment }: DefensibilityPanelPro
 
         <div className="flex items-center gap-3">
           <div className="text-right">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] block">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-[#647C89] block">
               Total Gates Cleared
             </span>
             <span className="font-mono text-sm font-bold text-emerald-700">
@@ -37,7 +37,7 @@ export default function DefensibilityPanel({ assessment }: DefensibilityPanelPro
 
       {/* Balanced Gate Grid */}
       <div>
-        <h4 className="mb-2.5 text-xs font-bold uppercase tracking-wider text-[#756350]">
+        <h4 className="mb-2.5 text-xs font-bold uppercase tracking-wider text-[#647C89]">
           Defensibility Verification Gates
         </h4>
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
@@ -54,7 +54,7 @@ export default function DefensibilityPanel({ assessment }: DefensibilityPanelPro
                 }`}
               >
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs font-bold text-[#221B15] capitalize flex items-center gap-1.5">
+                  <span className="text-xs font-bold text-[#172D3A] capitalize flex items-center gap-1.5">
                     <span>{isPassed ? "✓" : "⚠️"}</span>
                     <span>{name.replace(/_/g, " ")}</span>
                   </span>
@@ -69,7 +69,7 @@ export default function DefensibilityPanel({ assessment }: DefensibilityPanelPro
                   </span>
                 </div>
                 {gate.description && (
-                  <p className="text-[11px] text-[#554638] leading-relaxed">{gate.description}</p>
+                  <p className="text-[11px] text-[#344C59] leading-relaxed">{gate.description}</p>
                 )}
               </div>
             );
@@ -79,11 +79,11 @@ export default function DefensibilityPanel({ assessment }: DefensibilityPanelPro
 
       {/* Recommendation If Present */}
       {assessment.recommendation && (
-        <div className="rounded-2xl border border-terracotta-200 bg-terracotta-50/70 p-3.5 space-y-1">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-terracotta-800 block">
+        <div className="rounded-2xl border border-[#DDF2EE] bg-[#ECF7F5] p-3.5 space-y-1">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-[#126D66] block">
             Civil Engineering Recommendation:
           </span>
-          <p className="text-xs text-[#433830] leading-relaxed font-medium">
+          <p className="text-xs text-[#344C59] leading-relaxed font-medium">
             {assessment.recommendation}
           </p>
         </div>

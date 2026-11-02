@@ -173,8 +173,8 @@ export default function InfrastructureCrossSectionViewer() {
     <div className="space-y-6">
       {/* Visual Diagram Box */}
       {/* Visual Diagram Box */}
-      <div className="rounded-3xl border border-[#E8DFD3] bg-white p-4 sm:p-8 shadow-card space-y-6">
-        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] group">
+      <div className="rounded-3xl border border-[#DCE6E9] bg-white p-4 sm:p-8 shadow-card space-y-6">
+        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-[#DCE6E9] bg-[#F6F9FA] group">
           <img
             src="/images/drainage-mechanism-diagram.jpg"
             alt="Flooding Urban Block vs Smooth Draining Urban Block Cross-Section"
@@ -192,7 +192,7 @@ export default function InfrastructureCrossSectionViewer() {
               setIsDiagramExpanded(true);
               setZoomLevel(1);
             }}
-            className="absolute top-4 right-4 z-20 flex items-center gap-2 rounded-2xl bg-[#221B15]/85 hover:bg-[#221B15] text-white px-4 py-2.5 text-xs font-bold shadow-lift backdrop-blur-md transition-all border border-white/20 cursor-pointer hover:scale-105 active:scale-95"
+            className="absolute top-4 right-4 z-20 flex items-center gap-2 rounded-2xl bg-[#101F2B]/85 hover:bg-[#101F2B] text-white px-4 py-2.5 text-xs font-bold shadow-lift backdrop-blur-md transition-all border border-white/20 cursor-pointer hover:scale-105 active:scale-95"
             title="Click to expand diagram full-screen"
           >
             <svg className="h-4 w-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -211,7 +211,7 @@ export default function InfrastructureCrossSectionViewer() {
           >
             <div className="relative flex flex-col items-center">
               {/* Tooltip on hover */}
-              <span className="pointer-events-none absolute bottom-full mb-2 hidden group-hover/pin:flex items-center gap-1 rounded-xl bg-[#221B15] text-white px-2.5 py-1 text-xs font-bold shadow-xl whitespace-nowrap z-30 animate-fadeIn">
+              <span className="pointer-events-none absolute bottom-full mb-2 hidden group-hover/pin:flex items-center gap-1 rounded-xl bg-[#101F2B] text-white px-2.5 py-1 text-xs font-bold shadow-xl whitespace-nowrap z-30 animate-fadeIn">
                 <span>🏠 Basement Flooding</span>
                 <span className="text-red-400 font-mono text-[10px]">Click</span>
               </span>
@@ -237,7 +237,7 @@ export default function InfrastructureCrossSectionViewer() {
             title="Click to inspect: Catch Basin Overflow"
           >
             <div className="relative flex flex-col items-center">
-              <span className="pointer-events-none absolute bottom-full mb-2 hidden group-hover/pin:flex items-center gap-1 rounded-xl bg-[#221B15] text-white px-2.5 py-1 text-xs font-bold shadow-xl whitespace-nowrap z-30 animate-fadeIn">
+              <span className="pointer-events-none absolute bottom-full mb-2 hidden group-hover/pin:flex items-center gap-1 rounded-xl bg-[#101F2B] text-white px-2.5 py-1 text-xs font-bold shadow-xl whitespace-nowrap z-30 animate-fadeIn">
                 <span>🌊 Catch Basin Overflow</span>
                 <span className="text-red-400 font-mono text-[10px]">Click</span>
               </span>
@@ -261,7 +261,7 @@ export default function InfrastructureCrossSectionViewer() {
             title="Click to inspect: Underground Conduit Pipe (Choked)"
           >
             <div className="relative flex flex-col items-center">
-              <span className="pointer-events-none absolute bottom-full mb-2 hidden group-hover/pin:flex items-center gap-1 rounded-xl bg-[#221B15] text-white px-2.5 py-1 text-xs font-bold shadow-xl whitespace-nowrap z-30 animate-fadeIn">
+              <span className="pointer-events-none absolute bottom-full mb-2 hidden group-hover/pin:flex items-center gap-1 rounded-xl bg-[#101F2B] text-white px-2.5 py-1 text-xs font-bold shadow-xl whitespace-nowrap z-30 animate-fadeIn">
                 <span>🚇 Choked Conduit Trunk</span>
                 <span className="text-red-400 font-mono text-[10px]">Click</span>
               </span>
@@ -285,7 +285,7 @@ export default function InfrastructureCrossSectionViewer() {
             title="Click to inspect: Critical Bottleneck"
           >
             <div className="relative flex flex-col items-center">
-              <span className="pointer-events-none absolute bottom-full mb-2 hidden group-hover/pin:flex items-center gap-1 rounded-xl bg-[#221B15] text-white px-2.5 py-1 text-xs font-bold shadow-xl whitespace-nowrap z-30 animate-fadeIn">
+              <span className="pointer-events-none absolute bottom-full mb-2 hidden group-hover/pin:flex items-center gap-1 rounded-xl bg-[#101F2B] text-white px-2.5 py-1 text-xs font-bold shadow-xl whitespace-nowrap z-30 animate-fadeIn">
                 <span>⚠️ Silt/Debris Bottleneck</span>
                 <span className="text-red-400 font-mono text-[10px]">Click</span>
               </span>
@@ -310,7 +310,7 @@ export default function InfrastructureCrossSectionViewer() {
             title="Click to inspect: Elevation Slope (1.5%)"
           >
             <div className="relative flex flex-col items-center">
-              <span className="pointer-events-none absolute bottom-full mb-2 hidden group-hover/pin:flex items-center gap-1 rounded-xl bg-[#221B15] text-white px-2.5 py-1 text-xs font-bold shadow-xl whitespace-nowrap z-30 animate-fadeIn">
+              <span className="pointer-events-none absolute bottom-full mb-2 hidden group-hover/pin:flex items-center gap-1 rounded-xl bg-[#101F2B] text-white px-2.5 py-1 text-xs font-bold shadow-xl whitespace-nowrap z-30 animate-fadeIn">
                 <span>📐 Elevation Slope (1.5%)</span>
                 <span className="text-emerald-400 font-mono text-[10px]">Click</span>
               </span>
@@ -334,7 +334,7 @@ export default function InfrastructureCrossSectionViewer() {
             title="Click to inspect: Functioning Street Intake"
           >
             <div className="relative flex flex-col items-center">
-              <span className="pointer-events-none absolute bottom-full mb-2 hidden group-hover/pin:flex items-center gap-1 rounded-xl bg-[#221B15] text-white px-2.5 py-1 text-xs font-bold shadow-xl whitespace-nowrap z-30 animate-fadeIn">
+              <span className="pointer-events-none absolute bottom-full mb-2 hidden group-hover/pin:flex items-center gap-1 rounded-xl bg-[#101F2B] text-white px-2.5 py-1 text-xs font-bold shadow-xl whitespace-nowrap z-30 animate-fadeIn">
                 <span>🚰 Functioning Street Intake</span>
                 <span className="text-emerald-400 font-mono text-[10px]">Click</span>
               </span>
@@ -358,7 +358,7 @@ export default function InfrastructureCrossSectionViewer() {
             title="Click to inspect: Underground Conduit Pipe (Unobstructed Flow)"
           >
             <div className="relative flex flex-col items-center">
-              <span className="pointer-events-none absolute bottom-full mb-2 hidden group-hover/pin:flex items-center gap-1 rounded-xl bg-[#221B15] text-white px-2.5 py-1 text-xs font-bold shadow-xl whitespace-nowrap z-30 animate-fadeIn">
+              <span className="pointer-events-none absolute bottom-full mb-2 hidden group-hover/pin:flex items-center gap-1 rounded-xl bg-[#101F2B] text-white px-2.5 py-1 text-xs font-bold shadow-xl whitespace-nowrap z-30 animate-fadeIn">
                 <span>🚇 Unobstructed Conduit Pipe</span>
                 <span className="text-emerald-400 font-mono text-[10px]">Click</span>
               </span>
@@ -382,7 +382,7 @@ export default function InfrastructureCrossSectionViewer() {
             title="Click to inspect: Unobstructed Flow & Drainage Pathway"
           >
             <div className="relative flex flex-col items-center">
-              <span className="pointer-events-none absolute bottom-full mb-2 hidden group-hover/pin:flex items-center gap-1 rounded-xl bg-[#221B15] text-white px-2.5 py-1 text-xs font-bold shadow-xl whitespace-nowrap z-30 animate-fadeIn">
+              <span className="pointer-events-none absolute bottom-full mb-2 hidden group-hover/pin:flex items-center gap-1 rounded-xl bg-[#101F2B] text-white px-2.5 py-1 text-xs font-bold shadow-xl whitespace-nowrap z-30 animate-fadeIn">
                 <span>⚡ Unobstructed Gravity Outfall</span>
                 <span className="text-emerald-400 font-mono text-[10px]">Click</span>
               </span>
@@ -402,10 +402,10 @@ export default function InfrastructureCrossSectionViewer() {
         {/* Interactive Markings & Writings Explorer */}
         <div className="space-y-3 pt-1">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#756350] flex items-center gap-1.5">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#647C89] flex items-center gap-1.5">
               <span>🔍 Click Any Marking Below to Reveal Citizen-Friendly Details &amp; Examples:</span>
             </span>
-            <span className="text-[11px] text-[#9E8B75]">
+            <span className="text-[11px] text-[#879AA4]">
               (Clicking blurs background &amp; opens plain-English explanation)
             </span>
           </div>
@@ -460,7 +460,7 @@ export default function InfrastructureCrossSectionViewer() {
         {/* Structured Analytical Panels: High-Hierarchy Asymmetrical Treatments with Directional Elevation */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-3">
           {/* Block A: Failure & Hydraulic Inversion Panel (Left Directional Elevation, 6 cols) */}
-          <div className="lg:col-span-6 rounded-2xl border-y border-r border-[#F0D0CB] border-l-4 border-l-red-600 bg-gradient-to-br from-white via-[#FFF5F3] to-[#FDF0EE] p-6 sm:p-7 space-y-4 shadow-md hover:shadow-warm transition-all duration-300 relative">
+          <div className="lg:col-span-6 rounded-2xl border-y border-r border-[#F0D0CB] border-l-4 border-l-red-600 bg-gradient-to-br from-white via-[#FFF5F3] to-[#FDF0EE] p-6 sm:p-7 space-y-4 shadow-md hover:shadow-cool transition-all duration-300 relative">
             <div className="flex items-center justify-between gap-2 border-b border-red-100 pb-3">
               <div className="space-y-0.5">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-red-700 bg-red-100/80 border border-red-200 px-2 py-0.5 rounded-full inline-block">
@@ -482,30 +482,30 @@ export default function InfrastructureCrossSectionViewer() {
             {/* 3 Structured Quantitative Breakdown Cards */}
             <div className="grid grid-cols-3 gap-2.5 pt-1">
               <div className="rounded-xl border border-red-200 bg-white/90 p-2.5 text-center shadow-2xs">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] block">Silt Occlusion</span>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#647C89] block">Silt Occlusion</span>
                 <span className="font-mono text-sm sm:text-base font-bold text-red-700 block">58% Depth</span>
                 <span className="text-[10px] text-[#8C7A6B]">Cross-section loss</span>
               </div>
               <div className="rounded-xl border border-red-200 bg-white/90 p-2.5 text-center shadow-2xs">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] block">Reverse Head</span>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#647C89] block">Reverse Head</span>
                 <span className="font-mono text-sm sm:text-base font-bold text-red-700 block">+1.40 m</span>
                 <span className="text-[10px] text-[#8C7A6B]">Above street grate</span>
               </div>
               <div className="rounded-xl border border-red-200 bg-white/90 p-2.5 text-center shadow-2xs">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] block">Peak Capacity</span>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#647C89] block">Peak Capacity</span>
                 <span className="font-mono text-sm sm:text-base font-bold text-red-800 block">3.8 m³/s</span>
                 <span className="text-[10px] text-red-600 font-semibold">Deficit: -5.4 m³/s</span>
               </div>
             </div>
 
-            <div className="pt-2 border-t border-red-100 flex items-center justify-between text-xs text-[#756350]">
+            <div className="pt-2 border-t border-red-100 flex items-center justify-between text-xs text-[#647C89]">
               <span>Hydraulic Grade: Surcharged Reverse Pressure</span>
               <span className="font-mono text-red-700 font-bold">Failure: High</span>
             </div>
           </div>
 
           {/* Block B: Resilient Twin Catchment Panel (Right Directional Elevation, 6 cols) */}
-          <div className="lg:col-span-6 rounded-2xl border-y border-l border-[#CFE8D7] border-r-4 border-r-emerald-600 bg-gradient-to-bl from-white via-[#F2FAF5] to-[#ECF7F0] p-6 sm:p-7 space-y-4 shadow-md hover:shadow-warm transition-all duration-300 relative">
+          <div className="lg:col-span-6 rounded-2xl border-y border-l border-[#CFE8D7] border-r-4 border-r-emerald-600 bg-gradient-to-bl from-white via-[#F2FAF5] to-[#ECF7F0] p-6 sm:p-7 space-y-4 shadow-md hover:shadow-cool transition-all duration-300 relative">
             <div className="flex items-center justify-between gap-2 border-b border-emerald-100 pb-3">
               <div className="space-y-0.5">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100/80 border border-emerald-200 px-2 py-0.5 rounded-full inline-block">
@@ -527,23 +527,23 @@ export default function InfrastructureCrossSectionViewer() {
             {/* 3 Structured Quantitative Breakdown Cards */}
             <div className="grid grid-cols-3 gap-2.5 pt-1">
               <div className="rounded-xl border border-emerald-200 bg-white/90 p-2.5 text-center shadow-2xs">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] block">Invert Clearance</span>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#647C89] block">Invert Clearance</span>
                 <span className="font-mono text-sm sm:text-base font-bold text-emerald-700 block">100% Free</span>
                 <span className="text-[10px] text-[#8C7A6B]">Zero sediment bed</span>
               </div>
               <div className="rounded-xl border border-emerald-200 bg-white/90 p-2.5 text-center shadow-2xs">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] block">Bed Gradient</span>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#647C89] block">Bed Gradient</span>
                 <span className="font-mono text-sm sm:text-base font-bold text-emerald-700 block">+1.50 %</span>
                 <span className="text-[10px] text-[#8C7A6B]">v &gt; 1.5 m/s self-clean</span>
               </div>
               <div className="rounded-xl border border-emerald-200 bg-white/90 p-2.5 text-center shadow-2xs">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] block">Discharge Rate</span>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#647C89] block">Discharge Rate</span>
                 <span className="font-mono text-sm sm:text-base font-bold text-emerald-800 block">11.2 m³/s</span>
                 <span className="text-[10px] text-emerald-700 font-semibold">Surplus: +2.0 m³/s</span>
               </div>
             </div>
 
-            <div className="pt-2 border-t border-emerald-100 flex items-center justify-between text-xs text-[#756350]">
+            <div className="pt-2 border-t border-emerald-100 flex items-center justify-between text-xs text-[#647C89]">
               <span>Hydraulic Grade: Free Gravity Outfall</span>
               <span className="font-mono text-emerald-700 font-bold">Status: Optimal</span>
             </div>
@@ -558,13 +558,13 @@ export default function InfrastructureCrossSectionViewer() {
           onClick={() => setSelectedTerm(null)}
         >
           <div
-            className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-[#E8DFD3] bg-[#FFFDF9] p-6 sm:p-8 shadow-2xl space-y-6 cursor-default"
+            className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-[#DCE6E9] bg-white p-6 sm:p-8 shadow-2xl space-y-6 cursor-default"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="flex items-start justify-between gap-4 pb-4 border-b border-[#E8DFD3]">
+            <div className="flex items-start justify-between gap-4 pb-4 border-b border-[#DCE6E9]">
               <div className="flex items-center gap-3">
-                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-[#E0D5C7] text-2xl shadow-sm">
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-[#DCE6E9] text-2xl shadow-sm">
                   {selectedTerm.icon}
                 </span>
                 <div>
@@ -578,9 +578,9 @@ export default function InfrastructureCrossSectionViewer() {
                     >
                       {selectedTerm.block === "failure" ? "Failure Bottleneck" : "Resilient Drainage"}
                     </span>
-                    <span className="text-xs font-mono text-[#756350]">{selectedTerm.shortTag}</span>
+                    <span className="text-xs font-mono text-[#647C89]">{selectedTerm.shortTag}</span>
                   </div>
-                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#221B15] mt-1">
+                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#172D3A] mt-1">
                     {selectedTerm.name}
                   </h3>
                 </div>
@@ -589,7 +589,7 @@ export default function InfrastructureCrossSectionViewer() {
               <button
                 type="button"
                 onClick={() => setSelectedTerm(null)}
-                className="rounded-2xl border border-[#E0D5C7] bg-white p-2.5 text-[#554638] hover:bg-terracotta-50 hover:text-terracotta-800 hover:border-terracotta-300 transition-all cursor-pointer shadow-sm shrink-0"
+                className="rounded-2xl border border-[#DCE6E9] bg-white p-2.5 text-[#344C59] hover:bg-[#ECF7F5] hover:text-[#126D66] hover:border-[#168C83] transition-all cursor-pointer shadow-sm shrink-0"
                 aria-label="Close detail modal"
               >
                 <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -600,32 +600,32 @@ export default function InfrastructureCrossSectionViewer() {
             </div>
 
             {/* Plain English explanation for normal citizens */}
-            <div className="space-y-2 rounded-2xl border border-terracotta-200 bg-terracotta-50/60 p-4">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-terracotta-800 block">
+            <div className="space-y-2 rounded-2xl border border-[#DDF2EE] bg-[#ECF7F5] p-4">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#126D66] block">
                 What does this mean for your neighborhood street?
               </span>
-              <p className="text-sm text-[#433830] leading-relaxed font-medium">
+              <p className="text-sm text-[#344C59] leading-relaxed font-medium">
                 {selectedTerm.plainEnglish}
               </p>
             </div>
 
             {/* Real Chennai Example */}
-            <div className="space-y-2 rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-4">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#756350] block">
+            <div className="space-y-2 rounded-2xl border border-[#DCE6E9] bg-[#F6F9FA] p-4">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#647C89] block">
                 Ground-Truth GCC Flood Survey Record (Cyclone Michaung &amp; Recent Events):
               </span>
-              <p className="text-xs text-[#554638] leading-relaxed">
+              <p className="text-xs text-[#344C59] leading-relaxed">
                 {selectedTerm.neighborhoodExample}
               </p>
             </div>
 
             {/* Engineering Mechanism & Mitigation */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="rounded-2xl border border-[#E8DFD3] bg-white p-4 space-y-1">
-                <span className="text-[10px] font-bold uppercase text-[#756350] block">
+              <div className="rounded-2xl border border-[#DCE6E9] bg-white p-4 space-y-1">
+                <span className="text-[10px] font-bold uppercase text-[#647C89] block">
                   Hydraulic Fluid Principle
                 </span>
-                <p className="text-xs text-[#554638] leading-relaxed">
+                <p className="text-xs text-[#344C59] leading-relaxed">
                   {selectedTerm.mechanism}
                 </p>
               </div>
@@ -645,7 +645,7 @@ export default function InfrastructureCrossSectionViewer() {
               <button
                 type="button"
                 onClick={() => setSelectedTerm(null)}
-                className="rounded-xl bg-terracotta-600 px-5 py-2 text-xs font-bold text-white shadow-warm hover:bg-terracotta-700 transition-all cursor-pointer"
+                className="rounded-xl bg-[#126D66] px-5 py-2 text-xs font-bold text-white shadow-cool hover:bg-[#101F2B] transition-all cursor-pointer"
               >
                 Close Explanation
               </button>

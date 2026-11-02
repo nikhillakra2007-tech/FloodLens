@@ -18,10 +18,10 @@ export default function ExperienceModeSelector({
   return (
     <div className="space-y-3" role="radiogroup" aria-label="Select Experience Mode">
       <div className="flex items-center justify-between">
-        <label className="text-xs font-bold uppercase tracking-wider text-[#756350]">
-          Application Experience Mode <span className="text-terracotta-600">*</span>
+        <label className="text-xs font-bold uppercase tracking-wider text-[#647C89]">
+          Application Experience Mode <span className="text-[#168C83]">*</span>
         </label>
-        <span className="text-[11px] font-medium text-[#756350]">
+        <span className="text-[11px] font-medium text-[#647C89]">
           Bound to verified account
         </span>
       </div>
@@ -38,8 +38,8 @@ export default function ExperienceModeSelector({
           className={clsx(
             "relative text-left p-4 rounded-2xl border transition-all duration-300 cursor-pointer flex flex-col justify-between",
             value === "citizen"
-              ? "border-terracotta-600 bg-terracotta-50/50 shadow-sm ring-2 ring-terracotta-500/20"
-              : "border-[#E8DFD3] bg-white hover:border-[#D5C6B3] hover:bg-[#FAF7F2]/50 shadow-xs",
+              ? "border-[#126D66] bg-[#ECF7F5] shadow-sm ring-2 ring-[#168C83]/20"
+              : "border-[#DCE6E9] bg-white hover:border-[#C6D5DA] hover:bg-[#F6F9FA] shadow-xs",
             disabled && "opacity-60 cursor-not-allowed"
           )}
         >
@@ -49,8 +49,8 @@ export default function ExperienceModeSelector({
                 className={clsx(
                   "h-9 w-9 rounded-xl flex items-center justify-center transition-colors",
                   value === "citizen"
-                    ? "bg-terracotta-600 text-white"
-                    : "bg-[#F5EFE6] text-[#756350]"
+                    ? "bg-[#126D66] text-white"
+                    : "bg-[#EAF1F3] text-[#526B79]"
                 )}
               >
                 {/* Community / Citizen Icon */}
@@ -66,8 +66,8 @@ export default function ExperienceModeSelector({
                 className={clsx(
                   "h-5 w-5 rounded-full border flex items-center justify-center transition-all",
                   value === "citizen"
-                    ? "border-terracotta-600 bg-terracotta-600 text-white"
-                    : "border-[#D5C6B3] bg-white"
+                    ? "border-[#126D66] bg-[#126D66] text-white"
+                    : "border-[#C6D5DA] bg-white"
                 )}
               >
                 {value === "citizen" && (
@@ -77,25 +77,25 @@ export default function ExperienceModeSelector({
             </div>
 
             <div>
-              <h4 className="font-bold text-base text-[#221B15]">
+              <h4 className="font-bold text-base text-[#172D3A]">
                 Citizen
               </h4>
-              <p className="text-xs text-[#554638] mt-1 leading-relaxed">
+              <p className="text-xs text-[#344C59] mt-1 leading-relaxed">
                 For residents and community members who want plain-language understanding of flood risks.
               </p>
             </div>
 
-            <ul className="space-y-1.5 pt-2 border-t border-[#E8DFD3]/70 text-[11px] text-[#756350]">
+            <ul className="space-y-1.5 pt-2 border-t border-[#DCE6E9]/70 text-[11px] text-[#647C89]">
               <li className="flex items-center gap-1.5">
-                <span className="text-terracotta-600 font-bold">•</span>
+                <span className="text-[#168C83] font-bold">•</span>
                 <span>Plain-language flood summaries</span>
               </li>
               <li className="flex items-center gap-1.5">
-                <span className="text-terracotta-600 font-bold">•</span>
+                <span className="text-[#168C83] font-bold">•</span>
                 <span>Why this area flooded explanations</span>
               </li>
               <li className="flex items-center gap-1.5">
-                <span className="text-terracotta-600 font-bold">•</span>
+                <span className="text-[#168C83] font-bold">•</span>
                 <span>Local safety & uncertainty context</span>
               </li>
             </ul>
@@ -113,8 +113,8 @@ export default function ExperienceModeSelector({
           className={clsx(
             "relative text-left p-4 rounded-2xl border transition-all duration-300 cursor-pointer flex flex-col justify-between",
             value === "technical"
-              ? "border-terracotta-600 bg-terracotta-50/50 shadow-sm ring-2 ring-terracotta-500/20"
-              : "border-[#E8DFD3] bg-white hover:border-[#D5C6B3] hover:bg-[#FAF7F2]/50 shadow-xs",
+              ? "border-[#126D66] bg-[#ECF7F5] shadow-sm ring-2 ring-[#168C83]/20"
+              : "border-[#DCE6E9] bg-white hover:border-[#C6D5DA] hover:bg-[#F6F9FA] shadow-xs",
             disabled && "opacity-60 cursor-not-allowed"
           )}
         >
@@ -124,8 +124,8 @@ export default function ExperienceModeSelector({
                 className={clsx(
                   "h-9 w-9 rounded-xl flex items-center justify-center transition-colors",
                   value === "technical"
-                    ? "bg-terracotta-600 text-white"
-                    : "bg-[#F5EFE6] text-[#756350]"
+                    ? "bg-[#126D66] text-white"
+                    : "bg-[#EAF1F3] text-[#526B79]"
                 )}
               >
                 {/* Engineering / Gauge Icon */}
@@ -138,8 +138,8 @@ export default function ExperienceModeSelector({
                 className={clsx(
                   "h-5 w-5 rounded-full border flex items-center justify-center transition-all",
                   value === "technical"
-                    ? "border-terracotta-600 bg-terracotta-600 text-white"
-                    : "border-[#D5C6B3] bg-white"
+                    ? "border-[#126D66] bg-[#126D66] text-white"
+                    : "border-[#C6D5DA] bg-white"
                 )}
               >
                 {value === "technical" && (
@@ -149,25 +149,25 @@ export default function ExperienceModeSelector({
             </div>
 
             <div>
-              <h4 className="font-bold text-base text-[#221B15]">
+              <h4 className="font-bold text-base text-[#172D3A]">
                 Technical
               </h4>
-              <p className="text-xs text-[#554638] mt-1 leading-relaxed">
+              <p className="text-xs text-[#344C59] mt-1 leading-relaxed">
                 For engineers, hydrologists, and planning analysts requiring mathematical evidence.
               </p>
             </div>
 
-            <ul className="space-y-1.5 pt-2 border-t border-[#E8DFD3]/70 text-[11px] text-[#756350]">
+            <ul className="space-y-1.5 pt-2 border-t border-[#DCE6E9]/70 text-[11px] text-[#647C89]">
               <li className="flex items-center gap-1.5">
-                <span className="text-terracotta-600 font-bold">•</span>
+                <span className="text-[#168C83] font-bold">•</span>
                 <span>Twin-catchment divergence metrics</span>
               </li>
               <li className="flex items-center gap-1.5">
-                <span className="text-terracotta-600 font-bold">•</span>
+                <span className="text-[#168C83] font-bold">•</span>
                 <span>Rational runoff Q=CIA & Manning&apos;s eq</span>
               </li>
               <li className="flex items-center gap-1.5">
-                <span className="text-terracotta-600 font-bold">•</span>
+                <span className="text-[#168C83] font-bold">•</span>
                 <span>Causal DAGs & GVF backwater graphs</span>
               </li>
             </ul>

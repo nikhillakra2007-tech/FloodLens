@@ -17,10 +17,10 @@ export default function Sidebar({ sections, activeSection, onSectionChange }: Si
             <button
               onClick={() => onSectionChange(section.id)}
               className={clsx(
-                "w-full rounded px-3 py-2 text-left text-sm transition-colors",
+                "w-full rounded-xl px-3 py-2 text-left text-sm transition-colors",
                 activeSection === section.id
-                  ? "bg-flood-100 font-medium text-flood-800"
-                  : "text-gray-600 hover:bg-gray-100"
+                  ? "bg-[#ECF7F5] font-semibold text-[#126D66] border border-[#DDF2EE]"
+                  : "text-[#526B79] hover:bg-[#EAF1F3] hover:text-[#172D3A]"
               )}
             >
               {section.label}

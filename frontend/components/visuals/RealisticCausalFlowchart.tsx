@@ -244,31 +244,31 @@ export default function RealisticCausalFlowchart() {
   return (
     <div className="space-y-8">
       {/* 1. Header with Scenario Preset Buttons & Smooth Entrance Transition */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-[#E8DFD3] animate-fadeInUp">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-[#DCE6E9] animate-fadeInUp">
         <div className="space-y-2 max-w-2xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-terracotta-200 bg-terracotta-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-terracotta-800 shadow-xs">
-            <span className="h-2 w-2 rounded-full bg-terracotta-600 animate-pulse" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#DDF2EE] bg-[#ECF7F5] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#126D66] shadow-xs">
+            <span className="h-2 w-2 rounded-full bg-[#126D66] animate-pulse" />
             <span>Real Hydrological Physics &amp; Directed Acyclic Graph (DAG)</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#221B15] tracking-tight hover:text-terracotta-800 transition-colors duration-300">
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#172D3A] tracking-tight hover:text-[#126D66] transition-colors duration-300">
             Chennai Catchment Causal Flowchart
           </h2>
-          <p className="text-sm text-[#554638] leading-relaxed">
+          <p className="text-sm text-[#344C59] leading-relaxed">
             Trace the mathematical and physical sequence from extreme cloudburst rainfall (such as Cyclone Michaung) through conduit hydraulics, silt sedimentation, canal tidal surcharge, and street inundation.
           </p>
           <button
             type="button"
             onClick={() => setShowConventionsModal(true)}
-            className="inline-flex items-center gap-2 text-xs font-bold text-terracotta-700 bg-terracotta-50 hover:bg-terracotta-100 hover:text-terracotta-900 border border-terracotta-200 px-3.5 py-1.5 rounded-xl cursor-pointer transition-all duration-200 shadow-xs hover:shadow-sm"
+            className="inline-flex items-center gap-2 text-xs font-bold text-[#126D66] bg-[#ECF7F5] hover:bg-[#DDF2EE] hover:text-[#101F2B] border border-[#DDF2EE] px-3.5 py-1.5 rounded-xl cursor-pointer transition-all duration-200 shadow-xs hover:shadow-sm"
           >
             <span>📘 Explore Box Conventions &amp; Physics Formulations (Click to Open)</span>
-            <span className="text-terracotta-500 font-mono">→</span>
+            <span className="text-[#168C83] font-mono">→</span>
           </button>
         </div>
 
         {/* Preset scenario selectors */}
         <div className="space-y-2">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-[#756350] block">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-[#647C89] block">
             Select Calibrated Ward Scenario:
           </span>
           <div className="flex flex-wrap gap-2">
@@ -277,8 +277,8 @@ export default function RealisticCausalFlowchart() {
               onClick={() => applyPreset("anna-nagar")}
               className={`rounded-xl px-3.5 py-2 text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
                 activeScenario === "anna-nagar"
-                  ? "bg-terracotta-600 text-white shadow-warm scale-102"
-                  : "bg-white border border-[#E0D5C7] text-[#554638] hover:bg-[#FAF7F2]"
+                  ? "bg-[#126D66] text-white shadow-cool scale-102"
+                  : "bg-white border border-[#DCE6E9] text-[#344C59] hover:bg-[#F6F9FA]"
               }`}
             >
               <span className="h-2 w-2 rounded-full bg-red-400" />
@@ -289,8 +289,8 @@ export default function RealisticCausalFlowchart() {
               onClick={() => applyPreset("velachery")}
               className={`rounded-xl px-3.5 py-2 text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
                 activeScenario === "velachery"
-                  ? "bg-terracotta-600 text-white shadow-warm scale-102"
-                  : "bg-white border border-[#E0D5C7] text-[#554638] hover:bg-[#FAF7F2]"
+                  ? "bg-[#126D66] text-white shadow-cool scale-102"
+                  : "bg-white border border-[#DCE6E9] text-[#344C59] hover:bg-[#F6F9FA]"
               }`}
             >
               <span className="h-2 w-2 rounded-full bg-emerald-400" />
@@ -301,8 +301,8 @@ export default function RealisticCausalFlowchart() {
               onClick={() => applyPreset("t-nagar")}
               className={`rounded-xl px-3.5 py-2 text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
                 activeScenario === "t-nagar"
-                  ? "bg-terracotta-600 text-white shadow-warm scale-102"
-                  : "bg-white border border-[#E0D5C7] text-[#554638] hover:bg-[#FAF7F2]"
+                  ? "bg-[#126D66] text-white shadow-cool scale-102"
+                  : "bg-white border border-[#DCE6E9] text-[#344C59] hover:bg-[#F6F9FA]"
               }`}
             >
               <span className="h-2 w-2 rounded-full bg-amber-400" />
@@ -313,8 +313,8 @@ export default function RealisticCausalFlowchart() {
               onClick={() => applyPreset("adyar")}
               className={`rounded-xl px-3.5 py-2 text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
                 activeScenario === "adyar"
-                  ? "bg-terracotta-600 text-white shadow-warm scale-102"
-                  : "bg-white border border-[#E0D5C7] text-[#554638] hover:bg-[#FAF7F2]"
+                  ? "bg-[#126D66] text-white shadow-cool scale-102"
+                  : "bg-white border border-[#DCE6E9] text-[#344C59] hover:bg-[#F6F9FA]"
               }`}
             >
               <span className="h-2 w-2 rounded-full bg-emerald-400" />
@@ -325,22 +325,22 @@ export default function RealisticCausalFlowchart() {
       </div>
 
       {/* 2. Interactive Physics Sliders */}
-      <div className="rounded-3xl border border-[#E8DFD3] bg-white p-6 sm:p-8 shadow-card space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-[#E8DFD3]">
-          <span className="text-xs font-bold uppercase tracking-wider text-terracotta-700">
+      <div className="rounded-3xl border border-[#DCE6E9] bg-white p-6 sm:p-8 shadow-card space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-[#DCE6E9]">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#126D66]">
             Real-Time Hydraulic Parameter Controls
           </span>
-          <span className="text-xs text-[#756350]">
+          <span className="text-xs text-[#647C89]">
             Drag sliders to simulate alternate storm severities or interventions
           </span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           {/* Slider 1: 24h Rainfall */}
-          <div className="space-y-2 bg-[#FAF7F2] p-3.5 rounded-2xl border border-[#E8DFD3]">
+          <div className="space-y-2 bg-[#F6F9FA] p-3.5 rounded-2xl border border-[#DCE6E9]">
             <div className="flex justify-between items-center text-xs">
-              <span className="font-bold text-[#554638]">🌧️ 24h Rainfall</span>
-              <span className="font-mono font-bold text-terracotta-700">{rainfall} mm</span>
+              <span className="font-bold text-[#344C59]">🌧️ 24h Rainfall</span>
+              <span className="font-mono font-bold text-[#126D66]">{rainfall} mm</span>
             </div>
             <input
               type="range"
@@ -349,18 +349,18 @@ export default function RealisticCausalFlowchart() {
               step="10"
               value={rainfall}
               onChange={(e) => setRainfall(Number(e.target.value))}
-              className="w-full accent-terracotta-600 cursor-pointer"
+              className="w-full accent-[#168C83] cursor-pointer"
             />
-            <div className="flex justify-between text-[10px] text-[#9E8B75]">
+            <div className="flex justify-between text-[10px] text-[#879AA4]">
               <span>150mm (Moderate)</span>
               <span>480mm (Catastrophic)</span>
             </div>
           </div>
 
           {/* Slider 2: Silt Blockage */}
-          <div className="space-y-2 bg-[#FAF7F2] p-3.5 rounded-2xl border border-[#E8DFD3]">
+          <div className="space-y-2 bg-[#F6F9FA] p-3.5 rounded-2xl border border-[#DCE6E9]">
             <div className="flex justify-between items-center text-xs">
-              <span className="font-bold text-[#554638]">🪨 Conduit Silt</span>
+              <span className="font-bold text-[#344C59]">🪨 Conduit Silt</span>
               <span className={`font-mono font-bold ${siltation > 40 ? "text-red-700" : "text-emerald-700"}`}>
                 {siltation}% Blocked
               </span>
@@ -372,18 +372,18 @@ export default function RealisticCausalFlowchart() {
               step="5"
               value={siltation}
               onChange={(e) => setSiltation(Number(e.target.value))}
-              className="w-full accent-terracotta-600 cursor-pointer"
+              className="w-full accent-[#168C83] cursor-pointer"
             />
-            <div className="flex justify-between text-[10px] text-[#9E8B75]">
+            <div className="flex justify-between text-[10px] text-[#879AA4]">
               <span>0% (Clean)</span>
               <span>85% (Choked)</span>
             </div>
           </div>
 
           {/* Slider 3: Outfall Slope */}
-          <div className="space-y-2 bg-[#FAF7F2] p-3.5 rounded-2xl border border-[#E8DFD3]">
+          <div className="space-y-2 bg-[#F6F9FA] p-3.5 rounded-2xl border border-[#DCE6E9]">
             <div className="flex justify-between items-center text-xs">
-              <span className="font-bold text-[#554638]">📐 Pipe Invert Slope</span>
+              <span className="font-bold text-[#344C59]">📐 Pipe Invert Slope</span>
               <span className={`font-mono font-bold ${pipeSlope < 0 ? "text-red-700" : "text-emerald-700"}`}>
                 {pipeSlope > 0 ? `+${pipeSlope}%` : `${pipeSlope}%`}
               </span>
@@ -395,18 +395,18 @@ export default function RealisticCausalFlowchart() {
               step="0.1"
               value={pipeSlope}
               onChange={(e) => setPipeSlope(Number(e.target.value))}
-              className="w-full accent-terracotta-600 cursor-pointer"
+              className="w-full accent-[#168C83] cursor-pointer"
             />
-            <div className="flex justify-between text-[10px] text-[#9E8B75]">
+            <div className="flex justify-between text-[10px] text-[#879AA4]">
               <span>-0.5% (Depression)</span>
               <span>+2.0% (Gravity)</span>
             </div>
           </div>
 
           {/* Slider 4: Tidal Stage */}
-          <div className="space-y-2 bg-[#FAF7F2] p-3.5 rounded-2xl border border-[#E8DFD3]">
+          <div className="space-y-2 bg-[#F6F9FA] p-3.5 rounded-2xl border border-[#DCE6E9]">
             <div className="flex justify-between items-center text-xs">
-              <span className="font-bold text-[#554638]">🌊 Canal Tide Stage</span>
+              <span className="font-bold text-[#344C59]">🌊 Canal Tide Stage</span>
               <span className={`font-mono font-bold ${tidalStage > 1.0 ? "text-red-700" : "text-emerald-700"}`}>
                 +{tidalStage}m MSL
               </span>
@@ -418,18 +418,18 @@ export default function RealisticCausalFlowchart() {
               step="0.1"
               value={tidalStage}
               onChange={(e) => setTidalStage(Number(e.target.value))}
-              className="w-full accent-terracotta-600 cursor-pointer"
+              className="w-full accent-[#168C83] cursor-pointer"
             />
-            <div className="flex justify-between text-[10px] text-[#9E8B75]">
+            <div className="flex justify-between text-[10px] text-[#879AA4]">
               <span>+0.2m (Low)</span>
               <span>+2.2m (Surge)</span>
             </div>
           </div>
 
           {/* Slider 5: Impervious Fraction */}
-          <div className="space-y-2 bg-[#FAF7F2] p-3.5 rounded-2xl border border-[#E8DFD3]">
+          <div className="space-y-2 bg-[#F6F9FA] p-3.5 rounded-2xl border border-[#DCE6E9]">
             <div className="flex justify-between items-center text-xs">
-              <span className="font-bold text-[#554638]">🏙️ Impervious Cover</span>
+              <span className="font-bold text-[#344C59]">🏙️ Impervious Cover</span>
               <span className={`font-mono font-bold ${impervious > 75 ? "text-red-700" : "text-emerald-700"}`}>
                 {impervious}%
               </span>
@@ -441,9 +441,9 @@ export default function RealisticCausalFlowchart() {
               step="2"
               value={impervious}
               onChange={(e) => setImpervious(Number(e.target.value))}
-              className="w-full accent-terracotta-600 cursor-pointer"
+              className="w-full accent-[#168C83] cursor-pointer"
             />
-            <div className="flex justify-between text-[10px] text-[#9E8B75]">
+            <div className="flex justify-between text-[10px] text-[#879AA4]">
               <span>40% (Permeable)</span>
               <span>95% (Dense Urban)</span>
             </div>
@@ -452,22 +452,22 @@ export default function RealisticCausalFlowchart() {
 
         {/* Real-time telemetry output banner */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
-          <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-3.5">
-            <span className="text-[10px] font-bold uppercase text-[#756350] block">Overland Runoff Intake</span>
-            <span className="font-mono text-xl font-bold text-[#221B15]">{calculations.qInflow} m³/s</span>
-            <span className="text-[11px] text-[#9E8B75] block">Rainfall intake rate</span>
+          <div className="rounded-2xl border border-[#DCE6E9] bg-[#F6F9FA] p-3.5">
+            <span className="text-[10px] font-bold uppercase text-[#647C89] block">Overland Runoff Intake</span>
+            <span className="font-mono text-xl font-bold text-[#172D3A]">{calculations.qInflow} m³/s</span>
+            <span className="text-[11px] text-[#879AA4] block">Rainfall intake rate</span>
           </div>
-          <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-3.5">
-            <span className="text-[10px] font-bold uppercase text-[#756350] block">Conduit Drain Capacity</span>
-            <span className="font-mono text-xl font-bold text-terracotta-700">{calculations.qCapacity} m³/s</span>
-            <span className="text-[11px] text-[#9E8B75] block">Manning gravity discharge</span>
+          <div className="rounded-2xl border border-[#DCE6E9] bg-[#F6F9FA] p-3.5">
+            <span className="text-[10px] font-bold uppercase text-[#647C89] block">Conduit Drain Capacity</span>
+            <span className="font-mono text-xl font-bold text-[#126D66]">{calculations.qCapacity} m³/s</span>
+            <span className="text-[11px] text-[#879AA4] block">Manning gravity discharge</span>
           </div>
-          <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-3.5">
-            <span className="text-[10px] font-bold uppercase text-[#756350] block">Backwater Surcharge Head</span>
+          <div className="rounded-2xl border border-[#DCE6E9] bg-[#F6F9FA] p-3.5">
+            <span className="text-[10px] font-bold uppercase text-[#647C89] block">Backwater Surcharge Head</span>
             <span className={`font-mono text-xl font-bold ${calculations.backwaterHead > 0.6 ? "text-red-600" : "text-emerald-700"}`}>
               +{calculations.backwaterHead}m Head
             </span>
-            <span className="text-[11px] text-[#9E8B75] block">Reverse outward pressure</span>
+            <span className="text-[11px] text-[#879AA4] block">Reverse outward pressure</span>
           </div>
           <div className={`rounded-2xl border p-3.5 ${
             calculations.isCritical
@@ -476,7 +476,7 @@ export default function RealisticCausalFlowchart() {
               ? "border-amber-300 bg-amber-50/80"
               : "border-emerald-300 bg-emerald-50/80"
           }`}>
-            <span className="text-[10px] font-bold uppercase text-[#756350] block">Predicted Street Ponding</span>
+            <span className="text-[10px] font-bold uppercase text-[#647C89] block">Predicted Street Ponding</span>
             <span className={`font-mono text-xl font-black ${
               calculations.isCritical
                 ? "text-red-700"
@@ -494,13 +494,13 @@ export default function RealisticCausalFlowchart() {
       </div>
 
       {/* 3. The Realistic Live SVG Flowchart DAG Visualization with Generous Spacing */}
-      <div className="rounded-3xl border border-[#E8DFD3] bg-white p-6 sm:p-8 shadow-card space-y-4">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-[#E8DFD3]">
+      <div className="rounded-3xl border border-[#DCE6E9] bg-white p-6 sm:p-8 shadow-card space-y-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-[#DCE6E9]">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-terracotta-700">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#126D66]">
               Causal Hydraulic Topology (Click any box to inspect physical evidence)
             </span>
-            <p className="text-xs text-[#756350]">
+            <p className="text-xs text-[#647C89]">
               Animated flowing streams indicate direction of fluid momentum. Vibrant popping pulses highlight bottleneck choke points.
             </p>
           </div>
@@ -519,7 +519,7 @@ export default function RealisticCausalFlowchart() {
         </div>
 
         {/* SVG Diagram Canvas with 1560 width for generous spacing */}
-        <div className="relative overflow-x-auto rounded-2xl bg-[#FAF7F2] border border-[#E8DFD3] p-4">
+        <div className="relative overflow-x-auto rounded-2xl bg-[#F6F9FA] border border-[#DCE6E9] p-4">
           <svg
             viewBox="0 0 1560 380"
             className="w-full min-w-[1200px] h-auto select-none"
@@ -662,14 +662,14 @@ export default function RealisticCausalFlowchart() {
                       height="18"
                       rx="6"
                       fill="#FFFFFF"
-                      stroke="#E8DFD3"
+                      stroke="#DCE6E9"
                       strokeWidth="1.2"
                       className="shadow-sm"
                     />
                     <text
                       textAnchor="middle"
                       dy="3.5"
-                      className="text-[9px] font-mono fill-[#554638] font-bold"
+                      className="text-[9px] font-mono fill-[#344C59] font-bold"
                     >
                       {edge.label}
                     </text>
@@ -685,7 +685,7 @@ export default function RealisticCausalFlowchart() {
               const isWarning = node.status === "warning";
 
               const borderColor = isSelected
-                ? "#D96B27"
+                ? "#168C83"
                 : isFailed
                 ? "#EF4444"
                 : isWarning
@@ -693,7 +693,7 @@ export default function RealisticCausalFlowchart() {
                 : "#10B981";
 
               const bgColor = isSelected
-                ? "#FFF8F2"
+                ? "#ECF7F5"
                 : isFailed
                 ? "#FEF2F2"
                 : isWarning
@@ -731,7 +731,7 @@ export default function RealisticCausalFlowchart() {
                   <text
                     x="27"
                     y="27"
-                    className="text-[12px] font-bold fill-[#1C150D] tracking-tight"
+                    className="text-[12px] font-bold fill-[#172D3A] tracking-tight"
                   >
                     {node.name}
                   </text>
@@ -744,7 +744,7 @@ export default function RealisticCausalFlowchart() {
                     height="32"
                     rx="8"
                     fill="#FFFFFF"
-                    stroke="#E8DFD3"
+                    stroke="#DCE6E9"
                     strokeWidth="1.2"
                   />
 
@@ -764,7 +764,7 @@ export default function RealisticCausalFlowchart() {
                     x="200"
                     y="59"
                     textAnchor="end"
-                    className="text-[10px] font-sans fill-[#756350] font-bold"
+                    className="text-[10px] font-sans fill-[#647C89] font-bold"
                   >
                     {node.unit}
                   </text>
@@ -776,8 +776,8 @@ export default function RealisticCausalFlowchart() {
       </div>
 
       {/* 4. Hydrological Node Inspector Drawer (Revealed on Click) */}
-      <div className="rounded-3xl border border-[#E8DFD3] bg-white p-6 sm:p-8 shadow-card space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E8DFD3]">
+      <div className="rounded-3xl border border-[#DCE6E9] bg-white p-6 sm:p-8 shadow-card space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#DCE6E9]">
           <div className="flex items-center gap-3">
             <span className={`h-4 w-4 rounded-full ${
               selectedNode.status === "critical"
@@ -787,17 +787,17 @@ export default function RealisticCausalFlowchart() {
                 : "bg-emerald-500"
             }`} />
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-terracotta-700">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#126D66]">
                 Hydrological Inspector · Node Detail (Click any box above to switch)
               </span>
-              <h3 className="font-serif text-2xl font-bold text-[#221B15]">
+              <h3 className="font-serif text-2xl font-bold text-[#172D3A]">
                 {selectedNode.name}
               </h3>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="rounded-full bg-[#FAF7F2] border border-[#E0D5C7] px-4 py-1 text-xs font-mono font-bold text-[#221B15]">
+            <span className="rounded-full bg-[#F6F9FA] border border-[#DCE6E9] px-4 py-1 text-xs font-mono font-bold text-[#172D3A]">
               {selectedNode.valueString}
             </span>
             <span className={`rounded-full px-3 py-1 text-xs font-bold uppercase ${
@@ -814,44 +814,44 @@ export default function RealisticCausalFlowchart() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Physical Mechanism & Process */}
-          <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-5 space-y-2">
-            <span className="text-[11px] font-bold uppercase text-[#756350] block">
+          <div className="rounded-2xl border border-[#DCE6E9] bg-[#F6F9FA] p-5 space-y-2">
+            <span className="text-[11px] font-bold uppercase text-[#647C89] block">
               Physical Mechanism &amp; Causal Process
             </span>
-            <div className="text-xs bg-white p-3.5 rounded-xl border border-[#E0D5C7] text-[#33271E] font-medium leading-relaxed">
+            <div className="text-xs bg-white p-3.5 rounded-xl border border-[#DCE6E9] text-[#344C59] font-medium leading-relaxed">
               {selectedNode.description}
             </div>
-            <div className="text-[11px] text-[#756350] flex items-center gap-1.5 pt-1">
-              <span className="h-1.5 w-1.5 rounded-full bg-terracotta-600" />
+            <div className="text-[11px] text-[#647C89] flex items-center gap-1.5 pt-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#126D66]" />
               <span>Calibrated against hydrodynamic conservation laws</span>
             </div>
           </div>
 
           {/* Empirical Field Evidence (2015 GCC Flood Datum) */}
-          <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-5 space-y-2">
-            <span className="text-[11px] font-bold uppercase text-[#756350] block">
+          <div className="rounded-2xl border border-[#DCE6E9] bg-[#F6F9FA] p-5 space-y-2">
+            <span className="text-[11px] font-bold uppercase text-[#647C89] block">
               Empirical Sensor Datum (Cyclone Michaung &amp; Recent Floods)
             </span>
-            <div className="text-xs bg-white p-3 rounded-xl border border-[#E0D5C7] text-[#221B15] font-medium leading-relaxed">
+            <div className="text-xs bg-white p-3 rounded-xl border border-[#DCE6E9] text-[#172D3A] font-medium leading-relaxed">
               {selectedNode.evidenceDatum}
             </div>
-            <div className="text-[11px] text-[#756350] flex items-center gap-1.5 pt-1">
+            <div className="text-[11px] text-[#647C89] flex items-center gap-1.5 pt-1">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-600" />
               <span>Ground-truth calibrated against GCC stormwater archives</span>
             </div>
           </div>
 
           {/* Civil Engineering Countermeasure */}
-          <div className="rounded-2xl border border-terracotta-200 bg-terracotta-50/70 p-5 space-y-2">
-            <span className="text-[11px] font-bold uppercase text-terracotta-800 block">
+          <div className="rounded-2xl border border-[#DDF2EE] bg-[#ECF7F5]/70 p-5 space-y-2">
+            <span className="text-[11px] font-bold uppercase text-[#126D66] block">
               Recommended Engineering Intervention
             </span>
-            <div className="text-xs bg-white p-3 rounded-xl border border-terracotta-200 text-[#221B15] font-semibold leading-relaxed">
+            <div className="text-xs bg-white p-3 rounded-xl border border-[#DDF2EE] text-[#172D3A] font-semibold leading-relaxed">
               {selectedNode.mitigation}
             </div>
             <Link
               href="/investigations/new"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-terracotta-700 hover:text-terracotta-800 pt-1"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#126D66] hover:text-[#126D66] pt-1"
             >
               <span>Test Countermeasure in Ward Diagnosis →</span>
             </Link>

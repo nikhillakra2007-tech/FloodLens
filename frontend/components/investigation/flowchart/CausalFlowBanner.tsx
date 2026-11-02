@@ -55,7 +55,7 @@ export default function CausalFlowBanner({
         detail: `Primary: ${primaryDriverName}`,
         metric: "Conduit Hydraulic Strangle",
         status: "mechanism",
-        accent: "border-terracotta-300 bg-terracotta-50 text-terracotta-900",
+        accent: "border-[#168C83] bg-[#ECF7F5] text-[#101F2B]",
         badge: "Causal Driver",
       },
       {
@@ -73,19 +73,19 @@ export default function CausalFlowBanner({
   );
 
   return (
-    <div className="rounded-2xl border border-[#E8DFD3] bg-white p-5 shadow-card space-y-3.5">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#E8DFD3] pb-3">
+    <div className="rounded-2xl border border-[#DCE6E9] bg-white p-5 shadow-card space-y-3.5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#DCE6E9] pb-3">
         <div>
-          <span className="text-[10px] font-bold uppercase tracking-wider text-terracotta-700">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-[#126D66]">
             Causal Mechanism Flowchart
           </span>
-          <h3 className="font-serif text-lg font-bold text-[#221B15]">
+          <h3 className="font-serif text-lg font-bold text-[#172D3A]">
             Diagnostic Causal Chain: {placeA} vs {placeB}
           </h3>
         </div>
         <div className="flex items-center gap-2">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-terracotta-200 bg-terracotta-50/80 px-2.5 py-0.5 text-[11px] font-semibold text-terracotta-800">
-            <span className="h-1.5 w-1.5 rounded-full bg-terracotta-600 animate-pulse" />
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-[#DDF2EE] bg-[#ECF7F5] px-2.5 py-0.5 text-[11px] font-semibold text-[#126D66]">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#126D66] animate-pulse" />
             Direct Causal DAG
           </span>
         </div>
@@ -94,27 +94,27 @@ export default function CausalFlowBanner({
       {/* Horizontal Flowchart Steps */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
         {steps.map((s, idx) => (
-          <div key={s.step} className="relative flex flex-col justify-between rounded-xl border p-3.5 transition-all bg-[#FAF7F2]/60 hover:bg-white hover:shadow-subtle">
+          <div key={s.step} className="relative flex flex-col justify-between rounded-xl border p-3.5 transition-all bg-[#F6F9FA]/60 hover:bg-white hover:shadow-subtle">
             <div>
-              <div className="flex items-center justify-between text-[10px] font-mono font-bold text-[#756350] mb-1">
+              <div className="flex items-center justify-between text-[10px] font-mono font-bold text-[#647C89] mb-1">
                 <span>STAGE {s.step}</span>
                 <span className={`px-2 py-0.5 rounded-full border text-[9px] font-bold uppercase ${s.accent}`}>
                   {s.badge}
                 </span>
               </div>
-              <p className="text-[11px] font-semibold text-[#554638] uppercase tracking-wider">
+              <p className="text-[11px] font-semibold text-[#344C59] uppercase tracking-wider">
                 {s.stage}
               </p>
-              <h4 className="font-serif font-bold text-sm text-[#221B15] mt-1 leading-snug">
+              <h4 className="font-serif font-bold text-sm text-[#172D3A] mt-1 leading-snug">
                 {s.title}
               </h4>
-              <p className="text-xs text-[#554638] mt-1 leading-relaxed">
+              <p className="text-xs text-[#344C59] mt-1 leading-relaxed">
                 {s.detail}
               </p>
             </div>
 
-            <div className="mt-3 pt-2 border-t border-[#E8DFD3]/70 flex items-center justify-between text-[11px]">
-              <span className="font-mono font-semibold text-terracotta-800">
+            <div className="mt-3 pt-2 border-t border-[#DCE6E9]/70 flex items-center justify-between text-[11px]">
+              <span className="font-mono font-semibold text-[#126D66]">
                 {s.metric}
               </span>
             </div>

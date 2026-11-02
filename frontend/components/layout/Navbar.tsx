@@ -70,20 +70,20 @@ export default function Navbar() {
     <>
       <header
         className={clsx(
-          "sticky top-0 z-40 border-b transition-all duration-200 bg-[#FAF7F2]/95 backdrop-blur-md",
+          "sticky top-0 z-40 border-b transition-all duration-200 bg-white/95 backdrop-blur-md",
           hasScrolled
-            ? "border-[#E0D5C7] shadow-sm py-2.5"
-            : "border-[#E8DFD3] py-3.5"
+            ? "border-[#C6D5DA] shadow-sm py-2.5"
+            : "border-[#DCE6E9] py-3.5"
         )}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Brand Identity */}
           <div className="flex items-center gap-6 lg:gap-8">
             <Link href="/" className="group flex items-center gap-3">
-              <div className="relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-terracotta-500 to-terracotta-700 p-0.5 shadow-md shadow-terracotta-600/20 transition-all duration-200 group-hover:scale-105 group-hover:shadow-warm">
-                <div className="flex h-full w-full items-center justify-center rounded-[14px] bg-[#FAF7F2]">
+              <div className="relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-[#168C83] to-[#126D66] p-0.5 shadow-md shadow-[#168C83]/20 transition-all duration-200 group-hover:scale-105 group-hover:shadow-cool">
+                <div className="flex h-full w-full items-center justify-center rounded-[14px] bg-[#ECF7F5]">
                   <svg
-                    className="h-5 w-5 sm:h-6 sm:w-6 text-terracotta-600 transition-colors"
+                    className="h-5 w-5 sm:h-6 sm:w-6 text-[#126D66] transition-colors"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -98,21 +98,21 @@ export default function Navbar() {
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-bold text-xl tracking-tight text-[#221B15]">
-                    Flood<span className="text-terracotta-600 font-bold">Lens</span>
+                  <span className="font-bold text-xl tracking-tight text-[#172D3A]">
+                    Flood<span className="text-[#168C83] font-bold">Lens</span>
                   </span>
-                  <span className="rounded-full border border-terracotta-200 bg-terracotta-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-terracotta-700">
+                  <span className="rounded-full border border-[#DDF2EE] bg-[#ECF7F5] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#126D66]">
                     Chennai
                   </span>
                 </div>
-                <p className="text-[11px] sm:text-xs text-[#756350] font-medium tracking-normal hidden xs:block">
+                <p className="text-[11px] sm:text-xs text-[#647C89] font-medium tracking-normal hidden xs:block">
                   Differential Hydrological Intelligence
                 </p>
               </div>
             </Link>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 pl-3 xl:pl-4 border-l border-[#E8DFD3]" aria-label="Main Navigation">
+            <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 pl-3 xl:pl-4 border-l border-[#DCE6E9]" aria-label="Main Navigation">
               {currentNavLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -120,8 +120,8 @@ export default function Navbar() {
                   className={clsx(
                     "px-2.5 xl:px-3.5 py-2 text-xs xl:text-sm font-medium rounded-xl transition-all duration-150 whitespace-nowrap",
                     link.isActive
-                      ? "text-terracotta-800 bg-terracotta-50/90 border border-terracotta-200/80 font-semibold shadow-2xs"
-                      : "text-[#554638] hover:text-[#221B15] hover:bg-[#F5EFE6]"
+                      ? "text-[#126D66] bg-[#ECF7F5] border border-[#DDF2EE] font-semibold shadow-2xs"
+                      : "text-[#526B79] hover:text-[#172D3A] hover:bg-[#EAF1F3]"
                   )}
                 >
                   {link.label}
@@ -136,7 +136,7 @@ export default function Navbar() {
               /* Public Landing Page: Clean, public-facing header with prominent Sign In button */
               <Link
                 href="/auth"
-                className="inline-flex items-center gap-2 rounded-xl bg-terracotta-600 px-4 sm:px-5 py-2.5 text-sm sm:text-base font-bold text-white shadow-warm transition-all duration-200 hover:bg-terracotta-700 hover:shadow-lift hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap cursor-pointer"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#126D66] px-4 sm:px-5 py-2.5 text-sm sm:text-base font-bold text-white shadow-cool transition-all duration-200 hover:bg-[#0E544F] hover:shadow-lift hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap cursor-pointer"
               >
                 <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                   <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
@@ -149,7 +149,7 @@ export default function Navbar() {
               /* Inside Technical Application: Investigation Case Tag + User Profile Menu with Sign Out */
               <>
                 {investigationId && (
-                  <span className="hidden sm:inline-flex font-mono text-xs text-[#756350] bg-white border border-[#E8DFD3] px-3 py-1.5 rounded-xl font-bold shadow-2xs">
+                  <span className="hidden sm:inline-flex font-mono text-xs text-[#526B79] bg-[#F6F9FA] border border-[#DCE6E9] px-3 py-1.5 rounded-xl font-bold shadow-2xs">
                     Case: {investigationId.slice(0, 8)}
                   </span>
                 )}
@@ -161,7 +161,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden flex items-center justify-center rounded-xl border border-[#E0D5C7] bg-white p-2.5 sm:p-3 text-[#554638] hover:bg-[#FAF7F2] hover:text-[#221B15] transition-colors cursor-pointer"
+              className="xl:hidden flex items-center justify-center rounded-xl border border-[#DCE6E9] bg-white p-2.5 sm:p-3 text-[#526B79] hover:bg-[#F6F9FA] hover:text-[#172D3A] transition-colors cursor-pointer"
               aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={mobileMenuOpen}
             >
@@ -182,26 +182,26 @@ export default function Navbar() {
         <div className="xl:hidden fixed inset-0 z-50 flex">
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity animate-fadeIn"
+            className="fixed inset-0 bg-[#101F2B]/50 backdrop-blur-sm transition-opacity animate-fadeIn"
             onClick={() => setMobileMenuOpen(false)}
             aria-hidden="true"
           />
 
           {/* Drawer Sheet (16px readable typography, comfortable click targets) */}
-          <div className="relative ml-auto flex h-full w-full max-w-sm flex-col justify-between border-l border-[#E8DFD3] bg-[#FAF7F2] p-6 shadow-2xl animate-fadeIn">
+          <div className="relative ml-auto flex h-full w-full max-w-sm flex-col justify-between border-l border-[#DCE6E9] bg-white p-6 shadow-2xl animate-fadeIn">
             <div className="space-y-6">
               {/* Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-[#E8DFD3]">
+              <div className="flex items-center justify-between pb-4 border-b border-[#DCE6E9]">
                 <div className="flex items-center gap-2">
-                  <span className="font-bold text-lg text-[#221B15]">Navigation</span>
-                  <span className="rounded-full bg-terracotta-50 border border-terracotta-200 px-2 py-0.5 text-[10px] font-bold text-terracotta-700">
+                  <span className="font-bold text-lg text-[#172D3A]">Navigation</span>
+                  <span className="rounded-full bg-[#ECF7F5] border border-[#DDF2EE] px-2 py-0.5 text-[10px] font-bold text-[#126D66]">
                     FloodLens
                   </span>
                 </div>
                 <button
                   type="button"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="rounded-xl border border-[#E0D5C7] bg-white p-2 text-[#554638] hover:bg-[#F5EFE6]"
+                  className="rounded-xl border border-[#DCE6E9] bg-[#F6F9FA] p-2 text-[#526B79] hover:bg-[#EAF1F3]"
                   aria-label="Close menu"
                 >
                   <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -220,12 +220,12 @@ export default function Navbar() {
                     className={clsx(
                       "flex items-center justify-between rounded-xl px-4 py-3.5 text-base font-semibold transition-colors",
                       link.isActive
-                        ? "bg-terracotta-50 text-terracotta-800 border border-terracotta-200 font-bold shadow-2xs"
-                        : "text-[#221B15] hover:bg-[#F5EFE6]"
+                        ? "bg-[#ECF7F5] text-[#126D66] border border-[#DDF2EE] font-bold shadow-2xs"
+                        : "text-[#344C59] hover:bg-[#F6F9FA]"
                     )}
                   >
                     <span>{link.label}</span>
-                    <span className="text-sm text-[#9E8B75]">→</span>
+                    <span className="text-sm text-[#879AA4]">→</span>
                   </Link>
                 ))}
               </nav>
@@ -236,7 +236,7 @@ export default function Navbar() {
                   <Link
                     href="/auth"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="w-full flex items-center justify-center gap-2 rounded-xl bg-terracotta-600 px-5 py-3.5 text-base font-bold text-white shadow-warm hover:bg-terracotta-700 transition-colors"
+                    className="w-full flex items-center justify-center gap-2 rounded-xl bg-[#126D66] px-5 py-3.5 text-base font-bold text-white shadow-cool hover:bg-[#0E544F] transition-colors"
                   >
                     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                       <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
@@ -250,7 +250,7 @@ export default function Navbar() {
                     <Link
                       href="/investigations/new"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="w-full flex items-center justify-center gap-2 rounded-xl bg-terracotta-600 px-5 py-3.5 text-base font-bold text-white shadow-warm hover:bg-terracotta-700 transition-colors"
+                      className="w-full flex items-center justify-center gap-2 rounded-xl bg-[#126D66] px-5 py-3.5 text-base font-bold text-white shadow-cool hover:bg-[#0E544F] transition-colors"
                     >
                       <span>New Ward Diagnosis</span>
                       <span>→</span>
@@ -276,12 +276,12 @@ export default function Navbar() {
             </div>
 
             {/* Drawer Footer */}
-            <div className="border-t border-[#E8DFD3] pt-4 space-y-2 text-xs text-[#756350]">
+            <div className="border-t border-[#DCE6E9] pt-4 space-y-2 text-xs text-[#647C89]">
               <div className="flex items-center justify-between">
                 <span>Greater Chennai Corporation</span>
                 <span className="font-mono text-[10px]">2023 Michaung &amp; Multi-Event</span>
               </div>
-              <p className="text-[11px] leading-relaxed text-[#9E8B75]">
+              <p className="text-[11px] leading-relaxed text-[#879AA4]">
                 Differential hydrological intelligence platform for urban flood diagnosis.
               </p>
             </div>

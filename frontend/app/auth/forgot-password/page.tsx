@@ -90,21 +90,21 @@ function ForgotPasswordContent() {
 
   return (
     <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md rounded-3xl border border-[#E8DFD3] bg-white p-8 sm:p-10 shadow-lift space-y-6">
+      <div className="w-full max-w-md rounded-3xl border border-[#DCE6E9] bg-white p-8 sm:p-10 shadow-lift space-y-6">
         <div>
           <Link href="/" className="inline-flex items-center gap-2 mb-4 group">
-            <span className="font-serif text-xl font-bold tracking-tight text-[#221B15]">
-              Flood<span className="text-terracotta-600 italic">Lens</span>
+            <span className="font-serif text-xl font-bold tracking-tight text-[#172D3A]">
+              Flood<span className="text-[#168C83] italic">Lens</span>
             </span>
-            <span className="rounded-full border border-terracotta-200 bg-terracotta-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-terracotta-700">
+            <span className="rounded-full border border-[#DDF2EE] bg-[#ECF7F5] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#126D66]">
               Chennai
             </span>
           </Link>
 
-          <h2 className="font-serif text-2xl font-bold text-[#221B15]">
+          <h2 className="font-serif text-2xl font-bold text-[#172D3A]">
             {isResetMode ? "Set New Password" : "Reset Your Password"}
           </h2>
-          <p className="text-xs text-[#554638] mt-1.5 leading-relaxed">
+          <p className="text-xs text-[#344C59] mt-1.5 leading-relaxed">
             {isResetMode
               ? "Enter your new credentials below to restore secure account access."
               : "Enter your registered email address and we will dispatch a secure recovery link."}
@@ -140,7 +140,7 @@ function ForgotPasswordContent() {
             <div className="space-y-1.5">
               <label
                 htmlFor="reset-email"
-                className="text-xs font-bold uppercase tracking-wider text-[#756350]"
+                className="text-xs font-bold uppercase tracking-wider text-[#647C89]"
               >
                 Registered Email Address
               </label>
@@ -153,14 +153,14 @@ function ForgotPasswordContent() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 disabled={isLoading}
-                className="w-full px-4 py-3 text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all"
+                className="w-full px-4 py-3 text-sm rounded-xl border border-[#DCE6E9] focus:border-[#168C83] focus:ring-2 focus:ring-[#DDF2EE] transition-all bg-white text-[#172D3A]"
               />
             </div>
 
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full rounded-xl bg-terracotta-600 px-6 py-3.5 text-xs font-bold text-white shadow-warm transition-all duration-300 hover:bg-terracotta-700 hover:shadow-lift hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full rounded-xl bg-[#126D66] px-6 py-3.5 text-xs font-bold text-white shadow-cool transition-all duration-300 hover:bg-[#0E544F] hover:shadow-lift hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 cursor-pointer"
             >
               {isLoading ? (
                 <>
@@ -177,7 +177,7 @@ function ForgotPasswordContent() {
             <div className="space-y-1.5">
               <label
                 htmlFor="new-password"
-                className="text-xs font-bold uppercase tracking-wider text-[#756350]"
+                className="text-xs font-bold uppercase tracking-wider text-[#647C89]"
               >
                 New Password
               </label>
@@ -189,14 +189,14 @@ function ForgotPasswordContent() {
                 onChange={(e) => setNewPassword(e.target.value)}
                 required
                 disabled={isLoading}
-                className="w-full px-4 py-3 text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all"
+                className="w-full px-4 py-3 text-sm rounded-xl border border-[#DCE6E9] focus:border-[#168C83] focus:ring-2 focus:ring-[#DDF2EE] transition-all bg-white text-[#172D3A]"
               />
             </div>
 
             <div className="space-y-1.5">
               <label
                 htmlFor="confirm-new-password"
-                className="text-xs font-bold uppercase tracking-wider text-[#756350]"
+                className="text-xs font-bold uppercase tracking-wider text-[#647C89]"
               >
                 Confirm New Password
               </label>
@@ -208,14 +208,14 @@ function ForgotPasswordContent() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
                 disabled={isLoading}
-                className="w-full px-4 py-3 text-sm rounded-xl border border-[#E0D5C7] focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-200 transition-all"
+                className="w-full px-4 py-3 text-sm rounded-xl border border-[#DCE6E9] focus:border-[#168C83] focus:ring-2 focus:ring-[#DDF2EE] transition-all bg-white text-[#172D3A]"
               />
             </div>
 
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full rounded-xl bg-terracotta-600 px-6 py-3.5 text-xs font-bold text-white shadow-warm transition-all duration-300 hover:bg-terracotta-700 hover:shadow-lift hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full rounded-xl bg-[#126D66] px-6 py-3.5 text-xs font-bold text-white shadow-cool transition-all duration-300 hover:bg-[#0E544F] hover:shadow-lift hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 cursor-pointer"
             >
               {isLoading ? (
                 <>
@@ -229,10 +229,10 @@ function ForgotPasswordContent() {
           </form>
         )}
 
-        <div className="pt-2 text-center border-t border-[#E8DFD3]">
+        <div className="pt-2 text-center border-t border-[#DCE6E9]">
           <Link
             href="/auth?mode=login"
-            className="text-xs font-bold text-[#756350] hover:text-[#221B15] transition-colors"
+            className="text-xs font-bold text-[#647C89] hover:text-[#172D3A] transition-colors"
           >
             ← Return to Sign In
           </Link>
@@ -247,8 +247,8 @@ export default function ForgotPasswordPage() {
     <Suspense
       fallback={
         <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center p-8">
-          <div className="flex items-center gap-3 text-sm font-semibold text-terracotta-700">
-            <span className="h-4 w-4 animate-spin rounded-full border-2 border-terracotta-600 border-t-transparent" />
+          <div className="flex items-center gap-3 text-sm font-semibold text-[#126D66]">
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#168C83] border-t-transparent" />
             <span>Loading Password Recovery...</span>
           </div>
         </div>

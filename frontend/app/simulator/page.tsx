@@ -83,7 +83,7 @@ export default function SimulatorPage() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Link
           href="/hub"
-          className="inline-flex items-center gap-2 text-xs font-bold text-[#554638] hover:text-terracotta-700 bg-white border border-[#E0D5C7] rounded-xl px-3.5 sm:px-4 py-2 transition-all shadow-sm hover:shadow-warm"
+          className="inline-flex items-center gap-2 text-xs font-bold text-[#344C59] hover:text-[#126D66] bg-white border border-[#DCE6E9] rounded-xl px-3.5 sm:px-4 py-2 transition-all shadow-sm hover:shadow-cool"
         >
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -94,13 +94,13 @@ export default function SimulatorPage() {
         <div className="flex flex-wrap items-center gap-2">
           <Link
             href="/flowchart"
-            className="text-xs font-bold text-[#756350] hover:text-[#221B15] bg-[#F5EFE6] px-3 sm:px-3.5 py-1.5 rounded-xl transition-all"
+            className="text-xs font-bold text-[#647C89] hover:text-[#172D3A] bg-[#EAF1F3] px-3 sm:px-3.5 py-1.5 rounded-xl transition-all"
           >
             ← Causal Flowchart
           </Link>
           <Link
             href="/investigations/new"
-            className="text-xs font-bold text-white bg-terracotta-600 hover:bg-terracotta-700 px-3.5 sm:px-4 py-1.5 rounded-xl transition-all shadow-warm"
+            className="text-xs font-bold text-white bg-[#126D66] hover:bg-[#0E544F] px-3.5 sm:px-4 py-1.5 rounded-xl transition-all shadow-cool"
           >
             Launch Investigation →
           </Link>
@@ -108,23 +108,23 @@ export default function SimulatorPage() {
       </div>
 
       {/* Simulator Workspace */}
-      <div className="rounded-3xl border border-[#E8DFD3] bg-white p-6 sm:p-10 shadow-card space-y-8">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-[#E8DFD3]">
+      <div className="rounded-3xl border border-[#DCE6E9] bg-white p-6 sm:p-10 shadow-card space-y-8">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-[#DCE6E9]">
           <div className="space-y-2 max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-terracotta-200 bg-terracotta-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-terracotta-800">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#DDF2EE] bg-[#ECF7F5] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#126D66]">
               Differential Urban Twin Catchment Simulator
             </div>
-            <h1 className="font-bold text-2xl sm:text-3xl lg:text-4xl text-[#221B15] tracking-tight">
+            <h1 className="font-bold text-2xl sm:text-3xl lg:text-4xl text-[#172D3A] tracking-tight">
               Differential Diagnosis in Action
             </h1>
-            <p className="text-sm text-[#554638] leading-relaxed">
+            <p className="text-sm text-[#344C59] leading-relaxed">
               Toggle calibrated urban twin scenarios to see how differential spatial analysis eliminates rainfall confounds to isolate exact structural hydraulic bottlenecks.
             </p>
           </div>
 
           {/* Scenario Switcher Tabs */}
           <div className="space-y-1.5">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#756350] block">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#647C89] block">
               Calibrated Twin Pairs:
             </span>
             <div className="flex flex-wrap gap-2.5">
@@ -135,11 +135,11 @@ export default function SimulatorPage() {
                   onClick={() => setActiveScenario(s)}
                   className={`rounded-xl px-4 py-2.5 text-xs font-bold transition-all flex items-center gap-2.5 cursor-pointer ${
                     activeScenario.id === s.id
-                      ? "bg-terracotta-600 text-white shadow-warm"
-                      : "bg-[#FAF7F2] border border-[#E0D5C7] text-[#554638] hover:border-[#D5C6B3] hover:text-[#221B15]"
+                      ? "bg-[#126D66] text-white shadow-cool"
+                      : "bg-[#F6F9FA] border border-[#DCE6E9] text-[#344C59] hover:border-[#C6D5DA] hover:text-[#172D3A]"
                   }`}
                 >
-                  <span className={`h-2.5 w-2.5 rounded-full ${activeScenario.id === s.id ? "bg-white" : "bg-terracotta-500"}`} />
+                  <span className={`h-2.5 w-2.5 rounded-full ${activeScenario.id === s.id ? "bg-white" : "bg-[#168C83]"}`} />
                   <span>{s.nameA} vs {s.nameB}</span>
                 </button>
               ))}
@@ -153,61 +153,61 @@ export default function SimulatorPage() {
           <div className="lg:col-span-7 space-y-6">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-xs uppercase tracking-wider font-bold text-[#756350]">Comparative Axis</div>
-                <div className="font-bold text-2xl sm:text-3xl text-[#221B15] tracking-tight mt-1">
-                  <span className="text-[#C23E2A]">{activeScenario.nameA}</span> ({activeScenario.wardA}){" "}
-                  <span className="text-[#9E8B75] font-normal text-lg italic">vs</span>{" "}
-                  <span className="text-[#3B8352]">{activeScenario.nameB}</span> ({activeScenario.wardB})
+                <div className="text-xs uppercase tracking-wider font-bold text-[#647C89]">Comparative Axis</div>
+                <div className="font-bold text-2xl sm:text-3xl text-[#172D3A] tracking-tight mt-1">
+                  <span className="text-[#DC2626]">{activeScenario.nameA}</span> ({activeScenario.wardA}){" "}
+                  <span className="text-[#879AA4] font-normal text-lg italic">vs</span>{" "}
+                  <span className="text-[#059669]">{activeScenario.nameB}</span> ({activeScenario.wardB})
                 </div>
               </div>
-              <div className="rounded-2xl border border-terracotta-200 bg-terracotta-50 px-5 py-2.5 text-right">
-                <div className="text-[10px] font-bold text-terracotta-800 uppercase tracking-wider">Twin Fitness</div>
-                <div className="font-mono text-2xl font-black text-terracotta-700">{activeScenario.similarity}%</div>
+              <div className="rounded-2xl border border-[#DDF2EE] bg-[#ECF7F5] px-5 py-2.5 text-right">
+                <div className="text-[10px] font-bold text-[#126D66] uppercase tracking-wider">Twin Fitness</div>
+                <div className="font-mono text-2xl font-black text-[#126D66]">{activeScenario.similarity}%</div>
               </div>
             </div>
 
             {/* Explanatory Callout */}
-            <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-6 space-y-2">
+            <div className="rounded-2xl border border-[#DCE6E9] bg-[#F6F9FA] p-6 space-y-2">
               <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-terracotta-600" />
-                <span className="text-xs font-bold uppercase tracking-wider text-terracotta-800">
+                <span className="h-2 w-2 rounded-full bg-[#168C83]" />
+                <span className="text-xs font-bold uppercase tracking-wider text-[#126D66]">
                   Causal Diagnosis Finding
                 </span>
               </div>
-              <p className="text-sm leading-relaxed text-[#433830]">
+              <p className="text-sm leading-relaxed text-[#344C59]">
                 {activeScenario.summary}
               </p>
             </div>
 
             {/* 4 Differential Meters */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-4 space-y-1">
-                <div className="text-xs font-bold text-[#756350]">🌧️ Rainfall Differential</div>
-                <div className="font-mono text-sm font-bold text-[#221B15]">{activeScenario.rainfallDiff}</div>
-                <div className="text-[11px] text-[#9E8B75]">Storm forcing neutralized</div>
+              <div className="rounded-2xl border border-[#DCE6E9] bg-[#F6F9FA] p-4 space-y-1">
+                <div className="text-xs font-bold text-[#647C89]">🌧️ Rainfall Differential</div>
+                <div className="font-mono text-sm font-bold text-[#172D3A]">{activeScenario.rainfallDiff}</div>
+                <div className="text-[11px] text-[#879AA4]">Storm forcing neutralized</div>
               </div>
-              <div className="rounded-2xl border border-red-100 bg-red-50/50 p-4 space-y-1">
-                <div className="text-xs font-bold text-[#C23E2A]">🚰 SWD Drain Conduit Capacity</div>
-                <div className="font-mono text-sm font-bold text-[#C23E2A]">{activeScenario.drainageDiff}</div>
-                <div className="text-[11px] text-[#9E8B75]">Primary structural constraint</div>
+              <div className="rounded-2xl border border-red-200 bg-red-50/50 p-4 space-y-1">
+                <div className="text-xs font-bold text-[#DC2626]">🚰 SWD Drain Conduit Capacity</div>
+                <div className="font-mono text-sm font-bold text-[#DC2626]">{activeScenario.drainageDiff}</div>
+                <div className="text-[11px] text-[#879AA4]">Primary structural constraint</div>
               </div>
-              <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-4 space-y-1">
-                <div className="text-xs font-bold text-[#756350]">⛰️ DEM Elevation Gradient</div>
-                <div className="font-mono text-sm font-bold text-amber-800">{activeScenario.demDiff}</div>
-                <div className="text-[11px] text-[#9E8B75]">Micro-depression ponding</div>
+              <div className="rounded-2xl border border-[#DCE6E9] bg-[#F6F9FA] p-4 space-y-1">
+                <div className="text-xs font-bold text-[#647C89]">⛰️ DEM Elevation Gradient</div>
+                <div className="font-mono text-sm font-bold text-amber-700">{activeScenario.demDiff}</div>
+                <div className="text-[11px] text-[#879AA4]">Micro-depression ponding</div>
               </div>
-              <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-4 space-y-1">
-                <div className="text-xs font-bold text-[#756350]">🏙️ Urban Impervious Cover</div>
-                <div className="font-mono text-sm font-bold text-terracotta-700">{activeScenario.imperviousDiff}</div>
-                <div className="text-[11px] text-[#9E8B75]">Loss of natural infiltration</div>
+              <div className="rounded-2xl border border-[#DCE6E9] bg-[#F6F9FA] p-4 space-y-1">
+                <div className="text-xs font-bold text-[#647C89]">🏙️ Urban Impervious Cover</div>
+                <div className="font-mono text-sm font-bold text-[#168C83]">{activeScenario.imperviousDiff}</div>
+                <div className="text-[11px] text-[#879AA4]">Loss of natural infiltration</div>
               </div>
             </div>
           </div>
 
           {/* Right side: Causal Ranking Card Preview */}
-          <div className="lg:col-span-5 rounded-3xl border border-[#E8DFD3] bg-[#FAF7F2] p-7 space-y-6 shadow-sm">
-            <div className="flex items-center justify-between pb-3 border-b border-[#E8DFD3]">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#756350]">
+          <div className="lg:col-span-5 rounded-3xl border border-[#DCE6E9] bg-[#F6F9FA] p-7 space-y-6 shadow-sm">
+            <div className="flex items-center justify-between pb-3 border-b border-[#DCE6E9]">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#647C89]">
                 Synthesized Mechanism Ranking
               </span>
               <span className="rounded-full bg-emerald-100 border border-emerald-200 px-3 py-0.5 text-xs font-bold text-emerald-800">
@@ -216,35 +216,35 @@ export default function SimulatorPage() {
             </div>
 
             <div className="space-y-3.5">
-              <div className="rounded-2xl border-2 border-terracotta-200 bg-white p-5 space-y-2.5 shadow-sm">
+              <div className="rounded-2xl border-2 border-[#DDF2EE] bg-white p-5 space-y-2.5 shadow-sm">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-terracotta-700">Rank #1 Primary Driver</span>
-                  <span className="font-mono text-xs font-bold text-terracotta-800">{activeScenario.confidence}% Confidence</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#126D66]">Rank #1 Primary Driver</span>
+                  <span className="font-mono text-xs font-bold text-[#126D66]">{activeScenario.confidence}% Confidence</span>
                 </div>
-                <div className="font-bold text-[#221B15] text-sm">{activeScenario.primaryMechanism}</div>
-                <div className="h-2 w-full rounded-full bg-[#E0D5C7] overflow-hidden">
-                  <div className="h-full rounded-full bg-terracotta-600" style={{ width: `${activeScenario.confidence}%` }} />
-                </div>
-              </div>
-
-              <div className="rounded-2xl border border-[#E8DFD3] bg-white p-4 space-y-1.5 opacity-80">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="font-medium text-[#221B15]">Rank #2 Surface Infiltration Exhaustion</span>
-                  <span className="font-mono text-[#756350]">62% Confidence</span>
+                <div className="font-bold text-[#172D3A] text-sm">{activeScenario.primaryMechanism}</div>
+                <div className="h-2 w-full rounded-full bg-[#EAF1F3] overflow-hidden">
+                  <div className="h-full rounded-full bg-[#126D66]" style={{ width: `${activeScenario.confidence}%` }} />
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-[#E8DFD3] bg-white p-4 space-y-1.5 opacity-60">
+              <div className="rounded-2xl border border-[#DCE6E9] bg-white p-4 space-y-1.5 opacity-80">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="font-medium text-[#221B15]">Rank #3 Secondary Canal Tidal Hold</span>
-                  <span className="font-mono text-[#756350]">31% Confidence</span>
+                  <span className="font-medium text-[#172D3A]">Rank #2 Surface Infiltration Exhaustion</span>
+                  <span className="font-mono text-[#647C89]">62% Confidence</span>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-[#DCE6E9] bg-white p-4 space-y-1.5 opacity-60">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-medium text-[#172D3A]">Rank #3 Secondary Canal Tidal Hold</span>
+                  <span className="font-mono text-[#647C89]">31% Confidence</span>
                 </div>
               </div>
             </div>
 
             <Link
               href="/investigations/new"
-              className="w-full rounded-2xl bg-terracotta-600 hover:bg-terracotta-700 px-5 py-4 text-xs font-bold text-white flex items-center justify-center gap-2 transition-all cursor-pointer shadow-warm hover:shadow-lift"
+              className="w-full rounded-2xl bg-[#126D66] hover:bg-[#0E544F] px-5 py-4 text-xs font-bold text-white flex items-center justify-center gap-2 transition-all cursor-pointer shadow-cool hover:shadow-lift"
             >
               <span>Launch Full Diagnostic Console for This Pair</span>
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
