@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import FeaturesSectionNav from "@/components/layout/FeaturesSectionNav";
 import CausalFlowchart from "@/components/visuals/CausalFlowchart";
 import InfrastructureCrossSectionViewer from "@/components/visuals/InfrastructureCrossSectionViewer";
 import HydrologicalConventionsModal from "@/components/visuals/HydrologicalConventionsModal";
@@ -101,9 +100,7 @@ export default function LandingPage() {
   const [isConventionsOpen, setIsConventionsOpen] = useState<boolean>(false);
 
   return (
-    <>
-      <FeaturesSectionNav />
-      <div className="space-y-24 py-6 sm:py-12">
+    <div className="space-y-24 py-6 sm:py-12">
         {/* 1. HERO SECTION WITH SATELLITE DEM GRAPHIC */}
         <section id="overview" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12 scroll-mt-28">
           <div className="flex flex-col items-center text-center space-y-6 max-w-4xl mx-auto">
@@ -538,6 +535,5 @@ export default function LandingPage() {
         onClose={() => setIsConventionsOpen(false)}
       />
     </div>
-    </>
   );
 }

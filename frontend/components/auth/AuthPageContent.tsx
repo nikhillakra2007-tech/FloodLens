@@ -190,7 +190,7 @@ export default function AuthPageContent() {
         {/* ============================================================== */}
         {/* LEFT PANEL: DISTINCTIVE SCIENTIFIC HYDROLOGICAL VISUAL (38%)  */}
         {/* ============================================================== */}
-        <div className="md:col-span-5 bg-gradient-to-br from-[#101F2B] via-[#193344] to-[#263C4A] p-6 sm:p-7 border-b md:border-b-0 md:border-r border-[#DCE6E9] flex flex-col justify-between relative overflow-hidden">
+        <div className="md:col-span-5 bg-gradient-to-br from-[#101F2B] via-[#193344] to-[#263C4A] p-6 sm:p-7 border-b md:border-b-0 md:border-r border-[#DCE6E9] flex flex-col justify-start space-y-6 relative overflow-hidden">
           
           {/* Top Brand Header */}
           <div className="space-y-4 relative z-10">
@@ -244,7 +244,7 @@ export default function AuthPageContent() {
           </div>
 
           {/* Scientific Context & Proof Points */}
-          <div className="space-y-3 pt-4 border-t border-[#263C4A] relative z-10">
+          <div className="space-y-3 pt-5 border-t border-[#263C4A] relative z-10">
             <div>
               <h2 className="font-bold text-sm sm:text-base text-[#F1F6F7] leading-snug tracking-tight">
                 Understand the forces behind every flood.
