@@ -28,11 +28,11 @@ export default function LimitationsPanel({ limitations }: LimitationsPanelProps)
                 ? "border-red-200 bg-red-50/50"
                 : isMed
                 ? "border-amber-200 bg-amber-50/50"
-                : "border-[#DCE6E9] bg-[#F6F9FA]"
+                : "border-[#E8DFD3] bg-[#FAF7F2]"
             }`}
           >
             <div className="flex items-center justify-between gap-2">
-              <span className="text-xs font-bold text-[#172D3A] flex items-center gap-1.5 capitalize">
+              <span className="text-xs font-bold text-[#221B15] flex items-center gap-1.5 capitalize">
                 <span>{isHigh ? "⚠️" : isMed ? "⚡" : "ℹ️"}</span>
                 <span>{lim.limitation.replace(/_/g, " ")}</span>
               </span>
@@ -49,11 +49,11 @@ export default function LimitationsPanel({ limitations }: LimitationsPanelProps)
               </span>
             </div>
 
-            <p className="text-xs text-[#344C59] leading-relaxed">
+            <p className="text-xs text-[#554638] leading-relaxed">
               {lim.explanation}
             </p>
 
-            <div className="pt-1.5 border-t border-[#DCE6E9]/70 flex items-center justify-between text-[10px] text-[#647C89] font-mono">
+            <div className="pt-1.5 border-t border-[#E8DFD3]/70 flex items-center justify-between text-[10px] text-[#756350] font-mono">
               <span>Scope: {lim.affected_feature.replace(/_/g, " ")}</span>
               <span>Source: {lim.source}</span>
             </div>

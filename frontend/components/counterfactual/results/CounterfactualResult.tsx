@@ -91,8 +91,8 @@ export default function CounterfactualResult({ result }: CounterfactualResultPro
           {Object.entries(result.parameters || {}).map(([key, value]) => {
             if (typeof value === "object" && value !== null) {
               return (
-                <div key={key} className="rounded border border-[#DCE6E9] bg-white p-2.5 space-y-1">
-                  <span className="font-bold text-[#344C59] capitalize block border-b border-[#DCE6E9] pb-1">
+                <div key={key} className="rounded border border-[#E8DFD3] bg-white p-2.5 space-y-1">
+                  <span className="font-bold text-[#554638] capitalize block border-b border-[#E8DFD3] pb-1">
                     {key.replace(/_/g, " ")}
                   </span>
                   <dl className="space-y-1 pt-1">

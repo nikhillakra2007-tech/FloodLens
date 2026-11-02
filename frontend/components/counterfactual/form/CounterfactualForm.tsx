@@ -272,7 +272,7 @@ export default function CounterfactualForm({ investigationId }: CounterfactualFo
             type="button"
             onClick={handleRunCounterfactual}
             disabled={mutation.isPending}
-            className="w-full rounded-2xl bg-[#126D66] hover:bg-[#101F2B] px-6 py-3.5 text-sm font-bold text-white shadow-cool hover:shadow-lift transition-all disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer flex items-center justify-center gap-2"
+            className="w-full rounded-2xl bg-terracotta-600 hover:bg-terracotta-700 px-6 py-3.5 text-sm font-bold text-white shadow-warm hover:shadow-lift transition-all disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer flex items-center justify-center gap-2"
           >
             {mutation.isPending ? (
               <>
@@ -303,7 +303,7 @@ export default function CounterfactualForm({ investigationId }: CounterfactualFo
 
       {mutation.isPending && (
         <div className="space-y-2">
-          <p className="text-xs text-[#647C89] font-medium">Evaluating rational peak runoff proxy balance...</p>
+          <p className="text-xs text-[#756350] font-medium">Evaluating rational peak runoff proxy balance...</p>
           <LoadingSkeleton variant="card" />
         </div>
       )}

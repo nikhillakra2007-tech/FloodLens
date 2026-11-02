@@ -17,9 +17,9 @@ import { useAuth } from "@/lib/auth/context";
 const FloodMap = nextDynamic(() => import("@/components/map/FloodMap"), {
   ssr: false,
   loading: () => (
-    <div className="flex h-96 w-full items-center justify-center rounded-2xl border border-[#DCE6E9] bg-[#EAF1F3]">
-      <div className="flex items-center gap-3 text-sm font-semibold text-[#126D66]">
-        <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#126D66] border-t-transparent" />
+    <div className="flex h-96 w-full items-center justify-center rounded-2xl border border-[#E8DFD3] bg-[#F5EFE6]">
+      <div className="flex items-center gap-3 text-sm font-semibold text-terracotta-700">
+        <span className="h-4 w-4 animate-spin rounded-full border-2 border-terracotta-600 border-t-transparent" />
         <span>Loading Chennai Geospatial Basemap...</span>
       </div>
     </div>
@@ -330,20 +330,20 @@ export default function NewInvestigationPage() {
   if (mounted && experienceMode === "citizen") {
     return (
       <div className="mx-auto max-w-3xl px-4 py-16 text-center space-y-6">
-        <div className="rounded-3xl border border-[#DDF2EE] bg-[#F6F9FA] p-8 sm:p-12 shadow-card space-y-5">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-[#DDF2EE] bg-[#ECF7F5] px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#126D66]">
+        <div className="rounded-3xl border border-terracotta-200 bg-[#FAF7F2] p-8 sm:p-12 shadow-card space-y-5">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-terracotta-200 bg-terracotta-50 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-terracotta-800">
             Citizen Mode Active
           </span>
-          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#172D3A]">
+          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#221B15]">
             Technical Workspace Boundary
           </h1>
-          <p className="text-sm sm:text-base text-[#344C59] leading-relaxed max-w-xl mx-auto font-normal">
+          <p className="text-sm sm:text-base text-[#554638] leading-relaxed max-w-xl mx-auto font-normal">
             The Differential Spatial Diagnostic Console is reserved for municipal hydrologists and civil engineers calculating Manning conduit equations and backwater curves. As a Citizen Resident Observer, your dedicated interface is the Resident Community Portal.
           </p>
           <div className="pt-2 flex justify-center">
             <Link
               href="/hub"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#126D66] px-6 py-3 text-sm font-semibold text-white shadow-cool hover:bg-[#101F2B] transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-xl bg-terracotta-600 px-6 py-3 text-sm font-semibold text-white shadow-warm hover:bg-terracotta-700 transition-all cursor-pointer"
             >
               <span>← Return to Citizen Resident Portal</span>
             </Link>
@@ -356,16 +356,16 @@ export default function NewInvestigationPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 space-y-6 min-w-0 overflow-x-hidden">
       {/* 1. TOP STATUS BAR: ACTIVE PAIR STATUS */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-[#DCE6E9]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-[#E8DFD3]">
         <div className="flex items-center gap-2">
-          <span className="font-serif text-lg font-bold text-[#172D3A]">
+          <span className="font-serif text-lg font-bold text-[#221B15]">
             Differential Catchment Investigation Setup
           </span>
         </div>
 
         {/* Live Catchment Status Chip */}
-        <div className="flex items-center gap-3 bg-[#F6F9FA] border border-[#DCE6E9] rounded-2xl px-4 py-2 text-xs shadow-xs">
-          <span className="font-semibold text-[#647C89] uppercase tracking-wider text-[11px]">
+        <div className="flex items-center gap-3 bg-[#FAF7F2] border border-[#E8DFD3] rounded-2xl px-4 py-2 text-xs shadow-xs">
+          <span className="font-semibold text-[#756350] uppercase tracking-wider text-[11px]">
             Diagnostic Axis:
           </span>
           {placeA && placeB ? (
@@ -374,32 +374,32 @@ export default function NewInvestigationPage() {
                 <span className="h-2 w-2 rounded-full bg-[#C23E2A]" />
                 {formatPlaceOptionLabel(placeA)}
               </span>
-              <span className="text-[#879AA4]">vs</span>
+              <span className="text-[#9E8B75]">vs</span>
               <span className="text-[#3B8352] flex items-center gap-1">
                 <span className="h-2 w-2 rounded-full bg-[#3B8352]" />
                 {formatPlaceOptionLabel(placeB)}
               </span>
               {comparison && (
-                <span className="bg-[#DDF2EE] text-[#126D66] px-2 py-0.5 rounded text-[10px] font-semibold">
+                <span className="bg-terracotta-100 text-terracotta-800 px-2 py-0.5 rounded text-[10px] font-semibold">
                   {(comparison.similarity_score * 100).toFixed(0)}% Fit
                 </span>
               )}
             </div>
           ) : (
-            <span className="text-[#879AA4] italic">Choose catchments below</span>
+            <span className="text-[#9E8B75] italic">Choose catchments below</span>
           )}
         </div>
       </div>
 
       {/* 2. DEDICATED FUNCTIONAL SECTION BAR (Single-Section Switcher Tabs) */}
-      <div className="bg-white rounded-2xl border border-[#DCE6E9] p-1.5 shadow-sm flex flex-wrap gap-1.5">
+      <div className="bg-white rounded-2xl border border-[#E8DFD3] p-1.5 shadow-sm flex flex-wrap gap-1.5">
         <button
           type="button"
           onClick={() => setActiveSection("select")}
           className={`flex-1 min-w-[125px] sm:min-w-0 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
             activeSection === "select"
-              ? "bg-[#126D66] text-white shadow-cool"
-              : "text-[#344C59] hover:bg-[#F6F9FA] hover:text-[#172D3A]"
+              ? "bg-terracotta-600 text-white shadow-warm"
+              : "text-[#554638] hover:bg-[#FAF7F2] hover:text-[#221B15]"
           }`}
         >
           <span>🎯</span>
@@ -411,8 +411,8 @@ export default function NewInvestigationPage() {
           onClick={() => setActiveSection("map")}
           className={`flex-1 min-w-[125px] sm:min-w-0 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
             activeSection === "map"
-              ? "bg-[#126D66] text-white shadow-cool"
-              : "text-[#344C59] hover:bg-[#F6F9FA] hover:text-[#172D3A]"
+              ? "bg-terracotta-600 text-white shadow-warm"
+              : "text-[#554638] hover:bg-[#FAF7F2] hover:text-[#221B15]"
           }`}
         >
           <span>🗺️</span>
@@ -424,8 +424,8 @@ export default function NewInvestigationPage() {
           onClick={() => setActiveSection("vectors")}
           className={`flex-1 min-w-[125px] sm:min-w-0 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
             activeSection === "vectors"
-              ? "bg-[#126D66] text-white shadow-cool"
-              : "text-[#344C59] hover:bg-[#F6F9FA] hover:text-[#172D3A]"
+              ? "bg-terracotta-600 text-white shadow-warm"
+              : "text-[#554638] hover:bg-[#FAF7F2] hover:text-[#221B15]"
           }`}
         >
           <span>⚖️</span>
@@ -437,8 +437,8 @@ export default function NewInvestigationPage() {
           onClick={() => setActiveSection("engine")}
           className={`flex-1 min-w-[125px] sm:min-w-0 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
             activeSection === "engine"
-              ? "bg-[#126D66] text-white shadow-cool"
-              : "text-[#344C59] hover:bg-[#F6F9FA] hover:text-[#172D3A]"
+              ? "bg-terracotta-600 text-white shadow-warm"
+              : "text-[#554638] hover:bg-[#FAF7F2] hover:text-[#221B15]"
           }`}
         >
           <span>🚀</span>
@@ -450,12 +450,12 @@ export default function NewInvestigationPage() {
       {activeSection === "select" && (
         <div className="space-y-6 animate-fadeIn">
           {/* Quick Preset Selector Pill Bar */}
-          <div className="rounded-3xl border border-[#DCE6E9] bg-[#F6F9FA] p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
+          <div className="rounded-3xl border border-[#E8DFD3] bg-[#FAF7F2] p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
             <div className="space-y-1">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#126D66] block">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-terracotta-700 block">
                 Calibrated Ward Presets (2023 Cyclone Michaung &amp; Recent Monsoons)
               </span>
-              <p className="text-xs text-[#344C59]">
+              <p className="text-xs text-[#554638]">
                 Select pre-calibrated urban twin pairs with radar-verified rainfall equivalence:
               </p>
             </div>
@@ -463,14 +463,14 @@ export default function NewInvestigationPage() {
               <button
                 type="button"
                 onClick={() => handleSelectPreset("Anna Nagar", "Velachery")}
-                className="rounded-xl border border-[#DCE6E9] bg-white px-3.5 py-2 text-xs font-bold text-[#172D3A] hover:border-[#168C83] hover:bg-[#ECF7F5] transition-all flex items-center gap-2 cursor-pointer shadow-xs"
+                className="rounded-xl border border-[#E8DFD3] bg-white px-3.5 py-2 text-xs font-bold text-[#221B15] hover:border-terracotta-400 hover:bg-terracotta-50 transition-all flex items-center gap-2 cursor-pointer shadow-xs"
               >
                 <span className="h-2 w-2 rounded-full bg-[#C23E2A]" />
                 <span>Anna Nagar</span>
-                <span className="text-[#879AA4]">vs</span>
+                <span className="text-[#9E8B75]">vs</span>
                 <span className="h-2 w-2 rounded-full bg-[#3B8352]" />
                 <span>Velachery</span>
-                <span className="font-mono text-[10px] text-[#126D66] bg-[#DDF2EE] px-1.5 py-0.5 rounded">
+                <span className="font-mono text-[10px] text-terracotta-700 bg-terracotta-100 px-1.5 py-0.5 rounded">
                   83% Fit
                 </span>
               </button>
@@ -478,14 +478,14 @@ export default function NewInvestigationPage() {
               <button
                 type="button"
                 onClick={() => handleSelectPreset("T Nagar", "Adyar")}
-                className="rounded-xl border border-[#DCE6E9] bg-white px-3.5 py-2 text-xs font-bold text-[#172D3A] hover:border-[#168C83] hover:bg-[#ECF7F5] transition-all flex items-center gap-2 cursor-pointer shadow-xs"
+                className="rounded-xl border border-[#E8DFD3] bg-white px-3.5 py-2 text-xs font-bold text-[#221B15] hover:border-terracotta-400 hover:bg-terracotta-50 transition-all flex items-center gap-2 cursor-pointer shadow-xs"
               >
                 <span className="h-2 w-2 rounded-full bg-[#C23E2A]" />
                 <span>T Nagar</span>
-                <span className="text-[#879AA4]">vs</span>
+                <span className="text-[#9E8B75]">vs</span>
                 <span className="h-2 w-2 rounded-full bg-[#3B8352]" />
                 <span>Adyar</span>
-                <span className="font-mono text-[10px] text-[#126D66] bg-[#DDF2EE] px-1.5 py-0.5 rounded">
+                <span className="font-mono text-[10px] text-terracotta-700 bg-terracotta-100 px-1.5 py-0.5 rounded">
                   91% Fit
                 </span>
               </button>
@@ -495,18 +495,18 @@ export default function NewInvestigationPage() {
           {/* Dual Selection Cards */}
           <div className="grid grid-cols-1 md:grid-cols-11 gap-6 items-stretch">
             {/* Location A Card */}
-            <div className="md:col-span-5 rounded-3xl border-2 border-red-200 bg-white p-6 shadow-card flex flex-col justify-between space-y-4">
+            <div className="md:col-span-5 rounded-3xl border-2 border-red-200 bg-[#FFFDFB] p-6 shadow-card flex flex-col justify-between space-y-4">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#C23E2A]">
                     <span className="h-2 w-2 rounded-full bg-[#C23E2A]" />
                     Location A (Inundated Site)
                   </span>
-                  <span className="text-xs text-[#647C89] font-semibold">Incident Focus</span>
+                  <span className="text-xs text-[#756350] font-semibold">Incident Focus</span>
                 </div>
 
                 <div>
-                  <label className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-[#344C59]">
+                  <label className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-[#554638]">
                     Select Flooded Catchment:
                   </label>
                   <select
@@ -526,7 +526,7 @@ export default function NewInvestigationPage() {
                       }
                     }}
                     disabled={placesLoading}
-                    className="w-full rounded-xl border border-[#DCE6E9] bg-white px-3.5 py-2.5 text-xs font-semibold text-[#172D3A] shadow-xs focus:border-[#168C83] cursor-pointer"
+                    className="w-full rounded-xl border border-[#E0D5C7] bg-white px-3.5 py-2.5 text-xs font-semibold text-[#221B15] shadow-xs focus:border-terracotta-500 cursor-pointer"
                   >
                     <option value="">{placesLoading ? "Loading GCC wards..." : "Choose Location A..."}</option>
                     {places.map((place) => (
@@ -538,23 +538,23 @@ export default function NewInvestigationPage() {
                 </div>
 
                 {placeA ? (
-                  <div className="rounded-2xl border border-red-100 bg-[#F6F9FA] p-4 space-y-2 text-xs">
+                  <div className="rounded-2xl border border-red-100 bg-[#FAF7F2] p-4 space-y-2 text-xs">
                     <div className="flex justify-between items-center">
-                      <span className="font-serif font-bold text-sm text-[#172D3A]">{getCleanPlaceName(placeA.name)}</span>
+                      <span className="font-serif font-bold text-sm text-[#221B15]">{getCleanPlaceName(placeA.name)}</span>
                       <span className="font-mono text-[#C23E2A] bg-red-100 px-2 py-0.5 rounded-full font-bold text-[10px]">
                         Ward {placeA.ward ?? "N/A"}
                       </span>
                     </div>
-                    <p className="text-[#344C59] text-[11px] leading-relaxed">
+                    <p className="text-[#554638] text-[11px] leading-relaxed">
                       {placeA.description ?? "Monitored catchment station in Greater Chennai Corporation."}
                     </p>
-                    <div className="font-mono text-[10px] text-[#647C89] pt-1 border-t border-[#DCE6E9] flex justify-between">
+                    <div className="font-mono text-[10px] text-[#756350] pt-1 border-t border-[#E8DFD3] flex justify-between">
                       <span>Coordinates: {placeA.latitude.toFixed(3)}°N, {placeA.longitude.toFixed(3)}°E</span>
                       <span>Zone: {placeA.zone}</span>
                     </div>
                   </div>
                 ) : (
-                  <div className="rounded-2xl border border-dashed border-[#C6D5DA] p-5 text-center text-xs text-[#647C89]">
+                  <div className="rounded-2xl border border-dashed border-[#DFD3C1] p-5 text-center text-xs text-[#756350]">
                     Select a ward above or choose directly on the map.
                   </div>
                 )}
@@ -563,24 +563,24 @@ export default function NewInvestigationPage() {
 
             {/* VS Divider */}
             <div className="md:col-span-1 flex items-center justify-center py-2">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#DCE6E9] bg-white shadow-card font-serif font-black text-xs text-[#126D66]">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#E8DFD3] bg-white shadow-card font-serif font-black text-xs text-terracotta-700">
                 VS
               </div>
             </div>
 
             {/* Location B Card */}
-            <div className="md:col-span-5 rounded-3xl border-2 border-emerald-200 bg-white p-6 shadow-card flex flex-col justify-between space-y-4">
+            <div className="md:col-span-5 rounded-3xl border-2 border-emerald-200 bg-[#FFFDFB] p-6 shadow-card flex flex-col justify-between space-y-4">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#3B8352]">
                     <span className="h-2 w-2 rounded-full bg-[#3B8352]" />
                     Location B (Control Benchmark)
                   </span>
-                  <span className="text-xs text-[#647C89] font-semibold">Resilient Twin</span>
+                  <span className="text-xs text-[#756350] font-semibold">Resilient Twin</span>
                 </div>
 
                 <div>
-                  <label className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-[#344C59]">
+                  <label className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-[#554638]">
                     Select Resilient Control Ward:
                   </label>
                   <select
@@ -594,7 +594,7 @@ export default function NewInvestigationPage() {
                       }
                     }}
                     disabled={placesLoading || !placeA}
-                    className="w-full rounded-xl border border-[#DCE6E9] bg-white px-3.5 py-2.5 text-xs font-semibold text-[#172D3A] shadow-xs focus:border-emerald-500 cursor-pointer disabled:opacity-50"
+                    className="w-full rounded-xl border border-[#E0D5C7] bg-white px-3.5 py-2.5 text-xs font-semibold text-[#221B15] shadow-xs focus:border-emerald-500 cursor-pointer disabled:opacity-50"
                   >
                     <option value="">
                       {!placeA ? "Select Location A first" : "Choose comparison ward..."}
@@ -623,29 +623,29 @@ export default function NewInvestigationPage() {
                 </div>
 
                 {comparablesLoading && placeA && (
-                  <p className="text-xs text-[#126D66] font-semibold animate-pulse">
+                  <p className="text-xs text-terracotta-700 font-semibold animate-pulse">
                     Computing highest-similarity urban catchments...
                   </p>
                 )}
 
                 {placeB ? (
-                  <div className="rounded-2xl border border-emerald-100 bg-[#F6F9FA] p-4 space-y-2 text-xs">
+                  <div className="rounded-2xl border border-emerald-100 bg-[#FAF7F2] p-4 space-y-2 text-xs">
                     <div className="flex justify-between items-center">
-                      <span className="font-serif font-bold text-sm text-[#172D3A]">{getCleanPlaceName(placeB.name)}</span>
+                      <span className="font-serif font-bold text-sm text-[#221B15]">{getCleanPlaceName(placeB.name)}</span>
                       <span className="font-mono text-[#3B8352] bg-emerald-100 px-2 py-0.5 rounded-full font-bold text-[10px]">
                         Ward {placeB.ward ?? "N/A"}
                       </span>
                     </div>
-                    <p className="text-[#344C59] text-[11px] leading-relaxed">
+                    <p className="text-[#554638] text-[11px] leading-relaxed">
                       {placeB.description ?? "Benchmark resilient catchment station in Greater Chennai."}
                     </p>
-                    <div className="font-mono text-[10px] text-[#647C89] pt-1 border-t border-[#DCE6E9] flex justify-between">
+                    <div className="font-mono text-[10px] text-[#756350] pt-1 border-t border-[#E8DFD3] flex justify-between">
                       <span>Coordinates: {placeB.latitude.toFixed(3)}°N, {placeB.longitude.toFixed(3)}°E</span>
                       <span>Zone: {placeB.zone}</span>
                     </div>
                   </div>
                 ) : (
-                  <div className="rounded-2xl border border-dashed border-[#C6D5DA] p-5 text-center text-xs text-[#647C89]">
+                  <div className="rounded-2xl border border-dashed border-[#DFD3C1] p-5 text-center text-xs text-[#756350]">
                     Select a control ward above or choose directly on the map.
                   </div>
                 )}
@@ -654,11 +654,11 @@ export default function NewInvestigationPage() {
           </div>
 
           {/* Section Action Navigation */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#DCE6E9]">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#E8DFD3]">
             <button
               type="button"
               onClick={() => setActiveSection("map")}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-[#DCE6E9] bg-white hover:bg-[#F6F9FA] px-6 py-3.5 text-xs font-bold text-[#172D3A] transition-all cursor-pointer shadow-xs"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-[#E0D5C7] bg-white hover:bg-[#FAF7F2] px-6 py-3.5 text-xs font-bold text-[#221B15] transition-all cursor-pointer shadow-xs"
             >
               <span>🗺️ View &amp; Select on Geospatial Map →</span>
             </button>
@@ -672,7 +672,7 @@ export default function NewInvestigationPage() {
                 setActiveSection("vectors");
               }}
               disabled={!placeA || !placeB}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-[#126D66] hover:bg-[#101F2B] px-8 py-3.5 text-xs font-bold text-white shadow-cool transition-all cursor-pointer disabled:opacity-40"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-terracotta-600 hover:bg-terracotta-700 px-8 py-3.5 text-xs font-bold text-white shadow-warm transition-all cursor-pointer disabled:opacity-40"
             >
               <span>⚖️ Proceed to Environmental Vectors →</span>
             </button>
@@ -682,19 +682,19 @@ export default function NewInvestigationPage() {
 
       {/* 4. SECTION 2: INTERACTIVE GEOSPATIAL MAP */}
       {activeSection === "map" && (
-        <div className="rounded-3xl border border-[#DCE6E9] bg-white p-6 sm:p-8 shadow-card space-y-4 animate-fadeIn">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#DCE6E9]">
+        <div className="rounded-3xl border border-[#E8DFD3] bg-white p-6 sm:p-8 shadow-card space-y-4 animate-fadeIn">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#E8DFD3]">
             <div>
-              <h2 className="font-serif text-xl font-bold text-[#172D3A] flex items-center gap-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-[#126D66]" />
+              <h2 className="font-serif text-xl font-bold text-[#221B15] flex items-center gap-2">
+                <span className="h-2.5 w-2.5 rounded-full bg-terracotta-600" />
                 <span>Greater Chennai Catchment &amp; Flood Geospatial Grid</span>
               </h2>
-              <p className="text-xs text-[#344C59] mt-0.5">
+              <p className="text-xs text-[#554638] mt-0.5">
                 Click any ward pin to inspect telemetry or assign as Location A (Inundated) or Location B (Control Twin).
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <span className="font-mono text-xs text-[#647C89] bg-[#F6F9FA] border border-[#DCE6E9] px-3 py-1.5 rounded-xl">
+              <span className="font-mono text-xs text-[#756350] bg-[#FAF7F2] border border-[#E8DFD3] px-3 py-1.5 rounded-xl">
                 Chennai Datum: 13.04°N, 80.22°E
               </span>
             </div>
@@ -712,11 +712,11 @@ export default function NewInvestigationPage() {
           />
 
           {/* Map Section Navigation */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-3 border-t border-[#DCE6E9]">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-3 border-t border-[#E8DFD3]">
             <button
               type="button"
               onClick={() => setActiveSection("select")}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-[#DCE6E9] bg-white hover:bg-[#F6F9FA] px-6 py-3 text-xs font-bold text-[#344C59] transition-all cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-[#E0D5C7] bg-white hover:bg-[#FAF7F2] px-6 py-3 text-xs font-bold text-[#554638] transition-all cursor-pointer"
             >
               <span>← Back to Catchment Selector</span>
             </button>
@@ -730,7 +730,7 @@ export default function NewInvestigationPage() {
                 setActiveSection("vectors");
               }}
               disabled={!placeA || !placeB}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-[#126D66] hover:bg-[#101F2B] px-8 py-3 text-xs font-bold text-white shadow-cool transition-all cursor-pointer disabled:opacity-40"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-terracotta-600 hover:bg-terracotta-700 px-8 py-3 text-xs font-bold text-white shadow-warm transition-all cursor-pointer disabled:opacity-40"
             >
               <span>⚖️ Proceed to Environmental Vectors →</span>
             </button>
@@ -740,23 +740,23 @@ export default function NewInvestigationPage() {
 
       {/* 5. SECTION 3: ENVIRONMENTAL VECTORS & DIFFERENTIAL ANALYSIS */}
       {activeSection === "vectors" && (
-        <div className="rounded-3xl border border-[#DCE6E9] bg-white p-6 sm:p-8 shadow-card space-y-6 animate-fadeIn">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#DCE6E9]">
+        <div className="rounded-3xl border border-[#E8DFD3] bg-white p-6 sm:p-8 shadow-card space-y-6 animate-fadeIn">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E8DFD3]">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#126D66]">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-terracotta-700">
                 Hydrological Environmental Alignment
               </span>
-              <h2 className="font-serif text-2xl font-bold text-[#172D3A] mt-0.5">
+              <h2 className="font-serif text-2xl font-bold text-[#221B15] mt-0.5">
                 {placeA?.name ?? "Location A"} vs {placeB?.name ?? "Location B"}
               </h2>
             </div>
 
-            <div className="flex items-center gap-4 bg-[#F6F9FA] border border-[#DCE6E9] rounded-2xl px-5 py-3">
+            <div className="flex items-center gap-4 bg-[#FAF7F2] border border-[#E8DFD3] rounded-2xl px-5 py-3">
               <div className="text-right">
-                <div className="text-[10px] font-bold text-[#647C89] uppercase tracking-wider">Topographic Fit</div>
-                <div className="text-xs text-[#344C59]">Control Correlation</div>
+                <div className="text-[10px] font-bold text-[#756350] uppercase tracking-wider">Topographic Fit</div>
+                <div className="text-xs text-[#554638]">Control Correlation</div>
               </div>
-              <div className="text-3xl font-extrabold text-[#168C83] font-mono">
+              <div className="text-3xl font-extrabold text-terracotta-600 font-mono">
                 {comparison ? (comparison.similarity_score * 100).toFixed(0) : "83"}%
               </div>
             </div>
@@ -765,85 +765,85 @@ export default function NewInvestigationPage() {
           {/* Environmental Vectors 4-Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Precipitation */}
-            <div className="rounded-2xl border border-[#DCE6E9] bg-[#F6F9FA] p-4 space-y-2">
+            <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-4 space-y-2">
               <div className="flex justify-between text-xs">
-                <span className="font-bold text-[#172D3A] flex items-center gap-1.5">
+                <span className="font-bold text-[#221B15] flex items-center gap-1.5">
                   🌧️ Cloudburst Rainfall Alignment
                 </span>
-                <span className="font-mono font-bold text-[#126D66]">
+                <span className="font-mono font-bold text-terracotta-700">
                   {(rainfallScore * 100).toFixed(0)}% (±2% Confound Neutralized)
                 </span>
               </div>
-              <div className="h-2 w-full overflow-hidden rounded-full bg-[#DCE6E9]">
+              <div className="h-2 w-full overflow-hidden rounded-full bg-[#E0D5C7]">
                 <div
-                  className="h-full rounded-full bg-[#126D66]"
+                  className="h-full rounded-full bg-terracotta-600"
                   style={{ width: `${Math.max(8, rainfallScore * 100)}%` }}
                 />
               </div>
-              <p className="text-[11px] text-[#344C59]">
+              <p className="text-[11px] text-[#554638]">
                 Both catchments received extreme precipitation (420mm+ during 2023 Cyclone Michaung and 2021 events), isolating civil &amp; topographical factors.
               </p>
             </div>
 
             {/* DEM Terrain */}
-            <div className="rounded-2xl border border-[#DCE6E9] bg-[#F6F9FA] p-4 space-y-2">
+            <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-4 space-y-2">
               <div className="flex justify-between text-xs">
-                <span className="font-bold text-[#172D3A] flex items-center gap-1.5">
+                <span className="font-bold text-[#221B15] flex items-center gap-1.5">
                   ⛰️ DEM Elevation &amp; Slope Gradient
                 </span>
-                <span className="font-mono font-bold text-[#126D66]">
+                <span className="font-mono font-bold text-terracotta-700">
                   {(terrainScore * 100).toFixed(0)}%
                 </span>
               </div>
-              <div className="h-2 w-full overflow-hidden rounded-full bg-[#DCE6E9]">
+              <div className="h-2 w-full overflow-hidden rounded-full bg-[#E0D5C7]">
                 <div
-                  className="h-full rounded-full bg-[#126D66]"
+                  className="h-full rounded-full bg-terracotta-600"
                   style={{ width: `${Math.max(8, terrainScore * 100)}%` }}
                 />
               </div>
-              <p className="text-[11px] text-[#344C59]">
+              <p className="text-[11px] text-[#554638]">
                 Micro-depression basin in {placeA?.name ?? "Location A"} holds runoff versus natural gravitational fall in {placeB?.name ?? "Location B"}.
               </p>
             </div>
 
             {/* SWD Stormwater Drainage */}
-            <div className="rounded-2xl border border-[#DCE6E9] bg-[#F6F9FA] p-4 space-y-2">
+            <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-4 space-y-2">
               <div className="flex justify-between text-xs">
-                <span className="font-bold text-[#172D3A] flex items-center gap-1.5">
+                <span className="font-bold text-[#221B15] flex items-center gap-1.5">
                   🚰 SWD Stormwater Conduit Capacity
                 </span>
-                <span className="font-mono font-bold text-[#126D66]">
+                <span className="font-mono font-bold text-terracotta-700">
                   {(drainageScore * 100).toFixed(0)}%
                 </span>
               </div>
-              <div className="h-2 w-full overflow-hidden rounded-full bg-[#DCE6E9]">
+              <div className="h-2 w-full overflow-hidden rounded-full bg-[#E0D5C7]">
                 <div
-                  className="h-full rounded-full bg-[#126D66]"
+                  className="h-full rounded-full bg-terracotta-600"
                   style={{ width: `${Math.max(8, drainageScore * 100)}%` }}
                 />
               </div>
-              <p className="text-[11px] text-[#344C59]">
+              <p className="text-[11px] text-[#554638]">
                 Conduit desilting and cross-sectional intake area differentiate safe discharge from street surcharge.
               </p>
             </div>
 
             {/* Impervious Surface */}
-            <div className="rounded-2xl border border-[#DCE6E9] bg-[#F6F9FA] p-4 space-y-2">
+            <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-4 space-y-2">
               <div className="flex justify-between text-xs">
-                <span className="font-bold text-[#172D3A] flex items-center gap-1.5">
+                <span className="font-bold text-[#221B15] flex items-center gap-1.5">
                   🏙️ Urban Impervious Surface Fraction
                 </span>
-                <span className="font-mono font-bold text-[#126D66]">
+                <span className="font-mono font-bold text-terracotta-700">
                   {(landcoverScore * 100).toFixed(0)}%
                 </span>
               </div>
-              <div className="h-2 w-full overflow-hidden rounded-full bg-[#DCE6E9]">
+              <div className="h-2 w-full overflow-hidden rounded-full bg-[#E0D5C7]">
                 <div
-                  className="h-full rounded-full bg-[#126D66]"
+                  className="h-full rounded-full bg-terracotta-600"
                   style={{ width: `${Math.max(8, landcoverScore * 100)}%` }}
                 />
               </div>
-              <p className="text-[11px] text-[#344C59]">
+              <p className="text-[11px] text-[#554638]">
                 High paved commercial surfaces accelerate peak overland runoff coefficient Q = C·I·A.
               </p>
             </div>
@@ -854,18 +854,18 @@ export default function NewInvestigationPage() {
             <button
               type="button"
               onClick={handleCompare}
-              className="text-xs font-bold text-[#126D66] hover:text-[#101F2B] underline flex items-center gap-1 cursor-pointer"
+              className="text-xs font-bold text-terracotta-700 hover:text-terracotta-900 underline flex items-center gap-1 cursor-pointer"
             >
               <span>🔍 Open Pop-up Comparison Modal with Deep Backdrop Blur →</span>
             </button>
           </div>
 
           {/* Section Navigation */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#DCE6E9]">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#E8DFD3]">
             <button
               type="button"
               onClick={() => setActiveSection("map")}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-[#DCE6E9] bg-white hover:bg-[#F6F9FA] px-6 py-3 text-xs font-bold text-[#344C59] transition-all cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-[#E0D5C7] bg-white hover:bg-[#FAF7F2] px-6 py-3 text-xs font-bold text-[#554638] transition-all cursor-pointer"
             >
               <span>← Back to Geospatial Map</span>
             </button>
@@ -873,7 +873,7 @@ export default function NewInvestigationPage() {
             <button
               type="button"
               onClick={() => setActiveSection("engine")}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-[#126D66] hover:bg-[#101F2B] px-8 py-3 text-xs font-bold text-white shadow-cool transition-all cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-terracotta-600 hover:bg-terracotta-700 px-8 py-3 text-xs font-bold text-white shadow-warm transition-all cursor-pointer"
             >
               <span>🚀 Proceed to Diagnostic Pipeline →</span>
             </button>
@@ -883,18 +883,18 @@ export default function NewInvestigationPage() {
 
       {/* 6. SECTION 4: LIVE CAUSAL DIAGNOSTIC PIPELINE */}
       {activeSection === "engine" && (
-        <div className="rounded-3xl border border-[#DCE6E9] bg-white p-6 sm:p-8 shadow-card space-y-6 animate-fadeIn">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#DCE6E9]">
+        <div className="rounded-3xl border border-[#E8DFD3] bg-white p-6 sm:p-8 shadow-card space-y-6 animate-fadeIn">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#E8DFD3]">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#126D66]">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-terracotta-700">
                 Automated Hydrological Pipeline
               </span>
-              <h2 className="font-serif text-2xl font-bold text-[#172D3A] mt-0.5">
+              <h2 className="font-serif text-2xl font-bold text-[#221B15] mt-0.5">
                 Causal DAG Formulation &amp; Audit Engine
               </h2>
             </div>
 
-            <span className="font-mono text-xs font-bold text-[#126D66] bg-[#ECF7F5] border border-[#DDF2EE] px-3 py-1.5 rounded-full w-fit">
+            <span className="font-mono text-xs font-bold text-terracotta-700 bg-terracotta-50 border border-terracotta-200 px-3 py-1.5 rounded-full w-fit">
               5-Step Deterministic Diagnostics
             </span>
           </div>
@@ -930,7 +930,7 @@ export default function NewInvestigationPage() {
                 <button
                   type="button"
                   onClick={() => handleSelectPreset("Anna Nagar", "Velachery")}
-                  className="mt-1 text-xs font-bold text-[#126D66] hover:text-[#101F2B] underline cursor-pointer"
+                  className="mt-1 text-xs font-bold text-terracotta-700 hover:text-terracotta-900 underline cursor-pointer"
                 >
                   Switch to Calibrated Pair (Anna Nagar vs Velachery) →
                 </button>
@@ -947,8 +947,8 @@ export default function NewInvestigationPage() {
                   step.status === "completed"
                     ? "border-emerald-200 bg-emerald-50/70"
                     : step.status === "running"
-                    ? "border-[#168C83] bg-[#ECF7F5]/90 shadow-sm"
-                    : "border-[#DCE6E9] bg-[#F6F9FA] opacity-75"
+                    ? "border-terracotta-300 bg-terracotta-50/90 shadow-sm"
+                    : "border-[#E8DFD3] bg-[#FAF7F2] opacity-75"
                 }`}
               >
                 <div className="mt-0.5 shrink-0">
@@ -957,9 +957,9 @@ export default function NewInvestigationPage() {
                       ✓
                     </div>
                   ) : step.status === "running" ? (
-                    <div className="h-6 w-6 rounded-full border-2 border-[#126D66] border-t-transparent animate-spin" />
+                    <div className="h-6 w-6 rounded-full border-2 border-terracotta-600 border-t-transparent animate-spin" />
                   ) : (
-                    <div className="h-6 w-6 rounded-full border-2 border-[#C6D5DA] text-[#647C89] flex items-center justify-center font-bold text-xs">
+                    <div className="h-6 w-6 rounded-full border-2 border-[#D5C6B3] text-[#756350] flex items-center justify-center font-bold text-xs">
                       {step.id}
                     </div>
                   )}
@@ -967,23 +967,23 @@ export default function NewInvestigationPage() {
 
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-xs text-[#172D3A]">{step.label}</span>
-                    <span className="font-mono text-[10px] font-bold uppercase text-[#647C89]">
+                    <span className="font-bold text-xs text-[#221B15]">{step.label}</span>
+                    <span className="font-mono text-[10px] font-bold uppercase text-[#756350]">
                       {step.status}
                     </span>
                   </div>
-                  <p className="text-[11px] text-[#344C59] mt-0.5">{step.detail}</p>
+                  <p className="text-[11px] text-[#554638] mt-0.5">{step.detail}</p>
                 </div>
               </div>
             ))}
           </div>
 
           {/* Main Launch Button */}
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-[#DCE6E9]">
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-[#E8DFD3]">
             <button
               type="button"
               onClick={() => setActiveSection("vectors")}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-[#DCE6E9] bg-white hover:bg-[#F6F9FA] px-6 py-3.5 text-xs font-bold text-[#344C59] transition-all cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-[#E0D5C7] bg-white hover:bg-[#FAF7F2] px-6 py-3.5 text-xs font-bold text-[#554638] transition-all cursor-pointer"
             >
               <span>← Back to Environmental Vectors</span>
             </button>
@@ -992,7 +992,7 @@ export default function NewInvestigationPage() {
               type="button"
               onClick={handleStartInvestigation}
               disabled={isSubmitDisabled}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-[#126D66] hover:bg-[#101F2B] px-8 py-4 text-sm font-bold text-white shadow-cool hover:shadow-lift transition-all cursor-pointer disabled:opacity-40"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-terracotta-600 hover:bg-terracotta-700 px-8 py-4 text-sm font-bold text-white shadow-warm hover:shadow-lift transition-all cursor-pointer disabled:opacity-40"
             >
               {investigateMutation.isPending || isInvestigating ? (
                 <>
@@ -1020,19 +1020,19 @@ export default function NewInvestigationPage() {
           onClick={() => setShowCompareModal(false)}
         >
           <div
-            className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-3xl border border-[#DCE6E9] bg-white shadow-2xl p-6 sm:p-9 space-y-6 cursor-default"
+            className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-3xl border border-[#E8DFD3] bg-[#FFFDF9] shadow-2xl p-6 sm:p-9 space-y-6 cursor-default"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header with Title and Close Button */}
-            <div className="flex items-start justify-between gap-4 pb-4 border-b border-[#DCE6E9]">
+            <div className="flex items-start justify-between gap-4 pb-4 border-b border-[#E8DFD3]">
               <div className="space-y-1">
-                <div className="inline-flex items-center gap-2 rounded-full border border-[#DDF2EE] bg-[#ECF7F5] px-3 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[#126D66]">
-                  <span className="h-2 w-2 rounded-full bg-[#126D66] animate-pulse" />
+                <div className="inline-flex items-center gap-2 rounded-full border border-terracotta-200 bg-terracotta-50 px-3 py-0.5 text-[11px] font-bold uppercase tracking-wider text-terracotta-800">
+                  <span className="h-2 w-2 rounded-full bg-terracotta-600 animate-pulse" />
                   <span>Twin Catchment Differential Comparison</span>
                 </div>
-                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#172D3A] tracking-tight">
+                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#221B15] tracking-tight">
                   <span className="text-[#C23E2A]">{placeA?.name}</span>
-                  <span className="text-[#879AA4] font-normal mx-2.5">vs</span>
+                  <span className="text-[#9E8B75] font-normal mx-2.5">vs</span>
                   <span className="text-[#3B8352]">{placeB?.name}</span>
                 </h2>
               </div>
@@ -1040,7 +1040,7 @@ export default function NewInvestigationPage() {
               <button
                 type="button"
                 onClick={() => setShowCompareModal(false)}
-                className="rounded-2xl border border-[#DCE6E9] bg-white p-2.5 text-[#344C59] hover:bg-[#ECF7F5] hover:text-[#126D66] hover:border-[#168C83] transition-all cursor-pointer shadow-sm shrink-0"
+                className="rounded-2xl border border-[#E0D5C7] bg-white p-2.5 text-[#554638] hover:bg-terracotta-50 hover:text-terracotta-800 hover:border-terracotta-300 transition-all cursor-pointer shadow-sm shrink-0"
                 aria-label="Close Comparison"
               >
                 <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -1052,12 +1052,12 @@ export default function NewInvestigationPage() {
 
             {/* Quick Metrics Strip */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="rounded-2xl border border-[#DCE6E9] bg-[#F6F9FA] p-4 text-center">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-[#647C89]">Overall Spatial Fit</div>
-                <div className="font-mono text-2xl font-black text-[#168C83] mt-0.5">
+              <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-4 text-center">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-[#756350]">Overall Spatial Fit</div>
+                <div className="font-mono text-2xl font-black text-terracotta-600 mt-0.5">
                   {comparison ? (comparison.similarity_score * 100).toFixed(0) : "83"}%
                 </div>
-                <div className="text-[10px] text-[#344C59] mt-0.5">High Topographic Alignment</div>
+                <div className="text-[10px] text-[#554638] mt-0.5">High Topographic Alignment</div>
               </div>
 
               <div className="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-4 text-center">
@@ -1075,32 +1075,32 @@ export default function NewInvestigationPage() {
 
             {/* Side-by-Side Environmental Vectors */}
             <div className="space-y-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#647C89] block">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#756350] block">
                 Differential Vector Breakdown:
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="rounded-2xl border border-[#DCE6E9] bg-white p-4 space-y-1.5 shadow-xs">
+                <div className="rounded-2xl border border-[#E8DFD3] bg-white p-4 space-y-1.5 shadow-xs">
                   <div className="flex justify-between text-xs">
-                    <span className="font-bold text-[#172D3A]">⛰️ DEM Elevation &amp; Slope</span>
-                    <span className="font-mono font-bold text-[#126D66]">{(terrainScore * 100).toFixed(0)}%</span>
+                    <span className="font-bold text-[#221B15]">⛰️ DEM Elevation &amp; Slope</span>
+                    <span className="font-mono font-bold text-terracotta-700">{(terrainScore * 100).toFixed(0)}%</span>
                   </div>
-                  <div className="h-2 w-full overflow-hidden rounded-full bg-[#DCE6E9]">
-                    <div className="h-full rounded-full bg-[#126D66]" style={{ width: `${Math.max(6, terrainScore * 100)}%` }} />
+                  <div className="h-2 w-full overflow-hidden rounded-full bg-[#E0D5C7]">
+                    <div className="h-full rounded-full bg-terracotta-600" style={{ width: `${Math.max(6, terrainScore * 100)}%` }} />
                   </div>
-                  <p className="text-[11px] text-[#344C59]">
+                  <p className="text-[11px] text-[#554638]">
                     {placeA?.name} features a -1.4m micro-depression sink versus {placeB?.name}&apos;s continuous natural fall.
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-[#DCE6E9] bg-white p-4 space-y-1.5 shadow-xs">
+                <div className="rounded-2xl border border-[#E8DFD3] bg-white p-4 space-y-1.5 shadow-xs">
                   <div className="flex justify-between text-xs">
-                    <span className="font-bold text-[#172D3A]">🚰 SWD Stormwater Network</span>
-                    <span className="font-mono font-bold text-[#126D66]">{(drainageScore * 100).toFixed(0)}%</span>
+                    <span className="font-bold text-[#221B15]">🚰 SWD Stormwater Network</span>
+                    <span className="font-mono font-bold text-terracotta-700">{(drainageScore * 100).toFixed(0)}%</span>
                   </div>
-                  <div className="h-2 w-full overflow-hidden rounded-full bg-[#DCE6E9]">
-                    <div className="h-full rounded-full bg-[#126D66]" style={{ width: `${Math.max(6, drainageScore * 100)}%` }} />
+                  <div className="h-2 w-full overflow-hidden rounded-full bg-[#E0D5C7]">
+                    <div className="h-full rounded-full bg-terracotta-600" style={{ width: `${Math.max(6, drainageScore * 100)}%` }} />
                   </div>
-                  <p className="text-[11px] text-[#344C59]">
+                  <p className="text-[11px] text-[#554638]">
                     Sedimentation choke restricts hydraulic radius in {placeA?.name}, driving reverse manhole pressure.
                   </p>
                 </div>
@@ -1108,21 +1108,21 @@ export default function NewInvestigationPage() {
             </div>
 
             {/* Causal Finding Callout */}
-            <div className="rounded-2xl border border-[#DDF2EE] bg-[#ECF7F5] p-4 space-y-1.5">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#126D66] block">
+            <div className="rounded-2xl border border-terracotta-200 bg-terracotta-50/80 p-4 space-y-1.5">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-terracotta-800 block">
                 Causal Takeaway:
               </span>
-              <p className="text-xs text-[#344C59] leading-relaxed">
+              <p className="text-xs text-[#433830] leading-relaxed">
                 Because precipitation was statistically identical, flooding in {placeA?.name} was mathematically caused by conduit bottlenecks and outfall backwater stagnation rather than storm excess.
               </p>
             </div>
 
             {/* Modal Actions */}
-            <div className="flex flex-col sm:flex-row items-center justify-end gap-3 pt-3 border-t border-[#DCE6E9]">
+            <div className="flex flex-col sm:flex-row items-center justify-end gap-3 pt-3 border-t border-[#E8DFD3]">
               <button
                 type="button"
                 onClick={() => setShowCompareModal(false)}
-                className="w-full sm:w-auto rounded-2xl border border-[#DCE6E9] bg-white px-6 py-3 text-xs font-bold text-[#344C59] hover:bg-[#F6F9FA] transition-all cursor-pointer"
+                className="w-full sm:w-auto rounded-2xl border border-[#E0D5C7] bg-white px-6 py-3 text-xs font-bold text-[#554638] hover:bg-[#FAF7F2] transition-all cursor-pointer"
               >
                 Close Comparison
               </button>
@@ -1133,7 +1133,7 @@ export default function NewInvestigationPage() {
                   setShowCompareModal(false);
                   setActiveSection("engine");
                 }}
-                className="w-full sm:w-auto rounded-2xl bg-[#126D66] hover:bg-[#101F2B] px-8 py-3 text-xs font-bold text-white shadow-cool transition-all cursor-pointer"
+                className="w-full sm:w-auto rounded-2xl bg-terracotta-600 hover:bg-terracotta-700 px-8 py-3 text-xs font-bold text-white shadow-warm transition-all cursor-pointer"
               >
                 Proceed to Diagnostic Pipeline →
               </button>

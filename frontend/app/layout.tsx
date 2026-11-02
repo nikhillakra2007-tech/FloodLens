@@ -28,7 +28,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#101F2B",
+  themeColor: "#FAF7F2",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className="flex min-h-screen flex-col bg-[#F0F4F5] text-[#344C59] font-sans antialiased selection:bg-[#DDF2EE] selection:text-[#126D66] overflow-x-hidden">
+      <body className="flex min-h-screen flex-col bg-[#FAF7F2] text-[#221B15] font-sans antialiased selection:bg-terracotta-200 selection:text-terracotta-900 overflow-x-hidden">
         <Providers>
           <Navbar />
           <main className="flex-1 w-full overflow-x-hidden">

@@ -95,7 +95,7 @@ export default function FeaturesSectionNav() {
     <nav
       aria-label="Features Section Navigation"
       className={clsx(
-        "sticky top-[61px] sm:top-[69px] z-30 w-full transition-all duration-300 ease-in-out border-y border-[#DCE6E9]/90 bg-white/95 backdrop-blur-md shadow-2xs",
+        "sticky top-[61px] sm:top-[69px] z-30 w-full transition-all duration-300 ease-in-out border-y border-[#E8DFD3]/90 bg-[#FAF7F2]/95 backdrop-blur-md shadow-2xs",
         isVisible
           ? "translate-y-0 opacity-100 pointer-events-auto"
           : "-translate-y-full opacity-0 pointer-events-none"
@@ -105,9 +105,9 @@ export default function FeaturesSectionNav() {
         <div className="flex items-center justify-between h-11 sm:h-12 overflow-x-auto no-scrollbar gap-1 sm:gap-2">
           
           {/* Label indicator */}
-          <div className="hidden md:flex items-center gap-1.5 pr-3 border-r border-[#DCE6E9] shrink-0">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#168C83]" />
-            <span className="text-[11px] font-medium uppercase tracking-wider text-[#647C89]">
+          <div className="hidden md:flex items-center gap-1.5 pr-3 border-r border-[#E0D5C7] shrink-0">
+            <span className="h-1.5 w-1.5 rounded-full bg-terracotta-600" />
+            <span className="text-[11px] font-medium uppercase tracking-wider text-[#756350]">
               Features
             </span>
           </div>
@@ -124,8 +124,8 @@ export default function FeaturesSectionNav() {
                   className={clsx(
                     "px-3 py-1.5 rounded-xl text-[13px] sm:text-sm font-normal sm:font-medium transition-all duration-150 whitespace-nowrap cursor-pointer",
                     isActive
-                      ? "text-[#126D66] bg-[#ECF7F5] border border-[#DDF2EE] shadow-2xs font-semibold"
-                      : "text-[#526B79] hover:text-[#172D3A] hover:bg-[#EAF1F3]"
+                      ? "text-terracotta-800 bg-terracotta-100/80 border border-terracotta-200 shadow-2xs font-medium"
+                      : "text-[#554638] hover:text-[#221B15] hover:bg-[#F2ECE1]"
                   )}
                 >
                   <span className="sm:hidden">{item.shortLabel || item.label}</span>
@@ -136,10 +136,10 @@ export default function FeaturesSectionNav() {
           </div>
 
           {/* Quick jump to auth */}
-          <div className="hidden lg:flex items-center pl-3 border-l border-[#DCE6E9] shrink-0">
+          <div className="hidden lg:flex items-center pl-3 border-l border-[#E0D5C7] shrink-0">
             <a
               href="/auth"
-              className="text-xs font-medium text-[#126D66] hover:text-[#0E544F] transition-colors flex items-center gap-1"
+              className="text-xs font-medium text-terracotta-700 hover:text-terracotta-900 transition-colors flex items-center gap-1"
             >
               <span>Technical Mode</span>
               <span>→</span>
@@ -151,3 +151,4 @@ export default function FeaturesSectionNav() {
     </nav>
   );
 }
+

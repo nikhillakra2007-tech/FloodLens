@@ -81,23 +81,23 @@ export default function FloodObservationLayer({ observations }: FloodObservation
           >
             <Popup>
               <div className="text-xs p-0.5 space-y-1">
-                <div className="font-serif font-bold text-sm text-[#172D3A] border-b border-[#DCE6E9] pb-1">
+                <div className="font-serif font-bold text-sm text-[#221B15] border-b border-[#E8DFD3] pb-1">
                   Flood Observation
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="font-semibold text-[#344C59]">Severity:</span>
+                  <span className="font-semibold text-[#554638]">Severity:</span>
                   <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${isHigh ? 'bg-red-100 text-red-800' : 'bg-amber-100 text-amber-800'}`}>
                     {obs.severity || "Standard"}
                   </span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="font-semibold text-[#344C59]">Inundation Depth:</span>
+                  <span className="font-semibold text-[#554638]">Inundation Depth:</span>
                   <span className="font-mono font-bold text-red-700">
                     {obs.depth_cm !== null ? `${obs.depth_cm} cm` : "—"}
                   </span>
                 </div>
                 {obs.ward && (
-                  <div className="text-[11px] text-[#647C89]">
+                  <div className="text-[11px] text-[#756350]">
                     Ward: {obs.ward}
                   </div>
                 )}

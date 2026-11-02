@@ -157,9 +157,9 @@ export default function FloodMap({
 
   if (!mounted) {
     return (
-      <div className="flex h-96 w-full items-center justify-center rounded-2xl border border-[#DCE6E9] bg-[#EAF1F3]">
-        <div className="flex items-center gap-3 text-sm font-semibold text-[#126D66]">
-          <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#126D66] border-t-transparent" />
+      <div className="flex h-96 w-full items-center justify-center rounded-2xl border border-[#E8DFD3] bg-[#F5EFE6]">
+        <div className="flex items-center gap-3 text-sm font-semibold text-terracotta-700">
+          <span className="h-4 w-4 animate-spin rounded-full border-2 border-terracotta-600 border-t-transparent" />
           <span>Initializing Chennai Geospatial Grid...</span>
         </div>
       </div>
@@ -192,14 +192,14 @@ export default function FloodMap({
 
       {/* Notice when drainage is enabled describing architectural boundary */}
       {showDrains && (
-        <div className="rounded-xl border border-[#DDF2EE] bg-[#ECF7F5] p-3.5 text-xs text-[#101F2B]" role="status">
-          <p className="font-bold text-[#126D66]">Stormwater Drainage Infrastructure Grid:</p>
-          <p className="mt-0.5 text-[#344C59]">
+        <div className="rounded-xl border border-terracotta-200 bg-terracotta-50/80 p-3.5 text-xs text-terracotta-900" role="status">
+          <p className="font-bold text-terracotta-800">Stormwater Drainage Infrastructure Grid:</p>
+          <p className="mt-0.5 text-[#554638]">
             {drainageInfo?.note ??
               "GCC Storm Water Drain network attributes are analyzed at the ward catchment scale. Vector line geometries are bounded by the v1 API schema."}
           </p>
           {(drainageInfo?.wardA || drainageInfo?.wardB) && (
-            <p className="mt-1 font-mono text-[11px] text-[#126D66] font-semibold">
+            <p className="mt-1 font-mono text-[11px] text-terracotta-700 font-semibold">
               Active analysis wards: {drainageInfo.wardA ? `Ward ${drainageInfo.wardA} (A)` : ""}{" "}
               {drainageInfo.wardB ? `| Ward ${drainageInfo.wardB} (B)` : ""}
             </p>
@@ -208,7 +208,7 @@ export default function FloodMap({
       )}
 
       {/* Main Map + Responsive Legend Layout */}
-      <div className="relative h-[380px] sm:h-[480px] lg:h-[540px] w-full overflow-hidden rounded-2xl border border-[#DCE6E9] shadow-card bg-[#EAF1F3]">
+      <div className="relative h-[380px] sm:h-[480px] lg:h-[540px] w-full overflow-hidden rounded-2xl border border-[#E8DFD3] shadow-card bg-[#F5EFE6]">
         <MapContainer
           center={centerCoordinates}
           zoom={12}
@@ -234,7 +234,7 @@ export default function FloodMap({
             <Polyline
               positions={comparisonLine}
               pathOptions={{
-                color: "#168C83",
+                color: "#C85A17",
                 weight: 3.5,
                 dashArray: "6, 8",
                 opacity: 0.9,
@@ -246,7 +246,7 @@ export default function FloodMap({
           {renderedPlaces.map((place) => {
             const isSelectedA = selectedPlaceA?.id === place.id;
             const isSelectedB = selectedPlaceB?.id === place.id;
-            const pinColor = isSelectedA ? "#C23E2A" : isSelectedB ? "#168C83" : "#7194A5";
+            const pinColor = isSelectedA ? "#C23E2A" : isSelectedB ? "#3B8352" : "#8C7355";
             const pinLabel = isSelectedA ? "A" : isSelectedB ? "B" : "";
             const pinIcon = createPinIcon(pinColor, pinLabel, isSelectedA || isSelectedB);
 
@@ -258,10 +258,10 @@ export default function FloodMap({
                 eventHandlers={{ click: () => onPlaceSelect?.(place) }}
               >
                 <Popup>
-                  <div className="space-y-2 text-xs text-[#172D3A] min-w-[210px] p-0.5">
-                    <div className="flex items-center justify-between border-b border-[#DCE6E9] pb-1.5">
-                      <div className="font-bold text-sm text-[#172D3A]">{place.name}</div>
-                      <span className="rounded-full bg-[#EAF1F3] px-2 py-0.5 font-mono text-[10px] text-[#344C59]">
+                  <div className="space-y-2 text-xs text-[#221B15] min-w-[210px] p-0.5">
+                    <div className="flex items-center justify-between border-b border-[#E8DFD3] pb-1.5">
+                      <div className="font-bold text-sm text-[#221B15]">{place.name}</div>
+                      <span className="rounded-full bg-[#F5EFE6] px-2 py-0.5 font-mono text-[10px] text-[#554638]">
                         Ward {place.ward || "—"}
                       </span>
                     </div>
@@ -278,24 +278,24 @@ export default function FloodMap({
                         </span>
                       )}
                       {!isSelectedA && !isSelectedB && (
-                        <span className="text-[#647C89] text-[11px]">
-                          Zone: <span className="font-semibold text-[#172D3A] capitalize">{place.zone ?? "GCC"}</span>
+                        <span className="text-[#756350] text-[11px]">
+                          Zone: <span className="font-semibold text-[#221B15] capitalize">{place.zone ?? "GCC"}</span>
                         </span>
                       )}
                     </div>
 
                     {place.description && (
-                      <p className="text-[#344C59] text-[11px] leading-relaxed">
+                      <p className="text-[#554638] text-[11px] leading-relaxed">
                         {place.description}
                       </p>
                     )}
 
-                    <div className="font-mono text-[10px] text-[#879AA4]">
+                    <div className="font-mono text-[10px] text-[#9E8B75]">
                       {place.latitude.toFixed(3)}°N, {place.longitude.toFixed(3)}°E
                     </div>
 
                     {/* Direct Action Selection Buttons */}
-                    <div className="pt-1.5 border-t border-[#DCE6E9] flex flex-col gap-1.5">
+                    <div className="pt-1.5 border-t border-[#E8DFD3] flex flex-col gap-1.5">
                       <button
                         type="button"
                         onClick={(e) => {
@@ -358,20 +358,20 @@ export default function FloodMap({
       </div>
 
       {/* Dedicated Status & Telemetry Bar - Zero overlap on all viewports */}
-      <div className="rounded-xl border border-[#DCE6E9] bg-[#F6F9FA] p-3.5 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs sm:text-sm font-mono text-[#344C59] shadow-2xs">
+      <div className="rounded-xl border border-[#E8DFD3] bg-[#FAF7F2] p-3.5 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs sm:text-sm font-mono text-[#554638] shadow-2xs">
         <div className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-[#168C83] shrink-0" />
+          <span className="h-2 w-2 rounded-full bg-terracotta-600 shrink-0" />
           {selectedPlaceA && selectedPlaceB ? (
-            <span className="font-bold text-[#126D66]">
+            <span className="font-bold text-terracotta-800">
               Comparative Axis: {selectedPlaceA.name} (Ward {selectedPlaceA.ward ?? "—"}) ↔ {selectedPlaceB.name} (Ward {selectedPlaceB.ward ?? "—"})
             </span>
           ) : (
-            <span className="text-[#344C59]">
+            <span className="text-[#554638]">
               Chennai Catchment Grid · Click markers on map to assign comparison targets
             </span>
           )}
         </div>
-        <div className="text-[11px] sm:text-xs text-[#647C89] flex items-center gap-2">
+        <div className="text-[11px] sm:text-xs text-[#756350] flex items-center gap-2">
           <span>Datum: 13.04°N, 80.22°E</span>
         </div>
       </div>

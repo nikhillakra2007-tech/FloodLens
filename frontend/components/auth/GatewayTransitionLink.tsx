@@ -47,7 +47,7 @@ export default function GatewayTransitionLink({
       onClick={handleClick}
       className={clsx(
         className,
-        isTransitioning && "opacity-80 scale-[0.98] ring-2 ring-[#168C83]/40 transition-all duration-300"
+        isTransitioning && "opacity-80 scale-[0.98] ring-2 ring-terracotta-500/40 transition-all duration-300"
       )}
     >
       {children}
