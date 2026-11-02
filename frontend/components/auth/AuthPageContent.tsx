@@ -184,21 +184,21 @@ export default function AuthPageContent() {
 
   return (
     <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center px-4 py-8 sm:px-6">
-      {/* Compact, balanced card container (~820px max width) */}
-      <div className="w-full max-w-[820px] rounded-2xl md:rounded-3xl border border-[#E8DFD3] bg-white shadow-lift overflow-hidden grid grid-cols-1 md:grid-cols-12">
+      {/* Compact, balanced card container (~860px max width) */}
+      <div className="w-full max-w-[860px] rounded-2xl md:rounded-3xl border border-[#E8DFD3] bg-white shadow-lift overflow-hidden grid grid-cols-1 md:grid-cols-12">
         
         {/* ============================================================== */}
-        {/* LEFT PANEL: DISTINCTIVE SCIENTIFIC HYDROLOGICAL VISUAL (38%)  */}
+        {/* LEFT PANEL: DISTINCTIVE SCIENTIFIC HYDROLOGICAL VISUAL (42%)  */}
         {/* ============================================================== */}
-        <div className="md:col-span-5 bg-gradient-to-br from-[#FAF7F2] via-[#F5EFE6] to-[#EFE6D8] p-6 sm:p-7 border-b md:border-b-0 md:border-r border-[#E8DFD3] flex flex-col justify-start space-y-6 relative overflow-hidden">
+        <div className="md:col-span-5 bg-gradient-to-br from-[#FAF7F2] via-[#F5EFE6] to-[#EFE6D8] p-5 sm:p-6 lg:p-7 border-b md:border-b-0 md:border-r border-[#E8DFD3] flex flex-col justify-start relative overflow-hidden">
           
           {/* Top Brand Header */}
-          <div className="space-y-4 relative z-10">
+          <div className="mb-4 relative z-10">
             <Link href="/" className="inline-flex items-center gap-2.5 group">
-              <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-terracotta-500 to-terracotta-700 p-0.5 shadow-sm shadow-terracotta-600/20 group-hover:scale-105 transition-all">
+              <div className="relative flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-gradient-to-br from-terracotta-500 to-terracotta-700 p-0.5 shadow-sm shadow-terracotta-600/20 group-hover:scale-105 transition-all">
                 <div className="flex h-full w-full items-center justify-center rounded-[10px] bg-[#FAF7F2]">
                   <svg
-                    className="h-5 w-5 text-terracotta-600"
+                    className="h-4 w-4 sm:h-5 sm:w-5 text-terracotta-600"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -211,7 +211,7 @@ export default function AuthPageContent() {
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="font-bold text-lg tracking-tight text-[#221B15]">
+                  <span className="font-bold text-base sm:text-lg tracking-tight text-[#221B15]">
                     Flood<span className="text-terracotta-600">Lens</span>
                   </span>
                   <span className="rounded-full border border-terracotta-200 bg-terracotta-50 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-terracotta-700">
@@ -223,26 +223,37 @@ export default function AuthPageContent() {
                 </p>
               </div>
             </Link>
+          </div>
 
-            {/* Scientific diagram container */}
-            <div className="rounded-xl border border-[#E0D5C7] bg-white/70 p-2 sm:p-2.5 shadow-2xs backdrop-blur-xs space-y-1.5">
-              <div className="flex items-center justify-between border-b border-[#E8DFD3] pb-1.5">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] flex items-center gap-1">
-                  <span className="h-1.5 w-1.5 rounded-full bg-terracotta-600" />
-                  Hydrological Analysis Chain
-                </span>
-                <span className="font-mono text-[9px] text-[#8C7A6B]">
-                  Q = C·I·A | GVF dy/dx
-                </span>
-              </div>
+          {/* Scientific diagram container with grounding sequence indicator */}
+          <div className="rounded-xl border border-[#E0D5C7] bg-white/80 p-2 sm:p-2.5 shadow-2xs backdrop-blur-xs space-y-1.5 relative z-10">
+            <div className="flex items-center justify-between border-b border-[#E8DFD3] pb-1.5">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#756350] flex items-center gap-1">
+                <span className="h-1.5 w-1.5 rounded-full bg-terracotta-600" />
+                Hydrological Analysis Chain
+              </span>
+              <span className="font-mono text-[9px] text-[#8C7A6B]">
+                Q = C·I·A | GVF dy/dx
+              </span>
+            </div>
 
-              {/* Polished 5-Stage Scientific Hydrological Vector Diagram */}
-              <HydrologicalFlowchartVisual />
+            {/* Polished 5-Stage Scientific Hydrological Vector Diagram */}
+            <HydrologicalFlowchartVisual />
+
+            {/* Grounding sequence indicator directly below SVG */}
+            <div className="flex items-center justify-between pt-1 px-0.5 text-[9px] text-[#756350] border-t border-[#EAE2D6]">
+              <span className="font-semibold flex items-center gap-1">
+                <span className="h-1 w-1 rounded-full bg-terracotta-600" />
+                5-Stage Physical Sequence
+              </span>
+              <span className="font-mono text-[8.5px] text-[#8C7A6B]">
+                Rain → Runoff → SWD → Surge → Inundation
+              </span>
             </div>
           </div>
 
-          {/* Scientific Context & Proof Points */}
-          <div className="space-y-3 pt-4 border-t border-[#E8DFD3]/80 relative z-10">
+          {/* Scientific Context & Proof Points - Grounded directly below the illustration with intentional rhythm */}
+          <div className="mt-4 pt-3.5 border-t border-[#E0D5C7]/80 space-y-3 relative z-10">
             <div>
               <h2 className="font-bold text-sm sm:text-base text-[#221B15] leading-snug tracking-tight">
                 Understand the forces behind every flood.
@@ -252,7 +263,7 @@ export default function AuthPageContent() {
               </p>
             </div>
 
-            <div className="space-y-1.5 text-[11px] text-[#554638]">
+            <div className="space-y-2 text-[11px] text-[#554638]">
               <div className="flex items-center gap-2">
                 <span className="flex h-4 w-4 items-center justify-center rounded-md bg-terracotta-100 text-terracotta-700 text-[10px] font-bold shrink-0">
                   ✓
@@ -272,9 +283,13 @@ export default function AuthPageContent() {
                 <span>Technical simulations and impact assessment</span>
               </div>
             </div>
+          </div>
 
-            <div className="pt-1 text-[10px] text-[#756350] font-mono">
-              Backed by Copernicus DEM GLO-30 & GCC GIS SWD Data
+          {/* Footer datum note pinned cleanly at the bottom */}
+          <div className="mt-auto pt-3 relative z-10">
+            <div className="inline-flex items-center gap-1.5 rounded-md border border-[#E0D5C7]/80 bg-white/50 px-2 py-1 text-[9.5px] text-[#756350] font-mono">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              Copernicus DEM GLO-30 &bull; GCC GIS SWD Data
             </div>
           </div>
         </div>

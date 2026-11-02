@@ -156,7 +156,7 @@ export default function UserMenu() {
           {/* Quick Links & Sign Out Action */}
           <div className="space-y-1 pt-1 border-t border-[#E8DFD3]">
             <Link
-              href="/onboarding"
+              href="/settings"
               onClick={() => setIsOpen(false)}
               className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs sm:text-sm font-medium text-[#554638] hover:bg-[#FAF7F2] hover:text-[#221B15] transition-colors"
             >

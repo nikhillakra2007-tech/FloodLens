@@ -96,6 +96,7 @@ export function validateRedirectUrl(targetUrl: string | null | undefined, fallba
     "/onboarding",
     "/demo-video",
     "/auth",
+    "/settings",
   ];
 
   const pathnameOnly = trimmed.split("?")[0].split("#")[0];

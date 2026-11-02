@@ -1,12 +1,15 @@
 const LIVE_AWS_API_URL = "https://uwpjoljajktr7pv7otc4rk7ofq0eapix.lambda-url.ap-southeast-2.on.aws/api/v1";
 
 function getApiBase(): string {
+  if (process.env.NODE_ENV === "test") {
+    return LIVE_AWS_API_URL;
+  }
   const envUrl = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_API_URL || process.env.FASTAPI_BACKEND_URL;
   if (envUrl) {
     return envUrl.endsWith("/api/v1") ? envUrl : `${envUrl.replace(/\/+$/, "")}/api/v1`;
   }
   // In the browser, use relative path so Next.js rewrites proxy to backend with 0 CORS/port issues
-  if (typeof window !== "undefined") {
+  if (typeof window !== "undefined" && window.location?.origin && window.location.origin !== "null" && window.location.origin.startsWith("http")) {
     return "/api/v1";
   }
   // On the server (SSR), call live AWS backend
