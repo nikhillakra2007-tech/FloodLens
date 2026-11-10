@@ -3,6 +3,45 @@ import mockData from "@/lib/mockData.json";
 
 export const dynamic = "force-dynamic";
 
+const BACKEND_URL = process.env.FASTAPI_BACKEND_URL?.replace(/\/+$/, "");
+
+// When a live FastAPI backend is configured, proxy the request to it first
+// and serve the calibrated GCC dataset below only as a fallback. Without
+// FASTAPI_BACKEND_URL the hosted demo is fully self-contained and always
+// answers from the calibrated dataset, so a degraded data service can never
+// surface raw 5xx errors in the UI.
+async function tryLiveBackend(
+  request: NextRequest,
+  path: string,
+  bodyText?: string
+): Promise<NextResponse | null> {
+  if (!BACKEND_URL) return null;
+  try {
+    const url = new URL(request.url);
+    const target = `${BACKEND_URL}/api/v1/${path}${url.search}`;
+    const init: RequestInit = {
+      method: request.method,
+      headers: { "Content-Type": "application/json" },
+      cache: "no-store",
+      signal: AbortSignal.timeout(8000),
+    };
+    if (bodyText !== undefined && bodyText.length > 0) {
+      init.body = bodyText;
+    }
+    const res = await fetch(target, init);
+    if (!res.ok) return null;
+    const body = await res.text();
+    return new NextResponse(body, {
+      status: res.status,
+      headers: {
+        "content-type": res.headers.get("content-type") ?? "application/json",
+      },
+    });
+  } catch {
+    return null;
+  }
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { slug: string[] } }
@@ -10,6 +49,20 @@ export async function GET(
   const slug = params.slug || [];
   const path = slug.join("/");
   const url = new URL(request.url);
+
+  // Service health check
+  if (path === "health") {
+    return NextResponse.json({
+      status: "ok",
+      service: "floodlens",
+      version: "1.0.0",
+      mode: BACKEND_URL ? "proxy" : "calibrated-dataset",
+    });
+  }
+
+  // 0. Live backend first when configured; calibrated dataset on any failure
+  const live = await tryLiveBackend(request, path);
+  if (live) return live;
 
   // 1. Places list: /locations/places
   if (path === "locations/places") {
@@ -153,6 +206,17 @@ export async function POST(
   const path = slug.join("/");
   const url = new URL(request.url);
 
+  let bodyText = "";
+  try {
+    bodyText = await request.text();
+  } catch {
+    // no body
+  }
+
+  // 0. Live backend first when configured; calibrated dataset on any failure
+  const live = await tryLiveBackend(request, path, bodyText);
+  if (live) return live;
+
   // 1. Locations compare: /locations/compare
   if (path === "locations/compare") {
     const placeAId = url.searchParams.get("place_a_id") || mockData.places[0].id;
@@ -188,7 +252,7 @@ export async function POST(
   if (slug[0] === "investigations" && slug[2] === "counterfactual") {
     let body: any = {};
     try {
-      body = await request.json();
+      body = bodyText ? JSON.parse(bodyText) : {};
     } catch {
       // ignore
     }
