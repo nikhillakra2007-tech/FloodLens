@@ -1,13 +1,25 @@
-// Calibrated ward screening profiles for the Greater Chennai demo dataset.
+// Ward screening profiles for the Greater Chennai demo dataset.
 //
-// Each profile carries the physical catchment attributes the twin-matching
-// model screens on: terrain (SRTM 30m / CartoDEM), land cover (Sentinel-2
-// 10m), stormwater drain density and proximity to the nearest major
-// waterbody. The hosted demo ships these four calibrated wards; a live
-// FastAPI backend computes the same features from rasters at request time.
+// Provenance audit (2026-11-14):
+// - Anna Nagar and Velachery terrain/land-cover values ship with the repo's
+//   calibrated demo dataset (they are the values the original
+//   /locations/places/[id]/features handler served, sourced per the repo's
+//   DATA_INVENTORY.md from Copernicus DEM GLO-30 and ESA WorldCover 10m
+//   extractions over a 500m analysis window).
+// - T Nagar and Adyar values are ILLUSTRATIVE DEMO INPUT: the extracted
+//   rasters for those wards live in the backend's raw CSVs / PostGIS, which
+//   are not in this repo, so these numbers are plausible stand-ins, not
+//   measurements. They are labeled illustrative everywhere they surface.
+// - drainDensityKmPerKm2 and waterbodyDistanceM are illustrative for ALL
+//   wards: no traceable extraction ships in the repo.
+// - created_at on served feature bundles is the static dataset build time,
+//   not the request time.
+
+export type WardDataStatus = "calibrated_demo_dataset" | "illustrative_demo_input";
 
 export interface WardProfile {
   placeId: string;
+  dataStatus: WardDataStatus;
   meanElevationM: number;
   minElevationM: number;
   maxElevationM: number;
@@ -22,10 +34,25 @@ export interface WardProfile {
   waterbodyDistanceM: number;
 }
 
+// Fields with no traceable source in the repo for any ward.
+export const ILLUSTRATIVE_PROFILE_FIELDS = [
+  "drainDensityKmPerKm2",
+  "waterbodyDistanceM",
+] as const;
+
+// Static build time of the demo dataset (matches mockData.places created_at).
+// Served as-is; the request time is never presented as measurement time.
+export const DATASET_BUILT_AT = "2026-10-09T01:33:09.466380+05:30";
+
+const CALIBRATED_TERRAIN_SOURCE = "SRTM 30m / CartoDEM (demo dataset extraction)";
+const CALIBRATED_LANDCOVER_SOURCE = "Sentinel-2 Land Cover 10m (demo dataset extraction)";
+const ILLUSTRATIVE_SOURCE = "Illustrative demo input - no extracted source ships in the repo";
+
 export const WARD_PROFILES: Record<string, WardProfile> = {
-  // Anna Nagar (Ward 101)
+  // Anna Nagar (Ward 101) - values ship with the repo's calibrated demo dataset
   "9abecc5c-df2a-49ab-a089-1a8bd5244ff4": {
     placeId: "9abecc5c-df2a-49ab-a089-1a8bd5244ff4",
+    dataStatus: "calibrated_demo_dataset",
     meanElevationM: 6.8,
     minElevationM: 5.1,
     maxElevationM: 9.2,
@@ -36,12 +63,13 @@ export const WARD_PROFILES: Record<string, WardProfile> = {
     builtupFraction: 0.84,
     vegetationFraction: 0.11,
     waterFraction: 0.05,
-    drainDensityKmPerKm2: 3.1,
-    waterbodyDistanceM: 900,
+    drainDensityKmPerKm2: 3.1, // illustrative
+    waterbodyDistanceM: 900, // illustrative
   },
-  // T Nagar (Ward 104)
+  // T Nagar (Ward 104) - ILLUSTRATIVE: extracted values are not in the repo
   "1ea309cc-6461-493e-b4aa-412ea3474676": {
     placeId: "1ea309cc-6461-493e-b4aa-412ea3474676",
+    dataStatus: "illustrative_demo_input",
     meanElevationM: 7.6,
     minElevationM: 6.2,
     maxElevationM: 10.1,
@@ -52,12 +80,13 @@ export const WARD_PROFILES: Record<string, WardProfile> = {
     builtupFraction: 0.91,
     vegetationFraction: 0.06,
     waterFraction: 0.03,
-    drainDensityKmPerKm2: 3.6,
-    waterbodyDistanceM: 1500,
+    drainDensityKmPerKm2: 3.6, // illustrative
+    waterbodyDistanceM: 1500, // illustrative
   },
-  // Velachery (Ward 102)
+  // Velachery (Ward 102) - values ship with the repo's calibrated demo dataset
   "b0aa192d-6cc8-4262-97b7-07cd5de2d9a8": {
     placeId: "b0aa192d-6cc8-4262-97b7-07cd5de2d9a8",
+    dataStatus: "calibrated_demo_dataset",
     meanElevationM: 4.2,
     minElevationM: 1.8,
     maxElevationM: 7.5,
@@ -68,12 +97,13 @@ export const WARD_PROFILES: Record<string, WardProfile> = {
     builtupFraction: 0.65,
     vegetationFraction: 0.22,
     waterFraction: 0.13,
-    drainDensityKmPerKm2: 2.3,
-    waterbodyDistanceM: 250,
+    drainDensityKmPerKm2: 2.3, // illustrative
+    waterbodyDistanceM: 250, // illustrative
   },
-  // Adyar (Ward 103)
+  // Adyar (Ward 103) - ILLUSTRATIVE: extracted values are not in the repo
   "e503e3f2-28ba-46b0-8f7d-27aa3001f7be": {
     placeId: "e503e3f2-28ba-46b0-8f7d-27aa3001f7be",
+    dataStatus: "illustrative_demo_input",
     meanElevationM: 5.4,
     minElevationM: 3.9,
     maxElevationM: 8.4,
@@ -84,40 +114,25 @@ export const WARD_PROFILES: Record<string, WardProfile> = {
     builtupFraction: 0.72,
     vegetationFraction: 0.19,
     waterFraction: 0.09,
-    drainDensityKmPerKm2: 2.8,
-    waterbodyDistanceM: 150,
+    drainDensityKmPerKm2: 2.8, // illustrative
+    waterbodyDistanceM: 150, // illustrative
   },
 };
 
-// Fallback for wards without a calibrated screening profile: mid-range
-// values so an unknown ward scores near the middle of every axis instead
-// of silently inheriting another ward's terrain.
-export const DEFAULT_WARD_PROFILE: Omit<WardProfile, "placeId"> = {
-  meanElevationM: 6.0,
-  minElevationM: 4.0,
-  maxElevationM: 9.0,
-  meanSlope: 0.012,
-  meanSlopeDegrees: 0.7,
-  handM: 1.0,
-  relativeElevationM: 3.0,
-  builtupFraction: 0.78,
-  vegetationFraction: 0.15,
-  waterFraction: 0.07,
-  drainDensityKmPerKm2: 3.0,
-  waterbodyDistanceM: 800,
-};
-
-export function getWardProfile(placeId: string): WardProfile {
-  return WARD_PROFILES[placeId] ?? { placeId, ...DEFAULT_WARD_PROFILE };
+export function getWardProfile(placeId: string): WardProfile | null {
+  return WARD_PROFILES[placeId] ?? null;
 }
 
 // Terrain + land-cover feature bundle for one ward, matching the shape the
-// /locations/places/[id]/features endpoint serves.
+// /locations/places/[id]/features endpoint serves. Returns null for a ward
+// with no profile so callers can fail clearly instead of inventing data.
 export function buildWardFeatures(placeId: string) {
   const p = getWardProfile(placeId);
-  const createdAt = new Date().toISOString();
+  if (!p) return null;
+  const calibrated = p.dataStatus === "calibrated_demo_dataset";
   return {
     place_id: placeId,
+    data_status: p.dataStatus,
     terrain: {
       id: `terr-${placeId}`,
       place_id: placeId,
@@ -133,9 +148,10 @@ export function buildWardFeatures(placeId: string) {
       mean_slope_degrees: p.meanSlopeDegrees,
       hand_m: p.handM,
       relative_elevation_m: p.relativeElevationM,
-      source: "SRTM 30m / CartoDEM",
+      source: calibrated ? CALIBRATED_TERRAIN_SOURCE : ILLUSTRATIVE_SOURCE,
+      data_status: p.dataStatus,
       computation_version: "v2.1",
-      created_at: createdAt,
+      created_at: DATASET_BUILT_AT,
     },
     landcover: {
       id: `land-${placeId}`,
@@ -143,9 +159,10 @@ export function buildWardFeatures(placeId: string) {
       builtup_fraction: p.builtupFraction,
       vegetation_fraction: p.vegetationFraction,
       water_fraction: p.waterFraction,
-      source: "Sentinel-2 Land Cover 10m",
+      source: calibrated ? CALIBRATED_LANDCOVER_SOURCE : ILLUSTRATIVE_SOURCE,
+      data_status: p.dataStatus,
       computation_version: "v2.1",
-      created_at: createdAt,
+      created_at: DATASET_BUILT_AT,
     },
     location_features: [],
   };

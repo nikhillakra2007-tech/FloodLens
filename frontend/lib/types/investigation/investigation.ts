@@ -82,6 +82,8 @@ export interface Comparison {
   reasons: string[];
   // False when the pair has no calibrated run and the score is a screening estimate.
   is_calibrated?: boolean;
+  // Set on non-calibrated scores: illustrative estimate, not validated hydrology.
+  disclaimer?: string | null;
   created_at: string;
 }
 
@@ -239,4 +241,6 @@ export interface LocationCompareResponse {
   // False when the pair has no calibrated run and the score is a screening estimate.
   is_calibrated?: boolean;
   weights_version?: string;
+  // Set on non-calibrated scores: illustrative estimate, not validated hydrology.
+  disclaimer?: string | null;
 }

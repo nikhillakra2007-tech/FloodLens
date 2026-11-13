@@ -761,7 +761,7 @@ export default function NewInvestigationPage() {
               <div className="text-right">
                 <div className="text-[10px] font-bold text-[#756350] uppercase tracking-wider">Topographic Fit</div>
                 <div className="text-xs text-[#554638]">
-                  {comparison?.is_calibrated === false ? "Screening Estimate (No Calibrated Run)" : "Control Correlation"}
+                  {comparison?.is_calibrated === false ? "Illustrative Estimate (Not Validated Hydrology)" : "Control Correlation"}
                 </div>
               </div>
               <div className="text-3xl font-extrabold text-terracotta-600 font-mono">
@@ -1066,7 +1066,7 @@ export default function NewInvestigationPage() {
                   {comparison ? `${(comparison.similarity_score * 100).toFixed(0)}%` : "—"}
                 </div>
                 <div className="text-[10px] text-[#554638] mt-0.5">
-                  {comparison?.is_calibrated === false ? "Screening estimate - no calibrated run for this pair" : "High Topographic Alignment"}
+                  {comparison?.is_calibrated === false ? "Illustrative screening estimate - not validated hydrology" : "High Topographic Alignment"}
                 </div>
               </div>
 
