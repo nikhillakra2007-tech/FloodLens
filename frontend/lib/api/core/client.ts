@@ -28,12 +28,12 @@ export class ApiError extends Error {
 }
 
 import mockData from "@/lib/mockData.json";
-import { getTwinSimilarity, getComparablesForPlace } from "@/lib/scoring/twin-similarity";
+import { getComparablesForPlace } from "@/lib/scoring/twin-similarity";
 import { buildWardFeatures } from "@/lib/scoring/ward-profiles";
+import { buildClaimProvenance } from "@/lib/provenance/claim-provenance";
 
 function getFallbackData<T>(path: string, options?: RequestInit): T {
   const cleanPath = path.split("?")[0];
-  const urlParams = new URLSearchParams(path.includes("?") ? path.split("?")[1] : "");
 
   if (cleanPath === "/locations/places") {
     return mockData.places as unknown as T;
@@ -48,21 +48,6 @@ function getFallbackData<T>(path: string, options?: RequestInit): T {
     const id = cleanPath.split("/")[3];
     return (mockData.places.find((p) => p.id === id) ?? mockData.places[0]) as unknown as T;
   }
-  if (cleanPath === "/locations/compare") {
-    const placeAId = urlParams.get("place_a_id") || mockData.places[0].id;
-    const placeBId = urlParams.get("place_b_id") || mockData.places[2].id;
-    const twin = getTwinSimilarity(placeAId, placeBId);
-    return {
-      place_a_id: placeAId,
-      place_b_id: placeBId,
-      similarity_score: twin.similarity_score,
-      feature_similarities: twin.feature_similarities,
-      similarity_breakdown: twin.is_calibrated ? mockData.createComp.similarity_breakdown : null,
-      reasons: twin.reasons,
-      is_calibrated: twin.is_calibrated,
-      weights_version: twin.weights_version,
-    } as unknown as T;
-  }
   if (cleanPath === "/flood-observations" || cleanPath === "/map/flood-observations") {
     return mockData.obs as unknown as T;
   }
@@ -72,27 +57,12 @@ function getFallbackData<T>(path: string, options?: RequestInit): T {
   if (cleanPath === "/map/terrain") {
     return { elevation: 6.8, slope: 0.012, hand: 1.1 } as unknown as T;
   }
-  if (cleanPath === "/investigations/comparisons") {
-    const placeAId = urlParams.get("place_a_id") || mockData.createComp.place_a_id;
-    const placeBId = urlParams.get("place_b_id") || mockData.createComp.place_b_id;
-    const twin = getTwinSimilarity(placeAId, placeBId);
-    return {
-      ...mockData.createComp,
-      place_a_id: placeAId,
-      place_b_id: placeBId,
-      similarity_score: twin.similarity_score,
-      weights_version: twin.weights_version,
-      feature_similarities: twin.feature_similarities,
-      similarity_breakdown: twin.is_calibrated ? mockData.createComp.similarity_breakdown : null,
-      reasons: twin.reasons,
-      is_calibrated: twin.is_calibrated,
-    } as unknown as T;
-  }
-  if (cleanPath === "/investigations" && options?.method === "POST") {
-    return mockData.createInv as unknown as T;
-  }
   if (cleanPath.endsWith("/mechanisms")) {
     return mockData.mechs as unknown as T;
+  }
+  if (cleanPath.endsWith("/provenance") && cleanPath.includes("/evidence/")) {
+    const parts = cleanPath.split("/");
+    return buildClaimProvenance(parts[2], parts[4]) as unknown as T;
   }
   if (cleanPath.endsWith("/evidence")) {
     return mockData.evs as unknown as T;
@@ -109,20 +79,29 @@ function getFallbackData<T>(path: string, options?: RequestInit): T {
   if (cleanPath.endsWith("/limitations")) {
     return mockData.lim as unknown as T;
   }
-  if (cleanPath.endsWith("/counterfactual")) {
-    return mockData.cf as unknown as T;
-  }
   if (cleanPath.startsWith("/investigations/")) {
     const invId = cleanPath.split("/")[2];
     return { ...mockData.inv, id: invId, investigation_id: invId } as unknown as T;
   }
 
-  return mockData.places as unknown as T;
+  // Unknown endpoints must fail loudly. Returning an unrelated record here
+  // (previously the places list) let typos and unsupported routes pass as
+  // real data.
+  throw new ApiError(
+    "UNKNOWN_ENDPOINT",
+    `No calibrated demo response for ${options?.method ?? "GET"} ${cleanPath}`,
+    404
+  );
 }
 
 export async function fetchApi<T>(path: string, options?: RequestInit): Promise<T> {
   const apiBase = getApiBase();
   const url = `${apiBase}${path}`;
+  const method = (options?.method ?? "GET").toUpperCase();
+  // Reads may fall back to the calibrated demo dataset when the data service
+  // degrades. Mutations never do: a failed write must surface as an error,
+  // not as a fabricated success.
+  const canFallback = method === "GET" || method === "HEAD";
   try {
     const res = await fetch(url, {
       ...options,
@@ -130,18 +109,28 @@ export async function fetchApi<T>(path: string, options?: RequestInit): Promise<
     });
 
     if (!res.ok) {
+      if (!canFallback) {
+        throw new ApiError("REQUEST_FAILED", `${method} ${path} failed with HTTP ${res.status}`, res.status);
+      }
       console.warn(`[API] HTTP ${res.status} on ${path}, activating calibrated GCC fallback`);
       return getFallbackData<T>(path, options);
     }
 
     const contentType = res.headers.get("content-type");
     if (!contentType || !contentType.includes("application/json")) {
+      if (!canFallback) {
+        throw new ApiError("REQUEST_FAILED", `${method} ${path} returned a non-JSON response`, res.status);
+      }
       console.warn(`[API] Non-JSON response on ${path}, activating calibrated GCC fallback`);
       return getFallbackData<T>(path, options);
     }
 
     return await res.json();
   } catch (err) {
+    if (err instanceof ApiError) throw err;
+    if (!canFallback) {
+      throw new ApiError("NETWORK_ERROR", `${method} ${path} failed: ${err instanceof Error ? err.message : String(err)}`, 0);
+    }
     console.warn(`[API] Network error on ${path}, activating calibrated GCC fallback:`, err);
     return getFallbackData<T>(path, options);
   }

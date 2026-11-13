@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import mockData from "@/lib/mockData.json";
 import { getTwinSimilarity, getComparablesForPlace } from "@/lib/scoring/twin-similarity";
 import { buildWardFeatures } from "@/lib/scoring/ward-profiles";
+import { buildClaimProvenance } from "@/lib/provenance/claim-provenance";
 
 export const dynamic = "force-dynamic";
 
@@ -123,27 +124,33 @@ export async function GET(
     return NextResponse.json(mockData.mechs);
   }
 
-  // 9. Investigation evidence: /investigations/[id]/evidence
+  // 9. Evidence provenance: /investigations/[id]/evidence/[evidenceId]/provenance
+  // Must be checked before the bare evidence list route below.
+  if (slug[0] === "investigations" && slug[2] === "evidence" && slug[4] === "provenance") {
+    return NextResponse.json(buildClaimProvenance(slug[1], slug[3]));
+  }
+
+  // 10. Investigation evidence: /investigations/[id]/evidence
   if (slug[0] === "investigations" && slug[2] === "evidence") {
     return NextResponse.json(mockData.evs);
   }
 
-  // 10. Investigation graph: /investigations/[id]/graph
+  // 11. Investigation graph: /investigations/[id]/graph
   if (slug[0] === "investigations" && slug[2] === "graph") {
     return NextResponse.json(mockData.graph);
   }
 
-  // 11. Investigation validation: /investigations/[id]/validation
+  // 12. Investigation validation: /investigations/[id]/validation
   if (slug[0] === "investigations" && slug[2] === "validation") {
     return NextResponse.json(mockData.val);
   }
 
-  // 12. Investigation defensibility: /investigations/[id]/defensibility
+  // 13. Investigation defensibility: /investigations/[id]/defensibility
   if (slug[0] === "investigations" && slug[2] === "defensibility") {
     return NextResponse.json(mockData.def);
   }
 
-  // 13. Investigation limitations: /investigations/[id]/limitations
+  // 14. Investigation limitations: /investigations/[id]/limitations
   if (slug[0] === "investigations" && slug[2] === "limitations") {
     return NextResponse.json(mockData.lim);
   }
