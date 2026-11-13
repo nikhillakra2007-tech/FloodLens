@@ -32,7 +32,7 @@ export default function HydrologicalFlowchartVisual({
             refY="3"
             markerWidth="5"
             markerHeight="5"
-            orient="auto-reverse"
+            orient="auto"
           >
             <path d="M 0 1 L 5 3 L 0 5 z" fill="#2563EB" />
           </marker>
@@ -44,7 +44,7 @@ export default function HydrologicalFlowchartVisual({
             refY="3"
             markerWidth="5"
             markerHeight="5"
-            orient="auto-reverse"
+            orient="auto"
           >
             <path d="M 0 1 L 5 3 L 0 5 z" fill="#D97706" />
           </marker>
@@ -56,7 +56,7 @@ export default function HydrologicalFlowchartVisual({
             refY="3"
             markerWidth="5"
             markerHeight="5"
-            orient="auto-reverse"
+            orient="auto"
           >
             <path d="M 0 1 L 5 3 L 0 5 z" fill="#475569" />
           </marker>
@@ -68,7 +68,7 @@ export default function HydrologicalFlowchartVisual({
             refY="3"
             markerWidth="5"
             markerHeight="5"
-            orient="auto-reverse"
+            orient="auto"
           >
             <path d="M 0 1 L 5 3 L 0 5 z" fill="#DC2626" />
           </marker>

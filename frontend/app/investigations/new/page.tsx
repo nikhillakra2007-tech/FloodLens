@@ -125,6 +125,12 @@ export default function NewInvestigationPage() {
       if (placeA.id === placeB.id) {
         throw new Error("Location A and Location B must be distinct catchments for differential comparison.");
       }
+      const names = [placeA.name, placeB.name].join(" ");
+      if (!(names.includes("Anna Nagar") && names.includes("Velachery"))) {
+        throw new Error(
+          `The calibrated diagnostic run in this demo covers Anna Nagar vs Velachery only. ${placeA.name} vs ${placeB.name} has no calibrated evidence run yet, so no report was generated.`
+        );
+      }
       const comp = await createComparison(placeA.id, placeB.id);
       return createInvestigation(comp.id);
     },
@@ -456,7 +462,7 @@ export default function NewInvestigationPage() {
                 Calibrated Ward Presets (2023 Cyclone Michaung &amp; Recent Monsoons)
               </span>
               <p className="text-xs text-[#554638]">
-                Select pre-calibrated urban twin pairs with radar-verified rainfall equivalence:
+                Anna Nagar vs Velachery is the calibrated twin pair with a full diagnostic run. T Nagar vs Adyar can be compared and explored, but has no calibrated run yet:
               </p>
             </div>
             <div className="flex flex-wrap gap-2.5">
@@ -486,7 +492,7 @@ export default function NewInvestigationPage() {
                 <span className="h-2 w-2 rounded-full bg-[#3B8352]" />
                 <span>Adyar</span>
                 <span className="font-mono text-[10px] text-terracotta-700 bg-terracotta-100 px-1.5 py-0.5 rounded">
-                  91% Fit
+                  No calibrated run
                 </span>
               </button>
             </div>
