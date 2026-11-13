@@ -28,50 +28,25 @@ export class ApiError extends Error {
 }
 
 import mockData from "@/lib/mockData.json";
+import { getComparablesForPlace } from "@/lib/scoring/twin-similarity";
+import { buildWardFeatures } from "@/lib/scoring/ward-profiles";
+import { buildClaimProvenance } from "@/lib/provenance/claim-provenance";
 
 function getFallbackData<T>(path: string, options?: RequestInit): T {
   const cleanPath = path.split("?")[0];
-  const urlParams = new URLSearchParams(path.includes("?") ? path.split("?")[1] : "");
 
   if (cleanPath === "/locations/places") {
     return mockData.places as unknown as T;
   }
   if (cleanPath.startsWith("/locations/places/") && cleanPath.endsWith("/comparables")) {
-    const targetId = cleanPath.split("/")[3];
-    const targetPlace = mockData.places.find((p) => p.id === targetId) ?? mockData.places[0];
-    return {
-      target_place: targetPlace,
-      comparables: mockData.places
-        .filter((p) => p.id !== targetPlace.id)
-        .map((p) => ({
-          place: p,
-          similarity_score: p.name.includes("Velachery") ? 0.83 : 0.91,
-          breakdown: {
-            terrain_similarity: 0.84,
-            drainage_similarity: 0.86,
-            landcover_similarity: 0.91,
-            rainfall_similarity: 0.95,
-          },
-        })),
-    } as unknown as T;
+    return getComparablesForPlace(cleanPath.split("/")[3]) as unknown as T;
   }
   if (cleanPath.startsWith("/locations/places/") && cleanPath.endsWith("/features")) {
-    const targetId = cleanPath.split("/")[3];
-    return {
-      place_id: targetId,
-      terrain: { mean_elevation: 6.8, mean_slope: 0.015, hand: 1.2 },
-      landcover: { builtup_fraction: 0.78, vegetation_fraction: 0.15, water_fraction: 0.07 },
-      location_features: [],
-    } as unknown as T;
+    return buildWardFeatures(cleanPath.split("/")[3]) as unknown as T;
   }
   if (cleanPath.startsWith("/locations/places/")) {
     const id = cleanPath.split("/")[3];
     return (mockData.places.find((p) => p.id === id) ?? mockData.places[0]) as unknown as T;
-  }
-  if (cleanPath === "/locations/compare") {
-    const placeAId = urlParams.get("place_a_id") || mockData.places[0].id;
-    const placeBId = urlParams.get("place_b_id") || mockData.places[2].id;
-    return { ...mockData.compRes, place_a_id: placeAId, place_b_id: placeBId } as unknown as T;
   }
   if (cleanPath === "/flood-observations" || cleanPath === "/map/flood-observations") {
     return mockData.obs as unknown as T;
@@ -82,14 +57,12 @@ function getFallbackData<T>(path: string, options?: RequestInit): T {
   if (cleanPath === "/map/terrain") {
     return { elevation: 6.8, slope: 0.012, hand: 1.1 } as unknown as T;
   }
-  if (cleanPath === "/investigations/comparisons") {
-    return mockData.createComp as unknown as T;
-  }
-  if (cleanPath === "/investigations" && options?.method === "POST") {
-    return mockData.createInv as unknown as T;
-  }
   if (cleanPath.endsWith("/mechanisms")) {
     return mockData.mechs as unknown as T;
+  }
+  if (cleanPath.endsWith("/provenance") && cleanPath.includes("/evidence/")) {
+    const parts = cleanPath.split("/");
+    return buildClaimProvenance(parts[2], parts[4]) as unknown as T;
   }
   if (cleanPath.endsWith("/evidence")) {
     return mockData.evs as unknown as T;
@@ -106,20 +79,29 @@ function getFallbackData<T>(path: string, options?: RequestInit): T {
   if (cleanPath.endsWith("/limitations")) {
     return mockData.lim as unknown as T;
   }
-  if (cleanPath.endsWith("/counterfactual")) {
-    return mockData.cf as unknown as T;
-  }
   if (cleanPath.startsWith("/investigations/")) {
     const invId = cleanPath.split("/")[2];
     return { ...mockData.inv, id: invId, investigation_id: invId } as unknown as T;
   }
 
-  return mockData.places as unknown as T;
+  // Unknown endpoints must fail loudly. Returning an unrelated record here
+  // (previously the places list) let typos and unsupported routes pass as
+  // real data.
+  throw new ApiError(
+    "UNKNOWN_ENDPOINT",
+    `No calibrated demo response for ${options?.method ?? "GET"} ${cleanPath}`,
+    404
+  );
 }
 
 export async function fetchApi<T>(path: string, options?: RequestInit): Promise<T> {
   const apiBase = getApiBase();
   const url = `${apiBase}${path}`;
+  const method = (options?.method ?? "GET").toUpperCase();
+  // Reads may fall back to the calibrated demo dataset when the data service
+  // degrades. Mutations never do: a failed write must surface as an error,
+  // not as a fabricated success.
+  const canFallback = method === "GET" || method === "HEAD";
   try {
     const res = await fetch(url, {
       ...options,
@@ -127,18 +109,28 @@ export async function fetchApi<T>(path: string, options?: RequestInit): Promise<
     });
 
     if (!res.ok) {
+      if (!canFallback) {
+        throw new ApiError("REQUEST_FAILED", `${method} ${path} failed with HTTP ${res.status}`, res.status);
+      }
       console.warn(`[API] HTTP ${res.status} on ${path}, activating calibrated GCC fallback`);
       return getFallbackData<T>(path, options);
     }
 
     const contentType = res.headers.get("content-type");
     if (!contentType || !contentType.includes("application/json")) {
+      if (!canFallback) {
+        throw new ApiError("REQUEST_FAILED", `${method} ${path} returned a non-JSON response`, res.status);
+      }
       console.warn(`[API] Non-JSON response on ${path}, activating calibrated GCC fallback`);
       return getFallbackData<T>(path, options);
     }
 
     return await res.json();
   } catch (err) {
+    if (err instanceof ApiError) throw err;
+    if (!canFallback) {
+      throw new ApiError("NETWORK_ERROR", `${method} ${path} failed: ${err instanceof Error ? err.message : String(err)}`, 0);
+    }
     console.warn(`[API] Network error on ${path}, activating calibrated GCC fallback:`, err);
     return getFallbackData<T>(path, options);
   }

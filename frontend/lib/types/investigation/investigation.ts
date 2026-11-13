@@ -80,6 +80,8 @@ export interface Comparison {
   feature_similarities: Record<string, number>;
   similarity_breakdown: SimilarityBreakdown | null;
   reasons: string[];
+  // False when the pair has no calibrated run and the score is a screening estimate.
+  is_calibrated?: boolean;
   created_at: string;
 }
 
@@ -234,4 +236,7 @@ export interface LocationCompareResponse {
   feature_similarities: Record<string, number>;
   similarity_breakdown: SimilarityBreakdown | null;
   reasons: string[];
+  // False when the pair has no calibrated run and the score is a screening estimate.
+  is_calibrated?: boolean;
+  weights_version?: string;
 }

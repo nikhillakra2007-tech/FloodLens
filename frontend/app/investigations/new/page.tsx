@@ -760,10 +760,12 @@ export default function NewInvestigationPage() {
             <div className="flex items-center gap-4 bg-[#FAF7F2] border border-[#E8DFD3] rounded-2xl px-5 py-3">
               <div className="text-right">
                 <div className="text-[10px] font-bold text-[#756350] uppercase tracking-wider">Topographic Fit</div>
-                <div className="text-xs text-[#554638]">Control Correlation</div>
+                <div className="text-xs text-[#554638]">
+                  {comparison?.is_calibrated === false ? "Screening Estimate (No Calibrated Run)" : "Control Correlation"}
+                </div>
               </div>
               <div className="text-3xl font-extrabold text-terracotta-600 font-mono">
-                {comparison ? (comparison.similarity_score * 100).toFixed(0) : "83"}%
+                {comparison ? `${(comparison.similarity_score * 100).toFixed(0)}%` : "—"}
               </div>
             </div>
           </div>
@@ -1061,9 +1063,11 @@ export default function NewInvestigationPage() {
               <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-4 text-center">
                 <div className="text-[10px] font-bold uppercase tracking-wider text-[#756350]">Overall Spatial Fit</div>
                 <div className="font-mono text-2xl font-black text-terracotta-600 mt-0.5">
-                  {comparison ? (comparison.similarity_score * 100).toFixed(0) : "83"}%
+                  {comparison ? `${(comparison.similarity_score * 100).toFixed(0)}%` : "—"}
                 </div>
-                <div className="text-[10px] text-[#554638] mt-0.5">High Topographic Alignment</div>
+                <div className="text-[10px] text-[#554638] mt-0.5">
+                  {comparison?.is_calibrated === false ? "Screening estimate - no calibrated run for this pair" : "High Topographic Alignment"}
+                </div>
               </div>
 
               <div className="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-4 text-center">
