@@ -29,6 +29,7 @@ describe("getTwinSimilarity", () => {
     for (const twin of [tNagarAdyar, tNagarVelachery, annaNagarTNagar]) {
       expect(twin.is_calibrated).toBe(false);
       expect(twin.weights_version).toBe("ward_screening_v1");
+      expect(twin.disclaimer).toContain("not validated hydrology");
       expect(twin.similarity_score).toBeGreaterThan(0);
       expect(twin.similarity_score).toBeLessThanOrEqual(1);
     }
@@ -58,7 +59,9 @@ describe("getTwinSimilarity", () => {
 
 describe("getComparablesForPlace", () => {
   it("returns candidates in the ComparablesResponse shape, best first", () => {
-    const { candidates } = getComparablesForPlace(annaNagar.id);
+    const result = getComparablesForPlace(annaNagar.id);
+    expect(result).not.toBeNull();
+    const candidates = result!.candidates;
     expect(candidates).toHaveLength(mockData.places.length - 1);
     for (const c of candidates) {
       expect(c.place_id).not.toBe(annaNagar.id);
@@ -74,7 +77,7 @@ describe("getComparablesForPlace", () => {
   });
 
   it("keeps the calibrated score on the Anna Nagar vs Velachery candidate", () => {
-    const { candidates } = getComparablesForPlace(annaNagar.id);
+    const candidates = getComparablesForPlace(annaNagar.id)!.candidates;
     const velacheryCandidate = candidates.find((c) => c.place_id === velachery.id);
     expect(velacheryCandidate?.similarity_score).toBeCloseTo(0.832, 3);
   });
@@ -83,26 +86,41 @@ describe("getComparablesForPlace", () => {
 describe("ward profiles", () => {
   it("gives each calibrated ward its own terrain and land cover", () => {
     const ids = mockData.places.map((p) => p.id);
-    const elevations = new Set(ids.map((id) => getWardProfile(id).meanElevationM));
-    const builtup = new Set(ids.map((id) => getWardProfile(id).builtupFraction));
+    const elevations = new Set(ids.map((id) => getWardProfile(id)?.meanElevationM));
+    const builtup = new Set(ids.map((id) => getWardProfile(id)?.builtupFraction));
     expect(elevations.size).toBe(ids.length);
     expect(builtup.size).toBe(ids.length);
   });
 
-  it("builds a features bundle keyed to the requested ward", () => {
-    const bundle = buildWardFeatures(velachery.id);
-    expect(bundle.place_id).toBe(velachery.id);
-    expect(bundle.terrain.place_id).toBe(velachery.id);
-    expect(bundle.landcover.place_id).toBe(velachery.id);
-    expect(bundle.terrain.mean_elevation).toBe(getWardProfile(velachery.id).meanElevationM);
-    expect(bundle.landcover.water_fraction).toBe(getWardProfile(velachery.id).waterFraction);
+  it("labels which wards are calibrated dataset values and which are illustrative", () => {
+    expect(getWardProfile(annaNagar.id)?.dataStatus).toBe("calibrated_demo_dataset");
+    expect(getWardProfile(velachery.id)?.dataStatus).toBe("calibrated_demo_dataset");
+    expect(getWardProfile(tNagar.id)?.dataStatus).toBe("illustrative_demo_input");
+    expect(getWardProfile(adyar.id)?.dataStatus).toBe("illustrative_demo_input");
   });
 
-  it("falls back to mid-range defaults for an unknown ward", () => {
-    const profile = getWardProfile("unknown-ward");
-    expect(profile.placeId).toBe("unknown-ward");
-    const twin = getTwinSimilarity("unknown-ward", annaNagar.id);
-    expect(twin.similarity_score).toBeGreaterThan(0);
-    expect(twin.is_calibrated).toBe(false);
+  it("builds a features bundle keyed to the requested ward with a static dataset timestamp", () => {
+    const bundle = buildWardFeatures(velachery.id);
+    expect(bundle?.place_id).toBe(velachery.id);
+    expect(bundle?.terrain.place_id).toBe(velachery.id);
+    expect(bundle?.landcover.place_id).toBe(velachery.id);
+    expect(bundle?.terrain.mean_elevation).toBe(getWardProfile(velachery.id)?.meanElevationM);
+    expect(bundle?.landcover.water_fraction).toBe(getWardProfile(velachery.id)?.waterFraction);
+    // The served timestamp is the dataset build time, never the request time.
+    expect(bundle?.terrain.created_at).toBe("2026-10-09T01:33:09.466380+05:30");
+  });
+
+  it("marks illustrative wards as illustrative in the served bundle", () => {
+    const bundle = buildWardFeatures(tNagar.id);
+    expect(bundle?.data_status).toBe("illustrative_demo_input");
+    expect(bundle?.terrain.source).toContain("Illustrative");
+    expect(bundle?.terrain.source).not.toContain("SRTM");
+  });
+
+  it("fails clearly for an unknown ward instead of inventing a profile", () => {
+    expect(getWardProfile("unknown-ward")).toBeNull();
+    expect(buildWardFeatures("unknown-ward")).toBeNull();
+    expect(() => getTwinSimilarity("unknown-ward", annaNagar.id)).toThrow(/No ward profile/);
+    expect(getComparablesForPlace("unknown-ward")).toBeNull();
   });
 });

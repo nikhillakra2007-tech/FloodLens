@@ -16,7 +16,13 @@ export interface TwinSimilarity {
   reasons: string[];
   is_calibrated: boolean;
   weights_version: string;
+  // Set on every non-calibrated score: these are illustrative screening
+  // estimates from demo ward profiles, not validated hydrology.
+  disclaimer: string | null;
 }
+
+export const SCREENING_DISCLAIMER =
+  "Illustrative screening estimate from demo ward profiles - not validated hydrology.";
 
 const CALIBRATED_A = mockData.compRes.place_a_id;
 const CALIBRATED_B = mockData.compRes.place_b_id;
@@ -35,6 +41,7 @@ function calibratedSimilarity(): TwinSimilarity {
     reasons: [...mockData.compRes.reasons],
     is_calibrated: true,
     weights_version: "phase2_explainable",
+    disclaimer: null,
   };
 }
 
@@ -78,6 +85,11 @@ const WEIGHTS = {
 function screeningSimilarity(placeAId: string, placeBId: string): TwinSimilarity {
   const a = getWardProfile(placeAId);
   const b = getWardProfile(placeBId);
+  if (!a || !b) {
+    throw new Error(
+      `No ward profile for ${!a ? placeAId : placeBId}; refusing to invent a physical profile`
+    );
+  }
   const placeA = mockData.places.find((p) => p.id === placeAId);
   const placeB = mockData.places.find((p) => p.id === placeBId);
 
@@ -140,10 +152,16 @@ function screeningSimilarity(placeAId: string, placeBId: string): TwinSimilarity
     reasons,
     is_calibrated: false,
     weights_version: "ward_screening_v1",
+    disclaimer: SCREENING_DISCLAIMER,
   };
 }
 
 export function getTwinSimilarity(placeAId: string, placeBId: string): TwinSimilarity {
+  if (!getWardProfile(placeAId) || !getWardProfile(placeBId)) {
+    throw new Error(
+      `No ward profile for ${!getWardProfile(placeAId) ? placeAId : placeBId}; refusing to invent a physical profile`
+    );
+  }
   if (placeAId === placeBId) {
     return {
       similarity_score: 1,
@@ -158,6 +176,7 @@ export function getTwinSimilarity(placeAId: string, placeBId: string): TwinSimil
       reasons: ["Identical catchment"],
       is_calibrated: false,
       weights_version: "ward_screening_v1",
+      disclaimer: SCREENING_DISCLAIMER,
     };
   }
   return isCalibratedPair(placeAId, placeBId)
@@ -166,9 +185,11 @@ export function getTwinSimilarity(placeAId: string, placeBId: string): TwinSimil
 }
 
 // Comparables candidate list for one target ward, best twin first, matching
-// the ComparablesResponse shape the console dropdown reads.
+// the ComparablesResponse shape the console dropdown reads. Returns null for
+// an unknown ward so the caller can fail clearly.
 export function getComparablesForPlace(targetPlaceId: string) {
-  const target = mockData.places.find((p) => p.id === targetPlaceId) ?? mockData.places[0];
+  const target = mockData.places.find((p) => p.id === targetPlaceId);
+  if (!target || !getWardProfile(target.id)) return null;
   const candidates = mockData.places
     .filter((p) => p.id !== target.id)
     .map((p) => {

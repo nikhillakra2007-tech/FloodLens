@@ -6,6 +6,15 @@ import { buildClaimProvenance } from "@/lib/provenance/claim-provenance";
 
 export const dynamic = "force-dynamic";
 
+// The scorer throws for wards with no profile; the API answers 404 instead.
+function getTwinSimilaritySafe(placeAId: string, placeBId: string) {
+  try {
+    return getTwinSimilarity(placeAId, placeBId);
+  } catch {
+    return null;
+  }
+}
+
 const BACKEND_URL = process.env.FASTAPI_BACKEND_URL?.replace(/\/+$/, "");
 
 // When a live FastAPI backend is configured, proxy the request to it first
@@ -75,19 +84,35 @@ export async function GET(
   // 2. Specific place comparables: /locations/places/[id]/comparables
   if (slug[0] === "locations" && slug[1] === "places" && slug[3] === "comparables") {
     // Per-pair scores: the calibrated twin keeps its stored run, every other
-    // ward gets a deterministic screening estimate from its own profile.
-    return NextResponse.json(getComparablesForPlace(slug[2]));
+    // ward gets a labeled screening estimate from its own profile.
+    const comparables = getComparablesForPlace(slug[2]);
+    if (!comparables) {
+      return NextResponse.json(
+        { error: "Unknown place; no ward profile ships in the demo dataset", place_id: slug[2] },
+        { status: 404 }
+      );
+    }
+    return NextResponse.json(comparables);
   }
 
   // 3. Specific place features: /locations/places/[id]/features
   if (slug[0] === "locations" && slug[1] === "places" && slug[3] === "features") {
-    return NextResponse.json(buildWardFeatures(slug[2]));
+    const features = buildWardFeatures(slug[2]);
+    if (!features) {
+      return NextResponse.json(
+        { error: "Unknown place; no feature bundle ships in the demo dataset", place_id: slug[2] },
+        { status: 404 }
+      );
+    }
+    return NextResponse.json(features);
   }
 
   // 4. Specific place by ID: /locations/places/[id]
   if (slug[0] === "locations" && slug[1] === "places" && slug.length === 3) {
-    const targetId = slug[2];
-    const place = mockData.places.find((p) => p.id === targetId) ?? mockData.places[0];
+    const place = mockData.places.find((p) => p.id === slug[2]);
+    if (!place) {
+      return NextResponse.json({ error: "Unknown place", place_id: slug[2] }, { status: 404 });
+    }
     return NextResponse.json(place);
   }
 
@@ -181,7 +206,13 @@ export async function POST(
   if (path === "locations/compare") {
     const placeAId = url.searchParams.get("place_a_id") || mockData.places[0].id;
     const placeBId = url.searchParams.get("place_b_id") || mockData.places[2].id;
-    const twin = getTwinSimilarity(placeAId, placeBId);
+    const twin = getTwinSimilaritySafe(placeAId, placeBId);
+    if (!twin) {
+      return NextResponse.json(
+        { error: "Unknown place; no ward profile ships in the demo dataset" },
+        { status: 404 }
+      );
+    }
     return NextResponse.json({
       place_a_id: placeAId,
       place_b_id: placeBId,
@@ -191,6 +222,7 @@ export async function POST(
       reasons: twin.reasons,
       is_calibrated: twin.is_calibrated,
       weights_version: twin.weights_version,
+      disclaimer: twin.disclaimer,
     });
   }
 
@@ -198,7 +230,13 @@ export async function POST(
   if (path === "investigations/comparisons") {
     const placeAId = url.searchParams.get("place_a_id") || mockData.places[0].id;
     const placeBId = url.searchParams.get("place_b_id") || mockData.places[2].id;
-    const twin = getTwinSimilarity(placeAId, placeBId);
+    const twin = getTwinSimilaritySafe(placeAId, placeBId);
+    if (!twin) {
+      return NextResponse.json(
+        { error: "Unknown place; no ward profile ships in the demo dataset" },
+        { status: 404 }
+      );
+    }
     return NextResponse.json({
       ...mockData.createComp,
       place_a_id: placeAId,
@@ -209,6 +247,7 @@ export async function POST(
       similarity_breakdown: twin.is_calibrated ? mockData.createComp.similarity_breakdown : null,
       reasons: twin.reasons,
       is_calibrated: twin.is_calibrated,
+      disclaimer: twin.disclaimer,
       created_at: new Date().toISOString(),
     });
   }

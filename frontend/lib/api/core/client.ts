@@ -39,14 +39,26 @@ function getFallbackData<T>(path: string, options?: RequestInit): T {
     return mockData.places as unknown as T;
   }
   if (cleanPath.startsWith("/locations/places/") && cleanPath.endsWith("/comparables")) {
-    return getComparablesForPlace(cleanPath.split("/")[3]) as unknown as T;
+    const comparables = getComparablesForPlace(cleanPath.split("/")[3]);
+    if (!comparables) {
+      throw new ApiError("UNKNOWN_PLACE", `No ward profile for ${cleanPath.split("/")[3]}`, 404);
+    }
+    return comparables as unknown as T;
   }
   if (cleanPath.startsWith("/locations/places/") && cleanPath.endsWith("/features")) {
-    return buildWardFeatures(cleanPath.split("/")[3]) as unknown as T;
+    const features = buildWardFeatures(cleanPath.split("/")[3]);
+    if (!features) {
+      throw new ApiError("UNKNOWN_PLACE", `No feature bundle for ${cleanPath.split("/")[3]}`, 404);
+    }
+    return features as unknown as T;
   }
   if (cleanPath.startsWith("/locations/places/")) {
     const id = cleanPath.split("/")[3];
-    return (mockData.places.find((p) => p.id === id) ?? mockData.places[0]) as unknown as T;
+    const place = mockData.places.find((p) => p.id === id);
+    if (!place) {
+      throw new ApiError("UNKNOWN_PLACE", `No demo place with id ${id}`, 404);
+    }
+    return place as unknown as T;
   }
   if (cleanPath === "/flood-observations" || cleanPath === "/map/flood-observations") {
     return mockData.obs as unknown as T;
