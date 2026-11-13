@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import mockData from "@/lib/mockData.json";
+import { getTwinSimilarity, getComparablesForPlace } from "@/lib/scoring/twin-similarity";
+import { buildWardFeatures } from "@/lib/scoring/ward-profiles";
 
 export const dynamic = "force-dynamic";
 
@@ -71,63 +73,14 @@ export async function GET(
 
   // 2. Specific place comparables: /locations/places/[id]/comparables
   if (slug[0] === "locations" && slug[1] === "places" && slug[3] === "comparables") {
-    const targetId = slug[2];
-    const targetPlace = mockData.places.find((p) => p.id === targetId) ?? mockData.places[0];
-    const comparables = mockData.places
-      .filter((p) => p.id !== targetPlace.id)
-      .map((p) => ({
-        place: p,
-        similarity_score: p.name.includes("Velachery") ? 0.83 : 0.91,
-        breakdown: {
-          terrain_similarity: 0.84,
-          drainage_similarity: 0.86,
-          landcover_similarity: 0.91,
-          rainfall_similarity: 0.95,
-        },
-      }));
-    return NextResponse.json({
-      target_place: targetPlace,
-      comparables,
-    });
+    // Per-pair scores: the calibrated twin keeps its stored run, every other
+    // ward gets a deterministic screening estimate from its own profile.
+    return NextResponse.json(getComparablesForPlace(slug[2]));
   }
 
   // 3. Specific place features: /locations/places/[id]/features
   if (slug[0] === "locations" && slug[1] === "places" && slug[3] === "features") {
-    const targetId = slug[2];
-    const isVelachery = targetId === mockData.places[2]?.id;
-    return NextResponse.json({
-      place_id: targetId,
-      terrain: {
-        id: `terr-${targetId}`,
-        place_id: targetId,
-        mean_elevation: isVelachery ? 4.2 : 6.8,
-        min_elevation: isVelachery ? 1.8 : 5.1,
-        max_elevation: isVelachery ? 7.5 : 9.2,
-        mean_slope: isVelachery ? 0.008 : 0.015,
-        hand: isVelachery ? 0.6 : 1.2,
-        relative_elevation: isVelachery ? 2.1 : 3.4,
-        elevation_mean_m: isVelachery ? 4.2 : 6.8,
-        elevation_min_m: isVelachery ? 1.8 : 5.1,
-        elevation_max_m: isVelachery ? 7.5 : 9.2,
-        mean_slope_degrees: isVelachery ? 0.45 : 0.86,
-        hand_m: isVelachery ? 0.6 : 1.2,
-        relative_elevation_m: isVelachery ? 2.1 : 3.4,
-        source: "SRTM 30m / CartoDEM",
-        computation_version: "v2.1",
-        created_at: new Date().toISOString(),
-      },
-      landcover: {
-        id: `land-${targetId}`,
-        place_id: targetId,
-        builtup_fraction: isVelachery ? 0.65 : 0.84,
-        vegetation_fraction: isVelachery ? 0.22 : 0.11,
-        water_fraction: isVelachery ? 0.13 : 0.05,
-        source: "Sentinel-2 Land Cover 10m",
-        computation_version: "v2.1",
-        created_at: new Date().toISOString(),
-      },
-      location_features: [],
-    });
+    return NextResponse.json(buildWardFeatures(slug[2]));
   }
 
   // 4. Specific place by ID: /locations/places/[id]
@@ -221,10 +174,16 @@ export async function POST(
   if (path === "locations/compare") {
     const placeAId = url.searchParams.get("place_a_id") || mockData.places[0].id;
     const placeBId = url.searchParams.get("place_b_id") || mockData.places[2].id;
+    const twin = getTwinSimilarity(placeAId, placeBId);
     return NextResponse.json({
-      ...mockData.compRes,
       place_a_id: placeAId,
       place_b_id: placeBId,
+      similarity_score: twin.similarity_score,
+      feature_similarities: twin.feature_similarities,
+      similarity_breakdown: twin.is_calibrated ? mockData.createComp.similarity_breakdown : null,
+      reasons: twin.reasons,
+      is_calibrated: twin.is_calibrated,
+      weights_version: twin.weights_version,
     });
   }
 
@@ -232,10 +191,18 @@ export async function POST(
   if (path === "investigations/comparisons") {
     const placeAId = url.searchParams.get("place_a_id") || mockData.places[0].id;
     const placeBId = url.searchParams.get("place_b_id") || mockData.places[2].id;
+    const twin = getTwinSimilarity(placeAId, placeBId);
     return NextResponse.json({
       ...mockData.createComp,
       place_a_id: placeAId,
       place_b_id: placeBId,
+      similarity_score: twin.similarity_score,
+      weights_version: twin.weights_version,
+      feature_similarities: twin.feature_similarities,
+      similarity_breakdown: twin.is_calibrated ? mockData.createComp.similarity_breakdown : null,
+      reasons: twin.reasons,
+      is_calibrated: twin.is_calibrated,
+      created_at: new Date().toISOString(),
     });
   }
 

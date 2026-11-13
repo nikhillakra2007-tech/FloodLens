@@ -28,6 +28,8 @@ export class ApiError extends Error {
 }
 
 import mockData from "@/lib/mockData.json";
+import { getTwinSimilarity, getComparablesForPlace } from "@/lib/scoring/twin-similarity";
+import { buildWardFeatures } from "@/lib/scoring/ward-profiles";
 
 function getFallbackData<T>(path: string, options?: RequestInit): T {
   const cleanPath = path.split("?")[0];
@@ -37,32 +39,10 @@ function getFallbackData<T>(path: string, options?: RequestInit): T {
     return mockData.places as unknown as T;
   }
   if (cleanPath.startsWith("/locations/places/") && cleanPath.endsWith("/comparables")) {
-    const targetId = cleanPath.split("/")[3];
-    const targetPlace = mockData.places.find((p) => p.id === targetId) ?? mockData.places[0];
-    return {
-      target_place: targetPlace,
-      comparables: mockData.places
-        .filter((p) => p.id !== targetPlace.id)
-        .map((p) => ({
-          place: p,
-          similarity_score: p.name.includes("Velachery") ? 0.83 : 0.91,
-          breakdown: {
-            terrain_similarity: 0.84,
-            drainage_similarity: 0.86,
-            landcover_similarity: 0.91,
-            rainfall_similarity: 0.95,
-          },
-        })),
-    } as unknown as T;
+    return getComparablesForPlace(cleanPath.split("/")[3]) as unknown as T;
   }
   if (cleanPath.startsWith("/locations/places/") && cleanPath.endsWith("/features")) {
-    const targetId = cleanPath.split("/")[3];
-    return {
-      place_id: targetId,
-      terrain: { mean_elevation: 6.8, mean_slope: 0.015, hand: 1.2 },
-      landcover: { builtup_fraction: 0.78, vegetation_fraction: 0.15, water_fraction: 0.07 },
-      location_features: [],
-    } as unknown as T;
+    return buildWardFeatures(cleanPath.split("/")[3]) as unknown as T;
   }
   if (cleanPath.startsWith("/locations/places/")) {
     const id = cleanPath.split("/")[3];
@@ -71,7 +51,17 @@ function getFallbackData<T>(path: string, options?: RequestInit): T {
   if (cleanPath === "/locations/compare") {
     const placeAId = urlParams.get("place_a_id") || mockData.places[0].id;
     const placeBId = urlParams.get("place_b_id") || mockData.places[2].id;
-    return { ...mockData.compRes, place_a_id: placeAId, place_b_id: placeBId } as unknown as T;
+    const twin = getTwinSimilarity(placeAId, placeBId);
+    return {
+      place_a_id: placeAId,
+      place_b_id: placeBId,
+      similarity_score: twin.similarity_score,
+      feature_similarities: twin.feature_similarities,
+      similarity_breakdown: twin.is_calibrated ? mockData.createComp.similarity_breakdown : null,
+      reasons: twin.reasons,
+      is_calibrated: twin.is_calibrated,
+      weights_version: twin.weights_version,
+    } as unknown as T;
   }
   if (cleanPath === "/flood-observations" || cleanPath === "/map/flood-observations") {
     return mockData.obs as unknown as T;
@@ -83,7 +73,20 @@ function getFallbackData<T>(path: string, options?: RequestInit): T {
     return { elevation: 6.8, slope: 0.012, hand: 1.1 } as unknown as T;
   }
   if (cleanPath === "/investigations/comparisons") {
-    return mockData.createComp as unknown as T;
+    const placeAId = urlParams.get("place_a_id") || mockData.createComp.place_a_id;
+    const placeBId = urlParams.get("place_b_id") || mockData.createComp.place_b_id;
+    const twin = getTwinSimilarity(placeAId, placeBId);
+    return {
+      ...mockData.createComp,
+      place_a_id: placeAId,
+      place_b_id: placeBId,
+      similarity_score: twin.similarity_score,
+      weights_version: twin.weights_version,
+      feature_similarities: twin.feature_similarities,
+      similarity_breakdown: twin.is_calibrated ? mockData.createComp.similarity_breakdown : null,
+      reasons: twin.reasons,
+      is_calibrated: twin.is_calibrated,
+    } as unknown as T;
   }
   if (cleanPath === "/investigations" && options?.method === "POST") {
     return mockData.createInv as unknown as T;
