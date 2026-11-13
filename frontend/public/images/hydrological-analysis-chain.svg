@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 270" width="100%" height="100%" fill="none" role="img" aria-label="Five-stage scientific hydrological causal chain: 1. Rainfall Forcing (390mm Michaung) -> 2. Catchment Runoff (Q=CIA) -> 3. Drainage Network (SWD Culvert) -> 4. Hydraulic Bottleneck (+1.03m Backwater dy/dx) -> 5. Flood Risk Output (Ponding)">
   <defs>
-    <marker id="flow-arrow-blue" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto-reverse">
+    <marker id="flow-arrow-blue" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto">
       <path d="M 0 1 L 5 3 L 0 5 z" fill="#2563EB" />
     </marker>
-    <marker id="flow-arrow-amber" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto-reverse">
+    <marker id="flow-arrow-amber" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto">
       <path d="M 0 1 L 5 3 L 0 5 z" fill="#D97706" />
     </marker>
-    <marker id="flow-arrow-slate" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto-reverse">
+    <marker id="flow-arrow-slate" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto">
       <path d="M 0 1 L 5 3 L 0 5 z" fill="#475569" />
     </marker>
-    <marker id="flow-arrow-crimson" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto-reverse">
+    <marker id="flow-arrow-crimson" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto">
       <path d="M 0 1 L 5 3 L 0 5 z" fill="#DC2626" />
     </marker>
     <pattern id="inundationHatch" width="6" height="6" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
