@@ -2,80 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-
-interface Scenario {
-  id: string;
-  nameA: string;
-  wardA: string;
-  nameB: string;
-  wardB: string;
-  similarity: number;
-  primaryMechanism: string;
-  confidence: number;
-  verdict: string;
-  rainfallDiff: string;
-  drainageDiff: string;
-  demDiff: string;
-  imperviousDiff: string;
-  summary: string;
-}
-
-const DEMO_SCENARIOS: Scenario[] = [
-  {
-    id: "anna-nagar-velachery",
-    nameA: "Anna Nagar",
-    wardA: "Ward 101",
-    nameB: "Velachery",
-    wardB: "Ward 102",
-    similarity: 83.2,
-    primaryMechanism: "Downstream SWD Backwater & Outfall Congestion",
-    confidence: 88,
-    verdict: "DEFENSIBLE",
-    rainfallDiff: "+2.1% (Near-Identical Cloudburst)",
-    drainageDiff: "-38% Effective Outfall Gradient",
-    demDiff: "-1.4m Micro-depression Basin",
-    imperviousDiff: "+14% Built-up Impervious Surface",
-    summary:
-      "Despite experiencing virtually identical cloudburst rainfall (390mm vs 382mm), Anna Nagar inundated due to downstream stormwater drain backwater stagnation and a local elevation depression.",
-  },
-  {
-    id: "t-nagar-adyar",
-    nameA: "T Nagar",
-    wardA: "Ward 104",
-    nameB: "Adyar",
-    wardB: "Ward 103",
-    similarity: 91.1,
-    primaryMechanism: "Conduit Diameter Inadequacy & Overland Runoff",
-    confidence: 94,
-    verdict: "DEFENSIBLE",
-    rainfallDiff: "0.0% (Identical Sub-basin Storm)",
-    drainageDiff: "-46% Pipe Cross-sectional Area",
-    demDiff: "+0.8m HAND Elevation Discrepancy",
-    imperviousDiff: "+22% Commercial Paved Fraction",
-    summary:
-      "T Nagar's high impervious commercial density overwhelmed older masonry SWD conduits, whereas Adyar's proximate tidal river canal accepted high discharge with minimal backflow.",
-  },
-  {
-    id: "mylapore-foreshore",
-    nameA: "Mylapore",
-    wardA: "Ward 124",
-    nameB: "Foreshore Estate",
-    wardB: "Ward 125",
-    similarity: 87.5,
-    primaryMechanism: "Buckingham Canal Tidal Surge Lock & Flap Gate Surcharge",
-    confidence: 91,
-    verdict: "DEFENSIBLE",
-    rainfallDiff: "-1.2% (Coastal Convective Cell)",
-    drainageDiff: "-52% Gravitational Outfall Velocity",
-    demDiff: "+0.3m Distance to Coastal Margin",
-    imperviousDiff: "+18% Built-up Fraction",
-    summary:
-      "Mylapore's primary stormwater outfall was hydraulically locked by Buckingham Canal tidal surge height, forcing floodwaters upward through roadside inlets, whereas Foreshore Estate discharged into coastal dunes with active drainage.",
-  },
-];
+import { DEMO_SCENARIOS, type DemoScenario } from "@/lib/scenarios/demo-scenarios";
 
 export default function SimulatorPage() {
-  const [activeScenario, setActiveScenario] = useState<Scenario>(DEMO_SCENARIOS[0]);
+  const [activeScenario, setActiveScenario] = useState<DemoScenario>(DEMO_SCENARIOS[0]);
 
   return (
     <div className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8 animate-fadeIn">
@@ -118,14 +48,14 @@ export default function SimulatorPage() {
               Differential Diagnosis in Action
             </h1>
             <p className="text-sm text-[#554638] leading-relaxed">
-              Toggle calibrated urban twin scenarios to see how differential spatial analysis eliminates rainfall confounds to isolate exact structural hydraulic bottlenecks.
+              Toggle the calibrated twin scenario and the illustrative walkthroughs to see how differential spatial analysis eliminates rainfall confounds to isolate structural hydraulic bottlenecks.
             </p>
           </div>
 
           {/* Scenario Switcher Tabs */}
           <div className="space-y-1.5">
             <span className="text-[11px] font-bold uppercase tracking-wider text-[#756350] block">
-              Calibrated Twin Pairs:
+              Demo Twin Pairs:
             </span>
             <div className="flex flex-wrap gap-2.5">
               {DEMO_SCENARIOS.map((s) => (
@@ -162,7 +92,10 @@ export default function SimulatorPage() {
               </div>
               <div className="rounded-2xl border border-terracotta-200 bg-terracotta-50 px-5 py-2.5 text-right">
                 <div className="text-[10px] font-bold text-terracotta-800 uppercase tracking-wider">Twin Fitness</div>
-                <div className="font-mono text-2xl font-black text-terracotta-700">{activeScenario.similarity}%</div>
+                <div className="font-mono text-2xl font-black text-terracotta-700">
+                  {activeScenario.similarityPct !== null ? `${activeScenario.similarityPct}%` : "\u2014"}
+                </div>
+                <div className="text-[9px] font-semibold text-[#9E8B75] mt-0.5">{activeScenario.similarityNote}</div>
               </div>
             </div>
 
@@ -177,6 +110,11 @@ export default function SimulatorPage() {
               <p className="text-sm leading-relaxed text-[#433830]">
                 {activeScenario.summary}
               </p>
+              {activeScenario.disclaimer && (
+                <p className="text-[11px] leading-relaxed text-amber-800 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
+                  {activeScenario.disclaimer}
+                </p>
+              )}
             </div>
 
             {/* 4 Differential Meters */}
@@ -210,7 +148,15 @@ export default function SimulatorPage() {
               <span className="text-xs font-bold uppercase tracking-wider text-[#756350]">
                 Synthesized Mechanism Ranking
               </span>
-              <span className="rounded-full bg-emerald-100 border border-emerald-200 px-3 py-0.5 text-xs font-bold text-emerald-800">
+              <span
+                className={`rounded-full px-3 py-0.5 text-xs font-bold border ${
+                  activeScenario.dataStatus === "calibrated"
+                    ? "bg-emerald-100 border-emerald-200 text-emerald-800"
+                    : activeScenario.dataStatus === "illustrative"
+                      ? "bg-amber-100 border-amber-200 text-amber-800"
+                      : "bg-gray-100 border-gray-300 text-gray-700"
+                }`}
+              >
                 {activeScenario.verdict}
               </span>
             </div>
@@ -219,39 +165,63 @@ export default function SimulatorPage() {
               <div className="rounded-2xl border-2 border-terracotta-200 bg-white p-5 space-y-2.5 shadow-sm">
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-terracotta-700">Rank #1 Primary Driver</span>
-                  <span className="font-mono text-xs font-bold text-terracotta-800">{activeScenario.confidence}% Confidence</span>
+                  <span className="font-mono text-xs font-bold text-terracotta-800">
+                    {activeScenario.confidencePct !== null
+                      ? `${activeScenario.confidencePct}% Confidence`
+                      : activeScenario.confidenceNote}
+                  </span>
                 </div>
                 <div className="font-bold text-[#221B15] text-sm">{activeScenario.primaryMechanism}</div>
-                <div className="h-2 w-full rounded-full bg-[#E0D5C7] overflow-hidden">
-                  <div className="h-full rounded-full bg-terracotta-600" style={{ width: `${activeScenario.confidence}%` }} />
-                </div>
+                {activeScenario.confidencePct !== null && (
+                  <div className="h-2 w-full rounded-full bg-[#E0D5C7] overflow-hidden">
+                    <div className="h-full rounded-full bg-terracotta-600" style={{ width: `${activeScenario.confidencePct}%` }} />
+                  </div>
+                )}
               </div>
 
-              <div className="rounded-2xl border border-[#E8DFD3] bg-white p-4 space-y-1.5 opacity-80">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="font-medium text-[#221B15]">Rank #2 Surface Infiltration Exhaustion</span>
-                  <span className="font-mono text-[#756350]">62% Confidence</span>
+              {activeScenario.ranks.slice(1).map((rank, i) => (
+                <div
+                  key={rank.label}
+                  className={`rounded-2xl border border-[#E8DFD3] bg-white p-4 space-y-1.5 ${i === 0 ? "opacity-80" : "opacity-60"}`}
+                >
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-medium text-[#221B15]">Rank #{i + 2} {rank.label}</span>
+                    <span className="font-mono text-[#756350]">
+                      {rank.confidencePct !== null ? `${rank.confidencePct}% Confidence` : activeScenario.confidenceNote}
+                    </span>
+                  </div>
                 </div>
-              </div>
-
-              <div className="rounded-2xl border border-[#E8DFD3] bg-white p-4 space-y-1.5 opacity-60">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="font-medium text-[#221B15]">Rank #3 Secondary Canal Tidal Hold</span>
-                  <span className="font-mono text-[#756350]">31% Confidence</span>
-                </div>
-              </div>
+              ))}
             </div>
 
-            <Link
-              href="/investigations/new"
-              className="w-full rounded-2xl bg-terracotta-600 hover:bg-terracotta-700 px-5 py-4 text-xs font-bold text-white flex items-center justify-center gap-2 transition-all cursor-pointer shadow-warm hover:shadow-lift"
-            >
-              <span>Launch Full Diagnostic Console for This Pair</span>
-              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </Link>
+            {activeScenario.validationNote && (
+              <p className="text-[11px] text-[#756350] text-center">{activeScenario.validationNote}</p>
+            )}
+
+            {activeScenario.dataStatus !== "concept" ? (
+              <Link
+                href={
+                  activeScenario.consolePairParam
+                    ? `/investigations/new?pair=${activeScenario.consolePairParam}`
+                    : "/investigations/new"
+                }
+                className="w-full rounded-2xl bg-terracotta-600 hover:bg-terracotta-700 px-5 py-4 text-xs font-bold text-white flex items-center justify-center gap-2 transition-all cursor-pointer shadow-warm hover:shadow-lift"
+              >
+                <span>
+                  {activeScenario.dataStatus === "calibrated"
+                    ? "Launch Full Diagnostic Console for This Pair"
+                    : "Preview This Pair in the Console"}
+                </span>
+                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </Link>
+            ) : (
+              <p className="text-[11px] text-[#9E8B75] text-center border border-dashed border-[#E0D5C7] rounded-2xl px-4 py-3">
+                Not in the demo dataset - the console covers the four calibrated Chennai wards.
+              </p>
+            )}
           </div>
         </div>
       </div>
