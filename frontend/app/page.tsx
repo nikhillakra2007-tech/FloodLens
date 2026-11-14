@@ -6,60 +6,7 @@ import CausalFlowchart from "@/components/visuals/CausalFlowchart";
 import InfrastructureCrossSectionViewer from "@/components/visuals/InfrastructureCrossSectionViewer";
 import HydrologicalConventionsModal from "@/components/visuals/HydrologicalConventionsModal";
 import GatewayTransitionLink from "@/components/auth/GatewayTransitionLink";
-
-interface Scenario {
-  id: string;
-  nameA: string;
-  wardA: string;
-  nameB: string;
-  wardB: string;
-  similarity: number;
-  primaryMechanism: string;
-  confidence: number;
-  verdict: string;
-  rainfallDiff: string;
-  drainageDiff: string;
-  demDiff: string;
-  imperviousDiff: string;
-  summary: string;
-}
-
-const DEMO_SCENARIOS: Scenario[] = [
-  {
-    id: "anna-nagar-velachery",
-    nameA: "Anna Nagar",
-    wardA: "Ward 101",
-    nameB: "Velachery",
-    wardB: "Ward 102",
-    similarity: 83.2,
-    primaryMechanism: "Downstream SWD Backwater & Outfall Congestion",
-    confidence: 88,
-    verdict: "DEFENSIBLE",
-    rainfallDiff: "+2.1% (Near-Identical Cloudburst)",
-    drainageDiff: "-38% Effective Outfall Gradient",
-    demDiff: "-1.4m Micro-depression Basin",
-    imperviousDiff: "+14% Built-up Impervious Surface",
-    summary:
-      "Despite experiencing virtually identical cloudburst rainfall (390mm vs 382mm), Anna Nagar inundated due to downstream stormwater drain backwater stagnation and a local elevation depression.",
-  },
-  {
-    id: "t-nagar-adyar",
-    nameA: "T Nagar",
-    wardA: "Ward 104",
-    nameB: "Adyar",
-    wardB: "Ward 103",
-    similarity: 91.1,
-    primaryMechanism: "Conduit Diameter Inadequacy & Overland Runoff",
-    confidence: 94,
-    verdict: "DEFENSIBLE",
-    rainfallDiff: "0.0% (Identical Sub-basin Storm)",
-    drainageDiff: "-46% Pipe Cross-sectional Area",
-    demDiff: "+0.8m HAND Elevation Discrepancy",
-    imperviousDiff: "+22% Commercial Paved Fraction",
-    summary:
-      "T Nagar's high impervious commercial density overwhelmed older masonry SWD conduits, whereas Adyar's proximate tidal river canal accepted high discharge with minimal backflow.",
-  },
-];
+import { DEMO_SCENARIOS, type DemoScenario } from "@/lib/scenarios/demo-scenarios";
 
 interface FaqItem {
   question: string;
@@ -95,7 +42,7 @@ const FAQS: FaqItem[] = [
 ];
 
 export default function LandingPage() {
-  const [activeScenario, setActiveScenario] = useState<Scenario>(DEMO_SCENARIOS[0]);
+  const [activeScenario, setActiveScenario] = useState<DemoScenario>(DEMO_SCENARIOS[0]);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [isConventionsOpen, setIsConventionsOpen] = useState<boolean>(false);
 
@@ -277,7 +224,7 @@ export default function LandingPage() {
                 Differential Diagnosis in Action
               </h2>
               <p className="text-sm text-[#554638]">
-                Toggle calibrated urban twin scenarios to see how differential spatial analysis eliminates rainfall confounds to diagnose exact structural bottlenecks.
+                Toggle the calibrated twin scenario and the illustrative walkthroughs to see how differential spatial analysis eliminates rainfall confounds to diagnose structural bottlenecks.
               </p>
             </div>
 
@@ -347,8 +294,9 @@ export default function LandingPage() {
                     Twin Fitness
                   </div>
                   <div className="font-mono text-2xl sm:text-3xl font-black text-terracotta-700">
-                    {activeScenario.similarity}%
+                    {activeScenario.similarityPct !== null ? `${activeScenario.similarityPct}%` : "\u2014"}
                   </div>
+                  <div className="text-[9px] font-semibold text-[#9E8B75] mt-0.5">{activeScenario.similarityNote}</div>
                 </div>
               </div>
 
@@ -363,6 +311,11 @@ export default function LandingPage() {
                 <p className="text-sm leading-relaxed text-[#433830] transition-opacity duration-300">
                   {activeScenario.summary}
                 </p>
+                {activeScenario.disclaimer && (
+                  <p className="text-[11px] leading-relaxed text-amber-800 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
+                    {activeScenario.disclaimer}
+                  </p>
+                )}
               </div>
 
               {/* 4 Differential Meters with Hover Transitions */}
@@ -396,7 +349,15 @@ export default function LandingPage() {
                 <span className="text-xs font-bold uppercase tracking-wider text-[#756350]">
                   Synthesized Mechanism Ranking
                 </span>
-                <span className="rounded-full bg-emerald-100 border border-emerald-200 px-3 py-0.5 text-xs font-bold text-emerald-800 transition-all duration-300">
+                <span
+                  className={`rounded-full px-3 py-0.5 text-xs font-bold border transition-all duration-300 ${
+                    activeScenario.dataStatus === "calibrated"
+                      ? "bg-emerald-100 border-emerald-200 text-emerald-800"
+                      : activeScenario.dataStatus === "illustrative"
+                        ? "bg-amber-100 border-amber-200 text-amber-800"
+                        : "bg-gray-100 border-gray-300 text-gray-700"
+                  }`}
+                >
                   {activeScenario.verdict}
                 </span>
               </div>
@@ -405,34 +366,54 @@ export default function LandingPage() {
                 <div className="rounded-2xl border-2 border-terracotta-200 bg-white p-5 space-y-2.5 shadow-sm hover:border-terracotta-400 transition-all duration-300">
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-terracotta-700">Rank #1 Primary Driver</span>
-                    <span className="font-mono text-xs font-bold text-terracotta-800">{activeScenario.confidence}% Confidence</span>
+                    <span className="font-mono text-xs font-bold text-terracotta-800">
+                      {activeScenario.confidencePct !== null
+                        ? `${activeScenario.confidencePct}% Confidence`
+                        : activeScenario.confidenceNote}
+                    </span>
                   </div>
                   <div className="font-bold text-[#221B15] text-sm">{activeScenario.primaryMechanism}</div>
-                  <div className="h-2 w-full rounded-full bg-[#E0D5C7] overflow-hidden">
-                    <div className="h-full rounded-full bg-terracotta-600 transition-all duration-700 ease-out" style={{ width: `${activeScenario.confidence}%` }} />
-                  </div>
+                  {activeScenario.confidencePct !== null && (
+                    <div className="h-2 w-full rounded-full bg-[#E0D5C7] overflow-hidden">
+                      <div className="h-full rounded-full bg-terracotta-600 transition-all duration-700 ease-out" style={{ width: `${activeScenario.confidencePct}%` }} />
+                    </div>
+                  )}
                 </div>
 
-                <div className="rounded-2xl border border-[#E8DFD3] bg-white p-4 space-y-1.5 opacity-75 hover:opacity-100 transition-opacity duration-300">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-medium text-[#221B15]">Rank #2 Surface Infiltration Exhaustion</span>
-                    <span className="font-mono text-[#756350]">62% Confidence</span>
+                {activeScenario.ranks.slice(1).map((rank, i) => (
+                  <div
+                    key={rank.label}
+                    className={`rounded-2xl border border-[#E8DFD3] bg-white p-4 space-y-1.5 hover:opacity-100 transition-opacity duration-300 ${i === 0 ? "opacity-75" : "opacity-55"}`}
+                  >
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="font-medium text-[#221B15]">Rank #{i + 2} {rank.label}</span>
+                      <span className="font-mono text-[#756350]">
+                        {rank.confidencePct !== null ? `${rank.confidencePct}% Confidence` : activeScenario.confidenceNote}
+                      </span>
+                    </div>
                   </div>
-                </div>
-
-                <div className="rounded-2xl border border-[#E8DFD3] bg-white p-4 space-y-1.5 opacity-55 hover:opacity-100 transition-opacity duration-300">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-medium text-[#221B15]">Rank #3 Secondary Canal Tidal Hold</span>
-                    <span className="font-mono text-[#756350]">31% Confidence</span>
-                  </div>
-                </div>
+                ))}
               </div>
 
+              {activeScenario.validationNote && (
+                <p className="text-[11px] text-[#756350] text-center">{activeScenario.validationNote}</p>
+              )}
+
               <Link
-                href={`/auth?next=${encodeURIComponent(`/investigations/new?pair=${activeScenario.id}`)}`}
+                href={
+                  activeScenario.dataStatus === "concept"
+                    ? "/auth"
+                    : `/auth?next=${encodeURIComponent(`/investigations/new${activeScenario.consolePairParam ? `?pair=${activeScenario.consolePairParam}` : ""}`)}`
+                }
                 className="w-full rounded-2xl bg-white border border-[#E0D5C7] hover:border-terracotta-400 hover:bg-terracotta-50 hover:shadow-warm px-5 py-3.5 text-xs font-bold text-[#221B15] flex items-center justify-center gap-2 transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer shadow-sm group"
               >
-                <span>Sign In &amp; Run Ward Diagnosis for This Pair</span>
+                <span>
+                  {activeScenario.dataStatus === "calibrated"
+                    ? "Sign In & Run Ward Diagnosis for This Pair"
+                    : activeScenario.dataStatus === "illustrative"
+                      ? "Sign In & Preview This Pair"
+                      : "Sign In & Explore the Demo Dataset"}
+                </span>
                 <svg className="h-4 w-4 text-terracotta-600 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <line x1="5" y1="12" x2="19" y2="12" />
                   <polyline points="12 5 19 12 12 19" />
