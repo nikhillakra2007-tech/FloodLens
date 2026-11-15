@@ -66,7 +66,7 @@ export const WARD_PROFILES: Record<string, WardProfile> = {
     drainDensityKmPerKm2: 3.1, // illustrative
     waterbodyDistanceM: 900, // illustrative
   },
-  // T Nagar (Ward 104) - ILLUSTRATIVE: extracted values are not in the repo
+  // T Nagar - ILLUSTRATIVE: extracted values are not in the repo
   "1ea309cc-6461-493e-b4aa-412ea3474676": {
     placeId: "1ea309cc-6461-493e-b4aa-412ea3474676",
     dataStatus: "illustrative_demo_input",
@@ -83,7 +83,7 @@ export const WARD_PROFILES: Record<string, WardProfile> = {
     drainDensityKmPerKm2: 3.6, // illustrative
     waterbodyDistanceM: 1500, // illustrative
   },
-  // Velachery (Ward 102) - values ship with the repo's calibrated demo dataset
+  // Velachery (Ward 175) - values ship with the repo's calibrated demo dataset
   "b0aa192d-6cc8-4262-97b7-07cd5de2d9a8": {
     placeId: "b0aa192d-6cc8-4262-97b7-07cd5de2d9a8",
     dataStatus: "calibrated_demo_dataset",
@@ -100,7 +100,7 @@ export const WARD_PROFILES: Record<string, WardProfile> = {
     drainDensityKmPerKm2: 2.3, // illustrative
     waterbodyDistanceM: 250, // illustrative
   },
-  // Adyar (Ward 103) - ILLUSTRATIVE: extracted values are not in the repo
+  // Adyar (Ward 173) - ILLUSTRATIVE: extracted values are not in the repo
   "e503e3f2-28ba-46b0-8f7d-27aa3001f7be": {
     placeId: "e503e3f2-28ba-46b0-8f7d-27aa3001f7be",
     dataStatus: "illustrative_demo_input",

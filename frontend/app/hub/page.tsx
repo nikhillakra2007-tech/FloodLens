@@ -21,7 +21,8 @@ interface FeaturePortal {
 interface CitizenWardInfo {
   id: string;
   wardName: string;
-  wardNumber: string;
+  // GCC 2018 delimitation ward number; null when not gazette-verified.
+  wardNumber: string | null;
   status: "vulnerable" | "moderate" | "resilient";
   statusLabel: string;
   summary: string;
@@ -45,7 +46,7 @@ const CITIZEN_WARDS: CitizenWardInfo[] = [
   {
     id: "velachery",
     wardName: "Velachery",
-    wardNumber: "Ward 177",
+    wardNumber: "Ward 175",
     status: "moderate",
     statusLabel: "Actively Draining — Canal Outfall Dependent",
     summary: "Large portions of the ward drained effectively due to unobstructed trunk channels conveying water to marshland canals.",
@@ -56,7 +57,7 @@ const CITIZEN_WARDS: CitizenWardInfo[] = [
   {
     id: "t-nagar",
     wardName: "T. Nagar",
-    wardNumber: "Ward 104",
+    wardNumber: null,
     status: "vulnerable",
     statusLabel: "High Impervious Runoff Area",
     summary: "Commercial paved surfaces generate fast runoff that temporarily exceeds the capacity of older masonry drains.",
@@ -67,7 +68,7 @@ const CITIZEN_WARDS: CitizenWardInfo[] = [
   {
     id: "adyar",
     wardName: "Adyar",
-    wardNumber: "Ward 103",
+    wardNumber: "Ward 173",
     status: "resilient",
     statusLabel: "Resilient Twin Catchment",
     summary: "Gentle natural slope toward the river and clear conduit trunks allowed rainwater to discharge safely with minimal street pooling.",
@@ -254,7 +255,9 @@ export default function FeatureHubPage() {
                   >
                     <div className="flex items-center justify-between">
                       <span className="font-semibold text-sm text-[#221B15]">{ward.wardName}</span>
-                      <span className="font-mono text-[10px] text-[#756350]">{ward.wardNumber}</span>
+                      {ward.wardNumber && (
+                        <span className="font-mono text-[10px] text-[#756350]">{ward.wardNumber}</span>
+                      )}
                     </div>
                     <div className="mt-2 flex items-center gap-1.5">
                       <span
@@ -282,7 +285,8 @@ export default function FeatureHubPage() {
               <div>
                 <div className="flex items-center gap-2">
                   <h2 className="font-semibold text-xl sm:text-2xl text-[#221B15]">
-                    {selectedCitizenWard.wardName} ({selectedCitizenWard.wardNumber})
+                    {selectedCitizenWard.wardName}
+                      {selectedCitizenWard.wardNumber && ` (${selectedCitizenWard.wardNumber})`}
                   </h2>
                   <span
                     className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold border ${

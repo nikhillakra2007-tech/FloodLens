@@ -85,9 +85,9 @@ export default function SimulatorPage() {
               <div>
                 <div className="text-xs uppercase tracking-wider font-bold text-[#756350]">Comparative Axis</div>
                 <div className="font-bold text-2xl sm:text-3xl text-[#221B15] tracking-tight mt-1">
-                  <span className="text-[#C23E2A]">{activeScenario.nameA}</span> ({activeScenario.wardA}){" "}
+                  <span className="text-[#C23E2A]">{activeScenario.nameA}</span>{activeScenario.wardA && ` (${activeScenario.wardA})`}{" "}
                   <span className="text-[#9E8B75] font-normal text-lg italic">vs</span>{" "}
-                  <span className="text-[#3B8352]">{activeScenario.nameB}</span> ({activeScenario.wardB})
+                  <span className="text-[#3B8352]">{activeScenario.nameB}</span>{activeScenario.wardB && ` (${activeScenario.wardB})`}
                 </div>
               </div>
               <div className="rounded-2xl border border-terracotta-200 bg-terracotta-50 px-5 py-2.5 text-right">

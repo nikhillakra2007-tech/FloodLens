@@ -2,7 +2,7 @@
   "case_id": "CHENNAI_CASE_001",
   "event": "Chennai 2015 Flood",
   "target_location": "Anna Nagar (Ward 101)",
-  "comparison_location": "Velachery (Ward 102)",
+  "comparison_location": "Velachery (Ward 175)",
   "source_ids": {
     "flood_obs": "a680b136-a341-408b-b22f-c85207ec603d",
     "drainage": "7d4ccc25-7657-4e1d-9e4c-a5d80b3f8b8c",

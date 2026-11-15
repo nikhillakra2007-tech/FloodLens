@@ -69,7 +69,7 @@ Engineered for municipal civil engineers, disaster response coordinators, urban 
 ### B. Citizen Mode (Calm, Actionable Resident Portal)
 Engineered for Chennai residents, ward council members, and community observers who need immediate clarity without intimidating equations:
 - **Plain-Language Causality**: Clear explanations of why water accumulated (e.g. *"Stormwater backed up from downstream canals into the local bowl-like elevation depression; neighbor ward stayed dry due to steeper natural slope"*).
-- **Localized Ward Risk Status**: Specific to their ward (Velachery Ward 178, Anna Nagar Ward 102, T. Nagar Ward 104, Adyar Ward 103).
+- **Localized Ward Risk Status**: Specific to their ward (Anna Nagar Ward 101, Velachery Ward 175, Adyar Ward 173, T. Nagar).
 - **Immediate Resident Actions**: Actionable guidelines (elevate ground-floor appliances >30cm, avoid low-lying canal underpasses, park on designated elevated ramps).
 - **Verified Civil Emergency Helplines**: GCC Disaster Management `1913`, TNEB Power Outage & Emergency `94987 94987`, Police/Disaster `112`.
 - **On-Demand Engineering Unlock**: A single button allows residents to view underlying equations and technical simulations whenever desired.
