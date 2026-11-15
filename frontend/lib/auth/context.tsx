@@ -503,9 +503,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const demoId = isTech ? "demo-technical-officer" : "demo-citizen-user";
     const demoName = isTech ? "Dr. K. Senthil Nathan" : "Priya Ramanathan";
     const demoEmail = isTech ? "senthil.nathan@gcc.chennai.gov.in" : "priya.ramanathan@velachery.org";
-    const demoRole = isTech ? "GCC Senior Hydrologist & SWD Lead" : "Velachery Ward 170 Resident Observer";
+    const demoRole = isTech ? "GCC Senior Hydrologist & SWD Lead" : "Velachery Ward 175 Resident Observer";
     const demoDept = isTech ? "Greater Chennai Corporation — Stormwater Drainage Directorate" : "Velachery Residents Welfare Association";
-    const demoWard = isTech ? "Ward 101 — Anna Nagar" : "Ward 170 — Velachery";
+    const demoWard = isTech ? "Ward 101 — Anna Nagar" : "Ward 175 — Velachery";
 
     const demoUser: User = {
       id: demoId,

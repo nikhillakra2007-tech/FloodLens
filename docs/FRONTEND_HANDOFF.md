@@ -178,7 +178,7 @@ sequenceDiagram
 
 Canonical Pair:
 - **Place A**: Anna Nagar (Ward 101) — Substantially drained, inland, elevated.
-- **Place B**: Velachery (Ward 177) — Low-lying former marshland, high builtup, depressed HAND.
+- **Place B**: Velachery (Ward 175) — Low-lying former marshland, high builtup, depressed HAND.
 
 **Expected Baseline Outputs**:
 - **Similarity Score**: `0.812` (Explainable breakdown: rainfall 1.00, terrain 0.90, drainage 0.70, landcover 0.85, spatial 0.61).

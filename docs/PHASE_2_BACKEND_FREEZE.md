@@ -84,7 +84,7 @@ Re-run ingestion executed twice on a pristine database. 0-drift idempotency veri
 
 ## 5. Case 001 Scientific Verification
 
-**Canonical Comparison**: Anna Nagar (Ward 101) vs Velachery (Ward 177) — 2015 Extreme Event.
+**Canonical Comparison**: Anna Nagar (Ward 101) vs Velachery (Ward 175) — 2015 Extreme Event.
 
 - **Similarity Score**: `0.812`
   - Rainfall Similarity: `1.000` (Homogeneous regional storm)

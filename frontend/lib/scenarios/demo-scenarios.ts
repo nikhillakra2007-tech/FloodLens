@@ -27,9 +27,11 @@ export interface ScenarioRank {
 export interface DemoScenario {
   id: string;
   nameA: string;
-  wardA: string;
+  // GCC 2018 delimitation ward number, or null when no gazette-verified
+  // number exists for the locality. Never invent one.
+  wardA: string | null;
   nameB: string;
-  wardB: string;
+  wardB: string | null;
   dataStatus: ScenarioDataStatus;
   // Null when no score exists (scenario outside the demo dataset).
   similarityPct: number | null;
@@ -64,7 +66,7 @@ export const DEMO_SCENARIOS: DemoScenario[] = [
     nameA: "Anna Nagar",
     wardA: "Ward 101",
     nameB: "Velachery",
-    wardB: "Ward 102",
+    wardB: "Ward 175",
     dataStatus: "calibrated",
     similarityPct: 83.2,
     similarityNote: "Calibrated twin fit",
@@ -90,9 +92,9 @@ export const DEMO_SCENARIOS: DemoScenario[] = [
   {
     id: "t-nagar-adyar",
     nameA: "T Nagar",
-    wardA: "Ward 104",
+    wardA: null,
     nameB: "Adyar",
-    wardB: "Ward 103",
+    wardB: "Ward 173",
     dataStatus: "illustrative",
     similarityPct: Math.round(tNagarAdyarScreening.similarity_score * 1000) / 10,
     similarityNote: "Screening estimate - no calibrated run",
@@ -119,9 +121,9 @@ export const DEMO_SCENARIOS: DemoScenario[] = [
   {
     id: "mylapore-foreshore",
     nameA: "Mylapore",
-    wardA: "Ward 124",
+    wardA: null,
     nameB: "Foreshore Estate",
-    wardB: "Ward 125",
+    wardB: null,
     dataStatus: "concept",
     similarityPct: null,
     similarityNote: "Outside the demo dataset",

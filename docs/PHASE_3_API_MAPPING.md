@@ -219,7 +219,7 @@
   "investigation_id": "uuid",
   "mechanism_type": "IMPERVIOUS_SURFACE",
   "certainty_level": "SUPPORTED",
-  "claim": "Built-up land cover fraction is 0.82 in Ward 101 vs 0.69 in Ward 102",
+  "claim": "Built-up land cover fraction is 0.82 in Ward 101 vs 0.69 in Ward 175",
   "value": 0.13,
   "unit": "fraction",
   "source": "deterministic_engine",

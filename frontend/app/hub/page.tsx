@@ -21,7 +21,8 @@ interface FeaturePortal {
 interface CitizenWardInfo {
   id: string;
   wardName: string;
-  wardNumber: string;
+  // GCC 2018 delimitation ward number; null when not gazette-verified.
+  wardNumber: string | null;
   status: "vulnerable" | "moderate" | "resilient";
   statusLabel: string;
   summary: string;
@@ -40,12 +41,12 @@ const CITIZEN_WARDS: CitizenWardInfo[] = [
     summary: "Experienced road and basement flooding during intense cloudbursts due to canal backup, despite moderate rainfall.",
     whyItHappened: "Stormwater drains filled with sediment and downstream canal levels rose, causing water to back up through street grates rather than draining freely.",
     recommendedAction: "Request GCC pre-monsoon storm drain desilting; inspect ground-floor sump check valves to prevent reverse street flow.",
-    safetyAdvice: "Move vehicles to elevated ramps when rainfall exceeds 100mm; keep household drinking sumps sealed tightly.",
+    safetyAdvice: "Move vehicles to elevated ramps during very heavy rainfall alerts; keep household drinking sumps sealed tightly.",
   },
   {
     id: "velachery",
     wardName: "Velachery",
-    wardNumber: "Ward 177",
+    wardNumber: "Ward 175",
     status: "moderate",
     statusLabel: "Actively Draining — Canal Outfall Dependent",
     summary: "Large portions of the ward drained effectively due to unobstructed trunk channels conveying water to marshland canals.",
@@ -56,22 +57,22 @@ const CITIZEN_WARDS: CitizenWardInfo[] = [
   {
     id: "t-nagar",
     wardName: "T. Nagar",
-    wardNumber: "Ward 104",
+    wardNumber: null,
     status: "vulnerable",
     statusLabel: "High Impervious Runoff Area",
     summary: "Commercial paved surfaces generate fast runoff that temporarily exceeds the capacity of older masonry drains.",
-    whyItHappened: "Over 85% of land is covered by concrete and asphalt; rainwater cannot soak into the ground and rushes into street drains all at once.",
+    whyItHappened: "Most of the ward is paved over with concrete and asphalt, so rainwater cannot soak into the ground and rushes into street drains all at once.",
     recommendedAction: "Advocate for permeable pavement retrofit and rooftop rainwater harvesting recharge wells in apartment complexes.",
     safetyAdvice: "Avoid parking in underground basements during severe weather advisories.",
   },
   {
     id: "adyar",
     wardName: "Adyar",
-    wardNumber: "Ward 103",
+    wardNumber: "Ward 173",
     status: "resilient",
     statusLabel: "Resilient Twin Catchment",
     summary: "Gentle natural slope toward the river and clear conduit trunks allowed rainwater to discharge safely with minimal street pooling.",
-    whyItHappened: "A positive 1.5% ground gradient gives water natural downward momentum, allowing storm drains to self-clean at high velocity.",
+    whyItHappened: "A gentle natural ground slope toward the river gives water downward momentum, helping storm drains carry flow away at high velocity.",
     recommendedAction: "Maintain riverbank trash barriers and regular tidal gate inspection.",
     safetyAdvice: "Standard monsoon precautions; monitor river water level during high tide cycles.",
   },
@@ -254,7 +255,9 @@ export default function FeatureHubPage() {
                   >
                     <div className="flex items-center justify-between">
                       <span className="font-semibold text-sm text-[#221B15]">{ward.wardName}</span>
-                      <span className="font-mono text-[10px] text-[#756350]">{ward.wardNumber}</span>
+                      {ward.wardNumber && (
+                        <span className="font-mono text-[10px] text-[#756350]">{ward.wardNumber}</span>
+                      )}
                     </div>
                     <div className="mt-2 flex items-center gap-1.5">
                       <span
@@ -282,7 +285,8 @@ export default function FeatureHubPage() {
               <div>
                 <div className="flex items-center gap-2">
                   <h2 className="font-semibold text-xl sm:text-2xl text-[#221B15]">
-                    {selectedCitizenWard.wardName} ({selectedCitizenWard.wardNumber})
+                    {selectedCitizenWard.wardName}
+                      {selectedCitizenWard.wardNumber && ` (${selectedCitizenWard.wardNumber})`}
                   </h2>
                   <span
                     className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold border ${

@@ -2,7 +2,7 @@
 
 **Differential Urban Hydrological Intelligence for Defensible Flood Attribution**
 
-🔗 **[floodlens-app.vercel.app](https://floodlens-app.vercel.app)** · ⚡ **[Live Auth Gateway & Instant Demo](https://floodlens-app.vercel.app/auth)** · [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) · [![Tests](https://img.shields.io/badge/Frontend%20Tests-125%20Passed-emerald.svg)](https://github.com/nikhillakra2007-tech/FloodLens) · [![Python](https://img.shields.io/badge/Python-3.12-3776AB.svg?logo=python&logoColor=white)](https://python.org) · [![Next.js](https://img.shields.io/badge/Next.js-14-000000.svg?logo=next.js&logoColor=white)](https://nextjs.org) · [![AWS Serverless](https://img.shields.io/badge/AWS-Lambda%20%7C%20Bedrock%20%7C%20S3-FF9900.svg?logo=amazon-aws&logoColor=white)](https://aws.amazon.com)
+🔗 **[floodlens-app.vercel.app](https://floodlens-app.vercel.app)** · ⚡ **[Live Auth Gateway & Instant Demo](https://floodlens-app.vercel.app/auth)** · [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) · [![Tests](https://img.shields.io/badge/Frontend%20Tests-136%20Passed-emerald.svg)](https://github.com/nikhillakra2007-tech/FloodLens) · [![Python](https://img.shields.io/badge/Python-3.12-3776AB.svg?logo=python&logoColor=white)](https://python.org) · [![Next.js](https://img.shields.io/badge/Next.js-14-000000.svg?logo=next.js&logoColor=white)](https://nextjs.org) · [![AWS Serverless](https://img.shields.io/badge/AWS-Lambda%20%7C%20Bedrock%20%7C%20S3-FF9900.svg?logo=amazon-aws&logoColor=white)](https://aws.amazon.com)
 
 > *"Why did your street flood when the next ward didn't?"*
 
@@ -69,7 +69,7 @@ Engineered for municipal civil engineers, disaster response coordinators, urban 
 ### B. Citizen Mode (Calm, Actionable Resident Portal)
 Engineered for Chennai residents, ward council members, and community observers who need immediate clarity without intimidating equations:
 - **Plain-Language Causality**: Clear explanations of why water accumulated (e.g. *"Stormwater backed up from downstream canals into the local bowl-like elevation depression; neighbor ward stayed dry due to steeper natural slope"*).
-- **Localized Ward Risk Status**: Specific to their ward (Velachery Ward 178, Anna Nagar Ward 102, T. Nagar Ward 104, Adyar Ward 103).
+- **Localized Ward Risk Status**: Specific to their ward (Anna Nagar Ward 101, Velachery Ward 175, Adyar Ward 173, T. Nagar).
 - **Immediate Resident Actions**: Actionable guidelines (elevate ground-floor appliances >30cm, avoid low-lying canal underpasses, park on designated elevated ramps).
 - **Verified Civil Emergency Helplines**: GCC Disaster Management `1913`, TNEB Power Outage & Emergency `94987 94987`, Police/Disaster `112`.
 - **On-Demand Engineering Unlock**: A single button allows residents to view underlying equations and technical simulations whenever desired.
@@ -367,7 +367,7 @@ FloodLens/
 │   │   ├── investigation/         # Catchment comparison panels, 3D cross-section
 │   │   └── ui/                    # Reusable visual primitives & SVG DAG nodes
 │   ├── lib/                       # API clients, types, and hydraulic math helpers
-│   └── tests/                     # 125 Vitest frontend component & logic tests
+│   └── tests/                     # 136 Vitest frontend component & logic tests
 │
 ├── infra/                         # Infrastructure as Code
 │   └── floodlens-stack.yaml       # AWS CloudFormation template (Lambda, S3, IAM, URL)

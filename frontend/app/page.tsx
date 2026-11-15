@@ -266,9 +266,11 @@ export default function LandingPage() {
                       <div className="font-serif text-2xl sm:text-3xl font-bold text-[#C23E2A] tracking-tight">
                         {activeScenario.nameA}
                       </div>
-                      <div className="text-xs font-bold text-[#8C2314] font-mono tracking-wide mt-0.5">
-                        ({activeScenario.wardA})
-                      </div>
+                      {activeScenario.wardA && (
+                        <div className="text-xs font-bold text-[#8C2314] font-mono tracking-wide mt-0.5">
+                          ({activeScenario.wardA})
+                        </div>
+                      )}
                     </div>
 
                     {/* vs separator */}
@@ -276,14 +278,16 @@ export default function LandingPage() {
                       vs
                     </div>
 
-                    {/* Resilient Twin Ward B (Green) - Ward 102 appears directly below Velachery */}
+                    {/* Resilient Twin Ward B (Green) - Ward 175 (Velachery) appears below nameB */}
                     <div>
                       <div className="font-serif text-2xl sm:text-3xl font-bold text-[#3B8352] tracking-tight">
                         {activeScenario.nameB}
                       </div>
-                      <div className="text-xs font-bold text-[#235836] font-mono tracking-wide mt-0.5">
-                        ({activeScenario.wardB})
-                      </div>
+                      {activeScenario.wardB && (
+                        <div className="text-xs font-bold text-[#235836] font-mono tracking-wide mt-0.5">
+                          ({activeScenario.wardB})
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

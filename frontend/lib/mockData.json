@@ -12,7 +12,7 @@
       "created_at": "2026-10-09T01:33:09.466380+05:30"
     },
     {
-      "name": "T Nagar (Ward 104)",
+      "name": "T Nagar",
       "ward": "104",
       "zone": "T Nagar",
       "place_type": "flood_location",
@@ -23,7 +23,7 @@
       "created_at": "2026-10-09T01:33:09.466380+05:30"
     },
     {
-      "name": "Velachery (Ward 102)",
+      "name": "Velachery (Ward 175)",
       "ward": "102",
       "zone": "Velachery",
       "place_type": "comparable",
@@ -34,7 +34,7 @@
       "created_at": "2026-10-09T01:33:09.466380+05:30"
     },
     {
-      "name": "Adyar (Ward 103)",
+      "name": "Adyar (Ward 173)",
       "ward": "103",
       "zone": "Adyar",
       "place_type": "comparable",
@@ -122,7 +122,7 @@
     "comparison_id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
     "status": "completed",
     "agent_mode": "local",
-    "summary": "Differential analysis of Anna Nagar (Ward 101) vs Velachery (Ward 102). Similarity score: 0.81. Strongest mechanism: RUNOFF_CONCENTRATION.",
+    "summary": "Differential analysis of Anna Nagar (Ward 101) vs Velachery (Ward 175). Similarity score: 0.81. Strongest mechanism: RUNOFF_CONCENTRATION.",
     "strongest_mechanism": "RUNOFF_CONCENTRATION",
     "agent_response": {
       "unknowns": [
@@ -142,7 +142,7 @@
       ],
       "counterfactual_result": null,
       "historical_validation": null,
-      "investigation_summary": "Differential analysis of Anna Nagar (Ward 101) vs Velachery (Ward 102). Similarity score: 0.81. Strongest mechanism: RUNOFF_CONCENTRATION.",
+      "investigation_summary": "Differential analysis of Anna Nagar (Ward 101) vs Velachery (Ward 175). Similarity score: 0.81. Strongest mechanism: RUNOFF_CONCENTRATION.",
       "alternative_mechanisms": [
         "TERRAIN_DEPRESSION",
         "IMPERVIOUS_SURFACE",
@@ -176,7 +176,7 @@
       "created_at": "2026-10-09T01:33:09.466380+05:30"
     },
     "place_b": {
-      "name": "Velachery (Ward 102)",
+      "name": "Velachery (Ward 175)",
       "ward": "102",
       "zone": "Velachery",
       "place_type": "comparable",

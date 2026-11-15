@@ -19,9 +19,34 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "500", "600", "700"],
 });
 
+const siteDescription =
+  "Differential causal diagnosis for Greater Chennai flood resilience. Comparing twin urban catchments across stormwater drain conduits, elevation gradients, and imperviousness to isolate structural failure points.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://floodlens-app.vercel.app"),
   title: "FloodLens — Differential Urban Flood Mechanism Intelligence",
-  description: "Differential causal diagnosis for Greater Chennai flood resilience. Comparing twin urban catchments across stormwater drain conduits, elevation gradients, and imperviousness to isolate structural failure points.",
+  description: siteDescription,
+  openGraph: {
+    title: "FloodLens — Differential Urban Flood Mechanism Intelligence",
+    description: siteDescription,
+    url: "https://floodlens-app.vercel.app",
+    siteName: "FloodLens Chennai",
+    type: "website",
+    images: [
+      {
+        url: "/images/chennai-catchment-map.jpg",
+        width: 1376,
+        height: 768,
+        alt: "FloodLens differential twin catchment map of Chennai wards",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "FloodLens — Differential Urban Flood Mechanism Intelligence",
+    description: siteDescription,
+    images: ["/images/chennai-catchment-map.jpg"],
+  },
 };
 
 export const viewport: Viewport = {
