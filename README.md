@@ -2,7 +2,7 @@
 
 **Differential Urban Hydrological Intelligence for Defensible Flood Attribution**
 
-🔗 **[floodlens-app.vercel.app](https://floodlens-app.vercel.app)** · ⚡ **[Live Auth Gateway & Instant Demo](https://floodlens-app.vercel.app/auth)** · [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) · [![Tests](https://img.shields.io/badge/Frontend%20Tests-125%20Passed-emerald.svg)](https://github.com/nikhillakra2007-tech/FloodLens) · [![Python](https://img.shields.io/badge/Python-3.12-3776AB.svg?logo=python&logoColor=white)](https://python.org) · [![Next.js](https://img.shields.io/badge/Next.js-14-000000.svg?logo=next.js&logoColor=white)](https://nextjs.org) · [![AWS Serverless](https://img.shields.io/badge/AWS-Lambda%20%7C%20Bedrock%20%7C%20S3-FF9900.svg?logo=amazon-aws&logoColor=white)](https://aws.amazon.com)
+🔗 **[floodlens-app.vercel.app](https://floodlens-app.vercel.app)** · ⚡ **[Live Auth Gateway & Instant Demo](https://floodlens-app.vercel.app/auth)** · [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) · [![Tests](https://img.shields.io/badge/Frontend%20Tests-136%20Passed-emerald.svg)](https://github.com/nikhillakra2007-tech/FloodLens) · [![Python](https://img.shields.io/badge/Python-3.12-3776AB.svg?logo=python&logoColor=white)](https://python.org) · [![Next.js](https://img.shields.io/badge/Next.js-14-000000.svg?logo=next.js&logoColor=white)](https://nextjs.org) · [![AWS Serverless](https://img.shields.io/badge/AWS-Lambda%20%7C%20Bedrock%20%7C%20S3-FF9900.svg?logo=amazon-aws&logoColor=white)](https://aws.amazon.com)
 
 > *"Why did your street flood when the next ward didn't?"*
 
@@ -367,7 +367,7 @@ FloodLens/
 │   │   ├── investigation/         # Catchment comparison panels, 3D cross-section
 │   │   └── ui/                    # Reusable visual primitives & SVG DAG nodes
 │   ├── lib/                       # API clients, types, and hydraulic math helpers
-│   └── tests/                     # 125 Vitest frontend component & logic tests
+│   └── tests/                     # 136 Vitest frontend component & logic tests
 │
 ├── infra/                         # Infrastructure as Code
 │   └── floodlens-stack.yaml       # AWS CloudFormation template (Lambda, S3, IAM, URL)
