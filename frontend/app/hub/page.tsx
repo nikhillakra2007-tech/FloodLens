@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/lib/auth/context";
+import { DEMO_SCENARIOS } from "@/lib/scenarios/demo-scenarios";
 
 interface FeaturePortal {
   id: string;
@@ -29,6 +30,22 @@ interface CitizenWardInfo {
   whyItHappened: string;
   recommendedAction: string;
   safetyAdvice: string;
+}
+
+// Simulator highlights come from the shared scenario module so this page can
+// never drift from the simulator's numbers again.
+function simulatorHighlights(): string[] {
+  const calibrated = DEMO_SCENARIOS.find((s) => s.dataStatus === "calibrated");
+  const illustrative = DEMO_SCENARIOS.find((s) => s.dataStatus === "illustrative");
+  const lines: string[] = [];
+  if (calibrated && calibrated.similarityPct !== null) {
+    lines.push(`${calibrated.nameA} vs ${calibrated.nameB} (${calibrated.similarityPct}% calibrated twin fit)`);
+  }
+  if (illustrative && illustrative.similarityPct !== null) {
+    lines.push(`${illustrative.nameA} vs ${illustrative.nameB} (${illustrative.similarityPct}% screening estimate, uncalibrated)`);
+  }
+  lines.push("Differential meters: DEM depression, SWD diameter, and imperviousness");
+  return lines;
 }
 
 const CITIZEN_WARDS: CitizenWardInfo[] = [
@@ -118,11 +135,7 @@ export default function FeatureHubPage() {
       badgeColor: "bg-sage-100 text-sage-800 border-sage-200",
       description:
         "Pair inundated wards with resilient twins under identical Cyclone Michaung (2023) and recent cloudburst conditions to neutralize weather confounds and pinpoint failure points.",
-      highlights: [
-        "Anna Nagar vs Velachery (83.2% Twin Fitness)",
-        "T Nagar vs Adyar (91.1% Twin Fitness)",
-        "Differential meters: DEM depression, SWD diameter, and imperviousness",
-      ],
+      highlights: simulatorHighlights(),
       buttonText: "Explore Twin Simulator",
       buttonVariant: "secondary",
       iconSvg: (
