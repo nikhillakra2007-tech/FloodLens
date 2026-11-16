@@ -122,7 +122,7 @@ export default function SimulatorPage() {
               <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-4 space-y-1">
                 <div className="text-xs font-bold text-[#756350]">🌧️ Rainfall Differential</div>
                 <div className="font-mono text-sm font-bold text-[#221B15]">{activeScenario.rainfallDiff}</div>
-                <div className="text-[11px] text-[#9E8B75]">Storm forcing neutralized</div>
+                <div className="text-[11px] text-[#9E8B75]">{activeScenario.rainfallNote}</div>
               </div>
               <div className="rounded-2xl border border-red-100 bg-red-50/50 p-4 space-y-1">
                 <div className="text-xs font-bold text-[#C23E2A]">🚰 SWD Drain Conduit Capacity</div>

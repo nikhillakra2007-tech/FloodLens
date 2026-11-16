@@ -44,6 +44,8 @@ export interface DemoScenario {
   validationNote: string | null;
   ranks: ScenarioRank[];
   rainfallDiff: string;
+  // Sub-label under rainfallDiff - states how forcing is actually known.
+  rainfallNote: string;
   drainageDiff: string;
   demDiff: string;
   imperviousDiff: string;
@@ -80,7 +82,8 @@ export const DEMO_SCENARIOS: DemoScenario[] = [
       { label: "Terrain Depression", confidencePct: 50 },
       { label: "Impervious Surface", confidencePct: 40 },
     ],
-    rainfallDiff: "Near-identical cloudburst forcing",
+    rainfallDiff: "Comparable storm forcing",
+    rainfallNote: "Partially comparable - 70mm gauge diff",
     drainageDiff: "0.75 Effective Drain Capacity Ratio",
     demDiff: "-2.4m HAND Depression Differential",
     imperviousDiff: "+0.13 Built-up Fraction Difference",
@@ -109,6 +112,7 @@ export const DEMO_SCENARIOS: DemoScenario[] = [
       { label: "Secondary Canal Tidal Hold", confidencePct: null },
     ],
     rainfallDiff: "Assumed identical storm forcing",
+    rainfallNote: "Assumed forcing, not measured",
     drainageDiff: "Older masonry SWD conduits (hypothesis)",
     demDiff: "HAND profile from illustrative ward inputs",
     imperviousDiff: "Higher commercial paved fraction (hypothesis)",
@@ -138,6 +142,7 @@ export const DEMO_SCENARIOS: DemoScenario[] = [
       { label: "Coastal Outfall Velocity Loss", confidencePct: null },
     ],
     rainfallDiff: "Coastal convective cell (narrative)",
+    rainfallNote: "Narrative only",
     drainageDiff: "Gravitational outfall tidal lock (narrative)",
     demDiff: "Coastal margin proximity (narrative)",
     imperviousDiff: "Built-up fraction contrast (narrative)",

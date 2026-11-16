@@ -20,9 +20,9 @@ const FAQS: FaqItem[] = [
       "Traditional models treat rainfall volume as the sole driver. By pairing a severely flooded catchment with a resilient control ward that experienced identical radar-verified cloudburst rainfall (±3%), meteorological variance is neutralized. Any remaining divergence in ponding depth is mathematically attributed to physical constraints: pipe invert gradient, cross-sectional choking, or outfall tidal locking.",
   },
   {
-    question: "Why did Anna Nagar flood 1.4m while Velachery drained under recent extreme monsoons (Cyclone Michaung)?",
+    question: "Why did Anna Nagar flood while Velachery drained under comparable Cyclone Michaung storm conditions?",
     answer:
-      "Both areas received extreme rainfall (over 400mm during Cyclone Michaung). However, Anna Nagar suffered from downstream stormwater drain (SWD) backwater congestion along the Otteri Nullah canal, exacerbated by a -1.4m micro-depression sink. Velachery, despite low elevation, had unobstructed trunk channels accepting storm intake at higher gravitational velocity.",
+      "Both areas received extreme Cyclone Michaung rainfall - Chennai gauges recorded over 400mm in under two days (IMD-reported records) - but not identical: the calibrated comparability gate records a ~70mm difference between the two ward gauges. Anna Nagar suffered downstream stormwater drain (SWD) backwater congestion along the Otteri Nullah canal, compounded by a -2.4m HAND depression differential measured against Velachery. Velachery, despite low elevation, had unobstructed trunk channels accepting storm intake at higher gravitational velocity.",
   },
   {
     question: "What physical formulas govern the causal directed acyclic graph (DAG)?",
@@ -327,7 +327,7 @@ export default function LandingPage() {
                 <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-4 space-y-1 hover:bg-white hover:border-[#D5C6B3] hover:shadow-sm transition-all duration-300">
                   <div className="text-xs font-bold text-[#756350]">🌧️ Rainfall Differential</div>
                   <div className="font-mono text-sm font-bold text-[#221B15]">{activeScenario.rainfallDiff}</div>
-                  <div className="text-[11px] text-[#9E8B75]">Storm forcing neutralized</div>
+                  <div className="text-[11px] text-[#9E8B75]">{activeScenario.rainfallNote}</div>
                 </div>
                 <div className="rounded-2xl border border-red-100 bg-red-50/50 p-4 space-y-1 hover:bg-red-50 hover:border-red-300 hover:shadow-sm transition-all duration-300">
                   <div className="text-xs font-bold text-[#C23E2A]">🚰 SWD Drain Conduit Capacity</div>

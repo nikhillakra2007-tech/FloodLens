@@ -55,7 +55,7 @@ const TECHNICAL_TERMS: TechnicalTerm[] = [
     plainEnglish:
       "A physical plug formed where underground pipes narrow, bend, or cross telecom/water utility cables. Floating road garbage and construction mud settle here, creating a literal cork that traps all upstream water.",
     neighborhoodExample:
-      "Junction of 4th Avenue in Anna Nagar where a utility trench cut through the stormwater drain crown, creating a 60% constriction point that triggered 1.4m of road flooding.",
+      "Junction of 4th Avenue in Anna Nagar where a utility trench cut through the stormwater drain crown, constricting flow and triggering severe road flooding.",
     mechanism:
       "Sudden constriction creates localized head loss (h_L = k·v²/2g) and downstream hydraulic jump, reflecting shockwaves backward through street drain grates.",
     engineeringFix:
