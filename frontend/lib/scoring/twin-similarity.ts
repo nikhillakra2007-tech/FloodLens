@@ -69,7 +69,8 @@ function round3(x: number): number {
 }
 
 // Same-storm rainfall alignment: all four calibrated wards were hit by the
-// 2023 Cyclone Michaung cloudburst (~390mm), so storm forcing is treated as
+// 2023 Cyclone Michaung cloudburst, which the calibrated comparability gate
+// classifies as partially comparable (70mm gauge difference), so storm forcing is treated as
 // held constant across pairs (±2% gauge spread).
 const RAINFALL_SIMILARITY = 0.98;
 

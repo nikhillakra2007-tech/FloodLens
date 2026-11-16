@@ -789,7 +789,7 @@ export default function NewInvestigationPage() {
                 />
               </div>
               <p className="text-[11px] text-[#554638]">
-                Both catchments received extreme precipitation (420mm+ during 2023 Cyclone Michaung and 2021 events), isolating civil &amp; topographical factors.
+                Both catchments received extreme Cyclone Michaung rainfall. Gauge comparability is partial (70mm difference), so the diagnosis treats storm forcing as comparable rather than identical before weighing civil &amp; topographical factors.
               </p>
             </div>
 
@@ -1072,8 +1072,8 @@ export default function NewInvestigationPage() {
 
               <div className="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-4 text-center">
                 <div className="text-[10px] font-bold uppercase tracking-wider text-emerald-800">Rainfall Confound</div>
-                <div className="font-mono text-2xl font-black text-emerald-700 mt-0.5">ELIMINATED</div>
-                <div className="text-[10px] text-emerald-800 mt-0.5">Identical 390mm Storm (±2%)</div>
+                <div className="font-mono text-2xl font-black text-emerald-700 mt-0.5">{comparison?.is_calibrated === false ? "ASSUMED" : "CONTROLLED"}</div>
+                <div className="text-[10px] text-emerald-800 mt-0.5">{comparison?.is_calibrated === false ? "Identical forcing assumed - illustrative" : "Partially comparable - 70mm gauge diff"}</div>
               </div>
 
               <div className="rounded-2xl border border-red-200 bg-red-50/70 p-4 text-center">
@@ -1098,7 +1098,9 @@ export default function NewInvestigationPage() {
                     <div className="h-full rounded-full bg-terracotta-600" style={{ width: `${Math.max(6, terrainScore * 100)}%` }} />
                   </div>
                   <p className="text-[11px] text-[#554638]">
-                    {placeA?.name} features a -1.4m micro-depression sink versus {placeB?.name}&apos;s continuous natural fall.
+                    {comparison?.is_calibrated === false
+                      ? `${placeA?.name} terrain inputs are illustrative - no calibrated HAND measurement exists for this pair.`
+                      : `${placeA?.name} sits on a -2.4m HAND depression differential versus ${placeB?.name} (calibrated run).`}
                   </p>
                 </div>
 

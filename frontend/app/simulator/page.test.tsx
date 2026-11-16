@@ -32,3 +32,18 @@ describe("SimulatorPage scenario honesty", () => {
     expect(screen.queryByRole("link", { name: /Diagnostic Console/i })).not.toBeTruthy();
   });
 });
+
+describe("SimulatorPage honest forcing labels", () => {
+  it("states partial rainfall comparability for the calibrated run", () => {
+    render(<SimulatorPage />);
+    expect(screen.getByText("Comparable storm forcing")).toBeTruthy();
+    expect(screen.getByText(/Partially comparable - 70mm gauge diff/)).toBeTruthy();
+    expect(screen.queryByText(/Near-identical/)).toBeNull();
+  });
+
+  it("marks illustrative forcing as assumed, not measured", () => {
+    render(<SimulatorPage />);
+    fireEvent.click(screen.getByRole("button", { name: /T Nagar vs Adyar/i }));
+    expect(screen.getByText("Assumed forcing, not measured")).toBeTruthy();
+  });
+});

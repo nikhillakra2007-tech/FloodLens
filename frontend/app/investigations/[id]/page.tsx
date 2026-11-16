@@ -162,7 +162,7 @@ export default function InvestigationDetailPage() {
                   {investigation.place_a?.name ?? "Monitored Catchment"}
                 </h4>
                 <p className="text-xs text-[#554638] leading-relaxed font-normal">
-                  Ward {investigation.place_a?.ward || "178"} is situated in a low-elevation terrain pocket subject to runoff accumulation during high intensity downpours.
+                  {investigation.place_a?.ward ? `Ward ${investigation.place_a.ward} is situated in` : "This catchment sits in"} a low-elevation terrain pocket subject to runoff accumulation during high intensity downpours.
                 </p>
               </div>
 
