@@ -14,7 +14,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-xs sm:text-sm text-[#554638] leading-relaxed max-w-md font-medium">
-              Differential urban hydrological intelligence platform. Isolating physical civil failure points by pairing inundated catchments with resilient control wards under identical storm forcing.
+              Differential urban hydrological intelligence platform. Isolating physical civil failure points by pairing inundated catchments with resilient control wards under comparable storm forcing.
             </p>
             <div className="font-mono text-[11px] text-[#8C7A6B]">
               Copernicus DEM GLO-30 · GCC GIS Stormwater Drain Geometry · 2023 Michaung Benchmark

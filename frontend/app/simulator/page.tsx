@@ -48,7 +48,7 @@ export default function SimulatorPage() {
               Differential Diagnosis in Action
             </h1>
             <p className="text-sm text-[#554638] leading-relaxed">
-              Toggle the calibrated twin scenario and the illustrative walkthroughs to see how differential spatial analysis eliminates rainfall confounds to isolate structural hydraulic bottlenecks.
+              Toggle the calibrated twin scenario and the illustrative walkthroughs to see how differential spatial analysis controls for rainfall confounds to isolate structural hydraulic bottlenecks.
             </p>
           </div>
 

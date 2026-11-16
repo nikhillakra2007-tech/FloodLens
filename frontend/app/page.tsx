@@ -17,7 +17,7 @@ const FAQS: FaqItem[] = [
   {
     question: "How does differential twin catchment analysis isolate civil failure points?",
     answer:
-      "Traditional models treat rainfall volume as the sole driver. By pairing a severely flooded catchment with a resilient control ward that experienced identical radar-verified cloudburst rainfall (±3%), meteorological variance is neutralized. Any remaining divergence in ponding depth is mathematically attributed to physical constraints: pipe invert gradient, cross-sectional choking, or outfall tidal locking.",
+      "Traditional models treat rainfall volume as the sole driver. By pairing a severely flooded catchment with a resilient control ward that faced the same Cyclone Michaung system, most meteorological variance is controlled for - though gauges still differed by ~70mm, so forcing is partially comparable, not identical. The remaining divergence in ponding depth is attributed, with material limitations, to physical constraints: pipe invert gradient, cross-sectional choking, or outfall tidal locking.",
   },
   {
     question: "Why did Anna Nagar flood while Velachery drained under comparable Cyclone Michaung storm conditions?",
@@ -174,7 +174,7 @@ export default function LandingPage() {
             Flooding Block vs Resilient Twin Block
           </h2>
           <p className="text-sm sm:text-base text-[#554638] leading-relaxed">
-            See the exact underground mechanism: An identical cloudburst floods Block A due to conduit silt buildup and catch basin backwater, while Block B discharges smoothly via functional outfall slope. Click any pin or marking to inspect citizen-friendly details.
+            See the underground mechanism: a single cloudburst floods Block A due to conduit silt buildup and catch basin backwater, while Block B discharges smoothly via functional outfall slope. Click any pin or marking to inspect citizen-friendly details.
           </p>
         </div>
 
@@ -224,7 +224,7 @@ export default function LandingPage() {
                 Differential Diagnosis in Action
               </h2>
               <p className="text-sm text-[#554638]">
-                Toggle the calibrated twin scenario and the illustrative walkthroughs to see how differential spatial analysis eliminates rainfall confounds to diagnose structural bottlenecks.
+                Toggle the calibrated twin scenario and the illustrative walkthroughs to see how differential spatial analysis controls for rainfall confounds to diagnose structural bottlenecks.
               </p>
             </div>
 

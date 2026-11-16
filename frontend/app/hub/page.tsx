@@ -134,7 +134,7 @@ export default function FeatureHubPage() {
       badge: "Twin Ward Analysis",
       badgeColor: "bg-sage-100 text-sage-800 border-sage-200",
       description:
-        "Pair inundated wards with resilient twins under identical Cyclone Michaung (2023) and recent cloudburst conditions to neutralize weather confounds and pinpoint failure points.",
+        "Pair inundated wards with resilient twins under comparable Cyclone Michaung (2023) storm conditions to control for weather confounds and pinpoint candidate failure points.",
       highlights: simulatorHighlights(),
       buttonText: "Explore Twin Simulator",
       buttonVariant: "secondary",
