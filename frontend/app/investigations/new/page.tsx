@@ -1125,7 +1125,9 @@ export default function NewInvestigationPage() {
                 Causal Takeaway:
               </span>
               <p className="text-xs text-[#433830] leading-relaxed">
-                Because precipitation was statistically identical, flooding in {placeA?.name} was mathematically caused by conduit bottlenecks and outfall backwater stagnation rather than storm excess.
+                {comparison?.is_calibrated === false
+                  ? `This is an illustrative screening narrative for ${placeA?.name} vs ${placeB?.name}, not a calibrated diagnosis.`
+                  : `With storm forcing comparable between the two wards (partially comparable gauges, 70mm difference), the calibrated run attributes the flooding divergence in ${placeA?.name} to conduit bottlenecks and outfall backwater stagnation rather than storm excess - defensible with material limitations, not proven causation.`}
               </p>
             </div>
 

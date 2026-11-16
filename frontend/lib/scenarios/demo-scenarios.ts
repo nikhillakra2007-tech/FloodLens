@@ -88,7 +88,7 @@ export const DEMO_SCENARIOS: DemoScenario[] = [
     demDiff: "-2.4m HAND Depression Differential",
     imperviousDiff: "+0.13 Built-up Fraction Difference",
     summary:
-      "Under near-identical cloudburst forcing, Anna Nagar ponded while Velachery drained: the calibrated run attributes the divergence to greater upstream runoff concentration on a -2.4m HAND depression, defensible with material limitations.",
+      "Under comparable cloudburst forcing (ward gauges differed by ~70mm), Anna Nagar ponded while Velachery drained: the calibrated run attributes the divergence to greater upstream runoff concentration on a -2.4m HAND depression, defensible with material limitations.",
     disclaimer: null,
     consolePairParam: null,
   },

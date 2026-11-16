@@ -44,7 +44,7 @@ export default function InfrastructurePage() {
             Flooding Block vs Resilient Twin Block
           </h1>
           <p className="text-base text-[#554638] leading-relaxed">
-            See the exact underground mechanism: An identical cloudburst floods Block A due to conduit silt buildup and catch basin backwater, while Block B discharges smoothly via functional outfall slope.
+            See the underground mechanism: a single cloudburst floods Block A due to conduit silt buildup and catch basin backwater, while Block B discharges smoothly via functional outfall slope.
           </p>
         </div>
 
