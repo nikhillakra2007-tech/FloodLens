@@ -14,8 +14,8 @@ Test Suite: 76/76 PASSING (0 warnings)
 |---|---|---|---|---|---|---|---|
 | Flood Events (Multi-Year) | GCC Survey & Tamil Nadu SDMA | Relational | 3 events (2015, 2021, 2023) | Chennai Metropolitan Area (CMA) | Event-scale | Official | INGESTED |
 | Flood Observations | GCC Field Surveys | CSV | 17 points | Anna Nagar, Velachery, T Nagar, Adyar | Point observations | Official | INGESTED |
-| Stormwater Drainage Network | GCC SWD Department | CSV | 20 segments, 21 nodes, 4 outfalls | Wards 101, 102, 103, 104 | LINESTRING / POINT | Official | INGESTED |
-| Multi-Event Rainfall Series | IMD Regional Meteorological Centre | CSV | 96 readings (4 stations x 3 events x 8 intervals) | Wards 101, 102, 103, 104 | 6-hour interval station records | Official | INGESTED |
+| Stormwater Drainage Network | GCC SWD Department | CSV | 20 segments, 21 nodes, 4 outfalls | Anna Nagar 101, Velachery 175, Adyar 173, T Nagar (2018 delimitation) | LINESTRING / POINT | Official | INGESTED |
+| Multi-Event Rainfall Series | IMD Regional Meteorological Centre | CSV | 96 readings (4 stations x 3 events x 8 intervals) | Anna Nagar 101, Velachery 175, Adyar 173, T Nagar (2018 delimitation) | 6-hour interval station records | Official | INGESTED |
 | Terrain Elevation (DEM) | Copernicus DEM GLO-30 (ESA) | CSV | 4 places | 500m analysis window | 30m spatial | Derived | INGESTED |
 | Height Above Nearest Drainage (HAND) | Global HAND Model / Research | CSV | 4 places | 500m analysis window | 30m spatial | Derived | INGESTED |
 | Land Cover / Built-Up Fractions | ESA WorldCover 10m (ESA) | CSV | 4 places | 500m analysis window | 10m spatial | Research | INGESTED |
@@ -43,7 +43,7 @@ Test Suite: 76/76 PASSING (0 warnings)
 | `drainage_network_versions` | Active | 3 | 2015 baseline, 2021 audit, 2023 GIS survey |
 | `flood_events` | Active | 3 | Core 2015, 2021, and 2023 flood events |
 | `flood_events_v2` | Active | 3 | Enhanced event entity with extent and damage attributes |
-| `flood_observations` | Active | 17 | Point flood inundation depth observations |
+| `flood_observations` | Active | 17 | Point flood inundation depth observations; ward numbers are as recorded in the source surveys and predate the 2018 delimitation (e.g. Velachery recorded as 177, currently Ward 175) |
 | `rainfall_observations` | Active | 104 | 6-hour interval station precipitation records |
 | `rainfall_event_features` | Active | 12 | Cumulative, peak, duration, and intensity metrics |
 | `contributing_area_proxies` | Active | 4 | Topographic contributing-area proxies (is_true_catchment=False) |
