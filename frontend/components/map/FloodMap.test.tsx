@@ -31,7 +31,7 @@ const mockPlaces: Place[] = [
   {
     id: "p-1",
     name: "Velachery",
-    ward: "177",
+    ward: "175",
     zone: "Zone 13",
     place_type: "residential",
     description: "Low-lying residential zone",
@@ -101,6 +101,23 @@ describe("FloodMap", () => {
 
     fireEvent.click(toggle);
     expect(toggle.getAttribute("aria-checked")).toBe("false");
+  });
+
+  it("labels survey ward numbers as survey records, not current GCC wards", () => {
+    render(
+      <FloodMap
+        places={mockPlaces}
+        selectedPlaceA={mockPlaces[0]}
+        selectedPlaceB={mockPlaces[1]}
+        observations={mockObservations}
+        initialShowObservations={true}
+      />
+    );
+
+    // obs-1 carries the survey-era ward number 177 for Velachery; the popup
+    // must frame it as a survey record, not the current ward (175).
+    expect(screen.getByText(/Ward 177 \(as per survey record\)/)).toBeTruthy();
+    expect(screen.queryByText("Ward: 177")).toBeNull();
   });
 
   it("toggles Drainage Network scope notification", () => {

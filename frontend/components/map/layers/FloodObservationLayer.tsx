@@ -98,7 +98,7 @@ export default function FloodObservationLayer({ observations }: FloodObservation
                 </div>
                 {obs.ward && (
                   <div className="text-[11px] text-[#756350]">
-                    Ward: {obs.ward}
+                    Ward {obs.ward} (as per survey record)
                   </div>
                 )}
               </div>
