@@ -696,7 +696,7 @@ export default function NewInvestigationPage() {
                 <span>Greater Chennai Catchment &amp; Flood Geospatial Grid</span>
               </h2>
               <p className="text-xs text-[#554638] mt-0.5">
-                Click any ward pin to inspect telemetry or assign as Location A (Inundated) or Location B (Control Twin).
+                Click any ward pin to inspect it or assign as Location A (Inundated) or Location B (Control Twin).
               </p>
             </div>
             <div className="flex items-center gap-2">

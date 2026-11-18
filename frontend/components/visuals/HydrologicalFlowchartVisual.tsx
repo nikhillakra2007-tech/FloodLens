@@ -351,7 +351,7 @@ export default function HydrologicalFlowchartVisual({
           </g>
 
           <text x="210" y="197" fill="#9A3412" fontSize="8.5" fontWeight="700" fontFamily="monospace">
-            Velachery Ward 170
+            Velachery Ward 175
           </text>
           <text x="210" y="208" fill="#C2410C" fontSize="7" fontWeight="600" fontFamily="sans-serif">
             0.45m Surface Waterlogging Isolated

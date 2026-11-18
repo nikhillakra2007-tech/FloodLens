@@ -77,7 +77,7 @@ export default function RealisticCausalFlowchart() {
     }
   };
 
-  // Live Hydrological Calculations
+  // Interactive hydrological calculations
   const calculations = useMemo(() => {
     // 1. Peak Overland Runoff (Rational Method Q = C * I * A)
     const runoffCoefficient = 0.35 + (impervious / 100) * 0.55;
@@ -134,7 +134,7 @@ export default function RealisticCausalFlowchart() {
       unit: "Rainfall",
       status: rainfall > 300 ? "warning" : "normal",
       description: "Severe convective precipitation band recorded during Cyclone Michaung (Dec 2023) and extreme monsoons.",
-      evidenceDatum: "GCC Automatic Weather Station AWS-101 recorded 390mm in 24 hours (peak 68mm/h).",
+      evidenceDatum: "Scenario input: rainfall depth is set by the slider above, not read from a live gauge. For scale, press reports put Cyclone Michaung (Dec 2023) at roughly 530mm over three days at Nungambakkam.",
       mitigation: "Meteorological forcing cannot be altered; structural buffers must attenuate discharge.",
       x: 40,
       y: 145,
@@ -148,7 +148,7 @@ export default function RealisticCausalFlowchart() {
       unit: `Coeff ${calculations.runoffCoefficient}`,
       status: impervious > 75 ? "critical" : "normal",
       description: "Commercial and residential asphalt/concrete coverage eliminating natural soil percolation.",
-      evidenceDatum: `High-resolution Sentinel-2 normalized impervious index indicates ${impervious}% sealed surface.`,
+      evidenceDatum: `Scenario input: the ${impervious}% built-up value is set by the slider, not measured from satellite imagery. It feeds the runoff coefficient formula shown.`,
       mitigation: "Retrofit permeable interlocking pavers and roadside infiltration swales.",
       x: 350,
       y: 38,
@@ -162,7 +162,7 @@ export default function RealisticCausalFlowchart() {
       unit: "Overland Flow",
       status: calculations.qInflow > calculations.qCapacity ? "critical" : "normal",
       description: "Surface overland runoff concentrating into roadway curb catch-pits and storm drop-inlets.",
-      evidenceDatum: `Peak overland flow exceeds local street inlet collection rate by ${calculations.qDeficit} m³/s.`,
+      evidenceDatum: `Computed output: at current settings, overland inflow exceeds conduit capacity by ${calculations.qDeficit} m³/s (rational-method estimate).`,
       mitigation: "Install wider continuous curb-opening grates and linear interception channels.",
       x: 670,
       y: 38,
@@ -176,7 +176,7 @@ export default function RealisticCausalFlowchart() {
       unit: `Silt ${siltation}%`,
       status: calculations.qCapacity < 4 ? "critical" : calculations.qCapacity < 7 ? "warning" : "resilient",
       description: "Effective hydraulic discharge capacity constrained by internal siltation and pipe gradient slope.",
-      evidenceDatum: `CCTV sonar probe logged ${siltation}% solid sediment obstruction inside 1000mm trunk conduit.`,
+      evidenceDatum: `Scenario input: the ${siltation}% sediment obstruction is set by the slider, not logged by a CCTV probe. It shrinks the effective flow area in the Manning capacity formula.`,
       mitigation: "Pre-monsoon hydraulic jetting desiltation to restore 100% pipe invert diameter.",
       x: 990,
       y: 38,
@@ -190,7 +190,7 @@ export default function RealisticCausalFlowchart() {
       unit: "Canal Stage",
       status: tidalStage > 1.0 ? "critical" : "normal",
       description: "Buckingham Canal water elevation and astronomical spring tide surge submerging the pipe discharge outlet.",
-      evidenceDatum: "Water Resources Dept (WRD) gauge showed canal water level cresting above outfall crown.",
+      evidenceDatum: "Scenario input: canal stage is set by the tidal-head slider, not a live WRD gauge. When it rises above the outfall crown, pipe discharge becomes submerged.",
       mitigation: "Install automated duckbill flap-gates and secondary dry-well lift pumping stations.",
       x: 670,
       y: 255,
@@ -204,7 +204,7 @@ export default function RealisticCausalFlowchart() {
       unit: "Reverse Head",
       status: calculations.backwaterHead > 0.8 ? "critical" : calculations.backwaterHead > 0.3 ? "warning" : "resilient",
       description: "Gradually Varied Flow backwater curve pushing submerged canal head backward up through street manholes.",
-      evidenceDatum: "Manhole telemetry logged positive outward geysering pressure rather than downward suction.",
+      evidenceDatum: "Computed output: when the backwater head turns positive, the model indicates surcharge, water pushed up through manholes instead of draining down.",
       mitigation: "Construct inland inline surge relief chambers with one-way backflow prevention valves.",
       x: 990,
       y: 255,
@@ -218,7 +218,7 @@ export default function RealisticCausalFlowchart() {
       unit: `~${calculations.holdDurationHours}h hold`,
       status: calculations.isCritical ? "critical" : calculations.isModerate ? "warning" : "resilient",
       description: "Prolonged surface water accumulation trapping residents and submerging electrical infrastructure.",
-      evidenceDatum: `GCC Ward Log verified ${calculations.pondingDepth}m standing water during Cyclone Michaung (2023).`,
+      evidenceDatum: `Computed output: the ${calculations.pondingDepth}m ponding depth is estimated from current slider settings, not taken from a GCC ward log.`,
       mitigation: "Integrated catchment detention basin and decentralized micro-pumping network.",
       x: 1300,
       y: 145,
@@ -269,7 +269,7 @@ export default function RealisticCausalFlowchart() {
         {/* Preset scenario selectors */}
         <div className="space-y-2">
           <span className="text-[11px] font-bold uppercase tracking-wider text-[#756350] block">
-            Select Calibrated Ward Scenario:
+            Load a Scenario Preset (illustrative parameters):
           </span>
           <div className="flex flex-wrap gap-2">
             <button
@@ -294,7 +294,7 @@ export default function RealisticCausalFlowchart() {
               }`}
             >
               <span className="h-2 w-2 rounded-full bg-emerald-400" />
-              <span>Velachery (Ward 102 · Resilient Twin)</span>
+              <span>Velachery (Ward 175 · Resilient Twin)</span>
             </button>
             <button
               type="button"
@@ -306,7 +306,7 @@ export default function RealisticCausalFlowchart() {
               }`}
             >
               <span className="h-2 w-2 rounded-full bg-amber-400" />
-              <span>T. Nagar (Ward 104 · Failure)</span>
+              <span>T. Nagar (Illustrative · Failure)</span>
             </button>
             <button
               type="button"
@@ -318,7 +318,7 @@ export default function RealisticCausalFlowchart() {
               }`}
             >
               <span className="h-2 w-2 rounded-full bg-emerald-400" />
-              <span>Adyar (Ward 103 · Resilient Twin)</span>
+              <span>Adyar (Ward 173 · Resilient Twin)</span>
             </button>
           </div>
         </div>
@@ -328,7 +328,7 @@ export default function RealisticCausalFlowchart() {
       <div className="rounded-3xl border border-[#E8DFD3] bg-white p-6 sm:p-8 shadow-card space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-[#E8DFD3]">
           <span className="text-xs font-bold uppercase tracking-wider text-terracotta-700">
-            Real-Time Hydraulic Parameter Controls
+            Interactive Hydraulic Parameter Controls
           </span>
           <span className="text-xs text-[#756350]">
             Drag sliders to simulate alternate storm severities or interventions
@@ -827,17 +827,17 @@ export default function RealisticCausalFlowchart() {
             </div>
           </div>
 
-          {/* Empirical Field Evidence (2015 GCC Flood Datum) */}
+          {/* Evidence and provenance */}
           <div className="rounded-2xl border border-[#E8DFD3] bg-[#FAF7F2] p-5 space-y-2">
             <span className="text-[11px] font-bold uppercase text-[#756350] block">
-              Empirical Sensor Datum (Cyclone Michaung &amp; Recent Floods)
+              Evidence &amp; Provenance
             </span>
             <div className="text-xs bg-white p-3 rounded-xl border border-[#E0D5C7] text-[#221B15] font-medium leading-relaxed">
               {selectedNode.evidenceDatum}
             </div>
             <div className="text-[11px] text-[#756350] flex items-center gap-1.5 pt-1">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-600" />
-              <span>Ground-truth calibrated against GCC stormwater archives</span>
+              <span>Scenario inputs and computed outputs are labeled as such; sourced records are cited inline.</span>
             </div>
           </div>
 
