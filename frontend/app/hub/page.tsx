@@ -110,9 +110,9 @@ export default function FeatureHubPage() {
       description:
         "Trace exact mathematical failure sequences: Manning pipe discharge Q_cap, silt obstruction, tidal canal stage, and backwater surcharge.",
       highlights: [
-        "Live interactive sliders (Rainfall, Silt %, Slope, Tidal Head)",
-        "Animated SVG flow connectors with real-time status pulses",
-        "Deep Hydrological Inspector with physical equations & GCC field datum",
+        "Interactive sliders (Rainfall, Silt %, Slope, Tidal Head)",
+        "Animated SVG flow connectors with status pulses",
+        "Hydrological Inspector with physical equations and labeled evidence provenance",
       ],
       buttonText: "Launch Causal Flowchart",
       buttonVariant: "primary",

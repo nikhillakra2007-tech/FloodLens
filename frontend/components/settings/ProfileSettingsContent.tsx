@@ -8,15 +8,13 @@ import { useAuth } from "@/lib/auth/context";
 import { validateRedirectUrl } from "@/lib/auth/validation";
 
 const CHENNAI_WARDS = [
-  { value: "Ward 170 - Velachery South", label: "Ward 170 — Velachery South (Zone 13)" },
-  { value: "Ward 173 - Adyar West", label: "Ward 173 — Adyar West (Zone 13)" },
-  { value: "Ward 175 - Perungudi", label: "Ward 175 — Perungudi Industrial (Zone 14)" },
-  { value: "Ward 176 - Velachery East", label: "Ward 176 — Velachery East (Zone 13)" },
-  { value: "Ward 178 - Besant Nagar", label: "Ward 178 — Besant Nagar / Coastal (Zone 13)" },
-  { value: "Ward 179 - Thiruvanmiyur", label: "Ward 179 — Thiruvanmiyur (Zone 13)" },
-  { value: "Ward 180 - Kottivakkam", label: "Ward 180 — Kottivakkam / ECR (Zone 14)" },
+  // Ward-to-area mappings verified against the GCC 2018 delimitation gazette.
+  { value: "Ward 101 - Anna Nagar", label: "Ward 101 — Anna Nagar" },
+  { value: "Ward 173 - Adyar", label: "Ward 173 — Adyar" },
+  { value: "Ward 175 - Velachery", label: "Ward 175 — Velachery" },
+  { value: "Other - Not Listed", label: "Other / ward not listed" },
   { value: "Pallikaranai Marsh Catchment", label: "Pallikaranai Marsh Basin / Wetland Buffer" },
-  { value: "Mambalam Canal Basin", label: "Mambalam Canal Basin (Zone 10)" },
+  { value: "Mambalam Canal Basin", label: "Mambalam Canal Basin" },
   { value: "Buckingham Canal Corridor", label: "Buckingham Canal South Conduit" },
 ];
 
@@ -331,7 +329,7 @@ export default function ProfileSettingsContent() {
           {/* NOTIFICATION PREFERENCES */}
           <div className="rounded-2xl border border-[#E8DFD3] p-4 space-y-3">
             <span className="text-xs font-bold uppercase tracking-wider text-[#554638] block">
-              Automated Notification Preferences
+              Notification Preferences
             </span>
             <div className="space-y-2">
               <label className="flex items-start gap-3 cursor-pointer">
@@ -345,7 +343,7 @@ export default function ProfileSettingsContent() {
                 <div>
                   <p className="text-xs font-semibold text-[#221B15]">Email Causal Bulletins</p>
                   <p className="text-[11px] text-[#756350]">
-                    Receive technical causal diagnosis reports and counterfactual findings when investigations complete.
+                    Reserved for a future release: technical causal diagnosis reports when investigations complete. No delivery pipeline is connected yet; this preference is stored only.
                   </p>
                 </div>
               </label>
@@ -361,7 +359,7 @@ export default function ProfileSettingsContent() {
                 <div>
                   <p className="text-xs font-semibold text-[#221B15]">Urgent Inundation Alerts (SMS)</p>
                   <p className="text-[11px] text-[#756350]">
-                    Receive instant notifications if real-time backwater head divergence exceeds +1.03m dy/dx.
+                    Reserved for a future alerting service: urgent warnings when simulated backwater surcharge is detected. No SMS delivery is connected yet.
                   </p>
                 </div>
               </label>

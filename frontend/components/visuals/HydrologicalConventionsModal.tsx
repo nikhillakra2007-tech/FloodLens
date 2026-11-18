@@ -56,7 +56,7 @@ export default function HydrologicalConventionsModal({
               Hydrological Conventions &amp; Physics Formulations
             </h2>
             <p className="text-sm sm:text-base text-[#554638] leading-relaxed max-w-3xl">
-              An engineering guide to understand the mathematical formulas, sensor telemetry datum, and symbol conventions used throughout FloodLens. Click any card below for details on demand.
+              An engineering guide to understand the mathematical formulas, scenario values, and symbol conventions used throughout FloodLens. Click any card below for details on demand.
             </p>
           </div>
 
@@ -132,7 +132,7 @@ export default function HydrologicalConventionsModal({
               )}
             </div>
 
-            {/* ③ Empirical Telemetry */}
+            {/* ③ Scenario Rainfall Input */}
             <div
               onClick={() => setExpandedBoxItem(expandedBoxItem === "telemetry" ? null : "telemetry")}
               className={`rounded-2xl border p-4 cursor-pointer transition-all duration-200 ${
@@ -142,15 +142,15 @@ export default function HydrologicalConventionsModal({
               }`}
             >
               <span className="text-[10px] font-bold uppercase tracking-wider text-terracotta-800 block">
-                ③ Empirical Telemetry
+                ③ Scenario Rainfall Input
               </span>
               <div className="font-mono text-sm font-bold text-red-700 mt-1">390 mm / 24h</div>
               <p className="text-xs text-[#756350] mt-1.5 leading-relaxed">
-                Live calibrated ground-truth sensor datum.
+                Example preset value; the slider sets the actual scenario input.
               </p>
               {expandedBoxItem === "telemetry" && (
                 <div className="mt-3 pt-2.5 border-t border-terracotta-200 text-xs text-[#44362B] space-y-1">
-                  <strong>Source:</strong> GCC AWS weather stations, Sentinel-2 SAR radar, and CCTV sonar pipe probes.
+                  <strong>Reference:</strong> press reports put Cyclone Michaung (Dec 2023) rainfall near 530mm over three days at Nungambakkam; no live sensors feed this demo.
                 </div>
               )}
             </div>
@@ -298,7 +298,7 @@ export default function HydrologicalConventionsModal({
                     </ul>
                   </div>
                   <div className="text-[#221B15]">
-                    <strong>2015 Chennai Event Calibration:</strong> Sentinel-2 satellite data confirmed 84% impervious surface in Anna Nagar (Ward 101), generating 3x the surface runoff of peri-urban zones.
+                    <strong>Model example:</strong> at 84% built-up cover (the Anna Nagar preset), the runoff coefficient rises to 0.81, more than double that of open soil (0.35).
                   </div>
                 </div>
               )}
@@ -343,7 +343,7 @@ export default function HydrologicalConventionsModal({
                     </ul>
                   </div>
                   <div className="text-[#221B15]">
-                    <strong>2015 Chennai Event Calibration:</strong> Peak overland flow reached 3.14 m³/s, easily drowning curb inlets designed for half that volume.
+                    <strong>Model example:</strong> at the Anna Nagar preset settings, peak overland inflow computes to 3.14 m³/s, overwhelming standard curb inlets.
                   </div>
                 </div>
               )}
@@ -388,7 +388,7 @@ export default function HydrologicalConventionsModal({
                     </ul>
                   </div>
                   <div className="text-[#221B15]">
-                    <strong>2015 Chennai Event Calibration:</strong> CCTV probes logged 55% solid siltation in 1000mm trunk conduits, slashing discharge capacity to 2.76 m³/s.
+                    <strong>Model example:</strong> at 55% siltation and the Anna Nagar preset slope, the Manning capacity estimate falls to 2.76 m³/s.
                   </div>
                 </div>
               )}
@@ -431,7 +431,7 @@ export default function HydrologicalConventionsModal({
                     </ul>
                   </div>
                   <div className="text-[#221B15]">
-                    <strong>2015 Chennai Event Calibration:</strong> Buckingham Canal crested at +1.3m MSL, fully submerging outfall flap-gates and killing gravity flow.
+                    <strong>Model example:</strong> with canal stage above +1.0m MSL the outfall is submerged and gravity discharge stalls; the Anna Nagar preset uses +1.4m.
                   </div>
                 </div>
               )}
@@ -475,7 +475,7 @@ export default function HydrologicalConventionsModal({
                     </ul>
                   </div>
                   <div className="text-[#221B15]">
-                    <strong>2015 Chennai Event Calibration:</strong> A positive backwater surge head of +1.03m turned Anna Nagar street manholes into pressurized outward fountains.
+                    <strong>Model example:</strong> a positive backwater head indicates surcharge, water pushed up through street manholes instead of draining; severe presets produce heads above +1.0m.
                   </div>
                 </div>
               )}
@@ -519,7 +519,7 @@ export default function HydrologicalConventionsModal({
                     </ul>
                   </div>
                   <div className="text-[#221B15]">
-                    <strong>2015 Chennai Event Calibration:</strong> Ward 101 registered 0.7m to 1.2m of toxic standing water that lingered for over 15 hours until canal gates opened.
+                    <strong>Model example:</strong> at severe preset settings the model estimates 0.7m to 1.2m of standing water with stagnation lasting beyond half a day.
                   </div>
                 </div>
               )}

@@ -108,7 +108,7 @@ export default function InvestigationDetailPage() {
       {investigation.status === "running" && (
         <div className="flex items-center gap-3 rounded-2xl border border-terracotta-200 bg-terracotta-50 p-4 text-xs font-semibold text-terracotta-900 shadow-xs">
           <span className="h-3 w-3 animate-ping rounded-full bg-terracotta-500 shrink-0" />
-          <span>Investigation engine in progress. Live results stream automatically.</span>
+          <span>Investigation engine in progress. Reload the page to check for updated results.</span>
         </div>
       )}
 

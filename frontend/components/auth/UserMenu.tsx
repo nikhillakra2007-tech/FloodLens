@@ -140,7 +140,7 @@ export default function UserMenu() {
 
             <div>
               <p className="text-xs font-semibold text-[#221B15]">
-                {profile?.role_title || (isTechnical ? "GCC Senior Hydrologist & SWD Lead" : "Velachery Ward 170 Resident Observer")}
+                {profile?.role_title || (isTechnical ? "GCC Senior Hydrologist & SWD Lead" : "Velachery Ward 175 Resident Observer")}
               </p>
               <p className="text-[11px] text-[#756350] leading-relaxed mt-1">
                 {isTechnical

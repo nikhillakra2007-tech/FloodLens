@@ -25,7 +25,7 @@ const TECHNICAL_TERMS: TechnicalTerm[] = [
     plainEnglish:
       "The large reinforced concrete trunk pipe (usually 900mm to 1200mm diameter) buried 2 to 4 meters under your street. In Block A, this pipe is packed with hard silt, plastic debris, and construction mortar, reducing its open drain cross-section by over half.",
     neighborhoodExample:
-      "In Anna Nagar (Ward 101) during Cyclone Michaung (2023) and recent monsoons, CCTV camera rovers discovered up to 58% hardened silt bed sedimentation inside the trunk lines beneath 100-Feet Road, choking gravity velocity to a trickle.",
+      "Illustrative failure example for Anna Nagar (Ward 101), which saw severe waterlogging during Cyclone Michaung (Dec 2023): the model assumes 58% hardened silt bed sedimentation inside the trunk lines, choking gravity velocity to a trickle.",
     mechanism:
       "Manning's formula shows discharge capacity Q drops with the 2/3 power of hydraulic radius. Cutting open cross-section area in half cuts water carrying volume by nearly 70%.",
     engineeringFix:
@@ -40,7 +40,7 @@ const TECHNICAL_TERMS: TechnicalTerm[] = [
     plainEnglish:
       "The exact same size underground drainage pipe, but kept 100% clean and free of silt and construction debris. Rainwater rushes through smoothly like an empty subterranean highway directly toward the canal.",
     neighborhoodExample:
-      "In Velachery (Ward 102), desilted trunk conduits maintained an unchoked 1000mm diameter cross-section, safely conveying over 11 cubic meters of water per second straight into the Pallikaranai marshland canal.",
+      "In the Velachery (Ward 175) resilient-twin example, desilted trunk conduits keep the full 1000mm diameter cross-section, with a Manning capacity estimate above 11 m³/s draining toward the Pallikaranai marshland canal.",
     mechanism:
       "Full circular pipe invert area allows laminar gravity flow, avoiding turbid bottlenecks and maintaining design velocity above 1.5 m/s to prevent sediment settling.",
     engineeringFix:
@@ -85,7 +85,7 @@ const TECHNICAL_TERMS: TechnicalTerm[] = [
     plainEnglish:
       "The natural or engineered downward tilt of the street and pipe invert. A 1.5% slope means the pipe drops 1.5 meters for every 100 meters of horizontal distance, giving rainwater natural gravity momentum.",
     neighborhoodExample:
-      "Ward 103 (Adyar ridge) benefits from natural gentle topography falling toward the Adyar riverbed, maintaining self-cleansing water velocity.",
+      "Ward 173 (Adyar) benefits from natural gentle topography falling toward the Adyar riverbed, maintaining self-cleansing water velocity.",
     mechanism:
       "Positive bed slope (S_0 > 0.01) keeps Froude number healthy and counteracts downstream tailwater backpressure without requiring expensive diesel pumps.",
     engineeringFix:

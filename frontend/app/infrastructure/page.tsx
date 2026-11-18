@@ -139,8 +139,8 @@ export default function InfrastructurePage() {
             <div className="text-xs font-semibold text-[#756350]">Calibrated Urban Basins</div>
           </div>
           <div className="space-y-1">
-            <div className="font-serif text-3xl font-bold text-sage-600">100+</div>
-            <div className="text-xs font-semibold text-[#756350]">2015 Flood Inundation Markers</div>
+            <div className="font-serif text-3xl font-bold text-sage-600">17</div>
+            <div className="text-xs font-semibold text-[#756350]">Documented Flood Observations (GCC Survey)</div>
           </div>
           <div className="space-y-1">
             <div className="font-serif text-3xl font-bold text-[#554638]">6 Vectors</div>
