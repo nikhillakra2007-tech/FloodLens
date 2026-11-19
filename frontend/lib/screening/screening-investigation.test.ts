@@ -98,6 +98,10 @@ describe("buildScreeningReport", () => {
     const evIds = new Set(report.evidence.map((e) => e.id));
     for (const edge of report.graph.edges as any[]) {
       for (const id of edge.evidence_ids) expect(evIds.has(id)).toBe(true);
+      // MechanismGraph renders edge.label and styles by support_score
+      expect(typeof edge.label).toBe("string");
+      expect(edge.label.length).toBeGreaterThan(0);
+      expect(typeof edge.support_score).toBe("number");
     }
   });
 
