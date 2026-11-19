@@ -194,7 +194,8 @@ export default function MechanismGraph({ investigationId, selectedMechanismId }:
   const activeOutgoingEdges = activeNodeId ? graph.edges.filter((e) => e.source === activeNodeId) : [];
 
   // Helper to get concise, non-overlapping label for full view
-  const getCleanLabel = (label: string) => {
+  const getCleanLabel = (label?: string) => {
+    if (!label) return "";
     if (label.toLowerCase().includes("runoff generation")) {
       return "Impervious Runoff";
     }

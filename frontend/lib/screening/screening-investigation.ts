@@ -235,6 +235,8 @@ export function buildScreeningReport(placeAId: string, placeBId: string): Screen
         .map((e) => e.id),
       certainty_level: "HYPOTHESIS",
       relation_type: "CAUSAL_HYPOTHESIS",
+      support_score: d.score,
+      label: `${d.mechanism_type.replace(/_/g, " ")} (screening)`,
     })),
   };
 
