@@ -122,7 +122,7 @@
     "comparison_id": "4876ea3f-ad80-4f7d-b307-a1dc55a350b2",
     "status": "completed",
     "agent_mode": "local",
-    "summary": "Differential analysis of Anna Nagar (Ward 101) vs Velachery (Ward 175). Similarity score: 0.81. Strongest mechanism: RUNOFF_CONCENTRATION.",
+    "summary": "Differential analysis of Anna Nagar (Ward 101) vs Velachery (Ward 175). Similarity score: 0.83. Strongest mechanism: RUNOFF_CONCENTRATION.",
     "strongest_mechanism": "RUNOFF_CONCENTRATION",
     "agent_response": {
       "unknowns": [
@@ -142,7 +142,7 @@
       ],
       "counterfactual_result": null,
       "historical_validation": null,
-      "investigation_summary": "Differential analysis of Anna Nagar (Ward 101) vs Velachery (Ward 175). Similarity score: 0.81. Strongest mechanism: RUNOFF_CONCENTRATION.",
+      "investigation_summary": "Differential analysis of Anna Nagar (Ward 101) vs Velachery (Ward 175). Similarity score: 0.83. Strongest mechanism: RUNOFF_CONCENTRATION.",
       "alternative_mechanisms": [
         "TERRAIN_DEPRESSION",
         "IMPERVIOUS_SURFACE",
