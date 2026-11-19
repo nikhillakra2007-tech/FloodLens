@@ -3,6 +3,14 @@ import mockData from "@/lib/mockData.json";
 import { getTwinSimilarity, getComparablesForPlace } from "@/lib/scoring/twin-similarity";
 import { buildWardFeatures } from "@/lib/scoring/ward-profiles";
 import { buildClaimProvenance } from "@/lib/provenance/claim-provenance";
+import {
+  buildScreeningReport,
+  parseScreeningComparisonId,
+  parseScreeningInvestigationId,
+  screeningComparisonId,
+  screeningInvestigationId,
+  SCREENING_AGENT_MODE,
+} from "@/lib/screening/screening-investigation";
 
 export const dynamic = "force-dynamic";
 
@@ -137,6 +145,17 @@ export async function GET(
   // 7. Investigation details: /investigations/[id]
   if (slug[0] === "investigations" && slug.length === 2) {
     const invId = slug[1];
+    const screeningPair = parseScreeningInvestigationId(invId);
+    if (screeningPair) {
+      const report = buildScreeningReport(screeningPair.a, screeningPair.b);
+      if (!report) {
+        return NextResponse.json({ error: "Unknown screening pair" }, { status: 404 });
+      }
+      return NextResponse.json(report.investigation);
+    }
+    if (invId.startsWith("inv-")) {
+      return NextResponse.json({ error: "Unknown screening pair" }, { status: 404 });
+    }
     return NextResponse.json({
       ...mockData.inv,
       id: invId,
@@ -146,6 +165,12 @@ export async function GET(
 
   // 8. Investigation mechanisms: /investigations/[id]/mechanisms
   if (slug[0] === "investigations" && slug[2] === "mechanisms") {
+    const pair = parseScreeningInvestigationId(slug[1]);
+    if (pair) {
+      const report = buildScreeningReport(pair.a, pair.b);
+      if (!report) return NextResponse.json({ error: "Unknown screening pair" }, { status: 404 });
+      return NextResponse.json(report.mechanisms);
+    }
     return NextResponse.json(mockData.mechs);
   }
 
@@ -157,26 +182,56 @@ export async function GET(
 
   // 10. Investigation evidence: /investigations/[id]/evidence
   if (slug[0] === "investigations" && slug[2] === "evidence") {
+    const pair = parseScreeningInvestigationId(slug[1]);
+    if (pair) {
+      const report = buildScreeningReport(pair.a, pair.b);
+      if (!report) return NextResponse.json({ error: "Unknown screening pair" }, { status: 404 });
+      return NextResponse.json(report.evidence);
+    }
     return NextResponse.json(mockData.evs);
   }
 
   // 11. Investigation graph: /investigations/[id]/graph
   if (slug[0] === "investigations" && slug[2] === "graph") {
+    const pair = parseScreeningInvestigationId(slug[1]);
+    if (pair) {
+      const report = buildScreeningReport(pair.a, pair.b);
+      if (!report) return NextResponse.json({ error: "Unknown screening pair" }, { status: 404 });
+      return NextResponse.json(report.graph);
+    }
     return NextResponse.json(mockData.graph);
   }
 
   // 12. Investigation validation: /investigations/[id]/validation
   if (slug[0] === "investigations" && slug[2] === "validation") {
+    const pair = parseScreeningInvestigationId(slug[1]);
+    if (pair) {
+      const report = buildScreeningReport(pair.a, pair.b);
+      if (!report) return NextResponse.json({ error: "Unknown screening pair" }, { status: 404 });
+      return NextResponse.json(report.validation);
+    }
     return NextResponse.json(mockData.val);
   }
 
   // 13. Investigation defensibility: /investigations/[id]/defensibility
   if (slug[0] === "investigations" && slug[2] === "defensibility") {
+    const pair = parseScreeningInvestigationId(slug[1]);
+    if (pair) {
+      const report = buildScreeningReport(pair.a, pair.b);
+      if (!report) return NextResponse.json({ error: "Unknown screening pair" }, { status: 404 });
+      return NextResponse.json(report.defensibility);
+    }
     return NextResponse.json(mockData.def);
   }
 
   // 14. Investigation limitations: /investigations/[id]/limitations
   if (slug[0] === "investigations" && slug[2] === "limitations") {
+    const pair = parseScreeningInvestigationId(slug[1]);
+    if (pair) {
+      const report = buildScreeningReport(pair.a, pair.b);
+      if (!report) return NextResponse.json({ error: "Unknown screening pair" }, { status: 404 });
+      return NextResponse.json(report.limitations);
+    }
     return NextResponse.json(mockData.lim);
   }
 
@@ -239,6 +294,7 @@ export async function POST(
     }
     return NextResponse.json({
       ...mockData.createComp,
+      id: twin.is_calibrated ? mockData.createComp.id : screeningComparisonId(placeAId, placeBId),
       place_a_id: placeAId,
       place_b_id: placeBId,
       similarity_score: twin.similarity_score,
@@ -255,6 +311,16 @@ export async function POST(
   // 3. Create investigation: /investigations
   if (path === "investigations") {
     const comparisonId = url.searchParams.get("comparison_id") || mockData.createComp.id;
+    const screeningPair = parseScreeningComparisonId(comparisonId);
+    if (screeningPair) {
+      return NextResponse.json({
+        id: screeningInvestigationId(comparisonId),
+        comparison_id: comparisonId,
+        status: "completed",
+        agent_mode: SCREENING_AGENT_MODE,
+        created_at: new Date().toISOString(),
+      });
+    }
     return NextResponse.json({
       ...mockData.createInv,
       comparison_id: comparisonId,

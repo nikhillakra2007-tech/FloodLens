@@ -108,7 +108,13 @@ export default function InvestigationDetailPage() {
       {investigation.status === "running" && (
         <div className="flex items-center gap-3 rounded-2xl border border-terracotta-200 bg-terracotta-50 p-4 text-xs font-semibold text-terracotta-900 shadow-xs">
           <span className="h-3 w-3 animate-ping rounded-full bg-terracotta-500 shrink-0" />
-          <span>Investigation engine in progress. Reload the page to check for updated results.</span>
+          <span>Investigation engine in progress. Live results update automatically.</span>
+        </div>
+      )}
+
+      {investigation.agent_mode === "screening" && (
+        <div className="rounded-2xl border border-amber-300 bg-amber-50 p-4 text-xs font-semibold text-amber-900 shadow-xs">
+          Screening report: generated from demo ward profiles, several of them illustrative. Mechanism scores are unvalidated hypotheses and the defensibility verdict is INSUFFICIENT EVIDENCE. Treat this as a triage aid for choosing wards for a calibrated run, not as a diagnostic finding.
         </div>
       )}
 
