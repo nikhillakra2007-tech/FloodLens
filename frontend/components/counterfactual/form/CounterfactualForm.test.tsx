@@ -74,6 +74,36 @@ describe("CounterfactualForm", () => {
     expect(screen.getByLabelText(/Scenario Name/)).toBeTruthy();
   });
 
+  it("prefills land-cover inputs from a ward-derived baseline and labels them", () => {
+    render(
+      <CounterfactualForm
+        investigationId="inv-1"
+        baseline={{ runoff_coefficient: 0.81, upstream_impervious_fraction: 0.84 }}
+        baselineNote="Baseline pre-filled from the Anna Nagar ward profile (calibrated demo dataset)."
+      />,
+      { wrapper: Wrapper }
+    );
+    expect(
+      (screen.getByLabelText(/Runoff Coefficient/) as HTMLInputElement).value
+    ).toBe("0.81");
+    expect(
+      (screen.getByLabelText(/Upstream Impervious Fraction/) as HTMLInputElement).value
+    ).toBe("0.84");
+    expect(screen.getByText(/Baseline pre-filled from the Anna Nagar ward profile/)).toBeTruthy();
+    // Non-derived fields keep the generic screening defaults.
+    expect(
+      (screen.getByLabelText(/Rainfall/) as HTMLInputElement).value
+    ).toBe("100");
+  });
+
+  it("keeps generic defaults and shows no baseline note without a baseline", () => {
+    render(<CounterfactualForm investigationId="inv-1" />, { wrapper: Wrapper });
+    expect(
+      (screen.getByLabelText(/Runoff Coefficient/) as HTMLInputElement).value
+    ).toBe("0.7");
+    expect(screen.queryByText(/Baseline pre-filled/)).toBeNull();
+  });
+
   it("renders action button", () => {
     render(<CounterfactualForm investigationId="inv-1" />, { wrapper: Wrapper });
     expect(screen.getByText("Run Counterfactual")).toBeTruthy();

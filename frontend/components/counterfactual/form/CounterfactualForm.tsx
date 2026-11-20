@@ -11,6 +11,14 @@ import { ErrorState, LoadingSkeleton } from "@/components/ui";
 
 export interface CounterfactualFormProps {
   investigationId: string;
+  /**
+   * Optional ward-derived overrides for the land-cover-driven defaults
+   * (runoff coefficient, upstream impervious fraction). When provided, the
+   * form opens with these values and shows baselineNote so the derivation
+   * is labeled. Everything stays editable.
+   */
+  baseline?: Partial<CounterfactualRequest> | null;
+  baselineNote?: string | null;
 }
 
 const DEFAULT_VALUES: CounterfactualRequest = {
@@ -23,8 +31,11 @@ const DEFAULT_VALUES: CounterfactualRequest = {
   drainage_path_km: 2.0,
 };
 
-export default function CounterfactualForm({ investigationId }: CounterfactualFormProps) {
-  const [params, setParams] = useState<CounterfactualRequest>(DEFAULT_VALUES);
+export default function CounterfactualForm({ investigationId, baseline, baselineNote }: CounterfactualFormProps) {
+  const [params, setParams] = useState<CounterfactualRequest>({
+    ...DEFAULT_VALUES,
+    ...(baseline ?? {}),
+  });
   const [result, setResult] = useState<CounterfactualRun | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
@@ -88,6 +99,12 @@ export default function CounterfactualForm({ investigationId }: CounterfactualFo
   return (
     <div className="space-y-4">
       <CounterfactualDisclaimer />
+
+      {baselineNote && (
+        <p className="rounded-lg border border-[#E8DFD3] bg-[#FAF7F2] p-3 text-xs text-[#554638] leading-relaxed" role="note">
+          {baselineNote}
+        </p>
+      )}
 
       <div className="space-y-3">
         <div>
