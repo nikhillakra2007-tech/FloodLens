@@ -23,6 +23,7 @@ import { ErrorState, LoadingSkeleton } from "@/components/ui";
 import { CounterfactualForm } from "@/components/counterfactual";
 import CausalFlowBanner from "@/components/investigation/flowchart/CausalFlowBanner";
 import type { Mechanism } from "@/lib/types/investigation";
+import { deriveCounterfactualBaseline } from "@/lib/scoring/counterfactual-baseline";
 import mockData from "@/lib/mockData.json";
 
 const FloodMap = nextDynamic(() => import("@/components/map/FloodMap"), {
@@ -95,6 +96,20 @@ export default function InvestigationDetailPage() {
       </div>
     );
   }
+
+  // Pre-fill the counterfactual lab from the inundated catchment's ward
+  // profile (Location A) when one ships in the demo dataset. Derived values
+  // are labeled via the baseline note; unknown wards keep generic defaults.
+  const counterfactualBaselineRaw = investigation.place_a?.id
+    ? deriveCounterfactualBaseline(investigation.place_a.id)
+    : null;
+  const counterfactualBaseline = counterfactualBaselineRaw
+    ? {
+        runoff_coefficient: counterfactualBaselineRaw.runoff_coefficient,
+        upstream_impervious_fraction: counterfactualBaselineRaw.upstream_impervious_fraction,
+      }
+    : null;
+  const counterfactualBaselineNote = counterfactualBaselineRaw?.note ?? null;
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 space-y-6 min-w-0 overflow-x-hidden">
@@ -383,7 +398,11 @@ export default function InvestigationDetailPage() {
                     What-If Intervention Engine
                   </span>
                 </div>
-                <CounterfactualForm investigationId={id} />
+                <CounterfactualForm
+                  investigationId={id}
+                  baseline={counterfactualBaseline}
+                  baselineNote={counterfactualBaselineNote}
+                />
               </section>
 
               {/* Causal Flow Banner */}
